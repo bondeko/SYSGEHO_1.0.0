@@ -11,15 +11,27 @@
    			<ui:composition >
    		
 		        <rich:dropDownMenu mode="ajax" rendered="true">
-				<f:facet name="label">
-					<h:panelGrid cellpadding="0" cellspacing="0" columns="2"
-						style="vertical-align:middle">
-						<h:outputText value="Dossier patient" title="gestion des dossiers des patients"/>
-					</h:panelGrid>
-				</f:facet>
-	            
-			</rich:dropDownMenu>	
-			        			           			  		
-   		</ui:composition>
+					<f:facet name="label">
+						<h:panelGrid cellpadding="0" cellspacing="0" columns="2"
+							style="vertical-align:middle">
+							<h:outputText value="Dossier patient" title="gestion des dossiers des patients"/>
+						</h:panelGrid>
+					</f:facet>
+					
+					<rich:menuItem submitMode="ajax" rendered="true" 
+	                    action="#{patCtrl.openHomePage}" 
+	                    ajaxSingle="true" >
+	                    <h:outputText value="Patients" />
+	                </rich:menuItem>
+	                
+	                <rich:menuItem submitMode="ajax" rendered="true" 
+	                    action="#{rdvCtrl.openHomePage}" 
+	                    ajaxSingle="true" >
+	                    <h:outputText value="Rendez-vous" />
+	                </rich:menuItem>
+	                
+				</rich:dropDownMenu>	
+				
+   			</ui:composition>
    		
 </html>

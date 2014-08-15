@@ -2,5 +2,46 @@
 <faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
  xmlns:xi="http://www.w3.org/2001/XInclude"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
- 
+ <managed-bean>
+  <managed-bean-name>patCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.PatCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>rdvCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.RdvCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <navigation-rule>
+  <from-view-id>*</from-view-id>
+  <navigation-case>
+   <from-outcome>PatDetails</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/PatDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>PatEdition</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/PatEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>PatListe</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/PatListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>RdvDetails</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/RdvDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>RdvEdition</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/RdvEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>RdvListe</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/RdvListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+ </navigation-rule>
 </faces-config>

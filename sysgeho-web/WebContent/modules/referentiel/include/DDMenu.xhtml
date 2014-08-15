@@ -14,11 +14,70 @@
 				<f:facet name="label">
 					<h:panelGrid cellpadding="0" cellspacing="0" columns="2"
 						style="vertical-align:middle">
-						<h:outputText value="Référentiel" title="#{locale.parambaseappli}"/>
+						<h:outputText value="#{locale.referentiel}" title="#{locale.parambaseappli}"/>
 					</h:panelGrid>
 				</f:facet>
-			</rich:dropDownMenu>	
-	        			           			  		
+				
+				<rich:menuGroup value="#{locale.paramgeneraux}" rendered="true">
+                    
+                     <rich:menuItem submitMode="ajax" rendered="true" 
+		                 action="#{socCtrl.openHomePage}" 
+		                 ajaxSingle="true" >
+		                 <h:outputText value="#{locale.societes}" />
+		             </rich:menuItem>	
+		             
+		             <rich:menuItem submitMode="ajax" rendered="true" 
+		                 action="#{assCtrl.openHomePage}" 
+		                 ajaxSingle="true" >
+		                 <h:outputText value="Compagnies d'assurance" />
+		             </rich:menuItem>
+		             
+		             <rich:menuItem submitMode="ajax" rendered="true" 
+		                 action="#{specCtrl.openHomePage}" 
+		                 ajaxSingle="true" >
+		                 <h:outputText value="#{locale.specialites}" />
+		             </rich:menuItem>
+		             
+		             <rich:menuItem submitMode="ajax" rendered="true" 
+		                 action="#{typRdvCtrl.openHomePage}" 
+		                 ajaxSingle="true" >
+		                 <h:outputText value="Types de Rendez-vous" />
+		             </rich:menuItem>
+                   
+                </rich:menuGroup>
+				
+	             <rich:menuSeparator />
+	             
+	             <rich:menuGroup value="#{locale.paramexam}" rendered="true">
+                    
+                     <rich:menuItem submitMode="ajax" rendered="true" 
+		                 action="#{catExamCtrl.openHomePage}" 
+		                 ajaxSingle="true" >
+		                 <h:outputText value="#{locale.categoriexam}" />
+		             </rich:menuItem>
+		             
+		             <rich:menuItem submitMode="ajax" rendered="true" 
+		                 action="#{typExamCtrl.openHomePage}" 
+		                 ajaxSingle="true" >
+		                 <h:outputText value="Types Examens" />
+		             </rich:menuItem>
+                   
+                </rich:menuGroup>
+                
+                <rich:menuSeparator />
+	             
+	            <rich:menuGroup value="#{locale.paramsoins}" rendered="true">
+	                   
+                   <rich:menuItem submitMode="ajax" rendered="true" 
+	                 action="#{typSoinCtrl.openHomePage}" 
+	                 ajaxSingle="true" >
+	                 <h:outputText value="Types de Soins" />
+	             </rich:menuItem>
+		             
+               </rich:menuGroup>
+	             
+			</rich:dropDownMenu>
+			
  		</ui:composition>
    		
 </html>

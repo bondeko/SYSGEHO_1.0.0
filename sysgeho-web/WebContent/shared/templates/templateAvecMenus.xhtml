@@ -92,22 +92,13 @@
 							<h:outputText value="#{sessionCtrl.defaultVue.statut}" rendered="true" />
 							<rich:separator height="0px" width="30%" />
 					</h:panelGrid>
-					
+					 
 					<rich:spacer width="0px" />
 					<h:panelGrid columns="" width="100%" style="text-align:right;">
 						<h:commandButton action="#{sessionCtrl.deconnexion}" value="#{locale.deconnexion}" immediate="true" onclick="if(! confirm('#{locale.confirmdeconnexion} ','Confirmation')) return false;" />
 					</h:panelGrid>
 					<rich:spacer width="0px" />																
 				</h:panelGrid>		
-				
-				<rich:spacer width="0px" />
-				<h:panelGrid columns="12" >
-						<h:outputText value="Site"	title="#{sessionCtrl.defaultVue.user.libSite} "  />
-						<h:outputText value="#{sessionCtrl.defaultVue.user.libSite}" title="#{sessionCtrl.defaultVue.user.libSite}"  />
-						<h:outputText value="#{sessionCtrl.defaultVue.statut}" rendered="true" />
-						<rich:separator height="0px" width="30%" />
-				</h:panelGrid>
-				
 			</rich:simpleTogglePanel>	
 			</h:form>
 		</ui:define>

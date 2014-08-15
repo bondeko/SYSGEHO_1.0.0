@@ -8,8 +8,13 @@
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
  <managed-bean>
-  <managed-bean-name>siteCtrl</managed-bean-name>
-  <managed-bean-class>com.bondeko.sysgeho.ui.admin.controleur.SiteCtrl</managed-bean-class>
+  <managed-bean-name>svcCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.admin.controleur.SvcCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>rolCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.admin.controleur.RolCtrl</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
  <navigation-rule>
@@ -29,17 +34,31 @@
    <redirect/>
   </navigation-case>
   <navigation-case>
-   <from-outcome>SiteDetails</from-outcome>
-   <to-view-id>/modules/admin/pages/SiteDetails.xhtml</to-view-id>
+   <from-outcome>SvcDetails</from-outcome>
+   <to-view-id>/modules/admin/pages/SvcDetails.xhtml</to-view-id>
   </navigation-case>
   <navigation-case>
-   <from-outcome>SiteEdition</from-outcome>
-   <to-view-id>/modules/admin/pages/SiteEdition.xhtml</to-view-id>
+   <from-outcome>SvcEdition</from-outcome>
+   <to-view-id>/modules/admin/pages/SvcEdition.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
   <navigation-case>
-   <from-outcome>SiteListe</from-outcome>
-   <to-view-id>/modules/admin/pages/SiteListe.xhtml</to-view-id>
+   <from-outcome>SvcListe</from-outcome>
+   <to-view-id>/modules/admin/pages/SvcListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>RolDetails</from-outcome>
+   <to-view-id>/modules/admin/pages/RolDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>RolEdition</from-outcome>
+   <to-view-id>/modules/admin/pages/RolEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>RolListe</from-outcome>
+   <to-view-id>/modules/admin/pages/RolListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
  </navigation-rule>

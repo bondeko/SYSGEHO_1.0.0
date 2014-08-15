@@ -97,7 +97,7 @@
 								<rich:message for="inpt_nom" errorClass="msg_error" />						
 							</h:panelGroup>	
 
-							<h:outputText value="Prenom"  />						
+							<h:outputText value="#{locale.prenom}"  />						
 							<h:inputText  value="#{entiteCourante.libPre}"   style="width: 60%"   >
 							  <a4j:support event="onchange"  ajaxSingle="true" />	
 							</h:inputText>	
@@ -133,23 +133,42 @@
 							</h:inputTextarea>
 							
 							<h:panelGroup>
-								<h:outputText value="Site"	 />
+								<h:outputText value="Service"	 />
 								<ui:include src="/shared/include/required.xhtml" />
 							</h:panelGroup>
 							<h:panelGroup>	
-								<h:selectOneMenu id="somn_site" value="#{usrCtrl.defaultVue.entiteCourante.codSite}" style="width: 60%" required="true" 
-												requiredMessage="Valeur obligatoire" title="site"  >
+								<h:selectOneMenu id="somn_svc" value="#{usrCtrl.defaultVue.entiteCourante.codSvc}" style="width: 60%"  title="service"  >
 									<f:selectItem itemLabel="" itemValue="#{null}"/>
-									<f:selectItems  value="#{usrCtrl.defaultVue.listeSite}"/> 
-									<a4j:support event="onchange" ajaxSingle="true" actionListener="#{defaultVue.updateLibSite}" reRender="pngp_libSite" />						
+									<f:selectItems  value="#{usrCtrl.defaultVue.listeSvc}"/> 
+									<a4j:support event="onchange" ajaxSingle="true" actionListener="#{defaultVue.updateLibSvc}" reRender="pngp_libSvc" />						
 								</h:selectOneMenu>	
-								<rich:message for="somn_site" errorClass="msg_error" />
+								<rich:message for="somn_svc" errorClass="msg_error" />
 							</h:panelGroup> 
 							
 							<h:outputText value=""	 />
-							<h:panelGroup id="pngp_libSite">
+							<h:panelGroup id="pngp_libSvc">
 								<h:panelGroup>
-									<h:inputText value="#{usrCtrl.defaultVue.entiteCourante.libSite}" style="width: 60%" readonly="true"  rendered="#{! empty usrCtrl.defaultVue.entiteCourante.libSite}" />
+									<h:inputText value="#{usrCtrl.defaultVue.entiteCourante.libSvc}" style="width: 60%" readonly="true"  rendered="#{! empty usrCtrl.defaultVue.entiteCourante.libSvc}" />
+								</h:panelGroup>								
+							</h:panelGroup>
+							
+							<h:panelGroup>
+								<h:outputText value="#{locale.role}"	 />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
+							<h:panelGroup>	
+								<h:selectOneMenu id="somn_rol" value="#{usrCtrl.defaultVue.entiteCourante.codRol}" style="width: 60%"  title="#{locale.role}"  >
+									<f:selectItem itemLabel="" itemValue="#{null}"/>
+									<f:selectItems  value="#{usrCtrl.defaultVue.listeRol}"/> 
+									<a4j:support event="onchange" ajaxSingle="true" actionListener="#{defaultVue.updateLibRol}" reRender="pngp_libRol" />						
+								</h:selectOneMenu>	
+								<rich:message for="somn_rol" errorClass="msg_error" />
+							</h:panelGroup> 
+							
+							<h:outputText value=""	 />
+							<h:panelGroup id="pngp_libRol">
+								<h:panelGroup>
+									<h:inputText value="#{usrCtrl.defaultVue.entiteCourante.libRol}" style="width: 60%" readonly="true"  rendered="#{! empty usrCtrl.defaultVue.entiteCourante.libRol}" />
 								</h:panelGroup>								
 							</h:panelGroup>
 										  					
@@ -157,8 +176,6 @@
          				
          				<h:panelGrid columns="2" width="100%" columnClasses="pngdColRightDynamic,pngdColRightDynamic"  >
          				</h:panelGrid> 
-						
-						 
          					         		         		
          			</h:panelGrid>  
          	

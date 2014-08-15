@@ -29,9 +29,15 @@
                 </rich:menuGroup>
                 
                 <rich:menuItem submitMode="ajax" rendered="true" 
-                    action="#{siteCtrl.openHomePage}" 
+                    action="#{svcCtrl.openHomePage}" 
                     ajaxSingle="true" >
-                    <h:outputText value="Site" />
+                    <h:outputText value="Services" />
+                </rich:menuItem>
+                
+                <rich:menuItem submitMode="ajax" rendered="true" 
+                    action="#{rolCtrl.openHomePage}" 
+                    ajaxSingle="true" >
+                    <h:outputText value="#{locale.roles}" />
                 </rich:menuItem>
                 
 			</rich:dropDownMenu>	
