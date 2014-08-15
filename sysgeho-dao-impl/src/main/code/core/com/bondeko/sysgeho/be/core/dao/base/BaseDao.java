@@ -43,22 +43,14 @@ public abstract class BaseDao <T extends BaseEntity, ID extends Serializable>
 		try{
 			//Fixe l'état de l'entité à créer
 			((SysGehoBaseEntity) entity).setEtatEnt(EnuEtat.CREE.getValue());
-			getLogger().debug("Création de l'entité en BDD ...1");
 			//On précise que l'entité est actif
 			((SysGehoBaseEntity) entity).setBooAct(BigDecimal.ONE);
-			getLogger().debug("Création de l'entité en BDD ...2");
 			//On fixe l'année de création de l'entité
 			((SysGehoBaseEntity) entity).setCodExeFis(DateTools.getYear(DateTools.formatDate(new Date())));
-			getLogger().debug("Création de l'entité en BDD ...3");
 			//Fixe la date de création
 			((SysGehoBaseEntity) entity).setDatCrt(DateTools.formatDate(new Date()));
-			getLogger().debug("Création de l'entité en BDD ...4");
 			//Fixe l'utilisateur qui cree
 			((SysGehoBaseEntity) entity).setCodUsrCrt(entity.getInfoUser().getUser().getCodUsr());
-			getLogger().debug("Création de l'entité en BDD ...5");
-			//Fixe le site
-			((SysGehoBaseEntity) entity).setCodSiteID(entity.getInfoUser().getUser().getCodSite());
-			getLogger().debug("Création de l'entité en BDD ...6");
 			getLogger().debug("Création de l'entité en BDD ...");
 			this.getManager().persist(entity);
 			final X saved = this.getManager().merge(entity);

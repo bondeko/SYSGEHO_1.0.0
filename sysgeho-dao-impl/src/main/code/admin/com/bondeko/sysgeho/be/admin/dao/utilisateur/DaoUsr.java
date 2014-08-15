@@ -92,6 +92,12 @@ public class DaoUsr extends BaseDao<TabUsr, String> implements IDaoUsr{
 		if(currentUsr.getLibNom() != null && !currentUsr.getLibNom().equals("")){
 			clauseWhere = clauseWhere + " AND upper(o.libNom) like '%"+currentUsr.getLibNom()+"%'";
 		}
+		if(currentUsr.getLibSvc() != null && !currentUsr.getLibSvc().equals("")){
+			clauseWhere = clauseWhere + " AND upper(o.libSvc) like '%"+currentUsr.getLibSvc()+"%'";
+		}
+		if(currentUsr.getLibRol() != null && !currentUsr.getLibRol().equals("")){
+			clauseWhere = clauseWhere + " AND upper(o.libRol) like '%"+currentUsr.getLibRol()+"%'";
+		}
 		try{
 			String query = "SELECT o FROM " + entity.getClass().getSimpleName() + " o where " + clauseWhere +
 			" ORDER BY o.codUsr ";
