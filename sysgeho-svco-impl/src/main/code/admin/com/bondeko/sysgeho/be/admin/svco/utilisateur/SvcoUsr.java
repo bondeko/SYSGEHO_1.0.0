@@ -19,7 +19,6 @@ import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.IBaseSisv;
 import com.bondeko.sysgeho.be.core.svco.base.BaseSvco;
 
-//@Stateless(name = "SvcoUsr", mappedName = "SvcoUsr")
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
 public class SvcoUsr extends BaseSvco<TabUsr> implements IRemoteUsr, ILocalUsr{
