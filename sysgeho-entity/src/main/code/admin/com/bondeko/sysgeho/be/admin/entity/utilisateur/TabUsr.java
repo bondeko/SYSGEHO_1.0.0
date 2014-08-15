@@ -7,8 +7,6 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.bondeko.sysgeho.be.core.base.DateTools;
@@ -66,11 +64,17 @@ public class TabUsr extends SysGehoBaseEntity implements Serializable{
 	@Column(name = "LIB_FON")
 	private String libFon;
 	
-	@Column(name = "COD_SITE")
-	private String codSite;
+	@Column(name = "COD_SVC")
+	private String codSvc;
 	
-	@Column(name = "LIB_SITE")
-	private String libSite;
+	@Column(name = "LIB_SVC")
+	private String libSvc;
+	
+	@Column(name = "COD_ROL")
+	private String codRol;
+	
+	@Column(name = "LIB_ROL")
+	private String libRol;
 	
 
 	public String getCodUsr() {
@@ -222,20 +226,36 @@ public class TabUsr extends SysGehoBaseEntity implements Serializable{
 		return libFon;
 	}
 
-	public void setCodSite(String codSite) {
-		this.codSite = codSite;
+	public void setLibSvc(String libSvc) {
+		this.libSvc = libSvc;
 	}
 
-	public String getCodSite() {
-		return codSite;
+	public String getLibSvc() {
+		return libSvc;
 	}
 
-	public void setLibSite(String libSite) {
-		this.libSite = libSite;
+	public void setCodSvc(String codSvc) {
+		this.codSvc = codSvc;
 	}
 
-	public String getLibSite() {
-		return libSite;
+	public String getCodSvc() {
+		return codSvc;
+	}
+
+	public void setCodRol(String codRol) {
+		this.codRol = codRol;
+	}
+
+	public String getCodRol() {
+		return codRol;
+	}
+
+	public void setLibRol(String libRol) {
+		this.libRol = libRol;
+	}
+
+	public String getLibRol() {
+		return libRol;
 	}
 
 }

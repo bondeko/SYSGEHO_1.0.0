@@ -20,6 +20,10 @@ public enum EnuEtat {
 	LIVRE("2005", "Livré"),
 	
 	RECEPTIONNE("2006", "Réceptionné"),
+	
+	ANNULER("2007", "Annulé"),
+	
+	CONFIRME("2008", "Confirmé"),
 
 	SUPP("2001", "Supprimé");
 

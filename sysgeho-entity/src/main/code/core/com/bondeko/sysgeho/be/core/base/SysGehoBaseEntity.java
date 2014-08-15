@@ -34,9 +34,6 @@ public abstract class SysGehoBaseEntity extends BaseEntity{
 	@Column(name = "DAT_MOD")
 	private String datMod;
 	
-	@Column(name = "COD_SITE_ID")
-	private String codSiteID;
-	
 	/**
 	 * Constructeur par défaut
 	 */
@@ -98,12 +95,6 @@ public abstract class SysGehoBaseEntity extends BaseEntity{
 	}
 	public String getDatMod() {
 		return datMod;
-	}
-	public void setCodSiteID(String codSiteID) {
-		this.codSiteID = codSiteID;
-	}
-	public String getCodSiteID() {
-		return codSiteID;
 	}
 	
 }
