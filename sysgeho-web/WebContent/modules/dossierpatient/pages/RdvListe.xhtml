@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+ 	<f:view locale="#{localeCtrl.actual}" />
+   	<ui:composition template="/shared/templates/templateFormulaireListe.xhtml">
+		<ui:param name="managedBean" value="#{sessionScope[rdvCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" des Rendez-vous" />
+				
+		<!-- Crit?res standards de recherche -->
+		<ui:define name="standardFilter"  >
+			
+			<h:panelGrid columns="2" width="100%"   columnClasses="pngdColMiddle" rowClasses="pngdRow" >
+			
+				<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				
+					<h:outputText value="Code Rendez-vous" />          				
+         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.codRdv}" style="width: 30%" /> 
+         			
+         			<h:outputText value="Type Rendez-vous" />          				
+         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.libTypRdv}" style="width: 30%" />  
+         			
+         			<h:panelGroup>
+         				<h:outputText value="#{locale.annule} ?" />
+						<h:selectBooleanCheckbox value="#{rdvCtrl.defaultVue.entiteCourante.BEstAnn}" >
+							<a4j:support ajaxSingle="true"  event="onchange" />
+						</h:selectBooleanCheckbox>
+         			</h:panelGroup>
+         			
+         			<h:panelGroup>
+         				<h:outputText value="#{locale.confirme} ?" />
+						<h:selectBooleanCheckbox value="#{rdvCtrl.defaultVue.entiteCourante.BEstConf}" >
+							<a4j:support ajaxSingle="true"  event="onchange" />
+						</h:selectBooleanCheckbox>
+         			</h:panelGroup>
+
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2" width="100%" border="0" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				
+					
+					<h:outputText value="Nom patient" />          				
+         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.tabPat.libNom}" style="width: 40%" />  
+         			
+         			<h:outputText value="Service d'admission" />          				
+         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.libSvc}" style="width: 40%" />  
+         			
+         			<h:outputText value="#{locale.medecin}" />          				
+         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.tabUsr.libNom}" style="width: 40%" />  
+				
+				</h:panelGrid>
+														
+																																																	
+			</h:panelGrid>	
+											
+		</ui:define>
+		
+		<!-- Colonnes sp?cifiques ? l'entit? -->
+		<ui:define name="specificColumns"  > 	
+
+				<rich:column label="Code Rendez-vous" sortBy="#{entity.codRdv}" filterBy="#{entity.codRdv}" >
+				<f:facet name="header">
+					<h:outputText value="Code Rendez-vous"  />
+				</f:facet>
+				<h:outputText value="#{entity.codRdv}" />				
+			</rich:column>
+			
+			<rich:column label="Type de rendez-vous" sortBy="#{entity.libTypRdv}" filterBy="#{entity.libTypRdv}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="Type de rendez-vous"  />
+				</f:facet>
+				<h:outputText value="#{entity.libTypRdv}" />				
+			</rich:column>
+			
+			<rich:column label="Patient" sortBy="#{entity.tabPat.libNom}" filterBy="#{entity.tabPat.libNom}"  >
+				<f:facet name="header">
+					<h:outputText value="Patient"  />
+				</f:facet>
+				<h:outputText value="#{entity.tabPat.libNom}" />				
+			</rich:column>
+			
+			<rich:column label="Service d'admission" sortBy="#{entity.libSvc}" filterBy="#{entity.libSvc}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="Service d'admission"  />
+				</f:facet>
+				<h:outputText value="#{entity.libSvc}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.medecin}" sortBy="#{entity.tabUsr.libNom}" filterBy="#{entity.tabUsr.libNom}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.medecin}"  />
+				</f:facet>
+				<h:outputText value="#{entity.tabUsr.libNom}" />				
+			</rich:column>
+			
+			<rich:column label="Date de demande" sortBy="#{entity.dateDem}" filterBy="#{entity.dateDem}"  >
+				<f:facet name="header">
+					<h:outputText value="Date de demande" />
+				</f:facet>
+				<h:outputText value="#{entity.dateDem}" >	
+					<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+				</h:outputText>			
+			</rich:column>
+			
+			<rich:column label="Date du rendez-vous" sortBy="#{entity.dateRdv}" filterBy="#{entity.dateRdv}"  >
+				<f:facet name="header">
+					<h:outputText value="Date du rendez-vous" />
+				</f:facet>
+				<h:outputText value="#{entity.dateRdv}" >	
+					<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+				</h:outputText>			
+			</rich:column>
+			
+		</ui:define>	
+		
+		 <!-- Definition des modal panels  -->	
+		<ui:define name="modalPanel">			
+			
+		</ui:define>
+									
+	</ui:composition>
+	
+</html>

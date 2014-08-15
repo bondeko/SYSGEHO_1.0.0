@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+
+  	<ui:composition template="/shared/templates/templateFormulaireEdition.xhtml">
+  	
+		<ui:param name="managedBean" value="#{sessionScope[catExamCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" d'une #{locale.catexam}" />
+		
+		<!-- Definition du contenu de l'ecran principal  -->
+		<ui:define name="ecranPrincipalContenu">
+					
+				<h:panelGroup >
+					<fieldset>
+						<legend> <h:outputText value="Informations #{locale.catexam}" styleClass="legend" />  </legend>
+												
+						<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow">
+						
+							<h:panelGrid columns="2"  width="100%"   columnClasses="pngdColLeftDynamic,pngdColRightDynamic">
+								
+								<h:panelGroup>
+									<h:outputText value="Code " />
+									<ui:include src="/shared/include/required.xhtml" />
+								</h:panelGroup> 
+								<h:panelGroup>								
+									<h:inputText id="inpt_codecatexam" value="#{catExamCtrl.defaultVue.entiteCourante.codCatExam}" style="width: 30%" title="Code #{locale.catexam}"
+													required="true" requiredMessage="Valeur obligatoire" >
+										<a4j:support event="onchange" ajaxSingle="true" />
+									</h:inputText>
+									<rich:message for="inpt_codecatexam" errorClass="msg_error" />
+								</h:panelGroup>
+								
+								<h:panelGroup>
+									<h:outputText value="#{locale.libelle} " />
+									<ui:include src="/shared/include/required.xhtml" />
+								</h:panelGroup> 
+								<h:panelGroup>								
+									<h:inputText id="inpt_libellecat" value="#{catExamCtrl.defaultVue.entiteCourante.libCatExam}" style="width: 60%" title="#{locale.libelle} #{locale.catexam}"
+													required="true" requiredMessage="Valeur obligatoire" >
+										<a4j:support event="onchange" ajaxSingle="true" />
+									</h:inputText>
+									<rich:message for="inpt_libellecat" errorClass="msg_error" />
+								</h:panelGroup>
+										           																													
+							</h:panelGrid>	
+						
+							<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >	
+												     				             				             				             															
+							</h:panelGrid>						
+						
+						</h:panelGrid>
+					</fieldset>
+				</h:panelGroup>   
+				
+				<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="#{locale.specialite}" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+							
+							<h:panelGroup>
+								<h:outputText value="#{locale.specialite}"	 />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
+							<h:panelGroup>	
+								<h:selectOneMenu id="cod_spec" value="#{catExamCtrl.defaultVue.entiteCourante.codSpec}" style="width: 40%"  title="#{locale.specialite}"  
+										required="true"  requiredMessage="Validation obligatoire">
+									<f:selectItem itemLabel="" itemValue="#{null}"/>
+									<f:selectItems  value="#{catExamCtrl.defaultVue.listeSpec}"/> 
+									<a4j:support event="onchange" ajaxSingle="true" actionListener="#{defaultVue.updateLibSpec}" reRender="pngp_libSpec" />						
+								</h:selectOneMenu>	
+								<rich:message for="cod_spec" errorClass="msg_error" />
+							</h:panelGroup> 
+							
+							<h:outputText value=""	 />
+							<h:panelGroup id="pngp_libSpec">
+								<h:panelGroup>
+									<h:inputText value="#{catExamCtrl.defaultVue.entiteCourante.libSpec}" style="width: 60%" readonly="true"  rendered="#{! empty catExamCtrl.defaultVue.entiteCourante.libSpec}" />
+								</h:panelGroup>								
+							</h:panelGroup>
+							
+         				</h:panelGrid>  
+         				
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         						
+         				</h:panelGrid> 
+         				         		         		
+         			</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+				        				             													
+		</ui:define>	
+		
+	</ui:composition>
+	
+</html>

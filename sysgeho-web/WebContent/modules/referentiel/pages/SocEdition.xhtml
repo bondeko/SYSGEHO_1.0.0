@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+ 	<ui:composition template="/shared/templates/templateFormulaireEdition.xhtml">
+   			
+		<ui:param name="managedBean" value="#{sessionScope[socCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" d'une #{locale.societe}" />
+		
+	<!-- Definition du contenu de l'ecran principal  -->
+		<ui:define name="ecranPrincipalContenu">
+
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Informations #{locale.societe}" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:panelGroup>
+								<h:outputText value="Code #{locale.societe}" />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup> 												
+							<h:panelGroup>
+								<h:inputText id="inpt_cod"  value="#{entiteCourante.codSoc}" style="width: 30%" 
+								 	required="true"  requiredMessage="Valeur obligatoire" readonly="#{defaultVue.navigationMgr.enModification}" >							 	
+									<a4j:support event="onchange"  ajaxSingle="true" />											
+								</h:inputText>	
+								<rich:message for="inpt_cod" errorClass="msg_error" />						
+							</h:panelGroup>	
+							
+							<h:panelGroup>
+								<h:outputText value="Raison sociale" />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup> 												
+							<h:panelGroup>
+								<h:inputText id="inpt_nom"  value="#{entiteCourante.libSoc}" style="width: 60%" 
+								 	required="true"  requiredMessage="Validation obligatoire" >							 	
+									<a4j:support event="onchange"  ajaxSingle="true" />											
+								</h:inputText>	
+								<rich:message for="inpt_nom" errorClass="msg_error" />						
+							</h:panelGroup>	
+
+							<h:outputText value="#{locale.numcontrib}"  />						
+							<h:inputText  value="#{entiteCourante.libNumContrib}"   style="width: 60%"   >
+							  <a4j:support event="onchange"  ajaxSingle="true" />	
+							</h:inputText>	
+							
+							<h:panelGroup>
+								<h:outputText value="Nom du responsable" />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup> 												
+							<h:panelGroup>
+								<h:inputText id="inpt_nomrespo"  value="#{entiteCourante.libResp}" style="width: 60%" 
+								 	required="true"  requiredMessage="Validation obligatoire" >							 	
+									<a4j:support event="onchange"  ajaxSingle="true" />											
+								</h:inputText>	
+								<rich:message for="inpt_nomrespo" errorClass="msg_error" />						
+							</h:panelGroup>	
+							
+							<h:outputText value="#{locale.estaffiliee} ?" />
+							<h:selectBooleanCheckbox value="#{socCtrl.defaultVue.entiteCourante.BEstAff}" >
+								<a4j:support ajaxSingle="true"  event="onchange" reRender="dat_aff1,dat_aff2"/>
+							</h:selectBooleanCheckbox>
+							
+							<h:panelGroup id="dat_aff1">
+								<h:outputText value="Date affiliation" rendered="#{socCtrl.defaultVue.entiteCourante.BEstAff}"/>
+							</h:panelGroup>
+							<h:panelGroup id="dat_aff2">					
+								<rich:calendar value="#{socCtrl.defaultVue.entiteCourante.dateAff}" inputStyle="width: 30%"  title="Date affiliation" 
+										styleClass="selectDate"  datePattern="dd/MM/yyyy" rendered="#{socCtrl.defaultVue.entiteCourante.BEstAff}">
+									<a4j:support event="onchanged" ajaxSingle="true" />
+								</rich:calendar>
+							</h:panelGroup>
+							
+							<h:outputText value="#{locale.datecreation}" />
+							<rich:calendar value="#{socCtrl.defaultVue.entiteCourante.dateCre}" inputStyle="width: 30%"  title="#{locale.datecreation}" 
+									styleClass="selectDate"  datePattern="dd/MM/yyyy">
+								<a4j:support event="onchanged" ajaxSingle="true" />
+							</rich:calendar>
+							
+         				</h:panelGrid>  
+         				
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         						
+						    <h:outputText value="#{locale.siege}"  />						
+							<h:inputText  value="#{entiteCourante.libSiege}"   style="width: 60%"   >
+							  <a4j:support event="onchange"  ajaxSingle="true" />	
+							</h:inputText>
+							
+							 <h:outputText value="Ville"  />						
+							<h:inputText  value="#{entiteCourante.libVil}"   style="width: 60%"   >
+							  <a4j:support event="onchange"  ajaxSingle="true" />	
+							</h:inputText>
+													
+							<h:outputText value="#{locale.telephone}"  />						
+							<h:inputText   value="#{entiteCourante.libTel}"   style="width: 40%"   >
+							  <a4j:support event="onchange"  ajaxSingle="true" />	
+							</h:inputText>																					
+			
+							<h:outputText value="Boite postale"  />						
+							<h:inputText   value="#{entiteCourante.libBP}"   style="width: 40%"   >
+							  <a4j:support event="onchange"  ajaxSingle="true" />	
+							</h:inputText>	
+							
+							<h:outputText value="#{locale.addcomplete}"  />						
+							<h:inputTextarea   value="#{entiteCourante.libAdrCom}"   style="width: 60%"   >
+							  <a4j:support event="onchange"  ajaxSingle="true" />	
+							</h:inputTextarea>	
+							
+							<h:outputText value="Effectif"/>
+							<h:inputText id="inpt_eff" value="#{socCtrl.defaultVue.entiteCourante.valEff}"  styleClass="money" 
+								 required="false" style="width: 20%" 
+								  title="Effectif"
+								 converterMessage="#{msg['erreur.conversion.entiere']}"  >
+							</h:inputText>
+							
+							<h:outputText value="Prix unitaire"/>
+							<h:inputText id="inpt_priuni" value="#{socCtrl.defaultVue.entiteCourante.valPriUni}"  styleClass="money" 
+								 required="false" style="width: 20%" 
+								  title="Prix unitaire"
+								 converterMessage="#{msg['erreur.conversion.entiere']}"  >
+							</h:inputText>
+							
+         				</h:panelGrid> 
+         				         		         		
+         			</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+
+		</ui:define>
+	
+													
+	</ui:composition>
+	
+</html>

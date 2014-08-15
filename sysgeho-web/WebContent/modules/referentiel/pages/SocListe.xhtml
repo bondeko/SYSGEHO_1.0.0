@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+     
+  	<ui:composition template="/shared/templates/templateFormulaireListe.xhtml">
+		
+		<ui:param name="managedBean" value="#{sessionScope[socCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" des #{locale.societes}" />
+		
+		<!-- Criteres standards de recherche -->
+		<ui:define name="standardFilter"  >
+		
+			<h:panelGrid columns="2" width="100%"   columnClasses="pngdColMiddle" rowClasses="pngdRow" >
+			
+				<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				
+					<h:outputText value="Code #{locale.societe}" />          				
+         			<h:inputText  value="#{socCtrl.defaultVue.entiteRecherche.codSoc}" style="width: 30%" /> 
+         			
+					<h:outputText value="Raison sociale" />          				
+         			<h:inputText  value="#{socCtrl.defaultVue.entiteRecherche.libSoc}" style="width: 30%" />           					           					           					   					            				            				            			
+
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2" width="100%" border="0" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				</h:panelGrid>
+														
+																																																	
+			</h:panelGrid>	
+						
+		</ui:define>
+		
+		<!-- Colonnes specifiques e l entite -->
+		<ui:define name="specificColumns"  >
+		
+			<rich:column label="Code #{locale.societes}" sortBy="#{entity.codSoc}" filterBy="#{entity.codSoc}" >
+				<f:facet name="header">
+					<h:outputText value="Code #{locale.societes}"  />
+				</f:facet>
+				<h:outputText value="#{entity.codSoc}" />				
+			</rich:column>
+			
+			<rich:column label="Raison sociale" sortBy="#{entity.libSoc}" filterBy="#{entity.libSoc}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="Raison sociale"  />
+				</f:facet>
+				<h:outputText value="#{entity.libSoc}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.numcontrib}" sortBy="#{entity.libNumContrib}" filterBy="#{entity.libNumContrib}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.numcontrib}"  />
+				</f:facet>
+				<h:outputText value="#{entity.libNumContrib}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.siege}" sortBy="#{entity.libSiege}" filterBy="#{entity.libSiege}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.siege}"  />
+				</f:facet>
+				<h:outputText value="#{entity.libSiege}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.estaffiliee}" sortBy="#{entity.BEstAff}" filterBy="#{entity.BEstAff}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.estaffiliee}"  />
+				</f:facet>
+				<h:outputText value="#{entity.BEstAff}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.dateaffiliation}" sortBy="#{entity.dateAff}" filterBy="#{entity.dateAff}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.dateaffiliation}" />
+				</f:facet>
+				<h:outputText value="#{entity.dateAff}" >	
+					<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+				</h:outputText>			
+			</rich:column>
+			
+			<rich:column label="Effectif" sortBy="#{entity.valEff}" filterBy="#{entity.valEff}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="Effectif"  />
+				</f:facet>
+				<h:outputText value="#{entity.valEff}" />				
+			</rich:column>
+							
+		</ui:define>
+													
+	</ui:composition>
+	
+</html>

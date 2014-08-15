@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+     
+  	<ui:composition template="/shared/templates/templateFormulaireListe.xhtml">
+		
+		<ui:param name="managedBean" value="#{sessionScope[patCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" des Patients" />
+		
+		<!-- Criteres standards de recherche -->
+		<ui:define name="standardFilter"  >
+		
+			<h:panelGrid columns="2" width="100%"   columnClasses="pngdColMiddle" rowClasses="pngdRow" >
+			
+				<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				
+					<h:outputText value="Code " />          				
+         			<h:inputText  value="#{patCtrl.defaultVue.entiteRecherche.codPat}" style="width: 30%" /> 
+         			
+					<h:outputText value="Nom patient" />          				
+         			<h:inputText  value="#{patCtrl.defaultVue.entiteRecherche.libNom}" style="width: 30%" />  
+         			
+         			<h:outputText value="Matricule" />          				
+         			<h:inputText  value="#{patCtrl.defaultVue.entiteRecherche.libMat}" style="width: 30%" />           					           					           					   					            				            				            			
+
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2" width="100%" border="0" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				</h:panelGrid>
+														
+																																																	
+			</h:panelGrid>	
+						
+		</ui:define>
+		
+		<!-- Colonnes specifiques e l entite -->
+		<ui:define name="specificColumns"  >
+		
+			<rich:column label="Code patient" sortBy="#{entity.codPat}" filterBy="#{entity.codPat}" >
+				<f:facet name="header">
+					<h:outputText value="Code patient"  />
+				</f:facet>
+				<h:outputText value="#{entity.codPat}" />				
+			</rich:column>
+			
+			<rich:column label="Matricule" sortBy="#{entity.libMat}" filterBy="#{entity.libMat}"  >
+				<f:facet name="header">
+					<h:outputText value="Matricule"  />
+				</f:facet>
+				<h:outputText value="#{entity.libMat}" />				
+			</rich:column>
+			
+			<rich:column label="Nom " sortBy="#{entity.libNom}" filterBy="#{entity.libNom}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="Nom"  />
+				</f:facet>
+				<h:outputText value="#{entity.libNom}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.prenom}" sortBy="#{entity.libPre}" filterBy="#{entity.libPre}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.prenom}"  />
+				</f:facet>
+				<h:outputText value="#{entity.libPre}" />				
+			</rich:column>
+			
+			<rich:column label="Date de naissance" sortBy="#{entity.dateNais}" filterBy="#{entity.dateNais}"  >
+				<f:facet name="header">
+					<h:outputText value="Date de naissance" />
+				</f:facet>
+				<h:outputText value="#{entity.dateNais}" >	
+					<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+				</h:outputText>			
+			</rich:column>
+			
+			<rich:column label="Profession" sortBy="#{entity.libProf}" filterBy="#{entity.libProf}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="Profession"  />
+				</f:facet>
+				<h:outputText value="#{entity.libProf}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.estaffilie}?" sortBy="#{entity.BEstAff}" filterBy="#{entity.BEstAff}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.estaffilie}?"  />
+				</f:facet>
+				<h:outputText value="#{entity.BEstAff}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.societe}" sortBy="#{entity.libSoc}" filterBy="#{entity.libSoc}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.societe}" />
+				</f:facet>
+				<h:outputText value="#{entity.libSoc}" />	
+			</rich:column>
+			
+			<rich:column label="#{locale.estassure}?" sortBy="#{entity.BEstAss}" filterBy="#{entity.BEstAss}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.estassure}?"  />
+				</f:facet>
+				<h:outputText value="#{entity.BEstAss}" />				
+			</rich:column>
+			
+			<rich:column label="Assureur" sortBy="#{entity.libAss}" filterBy="#{entity.libAss}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="Assureur" />
+				</f:facet>
+				<h:outputText value="#{entity.libAss}" />	
+			</rich:column>
+			
+		</ui:define>
+													
+	</ui:composition>
+	
+</html>
