@@ -1395,9 +1395,57 @@ public abstract class SysGehoCtrl <H extends BaseEntity, T extends H>{
 		else{
 			throw new Exception("generer ordre transport");
 		}
-
-		
 	}	
-
+	
+	public String naviguerVersDetailsOuListe(T p$critere) throws Exception {
+		
+		// Determine vers quelle page ou Formulaire l'on doit se diriger
+		String v$navigation = getMemoEntite().concat(CoreConstants.SUFFIXE_NVGT_DETAILS);
+		
+		// Nombre total d'éléments correspondant au critère
+		List<T> list = getEntitySvco().rechercherParCritere(p$critere);
+//		long v$total = getEntitySvco().compterParCritere(p$critere);
+		int v$total = list.size();
+		System.out.println("getEntitySvco() == " + getEntitySvco());
+		System.out.println("v$total == " + v$total);
+		if(v$total > 1){
+			// Se diriger vers le formulaire LISTE
+			v$navigation = getMemoEntite().concat(CoreConstants.SUFFIXE_NVGT_LISTE);
+			
+			naviguer(p$critere);
+			
+		}
+		else if(v$total == 1){
+			// Récupération de l'unique résultat de la recherche
+			T v$resultat = getEntitySvco().rechercherParCritere(p$critere).get(0);
+			
+			if(v$resultat != null){
+				// Mise à jour de l'entité recherchée comme entité courante 
+				getDefaultVue().setEntiteCourante(v$resultat);
+				
+				// Mise en cohérence de l'interface
+				coherenceIHM();
+			}
+			else{
+				/*
+				 * Messages d'information de l'utilisateur à personnaliser selon les entités
+				 */		
+				FacesUtil.addWarnMessage("", "TRAITEMENT_RECHERCHER_AUCUN");	// Il est fortement improbable qu'un tel méssage soit affiché; Juste utile pour les dysfonctionnements.
+				v$navigation = null;
+			}
+			
+		}
+		// si le nombre de résultats est zero
+		else{
+			/*
+			 * Messages d'information de l'utilisateur à personnaliser selon les entités
+			 */		
+			FacesUtil.addWarnMessage("", "TRAITEMENT_RECHERCHER_AUCUN");
+			v$navigation = null;
+		}
+		
+		return v$navigation;
+			
+	}	
 
 }

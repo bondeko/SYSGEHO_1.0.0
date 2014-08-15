@@ -4,7 +4,8 @@ package com.bondeko.sysgeho.ui.admin.util;
  * 
  */
 
-import com.bondeko.sysgeho.be.admin.svco.utilisateur.IRemoteSite;
+import com.bondeko.sysgeho.be.admin.svco.utilisateur.IRemoteRol;
+import com.bondeko.sysgeho.be.admin.svco.utilisateur.IRemoteSvc;
 import com.bondeko.sysgeho.be.admin.svco.utilisateur.IRemoteUsr;
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
@@ -38,17 +39,17 @@ public class AdminSvcoDeleguate {
         return (IRemoteUsr) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoUsr", IRemoteUsr.class));
     }
 	
-	public static IRemoteSite getSvcoSite() throws ServiceLocatorException{
-        return (IRemoteSite) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoSite", IRemoteSite.class));
+	public static IRemoteSvc getSvcoSvc() throws ServiceLocatorException{
+        return (IRemoteSvc) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoSvc", IRemoteSvc.class));
     }
-
-
+	
+	public static IRemoteRol getSvcoRol() throws ServiceLocatorException{
+        return (IRemoteRol) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoRol", IRemoteRol.class));
+    }
 
 	public BaseLogger getLogger() {
 		return logger;
 	}
-
-
 
 	public void setLogger(BaseLogger logger) {
 		this.logger = logger;

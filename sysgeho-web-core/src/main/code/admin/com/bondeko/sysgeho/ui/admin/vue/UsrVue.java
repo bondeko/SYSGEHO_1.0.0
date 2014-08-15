@@ -8,7 +8,8 @@ import java.util.Map;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
-import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabSite;
+import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabRol;
+import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabSvc;
 import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr;
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
 import com.bondeko.sysgeho.ui.admin.util.AdminSvcoDeleguate;
@@ -24,10 +25,14 @@ public class UsrVue extends SysGehoVue<TabUsr>{
 	 */
 	String password;
 	
-	private List<SelectItem> listeSite;
+	private List<SelectItem> listeSvc;
+	
+	private List<SelectItem> listeRol;
 	
 	//mapSitr
-	private Map<String, TabSite> mapSite = new HashMap<String, TabSite>();
+	private Map<String, TabSvc> mapSvc = new HashMap<String, TabSvc>();
+	
+	private Map<String, TabRol> mapRol = new HashMap<String, TabRol>();
 	
 	public UsrVue(){
 		super();
@@ -95,42 +100,76 @@ public class UsrVue extends SysGehoVue<TabUsr>{
 		this.password = password;
 	}
 	
-	public List<SelectItem> getListeSite() {
+	public List<SelectItem> getListeSvc() {
 
-		if(listeSite == null){
+		if(listeSvc == null){
 			
-			listeSite = new ArrayList<SelectItem>();
+			listeSvc = new ArrayList<SelectItem>();
 			
-			List<TabSite> v$sites = null;
+			List<TabSvc> v$Svcs = null;
 						
 			// Critères de recherche des comptes de dépôt	
-			TabSite v$critere = new TabSite();	
+			TabSvc v$critere = new TabSvc();	
 			
 			// Recherche des comptes en BD 			
 			try {
-				v$sites = AdminSvcoDeleguate.getSvcoSite().rechercherTout(v$critere);
-				System.out.println(">>>>>>>>>>>>>>>>>> " + v$sites);
+				v$Svcs = AdminSvcoDeleguate.getSvcoSvc().rechercherTout(v$critere);
 			} 
 			catch (Exception e) {
-				System.out.println(">>>>>>>>>>>>>>>>>> exception >>>>>>>>>>>>>>");
 				getLogger().error(e.getMessage(), e);
 				e.printStackTrace();
 			} 
 			
-			v$sites = (v$sites != null)? v$sites : new ArrayList<TabSite>();
+			v$Svcs = (v$Svcs != null)? v$Svcs : new ArrayList<TabSvc>();
 			
 			// Création de la liste des élements pour le comboBox
-			for(TabSite v$site: v$sites){
-				SelectItem v$item = new SelectItem(v$site.getCodSite(),v$site.getCodSite());
-				listeSite.add(v$item);
-				mapSite.put(v$site.getCodSite(), v$site);
+			for(TabSvc v$Svc: v$Svcs){
+				SelectItem v$item = new SelectItem(v$Svc.getCodSvc(),v$Svc.getCodSvc());
+				listeSvc.add(v$item);
+				mapSvc.put(v$Svc.getCodSvc(), v$Svc);
 			}
 		}
-		return listeSite;
+		return listeSvc;
 	}
 	
-	public void updateLibSite(ActionEvent evt){
-		getEntiteCourante().setLibSite(mapSite.get(getEntiteCourante().getCodSite()).getLibSite());
+	public void updateLibSvc(ActionEvent evt){
+		getEntiteCourante().setLibSvc(mapSvc.get(getEntiteCourante().getCodSvc()).getLibSvc());
+	}
+	
+	public List<SelectItem> getListeRol() {
+
+		if(listeRol == null){
+			
+			listeRol = new ArrayList<SelectItem>();
+			
+			List<TabRol> v$Rols = null;
+						
+			// Critères de recherche des comptes de dépôt	
+			TabRol v$critere = new TabRol();	
+			
+			// Recherche des comptes en BD 			
+			try {
+				v$Rols = AdminSvcoDeleguate.getSvcoRol().rechercherTout(v$critere);
+			} 
+			catch (Exception e) {
+				getLogger().error(e.getMessage(), e);
+				e.printStackTrace();
+			} 
+			
+			v$Rols = (v$Rols != null)? v$Rols : new ArrayList<TabRol>();
+			
+			// Création de la liste des élements pour le comboBox
+			for(TabRol v$Rol: v$Rols){
+				SelectItem v$item = new SelectItem(v$Rol.getCodRol(),v$Rol.getCodRol());
+				listeRol.add(v$item);
+				mapRol.put(v$Rol.getCodRol(), v$Rol);
+			}
+		}
+		return listeRol;
+	}
+	
+	public void updateLibRol(ActionEvent evt){
+		getEntiteCourante().setLibRol(mapRol.get(getEntiteCourante().getCodRol()).getLibRol());
 	}
 	
 }

@@ -1,15 +1,12 @@
 package com.bondeko.sysgeho.ui.core.base;
 
 
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-/**
- * @author lkamhoua
- *
- */
 public class Traitement {
 	
 	/**
