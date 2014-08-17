@@ -1270,6 +1270,7 @@ public abstract class SysGehoCtrl <H extends BaseEntity, T extends H>{
 			// Nombre total d'éléménts de la requete de Recherche
 			//defaultVue.getTableMgr().setTotalRecherche(getEntitySvco().compterParCritere(defaultVue.getEntiteRecherche())); PAS CORRECT
 			long v$total = getEntitySvco().rechercherParCritere(p$critere).size();
+			System.out.println("naviguer().v$total " + v$total);
 			
 			// Définition de la plage pour la pagination
 			p$critere.setOffset(1);
@@ -1399,6 +1400,8 @@ public abstract class SysGehoCtrl <H extends BaseEntity, T extends H>{
 	
 	public String naviguerVersDetailsOuListe(T p$critere) throws Exception {
 		
+		defaultVue.setTypeRecherche("CRITERE");
+		
 		// Determine vers quelle page ou Formulaire l'on doit se diriger
 		String v$navigation = getMemoEntite().concat(CoreConstants.SUFFIXE_NVGT_DETAILS);
 		
@@ -1406,8 +1409,6 @@ public abstract class SysGehoCtrl <H extends BaseEntity, T extends H>{
 		List<T> list = getEntitySvco().rechercherParCritere(p$critere);
 //		long v$total = getEntitySvco().compterParCritere(p$critere);
 		int v$total = list.size();
-		System.out.println("getEntitySvco() == " + getEntitySvco());
-		System.out.println("v$total == " + v$total);
 		if(v$total > 1){
 			// Se diriger vers le formulaire LISTE
 			v$navigation = getMemoEntite().concat(CoreConstants.SUFFIXE_NVGT_LISTE);
@@ -1443,7 +1444,6 @@ public abstract class SysGehoCtrl <H extends BaseEntity, T extends H>{
 			FacesUtil.addWarnMessage("", "TRAITEMENT_RECHERCHER_AUCUN");
 			v$navigation = null;
 		}
-		
 		return v$navigation;
 			
 	}	

@@ -145,6 +145,7 @@ public class PatCtrl extends SysGehoCtrl<TabPat, TabPat>{
 				.naviguerVersFormulaireListe())) {
 			
 			TabRdv rdv = new TabRdv();
+			rdv.initData();
 			rdv.setTabPat(defaultVue.getEntiteCourante());
 
 			try {

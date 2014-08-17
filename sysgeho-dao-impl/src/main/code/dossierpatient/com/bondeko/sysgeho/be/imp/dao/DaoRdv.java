@@ -79,10 +79,10 @@ public class DaoRdv extends BaseDao<TabRdv, String> implements IDaoRdv{
 		if(currentRdv.getLibSvc()!= null && !currentRdv.getLibSvc().equals("")){
 			clauseWhere = clauseWhere + "AND upper(o.libSvc) like '%"+currentRdv.getLibSvc()+"%'";
 		}
-		if(currentRdv.getTabPat().getLibNom()!= null && !currentRdv.getTabPat().getLibNom().equals("")){
+		if(currentRdv.getTabPat()!= null && currentRdv.getTabPat().getLibNom()!= null && !currentRdv.getTabPat().getLibNom().equals("")){
 			clauseWhere = clauseWhere + "AND upper(o.tabPat.libNom) like '%"+currentRdv.getTabPat().getLibNom()+"%'";
 		}
-		if(currentRdv.getTabUsr().getLibNom()!= null && !currentRdv.getTabUsr().getLibNom().equals("")){
+		if(currentRdv.getTabUsr()!= null && currentRdv.getTabUsr().getLibNom()!= null && !currentRdv.getTabUsr().getLibNom().equals("")){
 			clauseWhere = clauseWhere + "AND upper(o.tabUsr.libNom) like '%"+currentRdv.getTabUsr().getLibNom()+"%'";
 		}
 		System.out.println("currentRdv.getBooEstAnn() " + currentRdv.getBooEstAnn());

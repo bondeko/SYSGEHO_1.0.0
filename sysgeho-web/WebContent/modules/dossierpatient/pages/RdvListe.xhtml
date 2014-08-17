@@ -21,30 +21,25 @@
 				<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
 				
 					<h:outputText value="Code Rendez-vous" />          				
-         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.codRdv}" style="width: 30%" /> 
+         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.codRdv}" style="width: 30%" immediate="true"/> 
          			
          			<h:outputText value="Type Rendez-vous" />          				
-         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.libTypRdv}" style="width: 30%" />  
+         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.libTypRdv}" style="width: 30%" immediate="true"/>  
          			
          			<h:panelGroup>
          				<h:outputText value="#{locale.annule} ?" />
-						<h:selectBooleanCheckbox value="#{rdvCtrl.defaultVue.entiteCourante.BEstAnn}" >
-							<a4j:support ajaxSingle="true"  event="onchange" />
-						</h:selectBooleanCheckbox>
+						<h:selectBooleanCheckbox value="#{rdvCtrl.defaultVue.entiteCourante.BEstAnn}" />
          			</h:panelGroup>
          			
          			<h:panelGroup>
          				<h:outputText value="#{locale.confirme} ?" />
-						<h:selectBooleanCheckbox value="#{rdvCtrl.defaultVue.entiteCourante.BEstConf}" >
-							<a4j:support ajaxSingle="true"  event="onchange" />
-						</h:selectBooleanCheckbox>
+						<h:selectBooleanCheckbox value="#{rdvCtrl.defaultVue.entiteCourante.BEstConf}" />
          			</h:panelGroup>
 
 				</h:panelGrid>
 				
 				<h:panelGrid columns="2" width="100%" border="0" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
 				
-					
 					<h:outputText value="Nom patient" />          				
          			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.tabPat.libNom}" style="width: 40%" />  
          			
@@ -56,7 +51,6 @@
 				
 				</h:panelGrid>
 														
-																																																	
 			</h:panelGrid>	
 											
 		</ui:define>
