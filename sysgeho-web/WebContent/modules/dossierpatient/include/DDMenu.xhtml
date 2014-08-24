@@ -30,6 +30,26 @@
 	                    <h:outputText value="Rendez-vous" />
 	                </rich:menuItem>
 	                
+	                <rich:menuSeparator />
+	                
+	                <rich:menuGroup value="Consultations" rendered="true">
+                    
+	                     <rich:menuItem submitMode="ajax" rendered="true" 
+			                 action="#{consulCtrl.openHomePage}" 
+			                 ajaxSingle="true" >
+			                 <h:outputText value="Consultations" />
+			             </rich:menuItem>	
+			             
+			             <rich:menuItem submitMode="ajax" rendered="true" 
+			                 action="#{cpteRenduConsulCtrl.openHomePage}" 
+			                 ajaxSingle="true" >
+			                 <h:outputText value="Comptes Rendus Consultations" />
+			             </rich:menuItem>
+			             
+	                </rich:menuGroup>
+	                
+	                <rich:menuSeparator />
+	                
 				</rich:dropDownMenu>	
 				
    			</ui:composition>

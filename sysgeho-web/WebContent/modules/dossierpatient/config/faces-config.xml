@@ -12,6 +12,16 @@
   <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.RdvCtrl</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>consulCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.ConsulCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>cpteRenduConsulCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.CpteRenduConsulCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
  <navigation-rule>
   <from-view-id>*</from-view-id>
   <navigation-case>
@@ -40,6 +50,36 @@
   <navigation-case>
    <from-outcome>RdvListe</from-outcome>
    <to-view-id>/modules/dossierpatient/pages/RdvListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>ConsulDetails</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/ConsulDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>ConsulEdition</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/ConsulEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>ConsulListe</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/ConsulListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>CpteRenduConsulDetails</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/CpteRenduConsulDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>CpteRenduConsulEdition</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/CpteRenduConsulEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>CpteRenduConsulListe</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/CpteRenduConsulListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
   

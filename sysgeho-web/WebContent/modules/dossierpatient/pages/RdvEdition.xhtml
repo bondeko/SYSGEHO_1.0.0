@@ -97,10 +97,13 @@
          				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
 
 							
-							<h:outputText value="Patient" />
+							<h:panelGroup>
+								<h:outputText value="Patient" />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
 							<h:panelGroup>
 							<h:inputText id="inpt_codPat" value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}" style="width: 20%" 
-								required="true"
+								required="true" requiredMessage="Valeur obligatoire"
 								readonly="true" 
 								title="Code" disabled="false">
 								<a4j:support event="onchange" ajaxSingle="true" 
@@ -230,11 +233,13 @@
         			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
         							         		
          				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
-
-							<h:outputText value="#{locale.medecin}" />
+							<h:panelGroup>
+								<h:outputText value="#{locale.medecin}" />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
 							<h:panelGroup>
 							<h:inputText id="inpt_codMed" value="#{rdvCtrl.defaultVue.entiteCourante.tabUsr.codUsr}" style="width: 20%" 
-								required="true"
+								required="true" requiredMessage="Valeur obligatoire"
 								readonly="true" 
 								title="Code" disabled="false">
 								<a4j:support event="onchange" ajaxSingle="true" reRender="prenomusr_1,prenomusr_2,ser_1,ser_2,rol_1,rol_2,adr1_1,adr_2"/>

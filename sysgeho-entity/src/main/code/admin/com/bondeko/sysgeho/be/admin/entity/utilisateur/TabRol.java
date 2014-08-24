@@ -21,7 +21,7 @@ public class TabRol extends SysGehoBaseEntity implements Serializable{
 	}
 	
 	public TabRol(InfoUser infoUser){
-		
+		this.setInfoUser(infoUser);
 	}
 	
 	@Id

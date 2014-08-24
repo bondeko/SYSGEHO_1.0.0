@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+ 	<ui:composition template="/shared/templates/templateFormulaireDetails.xhtml">
+   			
+		<ui:param name="managedBean" value="#{sessionScope[cpteRenduConsulCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" d'un Compte Rendu de Consultation" />
+		
+	<!-- Definition du contenu de l'ecran principal  -->
+		<ui:define name="ecranPrincipalContenu">
+			
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Consultation" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:outputText value="Consultation" />
+							<h:inputText id="inpt_codCon" value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.tabConsul.codConsul}" style="width: 20%" 
+								readonly="true" >
+								<a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>	
+							
+							<h:outputText value="Poids" />
+							<h:inputText  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.tabConsul.valPoids}" style="width: 40%" readonly="true"  title="Poids" />
+							
+							<h:outputText value="Tension" />	
+							<h:inputText  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.tabConsul.valTension}" style="width: 40%" readonly="true"  title="Tension" />
+							
+							<h:outputText value="Pou" />	
+							<h:inputText  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.tabConsul.valPou}" style="width: 40%" readonly="true"  title="Pou" />
+							
+							<h:outputText value="Pou" />	
+							<h:inputText  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.tabConsul.valTaille}" style="width: 40%" readonly="true"  title="Pou" />
+							
+						</h:panelGrid>
+							
+						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdLColRightDynamic" cellspacing="10" >
+							
+							
+							<h:outputText value="Patient" />	
+							<h:inputText  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.tabConsul.tabPat.libNom}" style="width: 60%" readonly="true"  title="Patient" />
+							
+							<h:outputText value="#{locale.medecinayantrealise}" />	
+							<h:inputText  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.tabConsul.tabUsr.libNom}" style="width: 60%" readonly="true"  title="#{locale.medecinayantrealise}" />
+							
+							<h:outputText value="Date consultation" />
+							<h:inputText value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.tabConsul.dateConsul}" readonly="true" style="width: 30%" title="Date enregistrement"  >
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+							</h:inputText>
+							
+						</h:panelGrid>
+					</h:panelGrid>
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Compte rendu" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         					<h:outputText value="Motif"/>
+							<h:inputText id="inpt_mot" value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libMotifConsul}"  
+								 readonly="true" style="width: 60%" title="Motif" >
+							</h:inputText>
+							
+							<h:outputText value="Histoire de la maladie"/>
+							<h:inputTextarea id="inpt_hist" value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libHisMal}"  
+								  readonly="true" style="width: 60%" title="Histoire de la maladie" >
+							</h:inputTextarea>
+							
+							<h:outputText value="Diagnostic Principal"/>
+							<h:inputTextarea value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libDiagPrin}"  
+								  readonly="true" style="width: 60%" title="Diagnostic Principal" >
+							</h:inputTextarea>
+							
+							<h:outputText value="Diagnostic Secondaire"/>
+							<h:inputTextarea  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libDiagSenc}"  
+								  readonly="true" style="width: 60%" title="Diagnostic Principal" >
+							</h:inputTextarea>
+							
+							<h:outputText value="Examen Biologique"/>
+							<h:inputTextarea  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libExamBio}"  
+								  readonly="true" style="width: 60%" title="Examen Biologique" >
+							</h:inputTextarea>
+
+         			</h:panelGrid>  
+         				
+         			<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+							<h:outputText value="Exploration Fonctionnelle"/>
+							<h:inputTextarea  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libExploFonc}"  
+								  readonly="true" style="width: 60%" title="Exploration Fonctionnelle" >
+							</h:inputTextarea>
+							
+							<h:outputText value="Examen Imagerie"/>
+							<h:inputTextarea  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libExamImag}"  
+								  readonly="true" style="width: 60%" title="Examen Imagerie" >
+							</h:inputTextarea>
+							
+							<h:outputText value="Traitements Prescrits"/>
+							<h:inputTextarea  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libTraitPres}"  
+								  readonly="true" style="width: 60%" title="Traitements Prescrits" >
+							</h:inputTextarea>
+							
+							<h:outputText value="Conclusion"/>
+							<h:inputTextarea  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libConcl}"  
+								 readonly="true" style="width: 60%" title="Conclusion" >
+							</h:inputTextarea>
+							
+							<h:outputText value="Date Compte Rendu" />
+							<h:inputText value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.date}" readonly="true" style="width: 30%" title="Date Compte Rendu"  >
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+							</h:inputText>
+							
+							
+         			</h:panelGrid> 
+         				         		         		
+         		</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+		</ui:define>
+	
+	</ui:composition>
+	
+</html>

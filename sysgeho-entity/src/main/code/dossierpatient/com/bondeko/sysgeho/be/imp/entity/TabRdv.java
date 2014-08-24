@@ -15,14 +15,13 @@ import javax.persistence.Table;
 import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr;
 import com.bondeko.sysgeho.be.core.base.DateTools;
 import com.bondeko.sysgeho.be.core.base.SysGehoBaseEntity;
-import com.bondeko.sysgeho.be.ref.entity.TabTypRdv;
 import com.bondeko.sysgeho.be.util.InfoUser;
 
 @Entity
 @Table(name="TAB_RDV")
 public class TabRdv extends SysGehoBaseEntity implements Serializable{
 	
-private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 	
 	@Override
 	public String getEntityCode() {
@@ -85,8 +84,6 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "BOO_EST_CONF")
 	private BigDecimal booEstConf;
 	
-	
-
 	public BigDecimal getBooEstAnn() {
 		return booEstAnn;
 	}

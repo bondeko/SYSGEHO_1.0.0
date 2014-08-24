@@ -30,11 +30,11 @@
 				</h:panelGrid>
 				<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
 				
-					<h:outputText value="#{locale.libelle} Service" />          				
-         			<h:inputText  value="#{usrCtrl.defaultVue.entiteRecherche.libSvc}" style="width: 60%" />   
+					<h:outputText value="#{locale.libelle} Service" />   
+					<h:inputText  value="#{usrCtrl.defaultVue.entiteRecherche.tabSvc.libSvc}" style="width: 40%" />   
          			
-         			<h:outputText value="#{locale.libelle} #{locale.role}" />          				
-         			<h:inputText  value="#{usrCtrl.defaultVue.entiteRecherche.libRol}" style="width: 60%" /> 
+         			<h:outputText value="#{locale.libelle} #{locale.role}" /> 
+         			<h:inputText  value="#{usrCtrl.defaultVue.entiteRecherche.tabRol.libRol}" style="width: 40%" /> 
 					
 				</h:panelGrid>
 																																																	
@@ -73,18 +73,18 @@
 				<h:outputText value="#{entity.libFon}" />				
 			</rich:column>
 			
-			<rich:column label="Service" sortBy="#{entity.libSvc}" filterBy="#{entity.libSvc}" width="150" >
+			<rich:column label="Service" sortBy="#{entity.tabSvc.libSvc}" filterBy="#{entity.tabSvc.libSvc}" width="150" >
 				<f:facet name="header">
 					<h:outputText value="Service "  />
 				</f:facet>
-				<h:outputText value="#{entity.libSvc}" />				
+				<h:outputText value="#{entity.tabSvc.libSvc}" />				
 			</rich:column>
 			
-			<rich:column label="#{locale.role}" sortBy="#{entity.libRol}" filterBy="#{entity.libRol}" width="150" >
+			<rich:column label="#{locale.role}" sortBy="#{entity.tabRol.libRol}" filterBy="#{entity.tabRol.libRol}" width="150" >
 				<f:facet name="header">
 					<h:outputText value="#{locale.role}"  />
 				</f:facet>
-				<h:outputText value="#{entity.libRol}" />				
+				<h:outputText value="#{entity.tabRol.libRol}" />				
 			</rich:column>
 				
 		</ui:define>

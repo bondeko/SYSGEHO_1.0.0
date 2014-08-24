@@ -31,7 +31,7 @@ public class TabPat extends SysGehoBaseEntity implements Serializable{
 	}
 	
 	public TabPat(InfoUser infoUser){
-		
+		this.setInfoUser(infoUser);
 	}
 	
 	@Id

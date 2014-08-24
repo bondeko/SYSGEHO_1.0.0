@@ -25,6 +25,7 @@ private static final long serialVersionUID = 1L;
 	}
 	
 	public TabAss(InfoUser infoUser){
+		this.setInfoUser(infoUser);
 	}
 	
 	@Id

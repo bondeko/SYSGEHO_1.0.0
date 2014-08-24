@@ -31,7 +31,7 @@ public class TabSoc extends SysGehoBaseEntity implements Serializable{
 	}
 	
 	public TabSoc(InfoUser infoUser){
-		
+		this.setInfoUser(infoUser);
 	}
 	
 	@Id

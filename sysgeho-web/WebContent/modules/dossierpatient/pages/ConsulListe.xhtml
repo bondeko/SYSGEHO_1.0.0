@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+     
+  	<ui:composition template="/shared/templates/templateFormulaireListe.xhtml">
+		
+		<ui:param name="managedBean" value="#{sessionScope[consulCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" des Consultations" />
+		
+		<!-- Criteres standards de recherche -->
+		<ui:define name="standardFilter"  >
+		
+			<h:panelGrid columns="2" width="100%"   columnClasses="pngdColMiddle" rowClasses="pngdRow" >
+			
+				<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				
+					<h:outputText value="Code " />          				
+         			<h:inputText  value="#{consulCtrl.defaultVue.entiteRecherche.codConsul}" style="width: 30%" /> 
+         			
+					<h:outputText value="Nom Patient" />          				
+         			<h:inputText  value="#{consulCtrl.defaultVue.entiteRecherche.tabPat.libNom}" style="width: 30%" />  
+         			
+         			<h:outputText value="#{locale.medecinayantrealise}" />          				
+         			<h:inputText  value="#{consulCtrl.defaultVue.entiteRecherche.tabUsr.libNom}" style="width: 30%" />           					           					           					   					            				            				            			
+
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2" width="100%" border="0" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				</h:panelGrid>
+														
+																																																	
+			</h:panelGrid>	
+						
+		</ui:define>
+		
+		<!-- Colonnes specifiques e l entite -->
+		<ui:define name="specificColumns"  >
+		
+			<rich:column label="Code " sortBy="#{entity.codConsul}" filterBy="#{entity.codConsul}" >
+				<f:facet name="header">
+					<h:outputText value="Code "  />
+				</f:facet>
+				<h:outputText value="#{entity.codConsul}" />				
+			</rich:column>
+			
+			<rich:column label="Patient" sortBy="#{entity.tabPat.libNom}" filterBy="#{entity.tabPat.libNom}"  >
+				<f:facet name="header">
+					<h:outputText value="Patient"  />
+				</f:facet>
+				<h:outputText value="#{entity.tabPat.libNom}" />				
+			</rich:column>
+			
+			<rich:column label="Poids " sortBy="#{entity.valPoids}" filterBy="#{entity.valPoids}" >
+				<f:facet name="header">
+					<h:outputText value="Poids"  />
+				</f:facet>
+				<h:outputText value="#{entity.valPoids}" />				
+			</rich:column>
+			
+			<rich:column label="Tension " sortBy="#{entity.valTension}" filterBy="#{entity.valTension}" >
+				<f:facet name="header">
+					<h:outputText value="Tension"  />
+				</f:facet>
+				<h:outputText value="#{entity.valTension}" />				
+			</rich:column>
+			
+			<rich:column label="Pou " sortBy="#{entity.valPou}" filterBy="#{entity.valPou}" >
+				<f:facet name="header">
+					<h:outputText value="Pou"  />
+				</f:facet>
+				<h:outputText value="#{entity.valPou}" />				
+			</rich:column>
+			
+			<rich:column label="Taille " sortBy="#{entity.valTaille}" filterBy="#{entity.valTaille}" >
+				<f:facet name="header">
+					<h:outputText value="Taille"  />
+				</f:facet>
+				<h:outputText value="#{entity.valTaille}" />				
+			</rich:column>
+			
+			<rich:column label="Date de consultation" sortBy="#{entity.dateConsul}" filterBy="#{entity.dateConsul}"  >
+				<f:facet name="header">
+					<h:outputText value="Date de consultation" />
+				</f:facet>
+				<h:outputText value="#{entity.dateConsul}" >	
+					<f:convertDateTime type="date" dateStyle="full" consultern="dd/MM/yyyy" timeZone="GMT+1" />
+				</h:outputText>			
+			</rich:column>
+			
+			<rich:column label="#{locale.medecinayantrealise}" sortBy="#{entity.tabUsr.libNom}" filterBy="#{entity.tabUsr.libNom}" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.medecinayantrealise}"  />
+				</f:facet>
+				<h:outputText value="#{entity.tabUsr.libNom}" />				
+			</rich:column>
+			
+			<rich:column label="Montant TTC"  sortBy="#{entity.valMntTtc}" filterBy="#{entity.valMntTtc}"  >
+				<f:facet name="header">
+					<h:outputText value="Montant TTC" />
+				</f:facet>	
+				<h:outputText value="#{entity.valMntTtc}" />		
+			</rich:column>
+			
+			<rich:column label="Statut " sortBy="#{entity.libStatut}" filterBy="#{entity.libStatut}" >
+				<f:facet name="header">
+					<h:outputText value="Statut"  />
+				</f:facet>
+				<h:outputText value="#{entity.libStatut}" />				
+			</rich:column>
+			
+		</ui:define>
+													
+	</ui:composition>
+	
+</html>

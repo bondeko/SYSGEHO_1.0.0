@@ -25,6 +25,7 @@ private static final long serialVersionUID = 1L;
 	}
 	
 	public TabCatExam(InfoUser infoUser){
+		this.setInfoUser(infoUser);
 	}
 	
 	@Id

@@ -5,8 +5,6 @@
 	
 		<jta-data-source>java:/sysGehoDS</jta-data-source>
 		
-		<class>com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr</class>
-		
 		<properties>
 			<property name="hibernate.archive.autodetection" value="class"/>
 			<property name="hibernate.format_sql" value="true" />

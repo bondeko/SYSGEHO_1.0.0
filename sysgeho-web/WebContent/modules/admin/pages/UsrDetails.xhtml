@@ -80,10 +80,16 @@
 							<h:inputTextarea value="#{entiteCourante.libAdr}" readonly="true" style="width: 60%" />
 							
 							<h:outputText value="Service"   />
-			  				<h:inputText  value="#{entiteCourante.libSvc}" style="width: 60%"  readonly="true" />
+							<h:panelGroup>
+								<h:inputText  value="#{entiteCourante.tabSvc.codSvc}" style="width: 20%"  readonly="true" />
+								<h:inputText  value="#{entiteCourante.tabSvc.libSvc}" style="width: 40%" readonly="true"/>   
+							</h:panelGroup>  
 			  				
 			  				<h:outputText value="#{locale.role}"   />
-			  				<h:inputText  value="#{entiteCourante.libRol}" style="width: 60%"  readonly="true" />
+			  				<h:panelGroup>
+		         				<h:inputText  value="#{entiteCourante.tabRol.codRol}" style="width: 20%" readonly="true"/> 
+		         				<h:inputText  value="#{entiteCourante.tabRol.libRol}" style="width: 40%" readonly="true"/> 
+		         			</h:panelGroup>
 							
 						</h:panelGrid>
 						

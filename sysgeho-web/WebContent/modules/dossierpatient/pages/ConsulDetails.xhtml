@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+ 	<ui:composition template="/shared/templates/templateFormulaireDetails.xhtml">
+   			
+		<ui:param name="managedBean" value="#{sessionScope[consulCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" d'une Consultation" />
+		
+	<!-- Definition du contenu de l'ecran principal  -->
+		<ui:define name="ecranPrincipalContenu">
+
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Informations Patient" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:outputText value="Patient" />
+							<h:panelGroup>
+								<h:inputText id="inpt_codPat" value="#{consulCtrl.defaultVue.entiteCourante.tabPat.codPat}" style="width: 20%" 
+									readonly="true" title="Code" >
+									<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>	
+								<h:inputText id="inpt_libPat" value="#{consulCtrl.defaultVue.entiteCourante.tabPat.libNom}" style="width: 40%" 
+										readonly="true"  title="#{locale.libelle}" > 
+										<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+							</h:panelGroup>
+							
+							<h:outputText value="#{locale.prenom}" />
+							<h:inputText  value="#{consulCtrl.defaultVue.entiteCourante.tabPat.libPre}" style="width: 40%" readonly="true"  title="#{locale.prenom}" />
+							
+							<h:outputText value="Matricule" />	
+							<h:inputText  value="#{consulCtrl.defaultVue.entiteCourante.tabPat.libMat}" style="width: 40%" readonly="true"  title="Matricule" />
+							
+							<h:outputText value="Date de naissance" />
+							<h:inputText value="#{consulCtrl.defaultVue.entiteCourante.tabPat.dateNais}" readonly="true" style="width: 30%" title="Date de naissance"  >
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+							</h:inputText>
+							
+							<h:outputText value="Sexe"  />
+							<h:selectOneRadio  value="#{consulCtrl.defaultVue.entiteCourante.tabPat.libSex}" disabled="true" >
+								<f:selectItem itemLabel="M" itemValue="M"  />
+								<f:selectItem itemLabel="F" itemValue="F"/>
+							</h:selectOneRadio>
+							
+						</h:panelGrid>
+							
+						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdLColRightDynamic" cellspacing="10" >
+							
+							<h:outputText value="#{locale.estaffilie} ?" />
+							<h:selectBooleanCheckbox value="#{consulCtrl.defaultVue.entiteCourante.tabPat.BEstAff}"  disabled="true" >
+								<a4j:support ajaxSingle="true"  event="onchange" />
+							</h:selectBooleanCheckbox>
+							
+							<h:outputText value="#{locale.societe}" />
+							<h:panelGroup id="soc_2">
+								<h:inputText id="inpt_codSoc" value="#{consulCtrl.defaultVue.entiteCourante.tabPat.codSoc}" style="width: 20%" 
+									readonly="true" title="Code" disabled="false" >
+									<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>	
+								<h:inputText id="inpt_libSoc" value="#{consulCtrl.defaultVue.entiteCourante.tabPat.libSoc}" style="width: 40%" 
+										readonly="true"  title="#{locale.libelle}" disabled="false" > 
+										<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+							</h:panelGroup>
+							
+							<h:outputText value="Profession" />
+							<h:inputText id="inpt_prof"  value="#{consulCtrl.defaultVue.entiteCourante.tabPat.libProf}" style="width: 60%" readonly="true" >							 	
+								<a4j:support event="onchange"  ajaxSingle="true" />											
+							</h:inputText>
+							
+							<h:outputText value="#{locale.medecintraitant}" />
+							<h:inputText  value="#{consulCtrl.defaultVue.entiteCourante.tabPat.libMed}" style="width: 60%" readonly="true" >							 	
+								<a4j:support event="onchange"  ajaxSingle="true" />											
+							</h:inputText>
+							
+							<h:outputText value="Date enregistrement" />
+							<h:inputText value="#{consulCtrl.defaultVue.entiteCourante.tabPat.dateEnreg}" readonly="true" style="width: 30%" title="Date enregistrement" >
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+							</h:inputText>
+							
+						</h:panelGrid>
+					</h:panelGrid>
+         	
+				</fieldset>								
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="#{locale.medecinayantrealise}" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:outputText value="#{locale.medecin}" />
+							<h:panelGroup>
+								<h:inputText id="inpt_codMed" value="#{consulCtrl.defaultVue.entiteCourante.tabUsr.codUsr}" style="width: 20%" 
+									required="true" readonly="true" title="Code" disabled="false" >
+									<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>	
+								<h:inputText id="inpt_libMed" value="#{consulCtrl.defaultVue.entiteCourante.tabUsr.libNom}" style="width: 40%" 
+										required="false" readonly="true"  title="#{locale.libelle}" disabled="false"> 
+										<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+						</h:panelGroup>
+						
+						<h:outputText value="#{locale.prenom}" />	
+						<h:inputText  value="#{consulCtrl.defaultVue.entiteCourante.tabUsr.libPre}" style="width: 40%" readonly="true"  title="#{locale.prenom}"/>
+								
+						<h:outputText value="Services" />
+						<h:inputText  value="#{consulCtrl.defaultVue.entiteCourante.tabUsr.tabSvc.libSvc}" style="width: 60%"  readonly="true" />	
+							
+         			</h:panelGrid>  
+         				
+         			<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+						<h:outputText value="#{locale.role}" />
+						<h:inputText  value="#{consulCtrl.defaultVue.entiteCourante.tabUsr.tabRol.libRol}" style="width: 60%"  readonly="true"/>
+         					
+						<h:outputText value="Adresse" />
+						<h:inputText  value="#{consulCtrl.defaultVue.entiteCourante.tabUsr.libAdr}" style="width: 60%"  readonly="true" />
+							
+         			</h:panelGrid> 
+         				         		         		
+         		</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="#{locale.paramconsultation}" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+							<h:outputText value="#{locale.specialite}"	 />
+							<h:panelGroup>	
+								<h:inputText id="inpt_codSpec" value="#{consulCtrl.defaultVue.entiteCourante.codSpec}"  
+									 readonly="true" style="width: 20%" title="#{locale.specialite}" />
+									 
+								<h:inputText id="inpt_libSpec" value="#{consulCtrl.defaultVue.entiteCourante.libSpec}"  
+									 readonly="true" style="width: 40%" title="#{locale.specialite}" />
+							</h:panelGroup> 
+							
+							<h:outputText value="Poids"/>
+							<h:inputText id="inpt_poi" value="#{consulCtrl.defaultVue.entiteCourante.valPoids}"  
+								readonly="true" style="width: 20%" title="Poids" >
+							</h:inputText>
+							
+							<h:outputText value="Tension"/>
+							<h:inputText id="inpt_ten" value="#{consulCtrl.defaultVue.entiteCourante.valTension}"  
+								 readonly="true" style="width: 20%" title="Tension" >
+							</h:inputText>
+							
+							<h:outputText value="Pou"/>
+							<h:inputText id="inpt_pou" value="#{consulCtrl.defaultVue.entiteCourante.valPou}"  
+								 readonly="true" style="width: 20%" title="Pou" >
+							</h:inputText>
+							
+							<h:outputText value="Taille"/>
+							<h:inputText id="inpt_tail" value="#{consulCtrl.defaultVue.entiteCourante.valTaille}"  
+								 readonly="true" style="width: 20%" title="Pou" >
+							</h:inputText>
+							
+         				</h:panelGrid>  
+         				
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+							<h:outputText value="Date consultation" />
+							<h:inputText value="#{consulCtrl.defaultVue.entiteCourante.dateConsul}" readonly="true" style="width: 30%" title="Date consultation"  >
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+							</h:inputText>
+							
+							<h:outputText value="Statut"/>
+							<h:inputTextarea id="inpt_stat" value="#{consulCtrl.defaultVue.entiteCourante.libStatut}"  
+								 readonly="true" style="width: 60%" title="Pou" >
+							</h:inputTextarea>
+							
+							<h:outputText value="Montant TTC" />
+							<h:inputText id="inpt_mntttc" value="#{consulCtrl.defaultVue.entiteCourante.valMntTtc}"  styleClass="money"
+								 readonly="true"  style="width: 30%" 
+								 title="Montant TTC"
+								 converterMessage="#{msg['erreur.conversion.entiere']}"   >
+								 <f:convertNumber currencySymbol="F CFA" pattern="#,###"   />
+							</h:inputText>
+							
+         				</h:panelGrid> 
+         				         		         		
+         			</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+		</ui:define>
+	
+	</ui:composition>
+	
+</html>

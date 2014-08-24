@@ -26,6 +26,7 @@ private static final long serialVersionUID = 1L;
 	}
 	
 	public TabTypExam(InfoUser infoUser){
+		this.setInfoUser(infoUser);
 	}
 	
 	@Id

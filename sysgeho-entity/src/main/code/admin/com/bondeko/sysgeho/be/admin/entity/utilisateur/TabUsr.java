@@ -7,6 +7,8 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.bondeko.sysgeho.be.core.base.DateTools;
@@ -24,7 +26,7 @@ public class TabUsr extends SysGehoBaseEntity implements Serializable{
 	}
 	
 	public TabUsr(InfoUser infoUser){
-		
+		this.setInfoUser(infoUser);
 	}
 	
 	//code de l'utilisateur
@@ -64,19 +66,14 @@ public class TabUsr extends SysGehoBaseEntity implements Serializable{
 	@Column(name = "LIB_FON")
 	private String libFon;
 	
-	@Column(name = "COD_SVC")
-	private String codSvc;
+	@ManyToOne
+	@JoinColumn(name = "COD_SVC")
+	private TabSvc tabSvc;
 	
-	@Column(name = "LIB_SVC")
-	private String libSvc;
+	@ManyToOne
+	@JoinColumn(name = "COD_ROL")
+	private TabRol tabRol;
 	
-	@Column(name = "COD_ROL")
-	private String codRol;
-	
-	@Column(name = "LIB_ROL")
-	private String libRol;
-	
-
 	public String getCodUsr() {
 		return codUsr;
 	}
@@ -154,10 +151,20 @@ public class TabUsr extends SysGehoBaseEntity implements Serializable{
 
 	@Override
 	public void validateData() {
+		
+		tabSvc = (tabSvc != null && 
+				(tabSvc.getCodSvc() == null || tabSvc.getCodSvc().trim().isEmpty())
+				? null : tabSvc);
+		
+		tabRol = (tabRol != null && 
+				(tabRol.getCodRol() == null || tabRol.getCodRol().trim().isEmpty())
+				? null : tabRol);
 	}
 
 	@Override
 	public void initData() {
+		tabSvc = (tabSvc == null ? new TabSvc() : tabSvc);
+		tabRol = (tabRol == null ? new TabRol() : tabRol);
 	}
 	
 	public Date getDateEmbauche() {
@@ -226,36 +233,20 @@ public class TabUsr extends SysGehoBaseEntity implements Serializable{
 		return libFon;
 	}
 
-	public void setLibSvc(String libSvc) {
-		this.libSvc = libSvc;
+	public void setTabSvc(TabSvc tabSvc) {
+		this.tabSvc = tabSvc;
 	}
 
-	public String getLibSvc() {
-		return libSvc;
+	public TabSvc getTabSvc() {
+		return tabSvc;
 	}
 
-	public void setCodSvc(String codSvc) {
-		this.codSvc = codSvc;
+	public void setTabRol(TabRol tabRol) {
+		this.tabRol = tabRol;
 	}
 
-	public String getCodSvc() {
-		return codSvc;
-	}
-
-	public void setCodRol(String codRol) {
-		this.codRol = codRol;
-	}
-
-	public String getCodRol() {
-		return codRol;
-	}
-
-	public void setLibRol(String libRol) {
-		this.libRol = libRol;
-	}
-
-	public String getLibRol() {
-		return libRol;
+	public TabRol getTabRol() {
+		return tabRol;
 	}
 
 }

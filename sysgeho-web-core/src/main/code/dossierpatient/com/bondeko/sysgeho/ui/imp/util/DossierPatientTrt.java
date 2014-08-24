@@ -44,7 +44,7 @@ public class DossierPatientTrt extends SysGehoTrt{
 		
 		ENREG_RDV = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "Enreg_rdv" , /* Libellé */ "Enregistrer un rendez-vous" , /* Commentaire */ "" , /* Méthode */ "enregistrerRdv",
 				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "000",
-				/* Type de modal panel */ Traitement.MODAL_SPECIAL, /* Message du modal panel */ "Confirmer l'enregistrement du chekpoint ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Type de modal panel */ Traitement.MODAL_SPECIAL, /* Message du modal panel */ "Confirmer l'enregistrement ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
 				/* Raccourci clavier */ "Shift+F4", /* index */ "11", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
 	}
 	
@@ -53,6 +53,35 @@ public class DossierPatientTrt extends SysGehoTrt{
 		NAVIGUER_RDV = new Traitement  (/* Type */Traitement.NAVIGATION , /* Code */ "Rdv" , /* Libellé */ "Consulter les Rendez-vous" + SEPERATEUR_2 + "Consulter les Rendez-vous" , /* Commentaire */ "" , /* Méthode */ Traitement.METHODE_NAVIGATION,
 			/* Config IHM */ new boolean[]{true,true,true,false} , 
 			/* Controleur de la destination */ "rdvCtrl", /* Type de progress bar */ Traitement.PROGRESS_NO, 
+			/* Raccourci clavier */ "", /* index */ "12");
+	}	
+	
+	/***
+	 * VALIDER_CONSUL
+	 */
+	public static Traitement VALIDER_CONSUL;	
+	static{
+		
+		VALIDER_CONSUL = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "Val_Consul" , /* Libellé */ "Valider" , /* Commentaire */ "" , /* Méthode */ "valider",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Valider la consultation ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "Shift+F2", /* index */ "14", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
+	
+	public static Traitement ENREG_CPTE_RENDU;	
+	static{
+		
+		ENREG_CPTE_RENDU = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "Enreg_CpteRendu" , /* Libellé */ "Enregistrer le compe rendu" , /* Commentaire */ "" , /* Méthode */ "enregistrerCpteRendu",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "000",
+				/* Type de modal panel */ Traitement.MODAL_SPECIAL, /* Message du modal panel */ "Confirmer l'enregistrement ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "Shift+F4", /* index */ "11", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
+	
+	public static Traitement NAVIGUER_CPTE_RENDU;
+	static{	
+		NAVIGUER_CPTE_RENDU = new Traitement  (/* Type */Traitement.NAVIGATION , /* Code */ "CpteRenduConsul" , /* Libellé */ "Naviguer vers le conpte rendu" + SEPERATEUR_2 + "Naviguer vers le conpte rendu" , /* Commentaire */ "" , /* Méthode */ Traitement.METHODE_NAVIGATION,
+			/* Config IHM */ new boolean[]{true,true,true,false} , 
+			/* Controleur de la destination */ "cpteRenduConsulCtrl", /* Type de progress bar */ Traitement.PROGRESS_NO, 
 			/* Raccourci clavier */ "", /* index */ "12");
 	}	
 	

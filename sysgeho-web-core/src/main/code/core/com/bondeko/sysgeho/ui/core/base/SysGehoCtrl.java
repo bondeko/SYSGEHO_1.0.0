@@ -587,6 +587,7 @@ public abstract class SysGehoCtrl <H extends BaseEntity, T extends H>{
 						
 			// Mise à jour de la date de la dernière recherche
 			setTimeOfLastSearch();
+			
 		}
 				
 		catch (SysGehoAppException e) {			
@@ -710,6 +711,7 @@ public abstract class SysGehoCtrl <H extends BaseEntity, T extends H>{
 			}	
 						
 			// Coherence IHM avant affichage du formulaire de consultation
+			coherenceIHM();
 		}	
 		
 		catch (BaseException e) {	
@@ -767,6 +769,9 @@ public abstract class SysGehoCtrl <H extends BaseEntity, T extends H>{
 		// Mise à jour de la navigation : Vers le formulaire d'Edition
 		v$navigation =  getMemoEntite().concat("Edition");
 		
+		// Mise en cohérence des IMH
+		coherenceIHM();
+		
 		// Retour à la page adéquate
 		return v$navigation;
 	}	
@@ -792,7 +797,8 @@ public abstract class SysGehoCtrl <H extends BaseEntity, T extends H>{
 			// MAJ de l'ID à display
 			setIdEntityToDisplay(defaultVue.getEntiteCourante().getId());
 		}
-		
+		// Mise en cohérence des IMH
+		coherenceIHM();
 		
 		// Retour à la page adéquate
 		return v$navigation;
@@ -922,6 +928,7 @@ public abstract class SysGehoCtrl <H extends BaseEntity, T extends H>{
 			v$navigation = getMemoEntite().concat(CoreConstants.SUFFIXE_NVGT_DETAILS);
 			
 			//Mise en Cohérence des IHMs avant de retourner sur le formulaire de Consultation
+			coherenceIHM();
 		}	
 		
 		// Sinon nous retournons vers le formulaire Liste 
@@ -976,7 +983,9 @@ public abstract class SysGehoCtrl <H extends BaseEntity, T extends H>{
 			index = (index+1)%(v$taille);
 			
 			// Mise à jour de l'entité courant 
-			defaultVue.setEntiteCourante(defaultVue.getTableMgr().getEntityByIndex(index));			
+			defaultVue.setEntiteCourante(defaultVue.getTableMgr().getEntityByIndex(index));		
+			
+			coherenceIHM();
 
 		}	
 		
@@ -1004,7 +1013,10 @@ public abstract class SysGehoCtrl <H extends BaseEntity, T extends H>{
 			index = (index > 0) ? (index -1)%v$taille : (v$taille-1);
 			
 			// Mise à jour de l'entité courant 
-			defaultVue.setEntiteCourante(defaultVue.getTableMgr().getEntityByIndex(index));			
+			defaultVue.setEntiteCourante(defaultVue.getTableMgr().getEntityByIndex(index));		
+			
+			// Mise en cohérence des IMH
+			coherenceIHM();	
 			
 		}				
 
@@ -1028,7 +1040,10 @@ public abstract class SysGehoCtrl <H extends BaseEntity, T extends H>{
 			int v$index = 0;
 			
 			// Mise à jour de l'entité courant 
-			defaultVue.setEntiteCourante(defaultVue.getTableMgr().getEntityByIndex(v$index));			
+			defaultVue.setEntiteCourante(defaultVue.getTableMgr().getEntityByIndex(v$index));	
+			
+			// Mise en cohérence des IMH
+			coherenceIHM();	
 
 		}				
 
@@ -1054,7 +1069,10 @@ public abstract class SysGehoCtrl <H extends BaseEntity, T extends H>{
 			int v$index = v$taille -1;
 			
 			// Mise à jour de l'entité courant 
-			defaultVue.setEntiteCourante(defaultVue.getTableMgr().getEntityByIndex(v$index));			
+			defaultVue.setEntiteCourante(defaultVue.getTableMgr().getEntityByIndex(v$index));
+			
+			// Mise en cohérence des IMH
+			coherenceIHM();	
 			
 		}				
 
@@ -1155,6 +1173,8 @@ public abstract class SysGehoCtrl <H extends BaseEntity, T extends H>{
 				v$navigation =  getMemoEntite().concat(CoreConstants.SUFFIXE_NVGT_EDITION);				
 			}
 		}
+		// Mise en cohérence des IMH
+		coherenceIHM();
 		
 		// Retour à la page adéquate
 		return v$navigation;
@@ -1447,5 +1467,44 @@ public abstract class SysGehoCtrl <H extends BaseEntity, T extends H>{
 		return v$navigation;
 			
 	}	
+	
+	/**
+	 * Permet de raffraîchir les données d'une entité
+	 * Utilisé au niveau du formulaire DETAILS pour le raffraîchissement des données
+	 */
+	public String raffraichir(){
+		
+		try{
+			// Mise à jour de l'entité courante selon le contexte du Formulaire 
+			defaultVue.setEntiteCouranteOfPageContext();
+			
+			// Sauvegarde de l'entité avant traitement specifique
+			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+
+			// Recherche de l'entité en BD
+			T v$entity  = getEntitySvco().rechercher(defaultVue.getEntiteCourante(), defaultVue.getEntiteCourante().getId());
+			
+			if(v$entity != null){
+				defaultVue.setEntiteCourante(v$entity);
+				
+				// L'on remplace l'ancienne entité de la liste (s'il y'en avait) par la nouvelle issue de la recherche 
+				defaultVue.getTableMgr().replace(defaultVue.getEntiteTemporaire(), defaultVue.getEntiteCourante());
+
+				this.coherenceIHM();		
+			}
+			else{
+				FacesUtil.addWarnMessage("", "L'entité à raffraîchir n'a pas été retrouvée");
+			}
+			
+		}	catch (SysGehoAppException e) {				
+			FacesUtil.addWarnMessage("",  e.getMessage());
+			getLogger().error(e.getMessage(), e);	
+		}	catch (Exception e) {
+			FacesUtil.addWarnMessage("",  "MSG_TRT_ALL_ECHEC_INCONNU");
+			getLogger().error(e.getMessage(), e);	
+		}		
+		
+		return null;
+	}
 
 }

@@ -1,18 +1,28 @@
 package com.bondeko.sysgeho.ui.admin.controleur;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.faces.event.ActionEvent;
+import javax.faces.model.SelectItem;
+
+import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabRol;
+import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabSvc;
 import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr;
+import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
 import com.bondeko.sysgeho.ui.admin.util.AdminSvcoDeleguate;
 import com.bondeko.sysgeho.ui.admin.util.AdminTrt;
 import com.bondeko.sysgeho.ui.admin.vue.UsrVue;
+import com.bondeko.sysgeho.ui.core.base.CoreConstants;
 import com.bondeko.sysgeho.ui.core.base.DataValidationException;
+import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
 import com.bondeko.sysgeho.ui.core.base.SysGehoCtrl;
+import com.bondeko.sysgeho.ui.core.base.SysGehoToolBox;
 import com.bondeko.sysgeho.ui.core.base.Traitement;
 
 public class UsrCtrl extends SysGehoCtrl<TabUsr, TabUsr>{
@@ -114,6 +124,61 @@ public class UsrCtrl extends SysGehoCtrl<TabUsr, TabUsr>{
 				}					
 			}
 		}	
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public String gotoRelatedEntity() {
+
+		// Determine vers quelle page ou Formulaire l'on doit se diriger
+		String v$navigation = super.gotoRelatedEntity();
+		/*
+		 * Recuperation du controleur 
+		 * NB: 
+		 * 	1-Cette méthode suppose que le controleur est bel et bien dans le Scope Session
+		 * 	2-Par ailleurs il devrait normalement déja existé du fait du passage de paramètres dans la page web
+		 */
+		SysGehoCtrl<BaseEntity, BaseEntity> v$controleur  =  (SysGehoCtrl<BaseEntity, BaseEntity>) FacesUtil.getSessionMapValue(SysGehoToolBox.getManagedBeanName(v$navigation));
+
+		return v$navigation;
+	}
+	
+	public void setSelectedEntity(BaseEntity p$entite) {
+
+		// Nom de la propriété à mettre à jour pour
+		String v$propriete = defaultVue.getNavigationMgr().getSelectionPropertyName();
+
+		if (v$propriete.equals("tabSvc")) {
+			TabSvc v$entite = (TabSvc) p$entite;
+			defaultVue.getEntiteCourante().setTabSvc(v$entite);
+		}
+
+		if (v$propriete.equals("tabRol")) {
+			TabRol v$entite = (TabRol) p$entite;
+			defaultVue.getEntiteCourante().setTabRol(v$entite);
+		}
+	}
+	
+	public String afficher(){
+		
+		String v$navigation = null;
+		// L'entité selectionné devient l'objet courant; Cela suppose que le Contexte de page est Liste
+		defaultVue.setEntiteCourante(defaultVue.getTableMgr().getEntiteSelectionne());
+		
+		
+		// Par simple Prudence, on dira si l'entite existe
+		if(defaultVue.getEntiteCourante() != null){
+			
+			// Mise à jour de la navigation : Vers le formulaire de Details
+			v$navigation =  getMemoEntite().concat(CoreConstants.SUFFIXE_NVGT_DETAILS);
+			
+			// MAJ de l'ID à display
+			setIdEntityToDisplay(defaultVue.getEntiteCourante().getId());
+		}
+		// Mise en cohérence des IMH
+		coherenceIHM();
+		// Retour à la page adéquate
+		return v$navigation;
 	}
 	
 }

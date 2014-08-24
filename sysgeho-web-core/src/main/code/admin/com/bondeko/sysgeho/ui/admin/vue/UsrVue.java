@@ -12,6 +12,7 @@ import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabRol;
 import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabSvc;
 import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr;
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
+import com.bondeko.sysgeho.be.imp.entity.TabRdv;
 import com.bondeko.sysgeho.ui.admin.util.AdminSvcoDeleguate;
 import com.bondeko.sysgeho.ui.core.base.AbstractNavigationManager;
 import com.bondeko.sysgeho.ui.core.base.SysGehoVue;
@@ -30,9 +31,6 @@ public class UsrVue extends SysGehoVue<TabUsr>{
 	private List<SelectItem> listeRol;
 	
 	//mapSitr
-	private Map<String, TabSvc> mapSvc = new HashMap<String, TabSvc>();
-	
-	private Map<String, TabRol> mapRol = new HashMap<String, TabRol>();
 	
 	public UsrVue(){
 		super();
@@ -49,10 +47,10 @@ public class UsrVue extends SysGehoVue<TabUsr>{
 	public static TabUsr getTabUsr (){		
 		
 		TabUsr v$user = new TabUsr();
-		// Mise des info de l'utilisateur
 		v$user.setInfoUser(getInfoUser());
 		v$user.initData();
 		return v$user ;	
+		
 	}	
 	
 	/**
@@ -124,16 +122,11 @@ public class UsrVue extends SysGehoVue<TabUsr>{
 			
 			// Création de la liste des élements pour le comboBox
 			for(TabSvc v$Svc: v$Svcs){
-				SelectItem v$item = new SelectItem(v$Svc.getCodSvc(),v$Svc.getCodSvc());
+				SelectItem v$item = new SelectItem(v$Svc.getCodSvc(),v$Svc.getLibSvc());
 				listeSvc.add(v$item);
-				mapSvc.put(v$Svc.getCodSvc(), v$Svc);
 			}
 		}
 		return listeSvc;
-	}
-	
-	public void updateLibSvc(ActionEvent evt){
-		getEntiteCourante().setLibSvc(mapSvc.get(getEntiteCourante().getCodSvc()).getLibSvc());
 	}
 	
 	public List<SelectItem> getListeRol() {
@@ -160,16 +153,12 @@ public class UsrVue extends SysGehoVue<TabUsr>{
 			
 			// Création de la liste des élements pour le comboBox
 			for(TabRol v$Rol: v$Rols){
-				SelectItem v$item = new SelectItem(v$Rol.getCodRol(),v$Rol.getCodRol());
+				SelectItem v$item = new SelectItem(v$Rol.getCodRol(),v$Rol.getLibRol());
 				listeRol.add(v$item);
-				mapRol.put(v$Rol.getCodRol(), v$Rol);
 			}
 		}
 		return listeRol;
 	}
 	
-	public void updateLibRol(ActionEvent evt){
-		getEntiteCourante().setLibRol(mapRol.get(getEntiteCourante().getCodRol()).getLibRol());
-	}
 	
 }

@@ -22,7 +22,7 @@ public class TabSvc extends SysGehoBaseEntity implements Serializable{
 	}
 	
 	public TabSvc(InfoUser infoUser){
-		
+		this.setInfoUser(infoUser);
 	}
 	
 	@Id
