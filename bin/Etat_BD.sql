@@ -1,7 +1,7 @@
 -- MySQL Administrator dump 1.4
 --
 -- ------------------------------------------------------
--- Server version	5.1.56-community 
+-- Server version	5.1.56-community
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -85,6 +85,83 @@ INSERT INTO `tab_cat_exam` (`COD_CAT_EXAM`,`LIB_CAT_EXAM`,`LIB_SPEC`,`ETAT_ENT`,
 
 
 --
+-- Definition of table `tab_consul`
+--
+
+DROP TABLE IF EXISTS `tab_consul`;
+CREATE TABLE `tab_consul` (
+  `COD_CONSUL` varchar(32) NOT NULL DEFAULT '',
+  `COD_PAT` varchar(32) DEFAULT NULL,
+  `COD_USR` varchar(32) DEFAULT NULL,
+  `COD_SPEC` varchar(32) DEFAULT NULL,
+  `VAL_POIDS` varchar(32) DEFAULT NULL,
+  `VAL_TENSION` varchar(10) DEFAULT NULL,
+  `VAL_POU` varchar(10) DEFAULT NULL,
+  `VAL_TAILLE` varchar(10) DEFAULT NULL,
+  `DAT_CONSUL` varchar(32) DEFAULT NULL,
+  `LIB_STATUT` varchar(255) DEFAULT NULL,
+  `VAL_MNT_TTC` decimal(20,2) DEFAULT NULL,
+  `ETAT_ENT` varchar(30) DEFAULT NULL,
+  `COD_EXE_FIS` varchar(30) DEFAULT NULL,
+  `BOO_ACT` decimal(1,0) DEFAULT '0',
+  `COD_USR_CRT` varchar(30) DEFAULT NULL,
+  `COD_USR_MOD` varchar(30) DEFAULT NULL,
+  `DAT_CRT` varchar(30) DEFAULT NULL,
+  `DAT_MOD` varchar(30) DEFAULT NULL,
+  `BOO_VAL` decimal(1,0) DEFAULT '0',
+  `BOO_CPTE_RENDU` decimal(1,0) DEFAULT '0',
+  PRIMARY KEY (`COD_CONSUL`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tab_consul`
+--
+
+/*!40000 ALTER TABLE `tab_consul` DISABLE KEYS */;
+INSERT INTO `tab_consul` (`COD_CONSUL`,`COD_PAT`,`COD_USR`,`COD_SPEC`,`VAL_POIDS`,`VAL_TENSION`,`VAL_POU`,`VAL_TAILLE`,`DAT_CONSUL`,`LIB_STATUT`,`VAL_MNT_TTC`,`ETAT_ENT`,`COD_EXE_FIS`,`BOO_ACT`,`COD_USR_CRT`,`COD_USR_MOD`,`DAT_CRT`,`DAT_MOD`,`BOO_VAL`,`BOO_CPTE_RENDU`) VALUES 
+ ('2014000001','2014000003','house','SPEC_A','75.45','39','1248','1m70','20140824000000000000','Resus+','25000.00','2002','2014','0','admin','admin','20140824183738000051','20140824184147000132','1','0');
+/*!40000 ALTER TABLE `tab_consul` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tab_cpte_rendu_consul`
+--
+
+DROP TABLE IF EXISTS `tab_cpte_rendu_consul`;
+CREATE TABLE `tab_cpte_rendu_consul` (
+  `COD_CPTE_RENDU_CONSUL` varchar(32) NOT NULL DEFAULT '',
+  `COD_CONSUL` varchar(32) DEFAULT NULL,
+  `LIB_MOTIF_CONSUL` varchar(1024) DEFAULT NULL,
+  `LIB_HIS_MAL` varchar(1024) DEFAULT NULL,
+  `LIB_DIAG_PRIN` varchar(1024) DEFAULT NULL,
+  `LIB_DIAG_SENC` varchar(1024) DEFAULT NULL,
+  `LIB_EXAM_BIO` varchar(1024) DEFAULT NULL,
+  `LIB_EXPLO_FONC` varchar(1024) DEFAULT NULL,
+  `LIB_EXAM_IMAG` varchar(1024) DEFAULT NULL,
+  `LIB_TRAIT_PRES` varchar(1024) DEFAULT NULL,
+  `LIB_CONCL` varchar(1024) DEFAULT NULL,
+  `DAT` varchar(32) DEFAULT NULL,
+  `ETAT_ENT` varchar(30) DEFAULT NULL,
+  `COD_EXE_FIS` varchar(30) DEFAULT NULL,
+  `BOO_ACT` decimal(1,0) DEFAULT '0',
+  `COD_USR_CRT` varchar(30) DEFAULT NULL,
+  `COD_USR_MOD` varchar(30) DEFAULT NULL,
+  `DAT_CRT` varchar(30) DEFAULT NULL,
+  `DAT_MOD` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`COD_CPTE_RENDU_CONSUL`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tab_cpte_rendu_consul`
+--
+
+/*!40000 ALTER TABLE `tab_cpte_rendu_consul` DISABLE KEYS */;
+INSERT INTO `tab_cpte_rendu_consul` (`COD_CPTE_RENDU_CONSUL`,`COD_CONSUL`,`LIB_MOTIF_CONSUL`,`LIB_HIS_MAL`,`LIB_DIAG_PRIN`,`LIB_DIAG_SENC`,`LIB_EXAM_BIO`,`LIB_EXPLO_FONC`,`LIB_EXAM_IMAG`,`LIB_TRAIT_PRES`,`LIB_CONCL`,`DAT`,`ETAT_ENT`,`COD_EXE_FIS`,`BOO_ACT`,`COD_USR_CRT`,`COD_USR_MOD`,`DAT_CRT`,`DAT_MOD`) VALUES 
+ ('2014000001','2014000001','blablabla','blablabla','blablabla','blablabla','blablabla','blablabla','blablabla','blablabla','blablabla','20140824000000000000','2000','2014','1','admin',NULL,'20140824190442000391',NULL);
+/*!40000 ALTER TABLE `tab_cpte_rendu_consul` ENABLE KEYS */;
+
+
+--
 -- Definition of table `tab_inc_cod`
 --
 
@@ -109,6 +186,8 @@ CREATE TABLE `tab_inc_cod` (
 
 /*!40000 ALTER TABLE `tab_inc_cod` DISABLE KEYS */;
 INSERT INTO `tab_inc_cod` (`COD_INC_COD`,`LIB_DESC`,`VAL_INC_COD`,`ETAT_ENT`,`COD_EXE_FIS`,`BOO_ACT`,`COD_USR_CRT`,`COD_USR_MOD`,`DAT_CRT`,`DAT_MOD`) VALUES 
+ ('2014TabConsul','compteur consultation','1',NULL,NULL,'0','admin','admin',NULL,'20140824183738000050'),
+ ('2014TabCpteRenduConsul','compteur compte rendu consultation','1',NULL,NULL,'0','admin','admin',NULL,'20140824190442000386'),
  ('2014TabPat','compteur patient','3',NULL,NULL,'0','admin','admin','20140809150354000617','20140811213038000551'),
  ('2014TabRdv','compteur RDV','4',NULL,NULL,'0','admin','admin','20140809150354000617','20140815202447000244');
 /*!40000 ALTER TABLE `tab_inc_cod` ENABLE KEYS */;
@@ -159,8 +238,8 @@ CREATE TABLE `tab_pat` (
 
 /*!40000 ALTER TABLE `tab_pat` DISABLE KEYS */;
 INSERT INTO `tab_pat` (`COD_PAT`,`LIB_MAT`,`LIB_TIT`,`LIB_NOM`,`LIB_PRE`,`ENU_STA_MAT`,`DAT_NAIS`,`LIB_SEX`,`LIB_ADR`,`LIB_NUM_TEL`,`LIB_PROF`,`LIB_FON`,`COD_SOC`,`BOO_EST_ASS`,`BOO_EST_AFF`,`LIB_PER_CON`,`LIB_NUM_TEL_PER_CON`,`COD_ASS`,`DAT_ENREG`,`BOO_EST_ARCH`,`LIB_MED`,`ETAT_ENT`,`COD_EXE_FIS`,`BOO_ACT`,`COD_USR_CRT`,`COD_USR_MOD`,`DAT_CRT`,`DAT_MOD`,`LIB_ASS`,`LIB_SOC`) VALUES 
- ('2014000001','05S024','ING','NANFACK ','Beauclair','2003','20101117000000000000','M','Douala-Bepanda','77010470','Developpeur','Devellopeur sénior','OCI','1','1','Mme Cristine','5847965','AXA','20140811000000000000',NULL,'0','2000','2014','1','admin','admin','20140811132159000704','20140811134630000894',NULL,NULL),
- ('2014000002','05S025','Network ','Ngouana','Brice','2000','20110914000000000000','M','RAS','95 87 25 69','IOS system','Admin','ERICSON','1','1','Mr soufo','589664','ACTIVA','20140811000000000000',NULL,'Mr House','2000','2014','1','admin','admin','20140811140343000363','20140813192547000587','Activa assurance et reassurance',NULL),
+ ('2014000001','05S024','ING','NANFACK ','Beauclair','2003','20101117000000000000','M','Douala-Bepanda','77010470','Developpeur','Devellopeur sénior','OCI','1','1','Mme Cristine','5847965','AXA','20140811000000000000',NULL,'0','2000','2014','1','admin','admin','20140811132159000704','20140824184045000504',NULL,'Office congolais d\'informatique'),
+ ('2014000002','05S025','Network ','Ngouana','Brice','2000','20110914000000000000','M','RAS','95 87 25 69','IOS system','Admin','ERICSON','1','1','Mr soufo','589664','ACTIVA','20140811000000000000',NULL,'Mr House','2000','2014','1','admin','admin','20140811140343000363','20140824184110000467','Activa assurance et reassurance','Sony and Eric sono'),
  ('2014000003','MT4145','trh','moihth','htrh','2002','20140814000000000000','F','8686','5686','sgg','sgf','MEGATIM','1','1','gsrhgh','868','ACTIVA','20140811000000000000',NULL,'sgg','2000','2014','1','admin',NULL,'20140811213038000556',NULL,'Activa assurance et reassurance','Mega tim work');
 /*!40000 ALTER TABLE `tab_pat` ENABLE KEYS */;
 
@@ -200,10 +279,10 @@ CREATE TABLE `tab_rdv` (
 
 /*!40000 ALTER TABLE `tab_rdv` DISABLE KEYS */;
 INSERT INTO `tab_rdv` (`COD_RDV`,`COD_PAT`,`COD_USR`,`COD_TYP_RDV`,`LIB_TYP_RDV`,`COD_SVC`,`LIB_SVC`,`DAT_DEM`,`DAT_RDV`,`VAL_NUM_ORDRE`,`LIB_OBS`,`BOO_EST_ANN`,`BOO_EST_CONF`,`ETAT_ENT`,`COD_EXE_FIS`,`BOO_ACT`,`COD_USR_CRT`,`COD_USR_MOD`,`DAT_CRT`,`DAT_MOD`) VALUES 
- ('2014000001','2014000001','house','CONS_10','Consultation','D_G','Direction générale','20140815000000000000','20140830143000000000','1','RAS','1','1','2007','2014','1','admin','admin','20140815110754000252','20140815115739000320'),
+ ('2014000001','2014000001','house','CONS_10','Consultation','D_G','Direction générale','20140815000000000000','20140830143000000000','1','RAS','1','1','2007','2014','1','admin','admin','20140815110754000252','20140817130006000908'),
  ('2014000002','2014000002','house','HOSTI_11','Hospitalisation','CHIR_DENT','Chirugie dentaire','20140815000000000000','20141106120000000000','2','RAS',NULL,NULL,'2000','2014','1','admin',NULL,'20140815115858000664',NULL),
  ('2014000003','2014000001','house','HOSTI_11','Hospitalisation','CHIR_DENT','Chirugie dentaire','20140807000000000000','20140816120000000000','5','RAS',NULL,NULL,'2000','2014','1','admin',NULL,'20140815201146000855',NULL),
- ('2014000004','2014000002','house','HOSTI_11','Hospitalisation','CHIR_DENT','Chirugie dentaire','20140808000000000000','20140810120000000000','45','ZAS',NULL,'1','2008','2014','1','admin','admin','20140815202447000249','20140815202454000438');
+ ('2014000004','2014000002','house','HOSTI_11','Hospitalisation','CHIR_DENT','Chirugie dentaire','20140808000000000000','20140810120000000000','45','ZAS','0','1','2008','2014','1','admin','admin','20140815202447000249','20140817130030000520');
 /*!40000 ALTER TABLE `tab_rdv` ENABLE KEYS */;
 
 
@@ -338,7 +417,7 @@ CREATE TABLE `tab_svc` (
 
 /*!40000 ALTER TABLE `tab_svc` DISABLE KEYS */;
 INSERT INTO `tab_svc` (`COD_SVC`,`LIB_SVC`,`LIB_DESC`,`COD_SVC_PAR`,`LIB_SVC_PAR`,`ETAT_ENT`,`COD_EXE_FIS`,`BOO_ACT`,`COD_USR_CRT`,`COD_USR_MOD`,`DAT_CRT`,`DAT_MOD`) VALUES 
- ('CHIR_DENT','Chirugie dentaire','bla bla bla','D_G','Direction générale','2000','2014','1','admin','admin','20140808184646000958','20140809123244000822'),
+ ('CHIR_DENT','Chirugie dentaire','bla bla bla','PED','Pédiatrie','2000','2014','1','admin','admin','20140808184646000958','20140823112728000440'),
  ('D_G','Direction générale','RAS','PED','Pédiatrie','2000','2014','1','admin','admin','20140808190806000022','20140809123201000837'),
  ('PED','Pédiatrie','RAS','CHIR_DENT',NULL,'2000','2014','1','admin',NULL,'20140808190837000342',NULL);
 /*!40000 ALTER TABLE `tab_svc` ENABLE KEYS */;
@@ -456,10 +535,8 @@ CREATE TABLE `tab_usr` (
   `LIB_FON` varchar(255) DEFAULT NULL,
   `LIB_NOM` varchar(255) DEFAULT NULL,
   `LIB_PRE` varchar(255) DEFAULT NULL,
-  `COD_SVC` varchar(255) DEFAULT NULL,
-  `LIB_SVC` varchar(255) DEFAULT NULL,
-  `COD_ROL` varchar(255) DEFAULT NULL,
-  `LIB_ROL` varchar(255) DEFAULT NULL,
+  `COD_SVC` varchar(32) DEFAULT NULL,
+  `COD_ROL` varchar(32) DEFAULT NULL,
   `DAT_MOD` varchar(255) DEFAULT NULL,
   `DAT_CRT` varchar(255) DEFAULT NULL,
   `COD_USR_MOD` varchar(255) DEFAULT NULL,
@@ -472,9 +549,12 @@ CREATE TABLE `tab_usr` (
 --
 
 /*!40000 ALTER TABLE `tab_usr` DISABLE KEYS */;
-INSERT INTO `tab_usr` (`COD_USR`,`BOO_ACT`,`COD_EXE_FIS`,`ETAT_ENT`,`BOO_SEX`,`COD_PWD`,`DAT_EMBCH`,`DAT_EXP_PWD`,`LIB_ADR`,`LIB_FON`,`LIB_NOM`,`LIB_PRE`,`COD_SVC`,`LIB_SVC`,`COD_ROL`,`LIB_ROL`,`DAT_MOD`,`DAT_CRT`,`COD_USR_MOD`,`COD_USR_CRT`) VALUES 
- ('admin','0.00','2014','2000','M','sysgeho','20111221000000000000','20141221000000000000','20141221000000000000','RH','Beauclair','MEGO','ADMIN','Administrateur SI','INF','Informaticien','20141221000000000000','20141221000000000000',NULL,NULL),
- ('house','1.00','2014','2000','M','house','20090805000000000000','20160825000000000000','Douala-bonandjo 75 85 89 63','Généraliste','Dr House','Blanchard','PED','Pédiatrie','MED_CHEF','Medecin chef',NULL,'20140815110312000436',NULL,'admin');
+INSERT INTO `tab_usr` (`COD_USR`,`BOO_ACT`,`COD_EXE_FIS`,`ETAT_ENT`,`BOO_SEX`,`COD_PWD`,`DAT_EMBCH`,`DAT_EXP_PWD`,`LIB_ADR`,`LIB_FON`,`LIB_NOM`,`LIB_PRE`,`COD_SVC`,`COD_ROL`,`DAT_MOD`,`DAT_CRT`,`COD_USR_MOD`,`COD_USR_CRT`) VALUES 
+ ('admin','0.00','2014','2000','M','sysgeho','20111221000000000000','20141221000000000000','20141221000000000000','RH','Beauclair','MEGO','D_G','MED_CHEF','20141221000000000000','20141221000000000000',NULL,NULL),
+ ('house','1.00','2014','2000','M','house','20090805000000000000','20160825000000000000','Douala-bonandjo 75 85 89 63','Généraliste','Dr House','Blanchard','PED','MED_CHEF',NULL,'20140815110312000436',NULL,'admin'),
+ ('RAS','1.00','2014','2000','F','ras',NULL,'20140821000000000000','','','ras','','D_G','MED_CHEF',NULL,'20140823111732000910',NULL,'admin'),
+ ('RED','1.00','2014','2000','F','111',NULL,'20140820000000000000','','re','re','re','D_G','MED_CHEF',NULL,'20140823152949000243',NULL,'admin'),
+ ('sysgeho','1.00','2014','2000','M','sysgeho','20140823000000000000','20160818000000000000','RAS','ING','Le Mego','yaya','D_G','MED_CHEF',NULL,'20140823092541000330',NULL,'admin');
 /*!40000 ALTER TABLE `tab_usr` ENABLE KEYS */;
 
 
