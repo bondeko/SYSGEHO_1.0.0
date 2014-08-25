@@ -76,14 +76,15 @@ public class SisvRdv extends BaseSisv<TabRdv, String> implements ISisvRdv{
 	}
 	
 	public <X extends BaseEntity> X creer(X p$entite) throws BaseException  {
-		TabRdv patCree = (TabRdv) p$entite; 
+		TabRdv rdvCree = (TabRdv) p$entite; 
 		//fais un teste si l'entité existe déjà
 		X entRech = getBaseDao().findById(p$entite, p$entite.getId());
 		if(entRech != null){
 			throw new BaseException("Erreur : Cette entité existe déjà");
 		}
-		((TabRdv)p$entite).setCodRdv(genererCodeRdvient(patCree));
-		return getBaseDao().save(p$entite);
+		rdvCree = initialiserDonnees(rdvCree);
+		rdvCree.setCodRdv(genererCodeRdvient(rdvCree));
+		return (X) getBaseDao().save(rdvCree);
 	}
 	
 	private String genererCodeRdvient(TabRdv tabRdv) throws SysGehoSystemException{
@@ -98,6 +99,12 @@ public class SisvRdv extends BaseSisv<TabRdv, String> implements ISisvRdv{
 		
 		 numero = DateTools.getYear(DateTools.formatDate(new Date()))+ numero;
 		return numero;
+	}
+	
+	private TabRdv initialiserDonnees(TabRdv rdv){
+		rdv.setBooEstAnn(BigDecimal.ZERO);
+		rdv.setBooEstConf(BigDecimal.ZERO);
+		return rdv;
 	}
 	
 	@Override

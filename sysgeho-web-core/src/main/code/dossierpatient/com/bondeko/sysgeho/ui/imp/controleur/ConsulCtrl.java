@@ -115,7 +115,6 @@ public class ConsulCtrl extends SysGehoCtrl<TabConsul, TabConsul>{
 		// Determine vers quelle page ou Formulaire l'on doit se diriger
 		String v$navigation = super.gotoRelatedEntity();
 		
-		System.out.println(">>>>>>>>>>>< v$navigation ==" + v$navigation);
 		/*
 		 * Recuperation du controleur 
 		 * NB: 
@@ -133,7 +132,6 @@ public class ConsulCtrl extends SysGehoCtrl<TabConsul, TabConsul>{
 			cpteRenduConsul.setTabConsul(defaultVue.getEntiteCourante());
 
 			try {
-				System.out.println(">>>>>>>>>>> " + v$controleur);
 				v$navigation = v$controleur.naviguerVersDetailsOuListe(cpteRenduConsul);
 			} catch (Exception e) { 
 				// TODO Auto-generated catch block
@@ -228,6 +226,11 @@ public class ConsulCtrl extends SysGehoCtrl<TabConsul, TabConsul>{
 
 			// Sauvegarde de l'entité avant traitement specifique
 			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+			
+			if(defaultVue.getEntiteCourante().getBooCpteRendu().equals(BigDecimal.ONE)){
+				FacesUtil.addWarnMessage("", "Il existe déjà un compte rendu pour la consultation "+ defaultVue.getEntiteCourante().getCodConsul());
+				return null;
+			}
 			
 			if(defaultVue.getEntiteCourante().getBooVal().equals(BigDecimal.ZERO)){
 				FacesUtil.addWarnMessage("", "Impossible d'enregistrer le compte rendu, Bien vouloir valider cette consultation");

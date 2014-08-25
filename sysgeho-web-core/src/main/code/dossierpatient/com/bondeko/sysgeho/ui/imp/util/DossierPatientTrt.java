@@ -50,7 +50,7 @@ public class DossierPatientTrt extends SysGehoTrt{
 	
 	public static Traitement NAVIGUER_RDV;
 	static{	
-		NAVIGUER_RDV = new Traitement  (/* Type */Traitement.NAVIGATION , /* Code */ "Rdv" , /* Libellé */ "Consulter les Rendez-vous" + SEPERATEUR_2 + "Consulter les Rendez-vous" , /* Commentaire */ "" , /* Méthode */ Traitement.METHODE_NAVIGATION,
+		NAVIGUER_RDV = new Traitement  (/* Type */Traitement.NAVIGATION , /* Code */ "Rdv" , /* Libellé */ "Naviguer vers les Rendez-vous" + SEPERATEUR_2 + "Naviguer vers les Rendez-vous" , /* Commentaire */ "" , /* Méthode */ Traitement.METHODE_NAVIGATION,
 			/* Config IHM */ new boolean[]{true,true,true,false} , 
 			/* Controleur de la destination */ "rdvCtrl", /* Type de progress bar */ Traitement.PROGRESS_NO, 
 			/* Raccourci clavier */ "", /* index */ "12");

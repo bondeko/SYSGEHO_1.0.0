@@ -70,17 +70,24 @@ private static BaseLogger logger = BaseLogger.getLogger(DaoCpteRenduConsul.class
 			throws SysGehoPersistenceException {
 		String clauseWhere = "1=1 AND o.etatEnt != '2001'";
 		TabCpteRenduConsul currentCpteRenduConsul = (TabCpteRenduConsul)entity;
-		if(currentCpteRenduConsul.getCodCpteRenduConsul()!= null && !currentCpteRenduConsul.getCodCpteRenduConsul().equals("")){
+		if(currentCpteRenduConsul!= null && currentCpteRenduConsul.getCodCpteRenduConsul()!= null 
+				&& !currentCpteRenduConsul.getCodCpteRenduConsul().equals("")){
 			clauseWhere = clauseWhere + "AND upper(o.codCpteRenduConsul) like '%"+currentCpteRenduConsul.getCodCpteRenduConsul()+"%'";
 		}
-		if(currentCpteRenduConsul.getTabConsul()!= null && !currentCpteRenduConsul.getTabConsul().getCodConsul().equals("")){
+		if(currentCpteRenduConsul!= null && currentCpteRenduConsul.getTabConsul()!= null 
+				&& currentCpteRenduConsul.getTabConsul().getCodConsul()!= null 
+				&& !currentCpteRenduConsul.getTabConsul().getCodConsul().equals("")){
 			clauseWhere = clauseWhere + "AND upper(o.tabConsul.codConsul) like '%"+currentCpteRenduConsul.getTabConsul().getCodConsul()+"%'";
 		}
-		if(currentCpteRenduConsul.getTabConsul()!= null && null != currentCpteRenduConsul.getTabConsul().getTabPat()
+		if(currentCpteRenduConsul!= null && currentCpteRenduConsul.getTabConsul()!= null 
+				&& null != currentCpteRenduConsul.getTabConsul().getTabPat()
+				&& currentCpteRenduConsul.getTabConsul().getTabPat().getLibNom()!= null 
 				&& !currentCpteRenduConsul.getTabConsul().getTabPat().getLibNom().equals("")){
 			clauseWhere = clauseWhere + "AND upper(o.tabConsul.tabPat.libNom) like '%"+currentCpteRenduConsul.getTabConsul().getTabPat().getLibNom()+"%'";
 		}
-		if(currentCpteRenduConsul.getTabConsul()!= null && null != currentCpteRenduConsul.getTabConsul().getTabUsr()
+		if(currentCpteRenduConsul!= null && currentCpteRenduConsul.getTabConsul()!= null 
+				&& null != currentCpteRenduConsul.getTabConsul().getTabUsr()
+				&& null != currentCpteRenduConsul.getTabConsul().getTabUsr().getLibNom()
 				&& !currentCpteRenduConsul.getTabConsul().getTabUsr().getLibNom().equals("")){
 			clauseWhere = clauseWhere + "AND upper(o.tabConsul.tabUsr.libNom) like '%"+currentCpteRenduConsul.getTabConsul().getTabUsr().getLibNom()+"%'";
 		}

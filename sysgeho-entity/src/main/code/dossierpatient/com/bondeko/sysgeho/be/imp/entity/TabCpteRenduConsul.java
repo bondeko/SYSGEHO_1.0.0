@@ -201,6 +201,7 @@ private static final long serialVersionUID = 1L;
 	@Override
 	public void initData() {
 		tabConsul = (tabConsul == null ? new TabConsul() : tabConsul);
+		tabConsul.initData();
 	}
 	
 	@Override

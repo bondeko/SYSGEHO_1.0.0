@@ -20,7 +20,6 @@ import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.BaseSisv;
 import com.bondeko.sysgeho.be.imp.dao.IDaoConsul;
 import com.bondeko.sysgeho.be.imp.entity.TabConsul;
-import com.bondeko.sysgeho.be.imp.entity.TabRdv;
 
 @Stateless
 public class SisvConsul extends BaseSisv<TabConsul, String> implements ISisvConsul{
@@ -83,8 +82,10 @@ public class SisvConsul extends BaseSisv<TabConsul, String> implements ISisvCons
 		if(entRech != null){
 			throw new BaseException("Erreur : Cette entité existe déjà");
 		}
-		((TabConsul)p$entite).setCodConsul(genererCodeConsul(conCree));
-		return getBaseDao().save(p$entite);
+		conCree = initialiserDonnees(conCree);
+		conCree.setCodConsul(genererCodeConsul(conCree));
+		
+		return (X) getBaseDao().save(conCree);
 	}
 	
 	private String genererCodeConsul(TabConsul tabConsul) throws SysGehoSystemException{
@@ -99,6 +100,12 @@ public class SisvConsul extends BaseSisv<TabConsul, String> implements ISisvCons
 		
 		 numero = DateTools.getYear(DateTools.formatDate(new Date()))+ numero;
 		return numero;
+	}
+	
+	private TabConsul initialiserDonnees(TabConsul consul){
+		consul.setBooCpteRendu(BigDecimal.ZERO);
+		consul.setBooVal(BigDecimal.ZERO);
+		return consul;
 	}
 	
 	@Override
