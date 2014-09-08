@@ -70,13 +70,18 @@ public class DaoConsul extends BaseDao<TabConsul, String> implements IDaoConsul{
 			throws SysGehoPersistenceException {
 		String clauseWhere = "1=1 AND o.etatEnt != '2001'";
 		TabConsul currentConsul = (TabConsul)entity;
-		if(currentConsul.getCodConsul()!= null && !currentConsul.getCodConsul().equals("")){
+		if(currentConsul != null && currentConsul.getCodConsul()!= null 
+				&& !currentConsul.getCodConsul().equals("")){
 			clauseWhere = clauseWhere + "AND upper(o.codConsul) like '%"+currentConsul.getCodConsul()+"%'";
 		}
-		if(currentConsul.getTabPat()!= null && !currentConsul.getTabPat().getLibNom().equals("")){
+		if(currentConsul != null && currentConsul.getTabPat()!= null 
+				 && currentConsul.getTabPat().getLibNom() != null
+				 && !currentConsul.getTabPat().getLibNom().equals("")){
 			clauseWhere = clauseWhere + "AND upper(o.tabPat.libNom) like '%"+currentConsul.getTabPat().getLibNom()+"%'";
 		}
-		if(currentConsul.getTabUsr()!= null && !currentConsul.getTabUsr().getLibNom().equals("")){
+		if(currentConsul != null && currentConsul.getTabUsr() != null 
+				&& currentConsul.getTabUsr().getLibNom() != null
+				&& !currentConsul.getTabUsr().getLibNom().equals("")){
 			clauseWhere = clauseWhere + "AND upper(o.tabUsr.libNom) like '%"+currentConsul.getTabUsr().getLibNom()+"%'";
 		}
 		try{
