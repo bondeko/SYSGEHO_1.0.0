@@ -33,6 +33,11 @@ import com.bondeko.sysgeho.be.imp.entity.TabSoin;
 import com.bondeko.sysgeho.be.ref.entity.TabAss;
 import com.bondeko.sysgeho.be.ref.entity.TabSoc;
 import com.bondeko.sysgeho.be.util.EntFichier;
+<<<<<<< .mine
+import com.bondeko.sysgeho.be.util.OutputType;
+import com.bondeko.sysgeho.ui.core.base.DataValidationException;
+=======
+>>>>>>> .r53
 import com.bondeko.sysgeho.ui.core.base.ExportFormatElt;
 import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
@@ -96,6 +101,16 @@ public class PatCtrl extends SysGehoCtrl<TabPat, TabPat>{
 		
 		v$mapTrt.put(DossierPatientTrt.ENREG_HOSPI.getKey(), new Traitement(DossierPatientTrt.ENREG_HOSPI));
 		
+<<<<<<< .mine
+		// Générer l'état des mouvements du conteneur
+		Traitement v$traitementGenListPat = new Traitement(
+				DossierPatientTrt.ETA_LIST_PAT);
+		v$traitementGenListPat.setModalType(Traitement.MODAL_SPECIAL);
+		//v$traitementGenMouv.setModalPanel("mpnl_date_gen_mouv_con"); 
+		v$traitementGenListPat.setMethode("genEtatListPat");
+		v$mapTrt.put(v$traitementGenListPat.getKey(), v$traitementGenListPat);
+		
+=======
 		v$mapTrt.put(DossierPatientTrt.ENREG_CONSUL.getKey(), new Traitement(DossierPatientTrt.ENREG_CONSUL));
 		
 		v$mapTrt.put(DossierPatientTrt.ENREG_EXAM.getKey(), new Traitement(DossierPatientTrt.ENREG_EXAM));
@@ -104,6 +119,7 @@ public class PatCtrl extends SysGehoCtrl<TabPat, TabPat>{
 		
 		v$mapTrt.put(DossierPatientTrt.EXP_ETA_PAT.getKey(), new Traitement(DossierPatientTrt.EXP_ETA_PAT));
 		
+>>>>>>> .r53
 		Traitement v$traitement = new Traitement(
 				DossierPatientTrt.NAVIGUER_RDV.naviguerVersFormulaireListe(),
 				DossierPatientTrt.NAVIGUER_RDV);
@@ -703,6 +719,86 @@ public class PatCtrl extends SysGehoCtrl<TabPat, TabPat>{
 //		}
 	}
 	
+	/**
+	 * Génére un ordre de transport
+	 * 
+	 * @return un message  sur l'état de l'opération
+	 */
+	@SuppressWarnings("finally")
+	public String genEtatListPat() {
+	// Determine vers quelle page ou Formulaire l'on doit se diriger
+		String v$navigation = null;
+
+		// Message d'information
+		String v$msgDetails = "GENERATION_SUCCES";
+
+		try {
+			PatVue v$vue = (PatVue) defaultVue;
+
+//			String choix = defaultVue.getEntiteCourante().getChoix();
+//			String enuTypMouv = defaultVue.getEntiteCourante().getEnuTypMouv() ;
+//			String datDeb = defaultVue.getEntiteCourante().getDatDeb();
+//			String datFin = defaultVue.getEntiteCourante().getDatFin();
+			// Mise à jour de l'entité courante selon le contexte du Formulaire
+			defaultVue.setEntiteCouranteOfPageContext();
+
+			// Sauvegarde de l'entité avant traitement specifique
+			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+
+			// Spécification du type de génération du fichier
+			OutputType outputType = OutputType.PDF;
+
+			// Consommation du service distant
+			TabPat patient = defaultVue.getEntiteCourante();
+			
+			
+			EntFichier v$fichier = DossierPatientSvcoDeleguate.getSvcoPat().genererEtatListPat(patient);
+
+			// création de dossier et fichiers temporaires et affichage de
+			// l'état généré
+			v$navigation = preview(v$fichier, outputType.getExtension());
+			
+			// L'on remplace l'ancienne entité de la liste par la nouvelle issue
+			// du résultat du traitement spécifiques
+			 defaultVue.getTableMgr().replace(defaultVue.getEntiteTemporaire(),
+					 defaultVue.getEntiteCourante());
+
+			// Si nous sommes en Consultation ==> sur le formulaire Details
+			if (defaultVue.getNavigationMgr().isFromDetails()) {
+				// Traitements particuliers
+			}
+
+			// Par contre si nous sommes sur le formulaire Liste
+			else if (defaultVue.getNavigationMgr().isFromListe()) {
+				// Traitements particuliers
+			}
+			FacesUtil.addInfoMessage("GENERATION_SUCCES", v$msgDetails);
+
+		} catch (SysGehoAppException e) {
+			// Aucune navigation possible
+			v$navigation = null;
+
+			// Message utilisateur
+			FacesUtil
+					.addWarnMessage("TRAITEMENT_ALL_ECHEC", e.getMessage());
+			getLogger().error(e.getMessage(), e);
+		} catch (Exception e) {
+			// Aucune navigation possible
+			e.printStackTrace();
+			v$navigation = null;
+			// Message utilisateur
+			FacesUtil
+					.addWarnMessage(
+							"TRAITEMENT_ALL_ECHEC","TRAITEMENT_ALL_ECHEC_INCONNU");
+			getLogger().error(e.getMessage(), e);
+		} finally {
+			// Retour à la page adéquate
+			return v$navigation;
+		}
+
+	}
+
+	
 	@SuppressWarnings({ "finally", "unchecked" })
 	public String hospitaliserPat() {
 		
@@ -863,4 +959,5 @@ public class PatCtrl extends SysGehoCtrl<TabPat, TabPat>{
 		return "SoinEdition";
 	}
 	
+>>>>>>> .r53
 }
