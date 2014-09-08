@@ -42,7 +42,7 @@ CREATE TABLE TAB_SVC (
   LIB_SVC varchar(255) ,
   LIB_DESC varchar(255) ,
   COD_SVC_PAR varchar(32) ,
-  LIB_SVC_PAR varchar(255) ,
+  --LIB_SVC_PAR varchar(255) , n'est plus necesaire car on passe par l'entité
   ETAT_ENT	VARCHAR(30),
   COD_EXE_FIS	VARCHAR(30),
   BOO_ACT	 NUMERIC(1,0) DEFAULT 0,
@@ -105,6 +105,7 @@ CREATE TABLE TAB_PAT (
   LIB_SEX varchar(32) ,
   LIB_ADR varchar(255) ,
   LIB_NUM_TEL varchar(32) ,
+  LIB_NUM_CNI varchar(32) ,
   LIB_PROF varchar(255) ,
   LIB_FON varchar(255) ,
   COD_SOC varchar(32) ,
@@ -146,7 +147,7 @@ CREATE TABLE TAB_CAT_EXAM (
   COD_CAT_EXAM varchar(32) ,
   LIB_CAT_EXAM varchar(255) ,
   COD_SPEC varchar(32) ,
-  LIB_SPEC varchar(255) ,
+  --LIB_SPEC varchar(255) , n'est plus necesaire car on passe par l'entité
   ETAT_ENT	VARCHAR(30),
   COD_EXE_FIS	VARCHAR(30),
   BOO_ACT	 NUMERIC(1,0) DEFAULT 0,
@@ -162,7 +163,7 @@ CREATE TABLE TAB_TYP_EXAM (
   LIB_TYP_EXAM varchar(255) ,
   LIB_DESC varchar(255) ,
   COD_CAT_EXAM varchar(32) ,
-  LIB_CAT_EXAM varchar(255) ,
+  --LIB_CAT_EXAM varchar(255) , n'est plus necesaire car on passe par l'entité
   
   ETAT_ENT	VARCHAR(30),
   COD_EXE_FIS	VARCHAR(30),
@@ -225,7 +226,7 @@ CREATE TABLE TAB_RDV (
   COD_PAT varchar(32) ,
   COD_USR varchar(32) ,
   COD_TYP_RDV varchar(32) ,
-  LIB_TYP_RDV varchar(255) ,
+  --LIB_TYP_RDV varchar(255) , n'est plus necesaire car on passe par l'entité
   COD_SVC varchar(32) ,
   LIB_SVC varchar(255) ,
   DAT_DEM varchar(32) ,
@@ -281,6 +282,7 @@ CREATE TABLE TAB_CPTE_RENDU_CONSUL (
   LIB_EXAM_IMAG varchar(1024) ,
   LIB_TRAIT_PRES varchar(1024) ,
   LIB_CONCL varchar(1024) ,
+  BOO_VAL NUMERIC(1,0) DEFAULT 0,
   DAT varchar(32) ,
   ETAT_ENT	VARCHAR(30),
   COD_EXE_FIS	VARCHAR(30),
@@ -290,5 +292,92 @@ CREATE TABLE TAB_CPTE_RENDU_CONSUL (
   DAT_CRT	VARCHAR(30),
   DAT_MOD	VARCHAR(30), 
   PRIMARY KEY (COD_CPTE_RENDU_CONSUL)
+);
+
+CREATE TABLE TAB_HOSPI (
+  COD_HOSPI varchar(32) ,
+  COD_PAT varchar(32) ,
+  COD_USR varchar(32) ,
+  COD_SVC varchar(32) ,
+  DAT_ADMI varchar(32) ,
+  LIB_MOTIF varchar(255) ,
+  LIB_NUM_CARNET varchar(255) ,
+  LIB_OBS varchar(1024) ,
+  LIB_NUM_CHBRE varchar(255) ,
+  LIB_NUM_LIT varchar(255) ,
+  VAL_MNT decimal(20,2) ,
+  BOO_SOR	 NUMERIC(1,0) DEFAULT 0,
+  LIB_PRESCRI varchar(1024) ,
+  DAT_SORTIE varchar(32) ,
+  
+  ETAT_ENT	VARCHAR(30),
+  COD_EXE_FIS	VARCHAR(30),
+  BOO_ACT	 NUMERIC(1,0) DEFAULT 0,
+  COD_USR_CRT	VARCHAR(30),
+  COD_USR_MOD	VARCHAR(30),
+  DAT_CRT	VARCHAR(30),
+  DAT_MOD	VARCHAR(30), 
+  PRIMARY KEY (COD_HOSPI)
+);
+
+CREATE TABLE TAB_EXAM (
+  COD_EXAM varchar(32) ,
+  COD_PAT varchar(32) ,
+  COD_TYP_EXAM varchar(32) ,
+  LIB_EXAM varchar(45) ,
+  LIB_OBJ varchar(1024) ,
+  VAL_MNT_TTC decimal(20,2) ,
+  DAT_EXAM varchar(32) ,
+  LIB_STATUT varchar(1024) ,
+  LIB_PRES varchar(255) ,
+  BOO_CPTE_RENDU NUMERIC(1,0) DEFAULT 0,
+  BOO_VAL NUMERIC(1,0) DEFAULT 0,
+  ETAT_ENT	VARCHAR(30),
+  COD_EXE_FIS	VARCHAR(30),
+  BOO_ACT	 NUMERIC(1,0) DEFAULT 0,
+  COD_USR_CRT	VARCHAR(30),
+  COD_USR_MOD	VARCHAR(30),
+  DAT_CRT	VARCHAR(30),
+  DAT_MOD	VARCHAR(30), 
+  PRIMARY KEY (COD_EXAM)
+);
+
+CREATE TABLE TAB_CPTE_RENDU_EXAM (
+  COD_CPTE_RENDU_EXAM varchar(32) ,
+  COD_EXAM varchar(32) ,
+  LIB_RESUL varchar(1024) ,
+  LIB_CONCLU varchar(1024) ,
+  BOO_VAL NUMERIC(1,0) DEFAULT 0,
+  DAT varchar(32) ,
+   
+  ETAT_ENT	VARCHAR(30),
+  COD_EXE_FIS	VARCHAR(30),
+  BOO_ACT	 NUMERIC(1,0) DEFAULT 0,
+  COD_USR_CRT	VARCHAR(30),
+  COD_USR_MOD	VARCHAR(30),
+  DAT_CRT	VARCHAR(30),
+  DAT_MOD	VARCHAR(30), 
+  PRIMARY KEY (COD_CPTE_RENDU_EXAM)
+);
+
+CREATE TABLE TAB_SOIN (
+  COD_SOIN varchar(32) ,
+  COD_PAT varchar(32) ,
+  COD_TYP_SOIN varchar(32) ,
+  LIB_SOIN varchar(45) ,
+  LIB_MOTIF varchar(1024) ,
+  VAL_MNT_TTC decimal(20,2) ,
+  DAT_SOIN varchar(32) ,
+  LIB_OBS varchar(1024) ,
+  BOO_VAL NUMERIC(1,0) DEFAULT 0,
+  
+  ETAT_ENT	VARCHAR(30),
+  COD_EXE_FIS	VARCHAR(30),
+  BOO_ACT	 NUMERIC(1,0) DEFAULT 0,
+  COD_USR_CRT	VARCHAR(30),
+  COD_USR_MOD	VARCHAR(30),
+  DAT_CRT	VARCHAR(30),
+  DAT_MOD	VARCHAR(30), 
+  PRIMARY KEY (COD_SOIN)
 );
 
