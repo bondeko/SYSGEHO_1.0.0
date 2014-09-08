@@ -1,4 +1,4 @@
-package com.bondeko.sysgeho.ui.ref.vue;
+package com.bondeko.sysgeho.ui.imp.vue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,19 +6,18 @@ import java.util.List;
 import javax.faces.model.SelectItem;
 
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
-import com.bondeko.sysgeho.be.ref.entity.TabCatExam;
+import com.bondeko.sysgeho.be.imp.entity.TabExam;
 import com.bondeko.sysgeho.be.ref.entity.TabTypExam;
 import com.bondeko.sysgeho.ui.core.base.AbstractNavigationManager;
 import com.bondeko.sysgeho.ui.core.base.SysGehoVue;
 import com.bondeko.sysgeho.ui.core.base.TableManager;
 import com.bondeko.sysgeho.ui.ref.util.RefSvcoDeleguate;
 
-public class TypExamVue extends SysGehoVue<TabTypExam>{
+public class ExamVue extends SysGehoVue<TabExam>{
 	
-	
-	private List<SelectItem> listeCatExam;
-	
-	public TypExamVue(){
+	private ArrayList<SelectItem> listeTypExam; 
+
+	public ExamVue(){
 		super();
 		// Instance des propriétés génériques héritées  
 		this.tableMgr = new TableManager();
@@ -30,12 +29,12 @@ public class TypExamVue extends SysGehoVue<TabTypExam>{
 	 * 
 	 * @return
 	 */	
-	public static TabTypExam getTabTypExam (){		
+	public static TabExam getTabExam (){		
 		
-		TabTypExam v$TypExam = new TabTypExam();
-		v$TypExam.setInfoUser(getInfoUser());
-		v$TypExam.initData();
-		return v$TypExam ;	
+		TabExam v$Exam = new TabExam();
+		v$Exam.setInfoUser(getInfoUser());
+		v$Exam.initData();
+		return v$Exam ;	
 	}	
 	
 	/**
@@ -43,9 +42,9 @@ public class TypExamVue extends SysGehoVue<TabTypExam>{
 	 * 
 	 * @return
 	 */
-	public static TabTypExam getTabTypExamForSearch (){		
-		TabTypExam v$TypExam = getTabTypExam();
-		return v$TypExam ;	
+	public static TabExam getTabExamForSearch (){		
+		TabExam v$Exam = getTabExam();
+		return v$Exam ;	
 	}	
 	/**
 	 * Retourne un Logger pour la Classe
@@ -53,12 +52,12 @@ public class TypExamVue extends SysGehoVue<TabTypExam>{
 	 * @return
 	 */
 	public BaseLogger getLogger() {
-		return BaseLogger.getLogger(TypExamVue.class);
+		return BaseLogger.getLogger(ExamVue.class);
 	}
 	
 	
-	public TabTypExam getNewEntity(){
-		return getTabTypExam();
+	public TabExam getNewEntity(){
+		return getTabExam();
 	}
 	
 	/***
@@ -66,39 +65,39 @@ public class TypExamVue extends SysGehoVue<TabTypExam>{
 	 *  
 	 * @return
 	 */	
-	public TabTypExam getEntityForSearch() {	
-		return getTabTypExamForSearch();
+	public TabExam getEntityForSearch() {	
+		return getTabExamForSearch();
 	}	
 	
-	public List<SelectItem> getListeCatExam() {
+	public List<SelectItem> getListeTypExam() {
 
-		if(listeCatExam == null){
+		if(listeTypExam == null){
 			
-			listeCatExam = new ArrayList<SelectItem>();
+			listeTypExam = new ArrayList<SelectItem>();
 			
-			List<TabCatExam> v$CatExams = null;
+			List<TabTypExam> v$TypExams = null;
 						
 			// Critères de recherche des comptes de dépôt	
-			TabCatExam v$critere = new TabCatExam();	
+			TabTypExam v$critere = new TabTypExam();	
 			
 			// Recherche des comptes en BD 			
 			try {
-				v$CatExams = RefSvcoDeleguate.getSvcoCatExam().rechercherTout(v$critere);
+				v$TypExams = RefSvcoDeleguate.getSvcoTypExam().rechercherTout(v$critere);
 			} 
 			catch (Exception e) {
 				getLogger().error(e.getMessage(), e);
 				e.printStackTrace();
 			} 
 			
-			v$CatExams = (v$CatExams != null)? v$CatExams : new ArrayList<TabCatExam>();
+			v$TypExams = (v$TypExams != null)? v$TypExams : new ArrayList<TabTypExam>();
 			
 			// Création de la liste des élements pour le comboBox
-			for(TabCatExam v$Cat: v$CatExams){
-				SelectItem v$item = new SelectItem(v$Cat.getCodCatExam(),v$Cat.getLibCatExam());
-				listeCatExam.add(v$item);
+			for(TabTypExam v$TypExam: v$TypExams){
+				SelectItem v$item = new SelectItem(v$TypExam.getCodTypExam(),v$TypExam.getLibTypExam());
+				listeTypExam.add(v$item);
 			}
 		}
-		return listeCatExam;
+		return listeTypExam;
 	}
 	
 }

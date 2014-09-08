@@ -67,6 +67,8 @@ public class CpteRenduConsulCtrl extends SysGehoCtrl<TabCpteRenduConsul, TabCpte
 		Map<String, Traitement> v$mapTrt = new TreeMap<String, Traitement>(
 				DossierPatientTrt.getTrtStandards(v$codeEntite));
 		
+		v$mapTrt.put(DossierPatientTrt.VALIDER_CPTE_RENDU_CONSUL.getKey(), new Traitement(DossierPatientTrt.VALIDER_CPTE_RENDU_CONSUL));
+		
 		listeTraitements = Traitement.getOrderedTrt(v$mapTrt);
 		return listeTraitements;
 	}
@@ -119,6 +121,60 @@ public class CpteRenduConsulCtrl extends SysGehoCtrl<TabCpteRenduConsul, TabCpte
 		if (v$propriete.equals("tabConsul")) {
 			TabConsul v$entite = (TabConsul) p$entite;
 			defaultVue.getEntiteCourante().setTabConsul(v$entite);
+		}
+	}
+	
+	@SuppressWarnings("finally")
+	public String valider() {
+
+		// Determine vers quelle page ou Formulaire l'on doit se diriger
+		String v$navigation = null;
+
+		// Message d'information
+		String v$msgDetails = "La Compte rendu de la Consultation n° ";
+
+		try {
+
+			// Mise à jour de l'entité courante selon le contexte du Formulaire
+			if (defaultVue.getNavigationMgr().isFromListe())
+				defaultVue.setEntiteCourante(defaultVue.getTableMgr()
+						.getEntiteSelectionne());
+
+			// Sauvegarde de l'entité avant traitement specifique
+			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+
+			// Consommation de l'EJB distant selon l'operation spécifique car
+			// l'entite courante est connue
+			defaultVue.setEntiteCourante(DossierPatientSvcoDeleguate.getSvcoCpteRenduConsul()
+					.valider(defaultVue.getEntiteCourante()));
+
+			v$msgDetails += defaultVue.getEntiteCourante().getTabConsul().getCodConsul()+" a été validé";
+
+			// L'on remplace l'ancienne entité de la liste par la nouvelle issue
+			// du résultat du traitement spécifiques
+			defaultVue.getTableMgr().replace(defaultVue.getEntiteTemporaire(),
+					defaultVue.getEntiteCourante());
+
+			// Si nous sommes en Consultation ==> sur le formulaire Details
+			if (defaultVue.getNavigationMgr().isFromDetails()) {
+				// Traitements particuliers
+			}
+
+			// Par contre si nous sommes sur le formulaire Liste
+			else if (defaultVue.getNavigationMgr().isFromListe()) {
+				// Traitements particuliers
+			}
+			defaultVue.getTableMgr().updateDataModel();
+			FacesUtil.addInfoMessage("", v$msgDetails);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			// Aucune navigation possible
+			v$navigation = null;
+			getLogger().error(e.getMessage(), e);
+		} finally {
+			// Retour à la page adéquate
+			return v$navigation;
 		}
 	}
 

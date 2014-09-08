@@ -4,12 +4,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr;
 import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
-import com.bondeko.sysgeho.be.imp.entity.TabPat;
-import com.bondeko.sysgeho.be.imp.entity.TabRdv;
+import com.bondeko.sysgeho.be.imp.entity.TabCpteRenduExam;
+import com.bondeko.sysgeho.be.imp.entity.TabExam;
 import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
 import com.bondeko.sysgeho.ui.core.base.SysGehoCtrl;
@@ -17,17 +16,17 @@ import com.bondeko.sysgeho.ui.core.base.SysGehoToolBox;
 import com.bondeko.sysgeho.ui.core.base.Traitement;
 import com.bondeko.sysgeho.ui.imp.util.DossierPatientSvcoDeleguate;
 import com.bondeko.sysgeho.ui.imp.util.DossierPatientTrt;
-import com.bondeko.sysgeho.ui.imp.vue.RdvVue;
+import com.bondeko.sysgeho.ui.imp.vue.CpteRenduExamVue;
 
-public class RdvCtrl extends SysGehoCtrl<TabRdv, TabRdv>{
+public class CpteRenduExamCtrl extends SysGehoCtrl<TabCpteRenduExam, TabCpteRenduExam>{
 	
 	/**
 	 * Nom du Bean managé par JSF dans le fichier de Configuration 
 	 */
-	private static String nomManagedBean = "rdvCtrl";
+	private static String nomManagedBean = "cpteRenduExamCtrl";
 	
-	public RdvCtrl(){		
-		defaultVue = new RdvVue();		
+	public CpteRenduExamCtrl(){		
+		defaultVue = new CpteRenduExamVue();		
 	}
 	
 	/**
@@ -39,12 +38,12 @@ public class RdvCtrl extends SysGehoCtrl<TabRdv, TabRdv>{
 		return nomManagedBean;
 	}	
 	
-	public IBaseSvco<TabRdv> getEntitySvco() throws ServiceLocatorException{	
-		return DossierPatientSvcoDeleguate.getSvcoRdv();
+	public IBaseSvco<TabCpteRenduExam> getEntitySvco() throws ServiceLocatorException{	
+		return DossierPatientSvcoDeleguate.getSvcoCpteRenduExam();
 	}
 	
-	public Class<RdvCtrl> getMyClass() {
-		return RdvCtrl.class;
+	public Class<CpteRenduExamCtrl> getMyClass() {
+		return CpteRenduExamCtrl.class;
 	}
 	
 	public String enregistrerModification(){
@@ -55,23 +54,20 @@ public class RdvCtrl extends SysGehoCtrl<TabRdv, TabRdv>{
 		} catch (ServiceLocatorException e) {
 			e.printStackTrace();
 		}
-		return "RdvDetails";
+		return "CpteRenduExamDetails";
 	}
 
 	@Override
 	public List<Traitement> getListeTraitements() {
-		String v$codeEntite = "Rdv";
+		String v$codeEntite = "CpteRenduExam";
 
-		System.out.println("RdvCtrl.getListeTraitements() ici il vaut : "
+		System.out.println("CpteRenduExamCtrl.getListeTraitements() ici il vaut : "
 				+ v$codeEntite);
 		// Ensemble des traitements standards
 		Map<String, Traitement> v$mapTrt = new TreeMap<String, Traitement>(
 				DossierPatientTrt.getTrtStandards(v$codeEntite));
 		
-		v$mapTrt.put(DossierPatientTrt.CONFIRMER_RDV.getKey(), new Traitement(DossierPatientTrt.CONFIRMER_RDV));
-		
-		v$mapTrt.put(DossierPatientTrt.ANNULER_RDV.getKey(), new Traitement(DossierPatientTrt.ANNULER_RDV));
-		
+		v$mapTrt.put(DossierPatientTrt.VALIDER_CPTE_RENDU_EXAM.getKey(), new Traitement(DossierPatientTrt.VALIDER_CPTE_RENDU_EXAM));
 		
 		listeTraitements = Traitement.getOrderedTrt(v$mapTrt);
 		return listeTraitements;
@@ -81,16 +77,16 @@ public class RdvCtrl extends SysGehoCtrl<TabRdv, TabRdv>{
 	@Override
 	public void buildListeTraitement() {
 		if(getMapTraitements() == null){
-			setMapTraitements(DossierPatientTrt.getTrtStandards("Rdv")) ;
+			setMapTraitements(DossierPatientTrt.getTrtStandards("CpteRenduExam")) ;
 		}
 	}
 	
 	@Override
-	public List<TabRdv> rechercherParCritere(TabRdv p$entity)
+	public List<TabCpteRenduExam> rechercherParCritere(TabCpteRenduExam p$entity)
 			throws SysGehoAppException {
 		try {
 			super.setTimeOfLastSearch();
-			return DossierPatientSvcoDeleguate.getSvcoRdv().rechercherParCritere(p$entity);
+			return DossierPatientSvcoDeleguate.getSvcoCpteRenduExam().rechercherParCritere(p$entity);
 		} catch (ServiceLocatorException e) {
 			e.printStackTrace();
 		}catch (SysGehoAppException e) {
@@ -122,26 +118,20 @@ public class RdvCtrl extends SysGehoCtrl<TabRdv, TabRdv>{
 		// Nom de la propriété à mettre à jour pour
 		String v$propriete = defaultVue.getNavigationMgr().getSelectionPropertyName();
 
-		if (v$propriete.equals("tabUsr")) {
-			TabUsr v$entite = (TabUsr) p$entite;
-			defaultVue.getEntiteCourante().setTabUsr(v$entite);
+		if (v$propriete.equals("tabExam")) {
+			TabExam v$entite = (TabExam) p$entite;
+			defaultVue.getEntiteCourante().setTabExam(v$entite);
 		}
-
-		if (v$propriete.equals("tabPat")) {
-			TabPat v$entite = (TabPat) p$entite;
-			defaultVue.getEntiteCourante().setTabPat(v$entite);
-		}
-
 	}
 	
 	@SuppressWarnings("finally")
-	public String annuler() {
+	public String valider() {
 
 		// Determine vers quelle page ou Formulaire l'on doit se diriger
 		String v$navigation = null;
 
 		// Message d'information
-		String v$msgDetails = "Le Rendez-vous n° ";
+		String v$msgDetails = "La Compte rendu de l'Examen n° ";
 
 		try {
 
@@ -155,71 +145,17 @@ public class RdvCtrl extends SysGehoCtrl<TabRdv, TabRdv>{
 
 			// Consommation de l'EJB distant selon l'operation spécifique car
 			// l'entite courante est connue
-			defaultVue.setEntiteCourante(DossierPatientSvcoDeleguate.getSvcoRdv()
-					.annuler(defaultVue.getEntiteCourante()));
+			defaultVue.setEntiteCourante(DossierPatientSvcoDeleguate.getSvcoCpteRenduExam()
+					.valider(defaultVue.getEntiteCourante()));
 
-			v$msgDetails += defaultVue.getEntiteCourante().getCodRdv()+" a été annulé";
-
-			// L'on remplace l'ancienne entité de la liste par la nouvelle issue
-			// du résultat du traitement spécifiques
-			defaultVue.getTableMgr().replace(defaultVue.getEntiteTemporaire(),
-					defaultVue.getEntiteCourante());
-
-			// Si nous sommes en Consultation ==> sur le formulaire Details
-			if (defaultVue.getNavigationMgr().isFromDetails()) {
-				// Traitements particuliers
-			}
-
-			// Par contre si nous sommes sur le formulaire Liste
-			else if (defaultVue.getNavigationMgr().isFromListe()) {
-				// Traitements particuliers
-			}
-			defaultVue.getTableMgr().updateDataModel();
-			FacesUtil.addInfoMessage("", v$msgDetails);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			// Aucune navigation possible
-			v$navigation = null;
-			getLogger().error(e.getMessage(), e);
-		} finally {
-			// Retour à la page adéquate
-			return v$navigation;
-		}
-	}
-	
-	@SuppressWarnings("finally")
-	public String confirmer() {
-
-		// Determine vers quelle page ou Formulaire l'on doit se diriger
-		String v$navigation = null;
-
-		// Message d'information
-		String v$msgDetails = "Le Rendez-vous n° ";
-
-		try {
-
-			// Mise à jour de l'entité courante selon le contexte du Formulaire
-			if (defaultVue.getNavigationMgr().isFromListe())
-				defaultVue.setEntiteCourante(defaultVue.getTableMgr()
-						.getEntiteSelectionne());
-
-			// Sauvegarde de l'entité avant traitement specifique
-			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
-
-			// Consommation de l'EJB distant selon l'operation spécifique car
-			// l'entite courante est connue
-			defaultVue.setEntiteCourante(DossierPatientSvcoDeleguate.getSvcoRdv()
-					.confirmer(defaultVue.getEntiteCourante()));
-
-			v$msgDetails += defaultVue.getEntiteCourante().getCodRdv()+" a été confirmé";
+			v$msgDetails += defaultVue.getEntiteCourante().getTabExam().getCodExam()+" a été validé";
 
 			// L'on remplace l'ancienne entité de la liste par la nouvelle issue
 			// du résultat du traitement spécifiques
 			defaultVue.getTableMgr().replace(defaultVue.getEntiteTemporaire(),
 					defaultVue.getEntiteCourante());
 
-			// Si nous sommes en Consultation ==> sur le formulaire Details
+			// Si nous sommes en consultation ==> sur le formulaire Details
 			if (defaultVue.getNavigationMgr().isFromDetails()) {
 				// Traitements particuliers
 			}

@@ -3,8 +3,12 @@ package com.bondeko.sysgeho.ui.imp.util;
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
 import com.bondeko.sysgeho.be.imp.svco.IRemoteConsul;
 import com.bondeko.sysgeho.be.imp.svco.IRemoteCpteRenduConsul;
+import com.bondeko.sysgeho.be.imp.svco.IRemoteCpteRenduExam;
+import com.bondeko.sysgeho.be.imp.svco.IRemoteExam;
+import com.bondeko.sysgeho.be.imp.svco.IRemoteHospi;
 import com.bondeko.sysgeho.be.imp.svco.IRemotePat;
 import com.bondeko.sysgeho.be.imp.svco.IRemoteRdv;
+import com.bondeko.sysgeho.be.imp.svco.IRemoteSoin;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
 import com.bondeko.sysgeho.ui.core.base.SysGehoSvcoDeleguate;
 
@@ -38,6 +42,22 @@ public class DossierPatientSvcoDeleguate {
 	
 	public static IRemoteConsul getSvcoConsul() throws ServiceLocatorException{
         return (IRemoteConsul) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoConsul", IRemoteConsul.class));
+    }
+	
+	public static IRemoteHospi getSvcoHospi() throws ServiceLocatorException{
+        return (IRemoteHospi) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoHospi", IRemoteHospi.class));
+    }
+	
+	public static IRemoteCpteRenduExam getSvcoCpteRenduExam() throws ServiceLocatorException{
+        return (IRemoteCpteRenduExam) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoCpteRenduExam", IRemoteCpteRenduExam.class));
+    }
+	
+	public static IRemoteExam getSvcoExam() throws ServiceLocatorException{
+        return (IRemoteExam) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoExam", IRemoteExam.class));
+    }
+	
+	public static IRemoteSoin getSvcoSoin() throws ServiceLocatorException{
+        return (IRemoteSoin) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoSoin", IRemoteSoin.class));
     }
 
 	public BaseLogger getLogger() {

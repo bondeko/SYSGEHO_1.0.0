@@ -1,15 +1,18 @@
 package com.bondeko.sysgeho.ui.imp.controleur;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabSvc;
 import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr;
 import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
+import com.bondeko.sysgeho.be.imp.entity.TabHospi;
 import com.bondeko.sysgeho.be.imp.entity.TabPat;
-import com.bondeko.sysgeho.be.imp.entity.TabRdv;
 import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
 import com.bondeko.sysgeho.ui.core.base.SysGehoCtrl;
@@ -17,17 +20,19 @@ import com.bondeko.sysgeho.ui.core.base.SysGehoToolBox;
 import com.bondeko.sysgeho.ui.core.base.Traitement;
 import com.bondeko.sysgeho.ui.imp.util.DossierPatientSvcoDeleguate;
 import com.bondeko.sysgeho.ui.imp.util.DossierPatientTrt;
-import com.bondeko.sysgeho.ui.imp.vue.RdvVue;
+import com.bondeko.sysgeho.ui.imp.vue.HospiVue;
 
-public class RdvCtrl extends SysGehoCtrl<TabRdv, TabRdv>{
+public class HospiCtrl extends SysGehoCtrl<TabHospi, TabHospi>{
 	
 	/**
 	 * Nom du Bean managé par JSF dans le fichier de Configuration 
 	 */
-	private static String nomManagedBean = "rdvCtrl";
+	private static String nomManagedBean = "hospiCtrl";
 	
-	public RdvCtrl(){		
-		defaultVue = new RdvVue();		
+	boolean sortie;
+	
+	public HospiCtrl(){		
+		defaultVue = new HospiVue();		
 	}
 	
 	/**
@@ -39,12 +44,12 @@ public class RdvCtrl extends SysGehoCtrl<TabRdv, TabRdv>{
 		return nomManagedBean;
 	}	
 	
-	public IBaseSvco<TabRdv> getEntitySvco() throws ServiceLocatorException{	
-		return DossierPatientSvcoDeleguate.getSvcoRdv();
+	public IBaseSvco<TabHospi> getEntitySvco() throws ServiceLocatorException{	
+		return DossierPatientSvcoDeleguate.getSvcoHospi();
 	}
 	
-	public Class<RdvCtrl> getMyClass() {
-		return RdvCtrl.class;
+	public Class<HospiCtrl> getMyClass() {
+		return HospiCtrl.class;
 	}
 	
 	public String enregistrerModification(){
@@ -55,23 +60,22 @@ public class RdvCtrl extends SysGehoCtrl<TabRdv, TabRdv>{
 		} catch (ServiceLocatorException e) {
 			e.printStackTrace();
 		}
-		return "RdvDetails";
+		return "HospiDetails";
 	}
 
 	@Override
 	public List<Traitement> getListeTraitements() {
-		String v$codeEntite = "Rdv";
+		String v$codeEntite = "Hospi";
 
-		System.out.println("RdvCtrl.getListeTraitements() ici il vaut : "
+		System.out.println("HospiCtrl.getListeTraitements() ici il vaut : "
 				+ v$codeEntite);
 		// Ensemble des traitements standards
 		Map<String, Traitement> v$mapTrt = new TreeMap<String, Traitement>(
 				DossierPatientTrt.getTrtStandards(v$codeEntite));
 		
-		v$mapTrt.put(DossierPatientTrt.CONFIRMER_RDV.getKey(), new Traitement(DossierPatientTrt.CONFIRMER_RDV));
-		
-		v$mapTrt.put(DossierPatientTrt.ANNULER_RDV.getKey(), new Traitement(DossierPatientTrt.ANNULER_RDV));
-		
+		Traitement v$traitement = new Traitement(DossierPatientTrt.SORTIE_HOSPI);
+		v$traitement.setModalPanel("mpnl_sortie_hospi");	// Id du modal panel			
+		v$mapTrt.put(v$traitement.getKey(), v$traitement);
 		
 		listeTraitements = Traitement.getOrderedTrt(v$mapTrt);
 		return listeTraitements;
@@ -81,16 +85,16 @@ public class RdvCtrl extends SysGehoCtrl<TabRdv, TabRdv>{
 	@Override
 	public void buildListeTraitement() {
 		if(getMapTraitements() == null){
-			setMapTraitements(DossierPatientTrt.getTrtStandards("Rdv")) ;
+			setMapTraitements(DossierPatientTrt.getTrtStandards("Hospi")) ;
 		}
 	}
 	
 	@Override
-	public List<TabRdv> rechercherParCritere(TabRdv p$entity)
+	public List<TabHospi> rechercherParCritere(TabHospi p$entity)
 			throws SysGehoAppException {
 		try {
 			super.setTimeOfLastSearch();
-			return DossierPatientSvcoDeleguate.getSvcoRdv().rechercherParCritere(p$entity);
+			return DossierPatientSvcoDeleguate.getSvcoHospi().rechercherParCritere(p$entity);
 		} catch (ServiceLocatorException e) {
 			e.printStackTrace();
 		}catch (SysGehoAppException e) {
@@ -106,6 +110,7 @@ public class RdvCtrl extends SysGehoCtrl<TabRdv, TabRdv>{
 
 		// Determine vers quelle page ou Formulaire l'on doit se diriger
 		String v$navigation = super.gotoRelatedEntity();
+		
 		/*
 		 * Recuperation du controleur 
 		 * NB: 
@@ -126,23 +131,30 @@ public class RdvCtrl extends SysGehoCtrl<TabRdv, TabRdv>{
 			TabUsr v$entite = (TabUsr) p$entite;
 			defaultVue.getEntiteCourante().setTabUsr(v$entite);
 		}
-
 		if (v$propriete.equals("tabPat")) {
 			TabPat v$entite = (TabPat) p$entite;
 			defaultVue.getEntiteCourante().setTabPat(v$entite);
 		}
-
+		if (v$propriete.equals("tabSvc")) {
+			TabSvc v$entite = (TabSvc) p$entite;
+			defaultVue.getEntiteCourante().setTabSvc(v$entite);
+		}
+	}
+	
+	public String sortieHospiPreModal(){
+		return null;
 	}
 	
 	@SuppressWarnings("finally")
-	public String annuler() {
+	public String sortirHospitalisation() {
 
 		// Determine vers quelle page ou Formulaire l'on doit se diriger
 		String v$navigation = null;
 
 		// Message d'information
-		String v$msgDetails = "Le Rendez-vous n° ";
-
+		String v$msgDetails = "L'hospitalisation du patient :  ";
+		Date date = defaultVue.getEntiteCourante().getDateSortie();
+		String prescri = defaultVue.getEntiteCourante().getLibPrescri();
 		try {
 
 			// Mise à jour de l'entité courante selon le contexte du Formulaire
@@ -152,13 +164,16 @@ public class RdvCtrl extends SysGehoCtrl<TabRdv, TabRdv>{
 
 			// Sauvegarde de l'entité avant traitement specifique
 			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
-
+			
+			defaultVue.getEntiteCourante().setDateSortie(date);
+			defaultVue.getEntiteCourante().setLibPrescri(prescri);
+			
 			// Consommation de l'EJB distant selon l'operation spécifique car
 			// l'entite courante est connue
-			defaultVue.setEntiteCourante(DossierPatientSvcoDeleguate.getSvcoRdv()
-					.annuler(defaultVue.getEntiteCourante()));
+			defaultVue.setEntiteCourante(DossierPatientSvcoDeleguate.getSvcoHospi()
+					.sortirHospitalisation(defaultVue.getEntiteCourante()));
 
-			v$msgDetails += defaultVue.getEntiteCourante().getCodRdv()+" a été annulé";
+			v$msgDetails += defaultVue.getEntiteCourante().getTabPat().getLibNom()+" est terminée";
 
 			// L'on remplace l'ancienne entité de la liste par la nouvelle issue
 			// du résultat du traitement spécifiques
@@ -187,59 +202,16 @@ public class RdvCtrl extends SysGehoCtrl<TabRdv, TabRdv>{
 			return v$navigation;
 		}
 	}
-	
-	@SuppressWarnings("finally")
-	public String confirmer() {
-
-		// Determine vers quelle page ou Formulaire l'on doit se diriger
-		String v$navigation = null;
-
-		// Message d'information
-		String v$msgDetails = "Le Rendez-vous n° ";
-
-		try {
-
-			// Mise à jour de l'entité courante selon le contexte du Formulaire
-			if (defaultVue.getNavigationMgr().isFromListe())
-				defaultVue.setEntiteCourante(defaultVue.getTableMgr()
-						.getEntiteSelectionne());
-
-			// Sauvegarde de l'entité avant traitement specifique
-			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
-
-			// Consommation de l'EJB distant selon l'operation spécifique car
-			// l'entite courante est connue
-			defaultVue.setEntiteCourante(DossierPatientSvcoDeleguate.getSvcoRdv()
-					.confirmer(defaultVue.getEntiteCourante()));
-
-			v$msgDetails += defaultVue.getEntiteCourante().getCodRdv()+" a été confirmé";
-
-			// L'on remplace l'ancienne entité de la liste par la nouvelle issue
-			// du résultat du traitement spécifiques
-			defaultVue.getTableMgr().replace(defaultVue.getEntiteTemporaire(),
-					defaultVue.getEntiteCourante());
-
-			// Si nous sommes en Consultation ==> sur le formulaire Details
-			if (defaultVue.getNavigationMgr().isFromDetails()) {
-				// Traitements particuliers
-			}
-
-			// Par contre si nous sommes sur le formulaire Liste
-			else if (defaultVue.getNavigationMgr().isFromListe()) {
-				// Traitements particuliers
-			}
-			defaultVue.getTableMgr().updateDataModel();
-			FacesUtil.addInfoMessage("", v$msgDetails);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			// Aucune navigation possible
-			v$navigation = null;
-			getLogger().error(e.getMessage(), e);
-		} finally {
-			// Retour à la page adéquate
-			return v$navigation;
-		}
+	public boolean isSortie() {
+		sortie = false;
+		TabHospi hospi = defaultVue.getEntiteCourante();
+		if(hospi != null && hospi.getBooSor() != null && hospi.getBooSor().equals(BigDecimal.ONE)) sortie = true;
+		return sortie;
 	}
 
+	public void setSortie(boolean sortie) {
+		this.sortie = sortie;
+	}
+
+	
 }

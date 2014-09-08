@@ -24,10 +24,15 @@ import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.base.DateTools;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
+import com.bondeko.sysgeho.be.imp.entity.TabConsul;
+import com.bondeko.sysgeho.be.imp.entity.TabExam;
+import com.bondeko.sysgeho.be.imp.entity.TabHospi;
 import com.bondeko.sysgeho.be.imp.entity.TabPat;
 import com.bondeko.sysgeho.be.imp.entity.TabRdv;
+import com.bondeko.sysgeho.be.imp.entity.TabSoin;
+import com.bondeko.sysgeho.be.ref.entity.TabAss;
+import com.bondeko.sysgeho.be.ref.entity.TabSoc;
 import com.bondeko.sysgeho.be.util.EntFichier;
-import com.bondeko.sysgeho.ui.core.base.DataValidationException;
 import com.bondeko.sysgeho.ui.core.base.ExportFormatElt;
 import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
@@ -89,15 +94,40 @@ public class PatCtrl extends SysGehoCtrl<TabPat, TabPat>{
 		
 		v$mapTrt.put(DossierPatientTrt.ENREG_RDV.getKey(), new Traitement(DossierPatientTrt.ENREG_RDV));
 		
-		Traitement v$traitementExp = new Traitement( DossierPatientTrt.EXP_ETA_PAT);
-		v$traitementExp.setModalType(Traitement.MODAL_SPECIAL);
-		v$traitementExp.setMethode("exporterPatients");
-		v$mapTrt.put(v$traitementExp.getKey(), v$traitementExp);
+		v$mapTrt.put(DossierPatientTrt.ENREG_HOSPI.getKey(), new Traitement(DossierPatientTrt.ENREG_HOSPI));
+		
+		v$mapTrt.put(DossierPatientTrt.ENREG_CONSUL.getKey(), new Traitement(DossierPatientTrt.ENREG_CONSUL));
+		
+		v$mapTrt.put(DossierPatientTrt.ENREG_EXAM.getKey(), new Traitement(DossierPatientTrt.ENREG_EXAM));
+		
+		v$mapTrt.put(DossierPatientTrt.ENREG_SOIN.getKey(), new Traitement(DossierPatientTrt.ENREG_SOIN));
+		
+		v$mapTrt.put(DossierPatientTrt.EXP_ETA_PAT.getKey(), new Traitement(DossierPatientTrt.EXP_ETA_PAT));
 		
 		Traitement v$traitement = new Traitement(
 				DossierPatientTrt.NAVIGUER_RDV.naviguerVersFormulaireListe(),
 				DossierPatientTrt.NAVIGUER_RDV);
 		v$mapTrt.put(v$traitement.getKey(), v$traitement);
+		
+		Traitement v$traitement2 = new Traitement(
+				DossierPatientTrt.NAVIGUER_HOSPI.naviguerVersFormulaireListe(),
+				DossierPatientTrt.NAVIGUER_HOSPI);
+		v$mapTrt.put(v$traitement2.getKey(), v$traitement2);
+		
+		Traitement v$traitement3 = new Traitement(
+				DossierPatientTrt.NAVIGUER_EXAMEN.naviguerVersFormulaireListe(),
+				DossierPatientTrt.NAVIGUER_EXAMEN);
+		v$mapTrt.put(v$traitement3.getKey(), v$traitement3);
+		
+		Traitement v$traitement4 = new Traitement(
+				DossierPatientTrt.NAVIGUER_CONSULTATION.naviguerVersFormulaireListe(),
+				DossierPatientTrt.NAVIGUER_CONSULTATION);
+		v$mapTrt.put(v$traitement4.getKey(), v$traitement4);
+		
+		Traitement v$traitement5 = new Traitement(
+				DossierPatientTrt.NAVIGUER_VERS_SOIN.naviguerVersFormulaireListe(),
+				DossierPatientTrt.NAVIGUER_VERS_SOIN);
+		v$mapTrt.put(v$traitement5.getKey(), v$traitement5);
 		
 		listeTraitements = Traitement.getOrderedTrt(v$mapTrt);
 		return listeTraitements;
@@ -156,16 +186,100 @@ public class PatCtrl extends SysGehoCtrl<TabPat, TabPat>{
 			}
 		}
 		
+		if (v$navigation.equals(DossierPatientTrt.NAVIGUER_HOSPI
+				.naviguerVersFormulaireListe())) {
+			
+			TabHospi hospi = new TabHospi();
+			hospi.initData();
+			hospi.setTabPat(defaultVue.getEntiteCourante());
+
+			try {
+				v$navigation = v$controleur.naviguerVersDetailsOuListe(hospi);
+			} catch (Exception e) { 
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 		return v$navigation;
 	}
 	
-	@Override
-	public void preEnregistrer() throws DataValidationException {
-		if(defaultVue.getEntiteCourante() != null  && defaultVue.getEntiteCourante().getCodAss()==null){
-			defaultVue.getEntiteCourante().setLibAss(null);
+	public String navigerExam(){
+		
+		String v$navigation = super.gotoRelatedEntity();
+		SysGehoCtrl<BaseEntity, BaseEntity> v$controleur  =  (SysGehoCtrl<BaseEntity, BaseEntity>) FacesUtil.getSessionMapValue(SysGehoToolBox.getManagedBeanName(v$navigation));
+		if (v$navigation.equals(DossierPatientTrt.NAVIGUER_EXAMEN
+				.naviguerVersFormulaireListe())) {
+			
+			TabExam exam = new TabExam();
+			exam.initData();
+			exam.setTabPat(defaultVue.getEntiteCourante());
+
+			try {
+				v$navigation = v$controleur.naviguerVersDetailsOuListe(exam);
+			} catch (Exception e) { 
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		if(defaultVue.getEntiteCourante() != null  && defaultVue.getEntiteCourante().getCodSoc()==null){
-			defaultVue.getEntiteCourante().setLibSoc(null);
+		return v$navigation;
+	}
+	
+	public String naviguerConsul(){
+		
+		String v$navigation = super.gotoRelatedEntity();
+		SysGehoCtrl<BaseEntity, BaseEntity> v$controleur  =  (SysGehoCtrl<BaseEntity, BaseEntity>) FacesUtil.getSessionMapValue(SysGehoToolBox.getManagedBeanName(v$navigation));
+		if (v$navigation.equals(DossierPatientTrt.NAVIGUER_CONSULTATION
+				.naviguerVersFormulaireListe())) {
+			
+			TabConsul consul = new TabConsul();
+			consul.initData();
+			consul.setTabPat(defaultVue.getEntiteCourante());
+
+			try {
+				v$navigation = v$controleur.naviguerVersDetailsOuListe(consul);
+			} catch (Exception e) { 
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return v$navigation;
+	}
+	
+	public String naviguerSoin(){
+		
+		String v$navigation = super.gotoRelatedEntity();
+		SysGehoCtrl<BaseEntity, BaseEntity> v$controleur  =  (SysGehoCtrl<BaseEntity, BaseEntity>) FacesUtil.getSessionMapValue(SysGehoToolBox.getManagedBeanName(v$navigation));
+		if (v$navigation.equals(DossierPatientTrt.NAVIGUER_VERS_SOIN
+				.naviguerVersFormulaireListe())) {
+			
+			TabSoin soin = new TabSoin();
+			soin.initData();
+			soin.setTabPat(defaultVue.getEntiteCourante());
+
+			try {
+				v$navigation = v$controleur.naviguerVersDetailsOuListe(soin);
+			} catch (Exception e) { 
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return v$navigation;
+	}
+	
+	public void setSelectedEntity(BaseEntity p$entite) {
+
+		// Nom de la propriété à mettre à jour pour
+		String v$propriete = defaultVue.getNavigationMgr().getSelectionPropertyName();
+
+		if (v$propriete.equals("tabSoc")) {
+			TabSoc v$entite = (TabSoc) p$entite;
+			defaultVue.getEntiteCourante().setTabSoc(v$entite);
+		}
+
+		if (v$propriete.equals("tabAss")) {
+			TabAss v$entite = (TabAss) p$entite;
+			defaultVue.getEntiteCourante().setTabAss(v$entite);
 		}
 	}
 	
@@ -343,11 +457,12 @@ public class PatCtrl extends SysGehoCtrl<TabPat, TabPat>{
 				}
 
 				try {
-					val = patient.getLibSoc();
+					if(patient.getTabSoc()!=null) val = patient.getTabSoc().getLibSoc();
 					label = new Label(11, i + 2, val);
 					sheet.addCell(label);
 				} catch (Exception e) {
 					e.printStackTrace();
+					val = "" ;
 				}
 				
 				try {
@@ -356,14 +471,16 @@ public class PatCtrl extends SysGehoCtrl<TabPat, TabPat>{
 					sheet.addCell(label);
 				} catch (Exception e) {
 					e.printStackTrace();
+					val = "" ;
 				}
 				
 				try {
-					val = patient.getLibAss();
+					if(patient.getTabAss() != null) val = patient.getTabAss().getLibAss();
 					label = new Label(13, i + 2, val);
 					sheet.addCell(label);
 				} catch (Exception e) {
 					e.printStackTrace();
+					val = "" ;
 				}
 
 				try {
@@ -585,5 +702,165 @@ public class PatCtrl extends SysGehoCtrl<TabPat, TabPat>{
 //			return v$navigation;
 //		}
 	}
+	
+	@SuppressWarnings({ "finally", "unchecked" })
+	public String hospitaliserPat() {
+		
+		String v$navigation = null;
+		
+		try {
+			// Mise à jour de l'entité courante selon le contexte du Formulaire
+			if (defaultVue.getNavigationMgr().isFromListe())
+				defaultVue.setEntiteCourante(defaultVue.getTableMgr()
+						.getEntiteSelectionne());
 
+			// Sauvegarde de l'entité avant traitement specifique
+			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+			
+			HospiCtrl hospiCtrl = (HospiCtrl) FacesUtil
+			.getSessionMapValue(new HospiCtrl().getNomManagedBean2());
+
+			if (hospiCtrl == null) {
+				hospiCtrl = new HospiCtrl();
+				
+				FacesUtil.setSessionMapValue(hospiCtrl.getNomManagedBean2(),
+						hospiCtrl);
+			}
+			
+			TabPat pat = getDefaultVue().getEntiteCourante();
+			
+			// On recherche si le patient n'a pas une hospitalisation en cours
+			TabHospi hospiRech = DossierPatientSvcoDeleguate.getSvcoHospi().rechercherParCodPat(pat.getCodPat());
+			if(hospiRech != null){
+				FacesUtil.addWarnMessage("", "Il existe déjà une hospitalisation en cours pour le patient "+ pat.getLibNom());
+				return null;
+			}
+			
+			TabHospi hospi = new TabHospi(pat.getInfoUser());
+			hospi.initData();
+			hospi.setTabPat(pat);	
+			hospiCtrl.getDefaultVue().setEntiteCourante(hospi);
+			hospiCtrl.getDefaultVue().getNavigationMgr().setEnModification(false);
+			
+		} catch (Exception e) {
+			v$navigation = null;
+			e.printStackTrace();
+		}
+		return "HospiEdition";
+	}
+	
+	public String consulter() {
+		
+		String v$navigation = null;
+		
+		try {
+			// Mise à jour de l'entité courante selon le contexte du Formulaire
+			if (defaultVue.getNavigationMgr().isFromListe())
+				defaultVue.setEntiteCourante(defaultVue.getTableMgr()
+						.getEntiteSelectionne());
+
+			// Sauvegarde de l'entité avant traitement specifique
+			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+			
+			ConsulCtrl consulCtrl = (ConsulCtrl) FacesUtil
+			.getSessionMapValue(new ConsulCtrl().getNomManagedBean2());
+
+			if (consulCtrl == null) {
+				consulCtrl = new ConsulCtrl();
+				
+				FacesUtil.setSessionMapValue(consulCtrl.getNomManagedBean2(),
+						consulCtrl);
+			}
+			
+			TabPat pat = getDefaultVue().getEntiteCourante();
+			
+			TabConsul consul = new TabConsul(pat.getInfoUser());
+			consul.initData();
+			consul.setTabPat(pat);	
+			consulCtrl.getDefaultVue().setEntiteCourante(consul);
+			consulCtrl.getDefaultVue().getNavigationMgr().setEnModification(false);
+			
+		} catch (Exception e) {
+			v$navigation = null;
+			e.printStackTrace();
+		}
+		return "ConsulEdition";
+	}
+	
+	public String examiner() {
+		
+		String v$navigation = null;
+		
+		try {
+			// Mise à jour de l'entité courante selon le contexte du Formulaire
+			if (defaultVue.getNavigationMgr().isFromListe())
+				defaultVue.setEntiteCourante(defaultVue.getTableMgr()
+						.getEntiteSelectionne());
+
+			// Sauvegarde de l'entité avant traitement specifique
+			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+			
+			ExamCtrl examCtrl = (ExamCtrl) FacesUtil
+			.getSessionMapValue(new ExamCtrl().getNomManagedBean2());
+
+			if (examCtrl == null) {
+				examCtrl = new ExamCtrl();
+				
+				FacesUtil.setSessionMapValue(examCtrl.getNomManagedBean2(),
+						examCtrl);
+			}
+			
+			TabPat pat = getDefaultVue().getEntiteCourante();
+			
+			TabExam exam = new TabExam(pat.getInfoUser());
+			exam.initData();
+			exam.setTabPat(pat);	
+			examCtrl.getDefaultVue().setEntiteCourante(exam);
+			examCtrl.getDefaultVue().getNavigationMgr().setEnModification(false);
+			
+		} catch (Exception e) {
+			v$navigation = null;
+			e.printStackTrace();
+		}
+		return "ExamEdition";
+	}
+	
+	public String enregistrerSoin() {
+		
+		String v$navigation = null;
+		
+		try {
+			// Mise à jour de l'entité courante selon le contexte du Formulaire
+			if (defaultVue.getNavigationMgr().isFromListe())
+				defaultVue.setEntiteCourante(defaultVue.getTableMgr()
+						.getEntiteSelectionne());
+
+			// Sauvegarde de l'entité avant traitement specifique
+			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+			
+			SoinCtrl soinCtrl = (SoinCtrl) FacesUtil
+			.getSessionMapValue(new SoinCtrl().getNomManagedBean2());
+
+			if (soinCtrl == null) {
+				soinCtrl = new SoinCtrl();
+				
+				FacesUtil.setSessionMapValue(soinCtrl.getNomManagedBean2(),
+						soinCtrl);
+			}
+			
+			TabPat pat = getDefaultVue().getEntiteCourante();
+			
+			TabSoin soin = new TabSoin(pat.getInfoUser());
+			soin.initData();
+			soin.setTabPat(pat);	
+			soinCtrl.getDefaultVue().setEntiteCourante(soin);
+			soinCtrl.getDefaultVue().getNavigationMgr().setEnModification(false);
+			
+		} catch (Exception e) {
+			v$navigation = null;
+			e.printStackTrace();
+		}
+		return "SoinEdition";
+	}
+	
 }

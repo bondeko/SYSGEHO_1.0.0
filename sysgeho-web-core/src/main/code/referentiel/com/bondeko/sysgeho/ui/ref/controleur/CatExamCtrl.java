@@ -7,7 +7,6 @@ import java.util.TreeMap;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
 import com.bondeko.sysgeho.be.ref.entity.TabCatExam;
-import com.bondeko.sysgeho.ui.core.base.DataValidationException;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
 import com.bondeko.sysgeho.ui.core.base.SysGehoCtrl;
 import com.bondeko.sysgeho.ui.core.base.Traitement;
@@ -88,13 +87,5 @@ public class CatExamCtrl extends SysGehoCtrl<TabCatExam, TabCatExam>{
 		}
 		return null;
 	}
-	
-	@Override
-	public void preEnregistrer() throws DataValidationException {
-		if(defaultVue.getEntiteCourante() != null  && defaultVue.getEntiteCourante().getCodSpec()==null){
-			defaultVue.getEntiteCourante().setLibSpec(null);
-		}
-	}
-
 
 }

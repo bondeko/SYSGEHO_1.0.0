@@ -1,18 +1,16 @@
 package com.bondeko.sysgeho.ui.imp.vue;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
 import com.bondeko.sysgeho.be.core.enums.EnuStatutMat;
+import com.bondeko.sysgeho.be.core.enums.EnuTitre;
 import com.bondeko.sysgeho.be.imp.entity.TabPat;
 import com.bondeko.sysgeho.be.ref.entity.TabAss;
-import com.bondeko.sysgeho.be.ref.entity.TabSoc;
 import com.bondeko.sysgeho.ui.core.base.AbstractNavigationManager;
 import com.bondeko.sysgeho.ui.core.base.SysGehoToolBox;
 import com.bondeko.sysgeho.ui.core.base.SysGehoVue;
@@ -23,13 +21,9 @@ public class PatVue extends SysGehoVue<TabPat>{
 	
 	private  Map<String, Object> listeStaMat;
 	
-	private List<SelectItem> listeSoc;
+	private  Map<String, Object> listeTitre;
 	
 	private List<SelectItem> listeAss;
-	
-	private Map<String, TabSoc> mapSoc = new HashMap<String, TabSoc>();
-	
-	private Map<String, TabAss> mapAss = new HashMap<String, TabAss>();
 	
 	public PatVue(){
 		super();
@@ -95,40 +89,12 @@ public class PatVue extends SysGehoVue<TabPat>{
 		return listeStaMat;
 	}
 	
-	public List<SelectItem> getListeSoc() {
-
-		if(listeSoc == null){
-			
-			listeSoc = new ArrayList<SelectItem>();
-			
-			List<TabSoc> v$Socs = null;
-						
-			// Critères de recherche des comptes de dépôt	
-			TabSoc v$critere = new TabSoc();	
-			
-			// Recherche des comptes en BD 			
-			try {
-				v$Socs = RefSvcoDeleguate.getSvcoSoc().rechercherTout(v$critere);
-			} 
-			catch (Exception e) {
-				getLogger().error(e.getMessage(), e);
-				e.printStackTrace();
-			} 
-			
-			v$Socs = (v$Socs != null)? v$Socs : new ArrayList<TabSoc>();
-			
-			// Création de la liste des élements pour le comboBox
-			for(TabSoc v$Soc: v$Socs){
-				SelectItem v$item = new SelectItem(v$Soc.getCodSoc(),v$Soc.getCodSoc());
-				listeSoc.add(v$item);
-				mapSoc.put(v$Soc.getCodSoc(), v$Soc);
-			}
+	public Map<String, Object> getListeTitre() {
+		if(listeTitre == null){
+			listeTitre = SysGehoToolBox.getComboData(EnuTitre.getMaps());
+			listeTitre.put("", "");
 		}
-		return listeSoc;
-	}
-	
-	public void updateLibSoc(ActionEvent evt){
-		getEntiteCourante().setLibSoc(mapSoc.get(getEntiteCourante().getCodSoc()).getLibSoc());
+		return listeTitre;
 	}
 	
 	public List<SelectItem> getListeAss() {
@@ -155,16 +121,11 @@ public class PatVue extends SysGehoVue<TabPat>{
 			
 			// Création de la liste des élements pour le comboBox
 			for(TabAss v$Ass: v$Asss){
-				SelectItem v$item = new SelectItem(v$Ass.getCodAss(),v$Ass.getCodAss());
+				SelectItem v$item = new SelectItem(v$Ass.getCodAss(),v$Ass.getLibAss());
 				listeAss.add(v$item);
-				mapAss.put(v$Ass.getCodAss(), v$Ass);
 			}
 		}
 		return listeAss;
-	}
-	
-	public void updateLibAss(ActionEvent evt){
-		getEntiteCourante().setLibAss(mapAss.get(getEntiteCourante().getCodAss()).getLibAss());
 	}
 
 }

@@ -1,11 +1,8 @@
 package com.bondeko.sysgeho.ui.imp.vue;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
 import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabSvc;
@@ -23,10 +20,6 @@ public class RdvVue extends SysGehoVue<TabRdv>{
 	private List<SelectItem> listeSvc;
 	
 	private List<SelectItem> listeTypRdv;
-	
-	private Map<String, TabSvc> mapSvc = new HashMap<String, TabSvc>();
-	
-	private Map<String, TabTypRdv> mapTypRdv = new HashMap<String, TabTypRdv>();
 	
 	public RdvVue(){
 		super();
@@ -104,17 +97,13 @@ public class RdvVue extends SysGehoVue<TabRdv>{
 			
 			// Création de la liste des élements pour le comboBox
 			for(TabSvc v$Svc: v$Svcs){
-				SelectItem v$item = new SelectItem(v$Svc.getCodSvc(),v$Svc.getCodSvc());
+				SelectItem v$item = new SelectItem(v$Svc.getCodSvc(),v$Svc.getLibSvc());
 				listeSvc.add(v$item);
-				mapSvc.put(v$Svc.getCodSvc(), v$Svc);
 			}
 		}
 		return listeSvc;
 	}
 	
-	public void updateLibSvc(ActionEvent evt){
-		getEntiteCourante().setLibSvc(mapSvc.get(getEntiteCourante().getCodSvc()).getLibSvc());
-	}
 	
 	public List<SelectItem> getListeTypRdv() {
 
@@ -140,16 +129,11 @@ public class RdvVue extends SysGehoVue<TabRdv>{
 			
 			// Création de la liste des élements pour le comboBox
 			for(TabTypRdv v$TypRdv: v$TypRdvs){
-				SelectItem v$item = new SelectItem(v$TypRdv.getCodTypRdv(),v$TypRdv.getCodTypRdv());
+				SelectItem v$item = new SelectItem(v$TypRdv.getCodTypRdv(),v$TypRdv.getLibTypRdv());
 				listeTypRdv.add(v$item);
-				mapTypRdv.put(v$TypRdv.getCodTypRdv(), v$TypRdv);
 			}
 		}
 		return listeTypRdv;
-	}
-	
-	public void updateLibTypRdv(ActionEvent evt){
-		getEntiteCourante().setLibTypRdv(mapTypRdv.get(getEntiteCourante().getCodTypRdv()).getLibTypRdv());
 	}
 
 }

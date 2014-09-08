@@ -1,11 +1,8 @@
 package com.bondeko.sysgeho.ui.ref.vue;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
@@ -19,7 +16,6 @@ import com.bondeko.sysgeho.ui.ref.util.RefSvcoDeleguate;
 public class CatExamVue extends SysGehoVue<TabCatExam>{
 	
 	private List<SelectItem> listeSpec;
-	private Map<String, TabSpec> mapSpec = new HashMap<String, TabSpec>();
 	
 	public CatExamVue(){
 		super();
@@ -97,16 +93,11 @@ public class CatExamVue extends SysGehoVue<TabCatExam>{
 			
 			// Création de la liste des élements pour le comboBox
 			for(TabSpec v$Spec: v$Specs){
-				SelectItem v$item = new SelectItem(v$Spec.getCodSpec(),v$Spec.getCodSpec());
+				SelectItem v$item = new SelectItem(v$Spec.getCodSpec(),v$Spec.getLibSpec());
 				listeSpec.add(v$item);
-				mapSpec.put(v$Spec.getCodSpec(), v$Spec);
 			}
 		}
 		return listeSpec;
 	}
 	
-	public void updateLibSpec(ActionEvent evt){
-		getEntiteCourante().setLibSpec(mapSpec.get(getEntiteCourante().getCodSpec()).getLibSpec());
-	}
-
 }
