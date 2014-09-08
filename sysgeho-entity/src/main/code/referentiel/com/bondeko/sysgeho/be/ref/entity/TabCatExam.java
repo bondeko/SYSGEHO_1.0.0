@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.bondeko.sysgeho.be.core.base.SysGehoBaseEntity;
@@ -35,11 +37,9 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "LIB_CAT_EXAM")
 	private String libCatExam;
 	
-	@Column(name = "COD_SPEC")
-	private String codSpec;
-	
-	@Column(name = "LIB_SPEC")
-	private String libSpec;
+	@ManyToOne
+	@JoinColumn(name = "COD_SPEC")
+	private TabSpec tabSpec;
 	
 	public String getCodCatExam() {
 		return codCatExam;
@@ -57,24 +57,6 @@ private static final long serialVersionUID = 1L;
 		this.libCatExam = libCatExam;
 	}
 
-	
-	
-	public String getLibSpec() {
-		return libSpec;
-	}
-
-	public void setLibSpec(String libSpec) {
-		this.libSpec = libSpec;
-	}
-	
-	public String getCodSpec() {
-		return codSpec;
-	}
-
-	public void setCodSpec(String codSpec) {
-		this.codSpec = codSpec;
-	}
-
 	@Override
 	public Serializable getId() {
 		return getCodCatExam();
@@ -88,10 +70,23 @@ private static final long serialVersionUID = 1L;
 
 	@Override
 	public void validateData() {
+		
+		tabSpec = (tabSpec != null && 
+				(tabSpec.getCodSpec() == null || tabSpec.getCodSpec().trim().isEmpty()) 
+				? null : tabSpec);
 	}
 
 	@Override
 	public void initData() {
+		tabSpec = (tabSpec == null ? new TabSpec() : tabSpec);
+	}
+
+	public void setTabSpec(TabSpec tabSpec) {
+		this.tabSpec = tabSpec;
+	}
+
+	public TabSpec getTabSpec() {
+		return tabSpec;
 	}
 
 }

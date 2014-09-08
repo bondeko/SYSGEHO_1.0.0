@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.bondeko.sysgeho.be.core.base.SysGehoBaseEntity;
@@ -36,15 +38,9 @@ public class TabSvc extends SysGehoBaseEntity implements Serializable{
 	@Column(name = "LIB_DESC")
 	private String libDesc;
 	
-	@Column(name = "COD_SVC_PAR")
-	private String codSvcPar;
-	
-	@Column(name = "LIB_SVC_PAR")
-	private String libSvcPar;
-	
-//	@ManyToOne
-//	@JoinColumn(name = "COD_STR_PAR")
-//	private TabSvc tabSvcPar;
+	@ManyToOne
+	@JoinColumn(name = "COD_SVC_PAR")
+	private TabSvc tabSvcPar;
 
 	@Override
 	public String getEntityCode() {
@@ -65,13 +61,14 @@ public class TabSvc extends SysGehoBaseEntity implements Serializable{
 	@Override
 	public void validateData() {
 		
-//		tabSvcPar = (tabSvcPar != null && (tabSvcPar.getCodSvc() == null || tabSvcPar.getCodSvc().trim().isEmpty()) 
-//				? null : tabSvcPar);
+		tabSvcPar = (tabSvcPar != null && 
+				(tabSvcPar.getCodSvc() == null || tabSvcPar.getCodSvc().trim().isEmpty()) 
+				? null : tabSvcPar);
 	}
 
 	@Override
 	public void initData() {
-//		tabSvcPar = (tabSvcPar == null ? new TabSvc() : tabSvcPar);
+		tabSvcPar = (tabSvcPar == null ? new TabSvc() : tabSvcPar);
 	}
 
 	public void setLibDesc(String libDesc) {
@@ -98,29 +95,13 @@ public class TabSvc extends SysGehoBaseEntity implements Serializable{
 		return libSvc;
 	}
 
-	public void setCodSvcPar(String codSvcPar) {
-		this.codSvcPar = codSvcPar;
+	public void setTabSvcPar(TabSvc tabSvcPar) {
+		this.tabSvcPar = tabSvcPar;
 	}
 
-	public String getCodSvcPar() {
-		return codSvcPar;
+	public TabSvc getTabSvcPar() {
+		return tabSvcPar;
 	}
-
-	public void setLibSvcPar(String libSvcPar) {
-		this.libSvcPar = libSvcPar;
-	}
-
-	public String getLibSvcPar() {
-		return libSvcPar;
-	}
-
-//	public void setTabSvcPar(TabSvc tabSvcPar) {
-//		this.tabSvcPar = tabSvcPar;
-//	}
-//
-//	public TabSvc getTabSvcPar() {
-//		return tabSvcPar;
-//	}
 
 
 }

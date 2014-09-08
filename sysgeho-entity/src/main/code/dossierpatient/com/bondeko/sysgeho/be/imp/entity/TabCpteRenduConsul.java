@@ -1,6 +1,7 @@
 package com.bondeko.sysgeho.be.imp.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -68,6 +69,9 @@ private static final long serialVersionUID = 1L;
 	
 	@Column(name = "LIB_CONCL")
 	private String libConcl;
+	
+	@Column(name = "BOO_VAL")
+	private BigDecimal booVal;
 	
 	@Column(name = "DAT")
 	private String dat;
@@ -209,6 +213,14 @@ private static final long serialVersionUID = 1L;
 		tabConsul = (tabConsul != null && 
 				(tabConsul.getCodConsul() == null || tabConsul.getCodConsul().trim().isEmpty())
 				? null : tabConsul);
+	}
+
+	public void setBooVal(BigDecimal booVal) {
+		this.booVal = booVal;
+	}
+
+	public BigDecimal getBooVal() {
+		return booVal;
 	}
 	
 }

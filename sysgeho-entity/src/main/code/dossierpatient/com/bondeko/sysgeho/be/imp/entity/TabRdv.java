@@ -12,9 +12,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabSvc;
 import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr;
 import com.bondeko.sysgeho.be.core.base.DateTools;
 import com.bondeko.sysgeho.be.core.base.SysGehoBaseEntity;
+import com.bondeko.sysgeho.be.ref.entity.TabTypRdv;
 import com.bondeko.sysgeho.be.util.InfoUser;
 
 @Entity
@@ -49,18 +51,14 @@ public class TabRdv extends SysGehoBaseEntity implements Serializable{
 	@JoinColumn(name = "COD_USR")
 	private TabUsr tabUsr;
 	
-	@Column(name = "COD_TYP_RDV")
-	private String codTypRdv;
-	
-	@Column(name = "LIB_TYP_RDV")
-	private String libTypRdv;
+	@ManyToOne
+	@JoinColumn(name = "COD_TYP_RDV")
+	private TabTypRdv tabTypRdv;
 	
 	//Service d'admission
-	@Column(name = "COD_SVC")
-	private String codSvc;
-	
-	@Column(name = "LIB_SVC")
-	private String libSvc;
+	@ManyToOne
+	@JoinColumn(name = "COD_SVC")
+	private TabSvc tabSvc;
 	
 	//Date de demande
 	@Column(name = "DAT_DEM")
@@ -122,23 +120,6 @@ public class TabRdv extends SysGehoBaseEntity implements Serializable{
 
 	public void setTabUsr(TabUsr tabUsr) {
 		this.tabUsr = tabUsr;
-	}
-
-
-	public String getCodSvc() {
-		return codSvc;
-	}
-
-	public void setCodSvc(String codSvc) {
-		this.codSvc = codSvc;
-	}
-
-	public String getLibSvc() {
-		return libSvc;
-	}
-
-	public void setLibSvc(String libSvc) {
-		this.libSvc = libSvc;
 	}
 
 	public String getDatDem() {
@@ -226,6 +207,8 @@ public class TabRdv extends SysGehoBaseEntity implements Serializable{
 	public void initData() {
 		tabPat = (tabPat == null ? new TabPat() : tabPat);
 		tabUsr = (tabUsr == null ? new TabUsr() : tabUsr);
+		tabSvc = (tabSvc == null ? new TabSvc() : tabSvc);
+		tabTypRdv = (tabTypRdv == null ? new TabTypRdv() : tabTypRdv);
 
 	}
 	
@@ -238,40 +221,46 @@ public class TabRdv extends SysGehoBaseEntity implements Serializable{
 		tabUsr = (tabUsr != null && 
 				(tabUsr.getCodUsr() == null || tabUsr.getCodUsr().trim().isEmpty())
 				? null : tabUsr);
+		
+		tabTypRdv = (tabTypRdv != null && 
+				(tabTypRdv.getCodTypRdv() == null || tabTypRdv.getCodTypRdv().trim().isEmpty())
+				? null : tabTypRdv);
+		
+		tabSvc = (tabSvc != null && 
+				(tabSvc.getCodSvc() == null || tabSvc.getCodSvc().trim().isEmpty())
+				? null : tabSvc);
 	}
 
-	public String getCodTypRdv() {
-		return codTypRdv;
-	}
-
-	public void setCodTypRdv(String codTypRdv) {
-		this.codTypRdv = codTypRdv;
-	}
-
-	public String getLibTypRdv() {
-		return libTypRdv;
-	}
-
-	public void setLibTypRdv(String libTypRdv) {
-		this.libTypRdv = libTypRdv;
-	}
-	
 	public boolean getBEstAnn() {
-		return (booEstAnn != null && booEstAnn.compareTo(BigDecimal.ONE) == 0);
+		return ((booEstAnn == BigDecimal.ONE) ? true : false);
 	}
 
 	public void setBEstAnn(boolean bEstAnn) {
-		this.booEstAnn = (bEstAnn ? BigDecimal.ONE : BigDecimal.ZERO);
+		booEstAnn = (bEstAnn ? BigDecimal.ONE : BigDecimal.ZERO);
 	}
 	
 	public boolean getBEstConf() {
-		return (booEstConf != null && booEstConf.compareTo(BigDecimal.ONE) == 0);
+		return ((booEstConf == BigDecimal.ONE) ? true : false);
 	}
 
 	public void setBEstConf(boolean bEstConf) {
-		this.booEstConf = (bEstConf ? BigDecimal.ONE : BigDecimal.ZERO);
+		booEstConf = (bEstConf ? BigDecimal.ONE : BigDecimal.ZERO);
 	}
 
-	
+	public void setTabTypRdv(TabTypRdv tabTypRdv) {
+		this.tabTypRdv = tabTypRdv;
+	}
 
+	public TabTypRdv getTabTypRdv() {
+		return tabTypRdv;
+	}
+
+	public void setTabSvc(TabSvc tabSvc) {
+		this.tabSvc = tabSvc;
+	}
+
+	public TabSvc getTabSvc() {
+		return tabSvc;
+	}
+	
 }

@@ -8,11 +8,17 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.bondeko.sysgeho.be.core.base.DateTools;
 import com.bondeko.sysgeho.be.core.base.SysGehoBaseEntity;
 import com.bondeko.sysgeho.be.core.enums.EnuStatutMat;
+import com.bondeko.sysgeho.be.core.enums.EnuTitre;
+import com.bondeko.sysgeho.be.ref.entity.TabAss;
+import com.bondeko.sysgeho.be.ref.entity.TabSoc;
+import com.bondeko.sysgeho.be.ref.entity.TabSpec;
 import com.bondeko.sysgeho.be.util.InfoUser;
 
 @Entity
@@ -69,17 +75,14 @@ public class TabPat extends SysGehoBaseEntity implements Serializable{
 	@Column(name = "LIB_NUM_TEL")
 	private String libNumTel;
 	
+	@Column(name = "LIB_NUM_CNI")
+	private String libNumCni;
+	
 	@Column(name = "LIB_PROF")
 	private String libProf;
 	
 	@Column(name = "LIB_FON")
 	private String libFon;
-	
-	@Column(name = "COD_SOC")
-	private String codSoc;
-	
-	@Column(name = "LIB_SOC")
-	private String libSoc;
 	
 	@Column(name = "BOO_EST_ASS")
 	private BigDecimal booEstAss; 
@@ -93,11 +96,13 @@ public class TabPat extends SysGehoBaseEntity implements Serializable{
 	@Column(name = "LIB_NUM_TEL_PER_CON")
 	private String libNumTelPerCon;
 	
-	@Column(name = "COD_ASS")
-	private String codAss;
+	@ManyToOne
+	@JoinColumn(name = "COD_ASS")
+	private TabAss tabAss;
 	
-	@Column(name = "LIB_Ass")
-	private String libAss;
+	@ManyToOne
+	@JoinColumn(name = "COD_SOC")
+	private TabSoc tabSoc;
 	
 	@Column(name = "DAT_ENREG")
 	private String datEnreg;
@@ -335,48 +340,56 @@ public class TabPat extends SysGehoBaseEntity implements Serializable{
 
 	@Override
 	public void validateData() {
+		
+		tabAss = (tabAss != null && 
+				(tabAss.getCodAss() == null || tabAss.getCodAss().trim().isEmpty()) 
+				? null : tabAss);
+		
+		tabSoc = (tabSoc != null && 
+				(tabSoc.getCodSoc() == null || tabSoc.getCodSoc().trim().isEmpty()) 
+				? null : tabSoc);
 	}
 
 	@Override
 	public void initData() {
-		
+		tabAss = (tabAss == null ? new TabAss() : tabAss);
+		tabSoc = (tabSoc == null ? new TabSoc() : tabSoc);
+		tabAss.initData();
+		tabSoc.initData();
 	}
 	
-	public String getCodSoc() {
-		return codSoc;
+	public TabAss getTabAss() {
+		return tabAss;
 	}
 
-	public void setCodSoc(String codSoc) {
-		this.codSoc = codSoc;
+	public void setTabAss(TabAss tabAss) {
+		this.tabAss = tabAss;
 	}
 
-	public String getLibSoc() {
-		return libSoc;
+	public TabSoc getTabSoc() {
+		return tabSoc;
 	}
 
-	public void setLibSoc(String libSoc) {
-		this.libSoc = libSoc;
+	public void setTabSoc(TabSoc tabSoc) {
+		this.tabSoc = tabSoc;
 	}
 
-	public String getCodAss() {
-		return codAss;
-	}
-
-	public void setCodAss(String codAss) {
-		this.codAss = codAss;
-	}
-
-	public String getLibAss() {
-		return libAss;
-	}
-
-	public void setLibAss(String libAss) {
-		this.libAss = libAss;
-	}
-	
 	public String getLEnuStaMat() {
 		EnuStatutMat v$enum = EnuStatutMat.getByValue(this.enuStaMat); 
 		return (v$enum == null)? null: v$enum.getLibelle();
+	}
+	
+	public String getLEnuTitre() {
+		EnuTitre v$enum = EnuTitre.getByValue(this.libTit); 
+		return (v$enum == null)? null: v$enum.getLibelle();
+	}
+
+	public void setLibNumCni(String libNumCni) {
+		this.libNumCni = libNumCni;
+	}
+
+	public String getLibNumCni() {
+		return libNumCni;
 	}
 
 }

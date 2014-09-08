@@ -5,8 +5,9 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 import com.bondeko.sysgeho.be.core.base.SysGehoBaseEntity;
 import com.bondeko.sysgeho.be.util.InfoUser;
@@ -39,14 +40,9 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "LIB_DESC")
 	private String libDesc;
 	
-	@Column(name = "COD_CAT_EXAM")
-	private String codCatExam;
-	
-	@Column(name = "LIB_CAT_EXAM")
-	private String libCatExam;
-	
-	@Transient
-	private String libSpec;
+	@ManyToOne
+	@JoinColumn(name = "COD_CAT_EXAM")
+	private TabCatExam tabCatExam;
 	
 	public String getCodTypExam() {
 		return codTypExam;
@@ -78,10 +74,15 @@ private static final long serialVersionUID = 1L;
 
 	@Override
 	public void validateData() {
+		
+		tabCatExam = (tabCatExam != null && 
+				(tabCatExam.getCodCatExam() == null || tabCatExam.getCodCatExam().trim().isEmpty()) 
+				? null : tabCatExam);
 	}
 
 	@Override
 	public void initData() {
+		tabCatExam = (tabCatExam == null ? new TabCatExam() : tabCatExam);
 	}
 
 	public void setLibDesc(String libDesc) {
@@ -92,28 +93,12 @@ private static final long serialVersionUID = 1L;
 		return libDesc;
 	}
 
-	public String getCodCatExam() {
-		return codCatExam;
+	public void setTabCatExam(TabCatExam tabCatExam) {
+		this.tabCatExam = tabCatExam;
 	}
 
-	public void setCodCatExam(String codCatExam) {
-		this.codCatExam = codCatExam;
-	}
-
-	public String getLibCatExam() {
-		return libCatExam;
-	}
-
-	public void setLibCatExam(String libCatExam) {
-		this.libCatExam = libCatExam;
-	}
-
-	public void setLibSpec(String libSpec) {
-		this.libSpec = libSpec;
-	}
-
-	public String getLibSpec() {
-		return libSpec;
+	public TabCatExam getTabCatExam() {
+		return tabCatExam;
 	}
 
 }

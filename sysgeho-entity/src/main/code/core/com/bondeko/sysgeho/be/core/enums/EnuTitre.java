@@ -1,36 +1,28 @@
 package com.bondeko.sysgeho.be.core.enums;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public enum EnuEtat {
-
-
-	CREE("2000", "Crée"),
+public enum EnuTitre {
 	
-	VALIDE("2002", "Validé"),
+	ENF("2000", "Enf."),
 	
-	DEMARRE("2003", "Démarré"),
+	MR("2001", "Mr."),
 	
-	CLOTURE("2004", "Clôtuté"),
+	MME("2002", "Mme."),
 	
-	LIVRE("2005", "Livré"),
+	MLLE("2003", "Mlle."),
 	
-	RECEPTIONNE("2006", "Réceptionné"),
+	PROF("2004", "Prof."),
 	
-	ANNULER("2007", "Annulé"),
+	DR("2005", "Dr."),
 	
-	CONFIRME("2008", "Confirmé"),
+	ING("2006", "Ing."),
 	
-	EN_COURS("2009", "En cours"),
+	MTRE("2007", "Mtre.");
 	
-	TERMINE("2010", "Terminé"),
-
-	SUPP("2001", "Supprimé");
-
 	/**
 	 * Valeur de l'énumération
 	 */
@@ -45,7 +37,7 @@ public enum EnuEtat {
 	 * @param value : la valeur
 	 * @param libelle : le libellé
 	 */
-	private EnuEtat(String value, String libelle) {
+	private EnuTitre(String value, String libelle) {
 		this.value = value;
 		this.libelle = libelle;
 
@@ -69,8 +61,8 @@ public enum EnuEtat {
 	 * @param enumValue
 	 * @return
 	 */
-	public static EnuEtat getByValue(String enumValue) {
-		for (EnuEtat enm : EnuEtat.class
+	public static EnuTitre getByValue(String enumValue) {
+		for (EnuTitre enm : EnuTitre.class
 				.getEnumConstants()) {
 			if (enm.getValue().equalsIgnoreCase(enumValue))
 				return enm;
@@ -78,7 +70,7 @@ public enum EnuEtat {
 		return null;
 	}
 
-	private static List<EnuEtat> myList;
+	private static List<EnuTitre> myList;
 	private static Map<String, String> myMap;
 
 	/***
@@ -90,19 +82,19 @@ public enum EnuEtat {
 		return myMap;
 	}
 
-	public static List<EnuEtat> getListe() {
+	public static List<EnuTitre> getListe() {
 		return myList;
 	}
 
 	static {
-		myList = new ArrayList<EnuEtat>();
+		myList = new ArrayList<EnuTitre>();
 		myMap = new TreeMap<String, String>();
 		myMap.put("", "");
-		for (EnuEtat enm : EnuEtat.class
+		for (EnuTitre enm : EnuTitre.class
 				.getEnumConstants()) {
 			myList.add(enm);
 			myMap.put(enm.getValue(), enm.getLibelle());
 		}
 	}
-	
+
 }

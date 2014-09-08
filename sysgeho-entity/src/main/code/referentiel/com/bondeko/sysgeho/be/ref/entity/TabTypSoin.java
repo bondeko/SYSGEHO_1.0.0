@@ -32,6 +32,12 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "COD_TYP_SOIN")
 	private String codTypSoin;
 
+	@Column(name = "LIB_TYP_SOIN")
+	private String libTypSoin;
+	
+	@Column(name = "LIB_DESC")
+	private String libDesc;
+	
 	public String getCodTypSoin() {
 		return codTypSoin;
 	}
@@ -48,12 +54,6 @@ private static final long serialVersionUID = 1L;
 		this.libTypSoin = libTypSoin;
 	}
 
-	@Column(name = "LIB_TYP_SOIN")
-	private String libTypSoin;
-	
-	@Column(name = "LIB_DESC")
-	private String libDesc;
-	
 
 	public String getLibDesc() {
 		return libDesc;
