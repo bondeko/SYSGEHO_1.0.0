@@ -76,12 +76,13 @@ public class SisvPat extends BaseSisv<TabPat, String> implements ISisvPat{
 	
 	public <X extends BaseEntity> X creer(X p$entite) throws BaseException  {
 		TabPat patCree = (TabPat) p$entite; 
+		((TabPat)p$entite).setCodPat(genererCodePatient(patCree));
 		//fais un teste si l'entité existe déjà
 		X entRech = getBaseDao().findById(p$entite, p$entite.getId());
 		if(entRech != null){
 			throw new BaseException("Erreur : Cette entité existe déjà");
 		}
-		((TabPat)p$entite).setCodPat(genererCodePatient(patCree));
+		p$entite.validateData();
 		return getBaseDao().save(p$entite);
 	}
 	

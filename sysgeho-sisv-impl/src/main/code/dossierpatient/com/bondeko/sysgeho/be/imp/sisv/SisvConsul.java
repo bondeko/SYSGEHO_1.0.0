@@ -77,14 +77,14 @@ public class SisvConsul extends BaseSisv<TabConsul, String> implements ISisvCons
 	
 	public <X extends BaseEntity> X creer(X p$entite) throws BaseException  {
 		TabConsul conCree = (TabConsul) p$entite; 
+		conCree = initialiserDonnees(conCree);
+		conCree.setCodConsul(genererCodeConsul(conCree));
 		//fais un teste si l'entité existe déjà
-		X entRech = getBaseDao().findById(p$entite, p$entite.getId());
+		X entRech = getBaseDao().findById(p$entite, conCree.getId());
 		if(entRech != null){
 			throw new BaseException("Erreur : Cette entité existe déjà");
 		}
-		conCree = initialiserDonnees(conCree);
-		conCree.setCodConsul(genererCodeConsul(conCree));
-		
+		conCree.validateData();
 		return (X) getBaseDao().save(conCree);
 	}
 	

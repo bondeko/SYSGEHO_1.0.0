@@ -18,33 +18,38 @@ import com.bondeko.sysgeho.be.core.exception.BaseException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoPersistenceException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.BaseSisv;
-import com.bondeko.sysgeho.be.imp.dao.IDaoRdv;
-import com.bondeko.sysgeho.be.imp.entity.TabRdv;
+import com.bondeko.sysgeho.be.imp.dao.IDaoCpteRenduExam;
+import com.bondeko.sysgeho.be.imp.dao.IDaoExam;
+import com.bondeko.sysgeho.be.imp.entity.TabCpteRenduExam;
+import com.bondeko.sysgeho.be.imp.entity.TabExam;
 
 @Stateless
-public class SisvRdv extends BaseSisv<TabRdv, String> implements ISisvRdv{
+public class SisvCpteRenduExam extends BaseSisv<TabCpteRenduExam, String> implements ISisvCpteRenduExam{
 	
-	private static BaseLogger logger = BaseLogger.getLogger(SisvRdv.class);
+	private static BaseLogger logger = BaseLogger.getLogger(SisvCpteRenduExam.class);
 
 	@Override
 	public BaseLogger getLogger() {
 		return logger;
 	} 
 	@EJB
-	IDaoRdv daoRdv; 
+	IDaoCpteRenduExam daoCpteRenduExam; 
+	
+	@EJB
+	IDaoExam daoExam; 
 	
 	@EJB
 	IDaoIncCod daoIncCod;
 
 
 	@Override
-	public IBaseDao<TabRdv, String> getBaseDao() {
-		return daoRdv;
+	public IBaseDao<TabCpteRenduExam, String> getBaseDao() {
+		return daoCpteRenduExam;
 	}
 
 	public <X extends BaseEntity> X rechercher(X entity, Serializable id) throws SysGehoSystemException {
 		try {
-			return daoRdv.findById(entity, id);
+			return daoCpteRenduExam.findById(entity, id);
 		} catch (SysGehoPersistenceException e) {
 			e.printStackTrace();
 			SysGehoSystemException sbr = new SysGehoSystemException(e);
@@ -55,7 +60,7 @@ public class SisvRdv extends BaseSisv<TabRdv, String> implements ISisvRdv{
 	public <X extends BaseEntity> List<X> rechercherTout(X entity) throws SysGehoSystemException {
 			
 		try {
-			return daoRdv.findAll(entity);
+			return daoCpteRenduExam.findAll(entity);
 		} catch (SysGehoPersistenceException e) {
 			e.printStackTrace();
 			SysGehoSystemException sbr = new SysGehoSystemException(e);
@@ -67,7 +72,7 @@ public class SisvRdv extends BaseSisv<TabRdv, String> implements ISisvRdv{
 	public <X extends BaseEntity> List<X> rechercherParCritere(X entity)
 			throws SysGehoSystemException {
 		try {
-			return daoRdv.findByExample(entity);
+			return daoCpteRenduExam.findByExample(entity);
 		} catch (SysGehoPersistenceException e) {
 			e.printStackTrace();
 			SysGehoSystemException sbr = new SysGehoSystemException(e);
@@ -76,22 +81,30 @@ public class SisvRdv extends BaseSisv<TabRdv, String> implements ISisvRdv{
 	}
 	
 	public <X extends BaseEntity> X creer(X p$entite) throws BaseException  {
-		TabRdv rdvCree = (TabRdv) p$entite; 
-		rdvCree = initialiserDonnees(rdvCree);
-		rdvCree.setCodRdv(genererCodeRdvient(rdvCree));
+		TabCpteRenduExam cpteRenduCree = (TabCpteRenduExam) p$entite; 
+		//Teste si la examtation n'a pas deja un compte rendu
+		if(cpteRenduCree.getTabExam().getBooCpteRendu().equals(BigDecimal.ONE))
+			throw new BaseException("Erreur : Il existe déjà un compte rendu pour l'examen "+ cpteRenduCree.getTabExam().getCodExam());
+		cpteRenduCree = initialiserDonnees(cpteRenduCree);
+		//genere le code du compte rendu
+		((TabCpteRenduExam)p$entite).setCodCpteRenduExam(genererCodeCpteRenduExamient(cpteRenduCree));
 		//fais un teste si l'entité existe déjà
-		X entRech = getBaseDao().findById(p$entite, rdvCree.getId());
+		X entRech = getBaseDao().findById(p$entite, p$entite.getId());
 		if(entRech != null){
 			throw new BaseException("Erreur : Cette entité existe déjà");
 		}
-		rdvCree.validateData();
-		return (X) getBaseDao().save(rdvCree);
+		//Met à jour la examtation Boo_Cpte_Rendu = 1
+		TabExam exam = cpteRenduCree.getTabExam();
+		exam.setBooCpteRendu(BigDecimal.ONE);
+		daoExam.update(exam);
+		
+		return getBaseDao().save(p$entite);
 	}
 	
-	private String genererCodeRdvient(TabRdv tabRdv) throws SysGehoSystemException{
+	private String genererCodeCpteRenduExamient(TabCpteRenduExam tabCpteRenduExam) throws SysGehoSystemException{
 		BigDecimal v$inc;
 		try {
-			v$inc = daoIncCod.findNextIncCod(tabRdv).getValIncCod();
+			v$inc = daoIncCod.findNextIncCod(tabCpteRenduExam).getValIncCod();
 		} catch (SysGehoPersistenceException e) {
 			e.printStackTrace();
 			throw new SysGehoSystemException(e.getMessage(), e);
@@ -102,38 +115,23 @@ public class SisvRdv extends BaseSisv<TabRdv, String> implements ISisvRdv{
 		return numero;
 	}
 	
-	private TabRdv initialiserDonnees(TabRdv rdv){
-		rdv.setBooEstAnn(BigDecimal.ZERO);
-		rdv.setBooEstConf(BigDecimal.ZERO);
-		return rdv;
+	private TabCpteRenduExam initialiserDonnees(TabCpteRenduExam cpteRendu){
+		cpteRendu.setBooVal(BigDecimal.ZERO);
+		return cpteRendu;
 	}
 	
 	@Override
-	public TabRdv annuler(TabRdv $pRdv) throws SysGehoSystemException  {
+	public TabCpteRenduExam valider(TabCpteRenduExam $pCpteRduExam) throws SysGehoSystemException  {
 		try {
-			$pRdv.setBooEstAnn(BigDecimal.ONE);
-			$pRdv.setEtatEnt(EnuEtat.ANNULER.getValue());
-			return getBaseDao().update($pRdv);
+			$pCpteRduExam.setBooVal(BigDecimal.ONE);
+			$pCpteRduExam.setEtatEnt(EnuEtat.VALIDE.getValue());
+			return getBaseDao().update($pCpteRduExam);
 		} catch (SysGehoPersistenceException e) {
-			logger.debug("Erreur d'annulation du RDV");
+			logger.debug("Erreur de validation de l'exam");
 			e.printStackTrace();
 			SysGehoSystemException sbr = new SysGehoSystemException(e);
 			throw sbr;
 		}
 	}
 	
-	@Override
-	public TabRdv confirmer(TabRdv $pRdv) throws SysGehoSystemException  {
-		try {
-			$pRdv.setBooEstConf(BigDecimal.ONE);
-			$pRdv.setEtatEnt(EnuEtat.CONFIRME.getValue());
-			return getBaseDao().update($pRdv);
-		} catch (SysGehoPersistenceException e) {
-			logger.debug("Erreur de confirmation du RDV");
-			e.printStackTrace();
-			SysGehoSystemException sbr = new SysGehoSystemException(e);
-			throw sbr;
-		}
-	}
-
 }

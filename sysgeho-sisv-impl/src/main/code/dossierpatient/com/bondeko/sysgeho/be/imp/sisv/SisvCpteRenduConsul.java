@@ -13,6 +13,7 @@ import com.bondeko.sysgeho.be.core.base.BaseLogger;
 import com.bondeko.sysgeho.be.core.base.DateTools;
 import com.bondeko.sysgeho.be.core.dao.base.IBaseDao;
 import com.bondeko.sysgeho.be.core.dao.base.IDaoIncCod;
+import com.bondeko.sysgeho.be.core.enums.EnuEtat;
 import com.bondeko.sysgeho.be.core.exception.BaseException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoPersistenceException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
@@ -84,6 +85,9 @@ public class SisvCpteRenduConsul extends BaseSisv<TabCpteRenduConsul, String> im
 		//Teste si la consultation n'a pas deja un compte rendu
 		if(cpteRenduCree.getTabConsul().getBooCpteRendu().equals(BigDecimal.ONE))
 			throw new BaseException("Erreur : Il existe déjà un compte rendu pour la consultation "+ cpteRenduCree.getTabConsul().getCodConsul());
+		cpteRenduCree = initialiserDonnees(cpteRenduCree);
+		//genere le code du compte rendu
+		((TabCpteRenduConsul)p$entite).setCodCpteRenduConsul(genererCodeCpteRenduConsulient(cpteRenduCree));
 		//fais un teste si l'entité existe déjà
 		X entRech = getBaseDao().findById(p$entite, p$entite.getId());
 		if(entRech != null){
@@ -94,7 +98,6 @@ public class SisvCpteRenduConsul extends BaseSisv<TabCpteRenduConsul, String> im
 		consul.setBooCpteRendu(BigDecimal.ONE);
 		daoConsul.update(consul);
 		
-		((TabCpteRenduConsul)p$entite).setCodCpteRenduConsul(genererCodeCpteRenduConsulient(cpteRenduCree));
 		return getBaseDao().save(p$entite);
 	}
 	
@@ -110,6 +113,25 @@ public class SisvCpteRenduConsul extends BaseSisv<TabCpteRenduConsul, String> im
 		
 		 numero = DateTools.getYear(DateTools.formatDate(new Date()))+ numero;
 		return numero;
+	}
+	
+	private TabCpteRenduConsul initialiserDonnees(TabCpteRenduConsul cpteRendu){
+		cpteRendu.setBooVal(BigDecimal.ZERO);
+		return cpteRendu;
+	}
+	
+	@Override
+	public TabCpteRenduConsul valider(TabCpteRenduConsul $pCpteRduConsul) throws SysGehoSystemException  {
+		try {
+			$pCpteRduConsul.setBooVal(BigDecimal.ONE);
+			$pCpteRduConsul.setEtatEnt(EnuEtat.VALIDE.getValue());
+			return getBaseDao().update($pCpteRduConsul);
+		} catch (SysGehoPersistenceException e) {
+			logger.debug("Erreur de validation de la consultation");
+			e.printStackTrace();
+			SysGehoSystemException sbr = new SysGehoSystemException(e);
+			throw sbr;
+		}
 	}
 	
 }

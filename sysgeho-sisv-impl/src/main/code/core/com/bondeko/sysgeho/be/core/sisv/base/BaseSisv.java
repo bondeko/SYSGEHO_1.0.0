@@ -62,10 +62,12 @@ implements IBaseSisv<T, ID>{
 		if(entRech != null){
 			throw new BaseException("Erreur : Cette entité existe déjà");
 		}
+		p$entite.validateData();
 		return getBaseDao().save(p$entite);
 	}
 
 	public <X extends BaseEntity> X modifier(X p$entite) throws SysGehoPersistenceException {
+		p$entite.validateData();
 		return getBaseDao().update(p$entite);
 	}
 	
