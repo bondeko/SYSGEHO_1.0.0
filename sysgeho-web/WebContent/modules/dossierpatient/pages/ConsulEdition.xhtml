@@ -34,7 +34,7 @@
 								readonly="true" 
 								title="Code" disabled="false">
 								<a4j:support event="onchange" ajaxSingle="true" 
-									reRender="prenom_1,prenom_2,mat_1,mat_2,datnais_1,datnais_2,sexe_1,sexe_2,aff_1,aff_2,soc_1,soc_2,prof_1,prof_2,med_1,med_2,enreg_1,enreg_2"/>
+									reRender="prenom_1,prenom_2,datnais_1,datnais_2,aff_1,aff_2,soc_1,soc_2,med_1,med_2,enreg_1,enreg_2"/>
 							</h:inputText>	
 							<h:inputText id="inpt_libPat" value="#{consulCtrl.defaultVue.entiteCourante.tabPat.libNom}" style="width: 40%" 
 									required="false"
@@ -67,13 +67,6 @@
 								<h:inputText  value="#{consulCtrl.defaultVue.entiteCourante.tabPat.libPre}" style="width: 40%" readonly="true"  title="#{locale.prenom}" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
 							</h:panelGroup>
 							
-							<h:panelGroup id="mat_1">
-								<h:outputText value="Matricule" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>	
-							</h:panelGroup>		
-							<h:panelGroup id="mat_2">								
-								<h:inputText  value="#{consulCtrl.defaultVue.entiteCourante.tabPat.libMat}" style="width: 40%" readonly="true"  title="Matricule" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
-							</h:panelGroup>
-							
 							<h:panelGroup id="datnais_1">
 								<h:outputText value="Date de naissance" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
 							</h:panelGroup>	
@@ -83,49 +76,30 @@
 								</h:inputText>
 							</h:panelGroup>
 							
-							<h:panelGroup id="sexe_1">
-								<h:outputText value="Sexe"  rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
-							</h:panelGroup>	
-							<h:panelGroup id="sexe_2">
-								<h:selectOneRadio  value="#{consulCtrl.defaultVue.entiteCourante.tabPat.libSex}" disabled="true" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}">
-									<f:selectItem itemLabel="M" itemValue="M"  />
-									<f:selectItem itemLabel="F" itemValue="F"/>
-								</h:selectOneRadio>
-							</h:panelGroup>	
+							<h:panelGroup id="enreg_1">
+								<h:outputText value="Date enregistrement" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+							</h:panelGroup>
+							<h:panelGroup id="enreg_2">
+								<h:inputText value="#{consulCtrl.defaultVue.entiteCourante.tabPat.dateEnreg}" readonly="true" style="width: 30%" title="Date enregistrement"  rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}">
+									<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+								</h:inputText>
+							</h:panelGroup>
 							
 						</h:panelGrid>
 							
 						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdLColRightDynamic" cellspacing="10" >
 							
-							<h:panelGroup id="aff_1">
-								<h:outputText value="#{locale.estaffilie} ?" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
-							</h:panelGroup>
-							<h:panelGroup id="aff_2">
-								<h:selectBooleanCheckbox value="#{consulCtrl.defaultVue.entiteCourante.tabPat.BEstAff}"  disabled="true" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}">
-									<a4j:support ajaxSingle="true"  event="onchange" />
-								</h:selectBooleanCheckbox>
-							</h:panelGroup>
-							
 							<h:panelGroup id="soc_1">
 								<h:outputText value="#{locale.societe}" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
 							</h:panelGroup>
 							<h:panelGroup id="soc_2">
-								<h:inputText id="inpt_codSoc" value="#{consulCtrl.defaultVue.entiteCourante.tabPat.codSoc}" style="width: 20%" 
+								<h:inputText id="inpt_codSoc" value="#{consulCtrl.defaultVue.entiteCourante.tabPat.tabSoc.codSoc}" style="width: 20%" 
 									readonly="true" title="Code" disabled="false" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}">
 									<a4j:support event="onchange" ajaxSingle="true" />
 								</h:inputText>	
-								<h:inputText id="inpt_libSoc" value="#{consulCtrl.defaultVue.entiteCourante.tabPat.libSoc}" style="width: 40%" 
+								<h:inputText id="inpt_libSoc" value="#{consulCtrl.defaultVue.entiteCourante.tabPat.tabSoc.libSoc}" style="width: 40%" 
 										readonly="true"  title="#{locale.libelle}" disabled="false" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"> 
 										<a4j:support event="onchange" ajaxSingle="true" />
-								</h:inputText>
-							</h:panelGroup>
-							
-							<h:panelGroup id="prof_1">
-								<h:outputText value="Profession" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
-							</h:panelGroup>
-							<h:panelGroup id="prof_2">
-								<h:inputText id="inpt_prof"  value="#{consulCtrl.defaultVue.entiteCourante.tabPat.libProf}" style="width: 60%" readonly="true" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}">							 	
-									<a4j:support event="onchange"  ajaxSingle="true" />											
 								</h:inputText>
 							</h:panelGroup>
 							
@@ -138,13 +112,13 @@
 								</h:inputText>
 							</h:panelGroup>
 							
-							<h:panelGroup id="enreg_1">
-								<h:outputText value="Date enregistrement" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+							<h:panelGroup id="aff_1">
+								<h:outputText value="#{locale.estaffilie} ?" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
 							</h:panelGroup>
-							<h:panelGroup id="enreg_2">
-								<h:inputText value="#{consulCtrl.defaultVue.entiteCourante.tabPat.dateEnreg}" readonly="true" style="width: 30%" title="Date enregistrement"  rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}">
-									<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
-								</h:inputText>
+							<h:panelGroup id="aff_2">
+								<h:selectBooleanCheckbox value="#{consulCtrl.defaultVue.entiteCourante.tabPat.BEstAff}"  disabled="true" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}">
+									<a4j:support ajaxSingle="true"  event="onchange" />
+								</h:selectBooleanCheckbox>
 							</h:panelGroup>
 							
 						</h:panelGrid>
@@ -208,12 +182,8 @@
 						<h:panelGroup id="ser_2">
 							<h:inputText  value="#{consulCtrl.defaultVue.entiteCourante.tabUsr.tabSvc.libSvc}" style="width: 60%"  readonly="true" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>	
 						</h:panelGroup>	
-							
-         			</h:panelGrid>  
-         				
-         			<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
-         				
-         				<h:panelGroup id="rol_1">
+						
+						<h:panelGroup id="rol_1">
 							<h:outputText value="#{locale.role}" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
 						</h:panelGroup>
 						<h:panelGroup id="rol_2">
@@ -227,6 +197,10 @@
 							<h:inputText  value="#{consulCtrl.defaultVue.entiteCourante.tabUsr.libAdr}" style="width: 60%"  readonly="true" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
 						</h:panelGroup>	
 							
+         			</h:panelGrid>  
+         				
+         			<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
          			</h:panelGrid> 
          				         		         		
          		</h:panelGrid>  
@@ -269,7 +243,7 @@
 							
 							<h:outputText value="Taille"/>
 							<h:inputText id="inpt_tail" value="#{consulCtrl.defaultVue.entiteCourante.valTaille}"  
-								 required="false" style="width: 20%" title="Pou" >
+								 required="false" style="width: 20%" title="Taille" >
 							</h:inputText>
 							
 							
@@ -287,7 +261,7 @@
 							
 							<h:outputText value="Statut"/>
 							<h:inputTextarea id="inpt_stat" value="#{consulCtrl.defaultVue.entiteCourante.libStatut}"  
-								 required="false" style="width: 60%" title="Pou" >
+								 required="false" style="width: 60%" title="Statut" >
 							</h:inputTextarea>
 							
 							<h:outputText value="Montant TTC" />

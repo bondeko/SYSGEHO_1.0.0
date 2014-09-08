@@ -25,10 +25,10 @@
          				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
          				
 							<h:outputText value="Type de rendez-vous" />
-							<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.codTypRdv}"  style="width: 40%"  title="Type de rendez-vous" readonly="true"/>
-							
-							<h:outputText value=""	 />
-							<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.libTypRdv}" style="width: 60%" readonly="true"  rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.libTypRdv}" />
+							<h:panelGroup>
+								<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.tabTypRdv.codTypRdv}"  style="width: 20%"  title="Type de rendez-vous" readonly="true"/>
+								<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.tabTypRdv.libTypRdv}" style="width: 40%" readonly="true"  />
+							</h:panelGroup>
 							
          				</h:panelGrid>  
          				
@@ -50,10 +50,10 @@
          				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
          				
 							<h:outputText value="Service d'admission" />
-							<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.codSvc}" style="width: 40%"  title="Service d'admission" readonly="true"/>
-							
-							<h:outputText value=""	 />
-							<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.libSvc}" style="width: 60%" readonly="true"  rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.libSvc}" />
+							<h:panelGroup>
+								<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.tabSvc.codSvc}" style="width: 20%"  title="Service d'admission" readonly="true"/>
+								<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.tabSvc.libSvc}" style="width: 40%" readonly="true" />
+							</h:panelGroup>
 							
          				</h:panelGrid>  
          				
@@ -74,7 +74,6 @@
         							         		
          				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
 
-							
 							<h:outputText value="Patient" />
 							<h:panelGroup>
 								<h:inputText id="inpt_codPat" value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}" style="width: 20%" 
@@ -90,36 +89,28 @@
 							<h:outputText value="#{locale.prenom}" />											
 							<h:inputText  value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.libPre}" style="width: 40%" readonly="true"  title="#{locale.prenom}"/>
 							
-							<h:outputText value="Matricule" />											
-							<h:inputText  value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.libMat}" style="width: 40%" readonly="true"  title="Matricule"/>
-							
 							<h:outputText value="Date de naissance" />
 							<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.dateNais}" readonly="true" style="width: 30%" title="Date de naissance"  >
 								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
 							</h:inputText>
 							
-							<h:outputText value="Sexe"  />
-							<h:selectOneRadio  value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.libSex}" disabled="true" >
-								<f:selectItem itemLabel="M" itemValue="M"  />
-								<f:selectItem itemLabel="F" itemValue="F"/>
-							</h:selectOneRadio>
+							<h:outputText value="Date enregistrement" />
+							<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.dateEnreg}" readonly="true" style="width: 30%" title="Date enregistrement"  >
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+							</h:inputText>
+							
 							
 						</h:panelGrid>
 							
 						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdLColRightDynamic" cellspacing="10" >
 							
-							<h:outputText value="#{locale.estaffilie} ?" />
-							<h:selectBooleanCheckbox value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.BEstAff}"  disabled="true">
-								<a4j:support ajaxSingle="true"  event="onchange" />
-							</h:selectBooleanCheckbox>
-							
 							<h:outputText value="#{locale.societe}" />
 							<h:panelGroup>
-								<h:inputText id="inpt_codSoc" value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.codSoc}" style="width: 20%" 
+								<h:inputText id="inpt_codSoc" value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.tabSoc.codSoc}" style="width: 20%" 
 									readonly="true" title="Code" disabled="false">
 									<a4j:support event="onchange" ajaxSingle="true" />
 								</h:inputText>	
-								<h:inputText id="inpt_libSoc" value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.libSoc}" style="width: 40%" 
+								<h:inputText id="inpt_libSoc" value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.tabSoc.libSoc}" style="width: 40%" 
 										readonly="true"  title="#{locale.libelle}" disabled="false"> 
 										<a4j:support event="onchange" ajaxSingle="true" />
 								</h:inputText>
@@ -135,10 +126,10 @@
 								<a4j:support event="onchange"  ajaxSingle="true" />											
 							</h:inputText>
 							
-							<h:outputText value="Date enregistrement" />
-							<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.dateEnreg}" readonly="true" style="width: 30%" title="Date enregistrement"  >
-								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
-							</h:inputText>
+							<h:outputText value="#{locale.estaffilie} ?" />
+							<h:selectBooleanCheckbox value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.BEstAff}"  disabled="true">
+								<a4j:support ajaxSingle="true"  event="onchange" />
+							</h:selectBooleanCheckbox>
 							
 						</h:panelGrid>
 					</h:panelGrid>
@@ -170,21 +161,21 @@
 						<h:inputText  value="#{rdvCtrl.defaultVue.entiteCourante.tabUsr.libPre}" style="width: 40%" readonly="true"  title="#{locale.prenom}"/>
 							
 						<h:outputText value="Services" />
-						<h:inputText  value="#{rdvCtrl.defaultVue.entiteCourante.tabUsr.tabSvc.libSvc}" style="width: 60%"  readonly="true" />							 	
+						<h:inputText  value="#{rdvCtrl.defaultVue.entiteCourante.tabUsr.tabSvc.libSvc}" style="width: 60%"  readonly="true" />	
+						
+						<h:outputText value="#{locale.role}" />
+						<h:inputText  value="#{rdvCtrl.defaultVue.entiteCourante.tabUsr.tabRol.libRol}" style="width: 60%"  readonly="true" />
+						
+						<h:outputText value="Adresse" />
+						<h:inputText  value="#{rdvCtrl.defaultVue.entiteCourante.tabUsr.libAdr}" style="width: 60%"  readonly="true" />						 	
 							
          			</h:panelGrid>  
          				
        				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
        				
-       					<h:outputText value="#{locale.role}" />
-						<h:inputText  value="#{rdvCtrl.defaultVue.entiteCourante.tabUsr.tabRol.libRol}" style="width: 60%"  readonly="true" />
-						
-						<h:outputText value="Adresse" />
-						<h:inputText  value="#{rdvCtrl.defaultVue.entiteCourante.tabUsr.libAdr}" style="width: 60%"  readonly="true" />
-					
        				</h:panelGrid> 
          				         		         		
-         			</h:panelGrid>  
+         		 </h:panelGrid>  
          	
 				</fieldset>								
 			</h:panelGroup>
@@ -197,6 +188,9 @@
         							         		
          				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
          				
+         					<h:outputText value="Code du rendez vous" />
+							<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.codRdv}" readonly="true" style="width: 30%" title="Code du rendez vous"  />
+							
          					<h:outputText value="Date de Demande" />
 							<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.dateDem}" readonly="true" style="width: 30%" title="Date de Demande"  >
 								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
@@ -207,15 +201,16 @@
 								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
 							</h:inputText>
 							
-         				</h:panelGrid>  
-         				
-         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
-         				
-         					<h:outputText value="#{locale.numordre}"/>
+							<h:outputText value="#{locale.numordre}"/>
 							<h:inputText id="inpt_num" value="#{rdvCtrl.defaultVue.entiteCourante.valNumOrdre}"  styleClass="money" readonly="true" style="width: 10%" />
 							
 							<h:outputText value="Observations"/>
 							<h:inputTextarea id="inpt_obs" value="#{rdvCtrl.defaultVue.entiteCourante.libObs}"  style="width: 60%" readonly="true" title="Observations" />
+							
+         				</h:panelGrid>  
+         				
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
 							
          				</h:panelGrid> 
          				         		         		

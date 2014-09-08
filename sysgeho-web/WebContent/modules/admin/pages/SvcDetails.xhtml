@@ -32,8 +32,11 @@
 			  				<h:inputText value="#{entiteCourante.libSvc}" style="width: 40%"  readonly="true"  redisplay="true" />
 			  				
 			  				<h:outputText value="Service parent"   />
-			  				<h:inputText  value="#{entiteCourante.libSvcPar}" style="width: 40%"  readonly="true" />
-
+			  				<h:panelGroup>
+			  					<h:inputText  value="#{entiteCourante.tabSvcPar.codSvc}" style="width: 20%"  readonly="true" />
+			  					<h:inputText  value="#{entiteCourante.tabSvcPar.libSvc}" style="width: 40%"  readonly="true" />
+			  				</h:panelGroup>
+			  				
 							<h:outputText value="Description"   />
 			  				<h:inputTextarea value="#{entiteCourante.libDesc}" style="width: 60%"  readonly="true"  redisplay="true" />
 			  									

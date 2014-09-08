@@ -29,12 +29,21 @@
 								<ui:include src="/shared/include/required.xhtml" />
 							</h:panelGroup> 												
 							<h:panelGroup>
-								<h:inputText id="inpt_mat"  value="#{entiteCourante.libMat}" style="width: 30%" 
+								<h:inputText id="inpt_mat"  value="#{entiteCourante.libMat}" style="width: 20%" 
 								 	required="true"  requiredMessage="Valeur obligatoire" >							 	
 									<a4j:support event="onchange"  ajaxSingle="true" />											
 								</h:inputText>	
 								<rich:message for="inpt_mat" errorClass="msg_error" />						
 							</h:panelGroup>	
+							
+							<h:outputText value="Titre" />
+							<h:panelGroup >
+								<h:selectOneMenu id="enitit" value="#{patCtrl.defaultVue.entiteCourante.libTit}" style="width: 20%"
+										title="Titre"  immediate="true" >
+									<f:selectItems  value="#{patCtrl.defaultVue.listeTitre['map']}"/>
+									<a4j:support event="onchange" ajaxSingle="true" />						
+								</h:selectOneMenu>
+							</h:panelGroup>
 							
 							<h:panelGroup>
 								<h:outputText value="Nom patient" />
@@ -84,16 +93,10 @@
 								</h:selectOneMenu>
 							</h:panelGroup>
 							
-							<h:outputText value="#{locale.telephone}"  />						
-							<h:inputText   value="#{entiteCourante.libNumTel}"   style="width: 30%"   >
+							<h:outputText value="#{locale.numcni}"  />						
+							<h:inputText   value="#{entiteCourante.libNumCni}"   style="width: 30%"   >
 							  <a4j:support event="onchange"  ajaxSingle="true" />	
-							</h:inputText>																					
-			
-							<h:outputText value="Adresse"  />						
-							<h:inputTextarea   value="#{entiteCourante.libAdr}"   style="width: 60%"   >
-							  <a4j:support event="onchange"  ajaxSingle="true" />	
-							</h:inputTextarea>	
-							
+							</h:inputText>
 							
          				</h:panelGrid>  
          				
@@ -105,26 +108,32 @@
 							</h:selectBooleanCheckbox>
 							
 							<h:outputText value="#{locale.societe}"	 />
-							<h:panelGroup>	
-								<h:selectOneMenu id="somn_soc" value="#{patCtrl.defaultVue.entiteCourante.codSoc}" style="width: 40%"  title="#{locale.societe}"  >
-									<f:selectItem itemLabel="" itemValue="#{null}"/>
-									<f:selectItems  value="#{patCtrl.defaultVue.listeSoc}"/> 
-									<a4j:support event="onchange" ajaxSingle="true" actionListener="#{defaultVue.updateLibSoc}" reRender="pngp_libSoc" />						
-								</h:selectOneMenu>	
-								<rich:message for="somn_soc" errorClass="msg_error" />
-							</h:panelGroup> 
-							
-							<h:outputText value=""	 />
-							<h:panelGroup id="pngp_libSoc">
+							<h:panelGroup>
+								<h:inputText id="inpt_codSoc" value="#{patCtrl.defaultVue.entiteCourante.tabSoc.codSoc}" style="width: 20%" 
+									readonly="true" title="Code" disabled="false">
+									<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>	
+								<h:inputText id="inpt_libSoc" value="#{patCtrl.defaultVue.entiteCourante.tabSoc.libSoc}" style="width: 40%" 
+										readonly="true"  title="#{locale.libelle}" disabled="false"> 
+										<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+								<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
 								<h:panelGroup>
-									<h:inputText value="#{patCtrl.defaultVue.entiteCourante.libSoc}" style="width: 60%" readonly="true"  rendered="#{! empty patCtrl.defaultVue.entiteCourante.libSoc}" />
-								</h:panelGroup>								
+									<a4j:commandButton   value="..." action="#{patCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" >   	
+			           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
+			         						<f:setPropertyActionListener value="PatEdition" target="#{socCtrl.defaultVue.navigationMgr.selectionSource}" />
+			         						<!-- MAJ de la destination en mode Selection   --> 
+			           						<f:setPropertyActionListener value="true" target="#{socCtrl.defaultVue.navigationMgr.enSelection}" />  
+			           						<!-- Nom du Controlleur de l'entite source  --> 
+			          						<f:setPropertyActionListener value="patCtrl" target="#{socCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
+			          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
+			          						<f:setPropertyActionListener value="SocListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
+			          						<!-- Nom de la propriete a selectionner -->							         						             						
+			          						<f:setPropertyActionListener value="tabSoc" target="#{defaultVue.navigationMgr.selectionPropertyName}" />            						             						          						             				            					      						
+					             	</a4j:commandButton>
+					             	<rich:message for="inpt_codSoc" errorClass="msg_error" />
+								</h:panelGroup>
 							</h:panelGroup>
-							
-							<h:outputText value="Titre" />
-							<h:inputText id="inpt_titre"  value="#{entiteCourante.libTit}" style="width: 60%" >							 	
-								<a4j:support event="onchange"  ajaxSingle="true" />											
-							</h:inputText>	
 							
 							<h:outputText value="Profession" />
 							<h:inputText id="inpt_prof"  value="#{entiteCourante.libProf}" style="width: 60%" >							 	
@@ -146,6 +155,16 @@
 									styleClass="selectDate"  datePattern="dd/MM/yyyy" >
 								<a4j:support event="onchanged" ajaxSingle="true" />
 							</rich:calendar>
+							
+							<h:outputText value="#{locale.telephone}"  />						
+							<h:inputText   value="#{entiteCourante.libNumTel}"   style="width: 30%"   >
+							  <a4j:support event="onchange"  ajaxSingle="true" />	
+							</h:inputText>																					
+			
+							<h:outputText value="Adresse"  />						
+							<h:inputTextarea   value="#{entiteCourante.libAdr}"   style="width: 60%"   >
+							  <a4j:support event="onchange"  ajaxSingle="true" />	
+							</h:inputTextarea>	
 							
          				</h:panelGrid> 
          				         		         		
@@ -200,21 +219,14 @@
 								<h:outputText value="Assureur" rendered="#{patCtrl.defaultVue.entiteCourante.BEstAss}"/>
 							</h:panelGroup>
 							<h:panelGroup id="ass_2">	
-								<h:selectOneMenu id="somn_ass" value="#{patCtrl.defaultVue.entiteCourante.codAss}" style="width: 40%"  title="Assureur"  
+								<h:selectOneMenu id="somn_ass" value="#{patCtrl.defaultVue.entiteCourante.tabAss.codAss}" style="width: 60%"  title="Assureur"  
 											rendered="#{patCtrl.defaultVue.entiteCourante.BEstAss}">
 									<f:selectItem itemLabel="" itemValue="#{null}"/>
 									<f:selectItems  value="#{patCtrl.defaultVue.listeAss}"/> 
-									<a4j:support event="onchange" ajaxSingle="true" actionListener="#{defaultVue.updateLibAss}" reRender="pngp_libAss" />						
+									<a4j:support event="onchange" ajaxSingle="true" />						
 								</h:selectOneMenu>	
 								<rich:message for="somn_ass" errorClass="msg_error" />
 							</h:panelGroup> 
-							
-							<h:outputText value=""	 />
-							<h:panelGroup id="pngp_libAss">
-								<h:panelGroup>
-									<h:inputText value="#{patCtrl.defaultVue.entiteCourante.libAss}" style="width: 60%" readonly="true"  rendered="#{! empty patCtrl.defaultVue.entiteCourante.libAss and patCtrl.defaultVue.entiteCourante.BEstAss}" />
-								</h:panelGroup>								
-							</h:panelGroup>
 				
          				</h:panelGrid>  
          				

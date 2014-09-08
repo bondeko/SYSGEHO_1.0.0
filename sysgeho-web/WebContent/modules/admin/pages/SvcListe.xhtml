@@ -53,11 +53,11 @@
 				<h:outputText value="#{entity.libSvc}" />				
 			</rich:column>	
 			
-			<rich:column label="Service parent" sortBy="#{entity.libSvcPar}" filterBy="#{entity.libSvcPar}" width="150" >
+			<rich:column label="Service parent" sortBy="#{entity.tabSvcPar.libSvc}" filterBy="#{entity.tabSvcPar.libSvc}" width="150" >
 				<f:facet name="header">
 					<h:outputText value="Service parent"  />
 				</f:facet>
-				<h:outputText value="#{entity.libSvcPar}" />				
+				<h:outputText value="#{entity.tabSvcPar.libSvc}" />				
 			</rich:column>						
 		</ui:define>
 		

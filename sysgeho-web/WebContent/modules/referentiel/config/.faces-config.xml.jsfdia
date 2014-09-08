@@ -27,4 +27,188 @@
  <PROCESS-ITEM NAME="rules:#modules#referentiel#pages#OrgListe.xhtml"
   PATH="/modules/referentiel/pages/OrgListe.xhtml" SHAPE="304,3201,0,0"
   model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:0" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="SocDetails::#modules#referentiel#pages#SocDetails.xhtml"
+    NAME="output" PATH="/modules/referentiel/pages/SocDetails.xhtml"
+    TARGET="rules:#modules#referentiel#pages#SocDetails.xhtml"
+    TITLE="SocDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="SocEdition::#modules#referentiel#pages#SocEdition.xhtml"
+    NAME="output1" PATH="/modules/referentiel/pages/SocEdition.xhtml"
+    TARGET="rules:#modules#referentiel#pages#SocEdition.xhtml"
+    TITLE="SocEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="SocListe::#modules#referentiel#pages#SocListe.xhtml"
+    NAME="output2" PATH="/modules/referentiel/pages/SocListe.xhtml"
+    TARGET="rules:#modules#referentiel#pages#SocListe.xhtml"
+    TITLE="SocListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="AssDetails::#modules#referentiel#pages#AssDetails.xhtml"
+    NAME="output3" PATH="/modules/referentiel/pages/AssDetails.xhtml"
+    TARGET="rules:#modules#referentiel#pages#AssDetails.xhtml"
+    TITLE="AssDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="AssEdition::#modules#referentiel#pages#AssEdition.xhtml"
+    NAME="output4" PATH="/modules/referentiel/pages/AssEdition.xhtml"
+    TARGET="rules:#modules#referentiel#pages#AssEdition.xhtml"
+    TITLE="AssEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="AssListe::#modules#referentiel#pages#AssListe.xhtml"
+    NAME="output5" PATH="/modules/referentiel/pages/AssListe.xhtml"
+    TARGET="rules:#modules#referentiel#pages#AssListe.xhtml"
+    TITLE="AssListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="CatExamDetails::#modules#referentiel#pages#CatExamDetails.xhtml"
+    NAME="output6"
+    PATH="/modules/referentiel/pages/CatExamDetails.xhtml"
+    TARGET="rules:#modules#referentiel#pages#CatExamDetails.xhtml"
+    TITLE="CatExamDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="CatExamEdition::#modules#referentiel#pages#CatExamEdition.xhtml"
+    NAME="output7"
+    PATH="/modules/referentiel/pages/CatExamEdition.xhtml"
+    TARGET="rules:#modules#referentiel#pages#CatExamEdition.xhtml"
+    TITLE="CatExamEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="CatExamListe::#modules#referentiel#pages#CatExamListe.xhtml"
+    NAME="output8" PATH="/modules/referentiel/pages/CatExamListe.xhtml"
+    TARGET="rules:#modules#referentiel#pages#CatExamListe.xhtml"
+    TITLE="CatExamListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="TypExamDetails::#modules#referentiel#pages#TypExamDetails.xhtml"
+    NAME="output9"
+    PATH="/modules/referentiel/pages/TypExamDetails.xhtml"
+    TARGET="rules:#modules#referentiel#pages#TypExamDetails.xhtml"
+    TITLE="TypExamDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="TypExamEdition::#modules#referentiel#pages#TypExamEdition.xhtml"
+    NAME="output10"
+    PATH="/modules/referentiel/pages/TypExamEdition.xhtml"
+    TARGET="rules:#modules#referentiel#pages#TypExamEdition.xhtml"
+    TITLE="TypExamEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="TypExamListe::#modules#referentiel#pages#TypExamListe.xhtml"
+    NAME="output11" PATH="/modules/referentiel/pages/TypExamListe.xhtml"
+    TARGET="rules:#modules#referentiel#pages#TypExamListe.xhtml"
+    TITLE="TypExamListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="TypSoinDetails::#modules#referentiel#pages#TypSoinDetails.xhtml"
+    NAME="output12"
+    PATH="/modules/referentiel/pages/TypSoinDetails.xhtml"
+    TARGET="rules:#modules#referentiel#pages#TypSoinDetails.xhtml"
+    TITLE="TypSoinDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="TypSoinEdition::#modules#referentiel#pages#TypSoinEdition.xhtml"
+    NAME="output13"
+    PATH="/modules/referentiel/pages/TypSoinEdition.xhtml"
+    TARGET="rules:#modules#referentiel#pages#TypSoinEdition.xhtml"
+    TITLE="TypSoinEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="TypSoinListe::#modules#referentiel#pages#TypSoinListe.xhtml"
+    NAME="output14" PATH="/modules/referentiel/pages/TypSoinListe.xhtml"
+    TARGET="rules:#modules#referentiel#pages#TypSoinListe.xhtml"
+    TITLE="TypSoinListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="SpecDetails::#modules#referentiel#pages#SpecDetails.xhtml"
+    NAME="output15" PATH="/modules/referentiel/pages/SpecDetails.xhtml"
+    TARGET="rules:#modules#referentiel#pages#SpecDetails.xhtml"
+    TITLE="SpecDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="SpecEdition::#modules#referentiel#pages#SpecEdition.xhtml"
+    NAME="output16" PATH="/modules/referentiel/pages/SpecEdition.xhtml"
+    TARGET="rules:#modules#referentiel#pages#SpecEdition.xhtml"
+    TITLE="SpecEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="SpecListe::#modules#referentiel#pages#SpecListe.xhtml"
+    NAME="output17" PATH="/modules/referentiel/pages/SpecListe.xhtml"
+    TARGET="rules:#modules#referentiel#pages#SpecListe.xhtml"
+    TITLE="SpecListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="TypRdvDetails::#modules#referentiel#pages#TypRdvDetails.xhtml"
+    NAME="output18"
+    PATH="/modules/referentiel/pages/TypRdvDetails.xhtml"
+    TARGET="rules:#modules#referentiel#pages#TypRdvDetails.xhtml"
+    TITLE="TypRdvDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="TypRdvEdition::#modules#referentiel#pages#TypRdvEdition.xhtml"
+    NAME="output19"
+    PATH="/modules/referentiel/pages/TypRdvEdition.xhtml"
+    TARGET="rules:#modules#referentiel#pages#TypRdvEdition.xhtml"
+    TITLE="TypRdvEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="TypRdvListe::#modules#referentiel#pages#TypRdvListe.xhtml"
+    NAME="output20" PATH="/modules/referentiel/pages/TypRdvListe.xhtml"
+    TARGET="rules:#modules#referentiel#pages#TypRdvListe.xhtml"
+    TITLE="TypRdvListe" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#modules#referentiel#pages#AssEdition.xhtml"
+  PATH="/modules/referentiel/pages/AssEdition.xhtml" SHAPE="304,641,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#referentiel#pages#SocDetails.xhtml"
+  PATH="/modules/referentiel/pages/SocDetails.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#referentiel#pages#SocListe.xhtml"
+  PATH="/modules/referentiel/pages/SocListe.xhtml" SHAPE="304,417,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#referentiel#pages#AssDetails.xhtml"
+  PATH="/modules/referentiel/pages/AssDetails.xhtml" SHAPE="304,529,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#referentiel#pages#SocEdition.xhtml"
+  PATH="/modules/referentiel/pages/SocEdition.xhtml" SHAPE="304,305,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#referentiel#pages#AssListe.xhtml"
+  PATH="/modules/referentiel/pages/AssListe.xhtml" SHAPE="304,753,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#referentiel#pages#CatExamEdition.xhtml"
+  PATH="/modules/referentiel/pages/CatExamEdition.xhtml"
+  SHAPE="304,1073,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#referentiel#pages#CatExamDetails.xhtml"
+  PATH="/modules/referentiel/pages/CatExamDetails.xhtml"
+  SHAPE="304,401,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#referentiel#pages#CatExamListe.xhtml"
+  PATH="/modules/referentiel/pages/CatExamListe.xhtml"
+  SHAPE="304,1521,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#referentiel#pages#TypExamDetails.xhtml"
+  PATH="/modules/referentiel/pages/TypExamDetails.xhtml"
+  SHAPE="304,497,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#referentiel#pages#TypExamEdition.xhtml"
+  PATH="/modules/referentiel/pages/TypExamEdition.xhtml"
+  SHAPE="304,1169,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#referentiel#pages#TypExamListe.xhtml"
+  PATH="/modules/referentiel/pages/TypExamListe.xhtml"
+  SHAPE="304,1617,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#referentiel#pages#TypSoinDetails.xhtml"
+  PATH="/modules/referentiel/pages/TypSoinDetails.xhtml"
+  SHAPE="304,689,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#referentiel#pages#TypSoinEdition.xhtml"
+  PATH="/modules/referentiel/pages/TypSoinEdition.xhtml"
+  SHAPE="304,1361,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#referentiel#pages#TypSoinListe.xhtml"
+  PATH="/modules/referentiel/pages/TypSoinListe.xhtml"
+  SHAPE="304,1809,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#referentiel#pages#SpecEdition.xhtml"
+  PATH="/modules/referentiel/pages/SpecEdition.xhtml"
+  SHAPE="304,2257,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#referentiel#pages#SpecListe.xhtml"
+  PATH="/modules/referentiel/pages/SpecListe.xhtml" SHAPE="304,2369,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#referentiel#pages#SpecDetails.xhtml"
+  PATH="/modules/referentiel/pages/SpecDetails.xhtml"
+  SHAPE="304,1921,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#referentiel#pages#TypRdvListe.xhtml"
+  PATH="/modules/referentiel/pages/TypRdvListe.xhtml"
+  SHAPE="304,1905,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#referentiel#pages#TypRdvEdition.xhtml"
+  PATH="/modules/referentiel/pages/TypRdvEdition.xhtml"
+  SHAPE="304,1457,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#referentiel#pages#TypRdvDetails.xhtml"
+  PATH="/modules/referentiel/pages/TypRdvDetails.xhtml"
+  SHAPE="304,785,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

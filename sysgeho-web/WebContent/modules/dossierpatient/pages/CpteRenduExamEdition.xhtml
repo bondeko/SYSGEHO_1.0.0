@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+ 	<ui:composition template="/shared/templates/templateFormulaireEdition.xhtml">
+   			
+		<ui:param name="managedBean" value="#{sessionScope[cpteRenduExamCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" d'un Compte Rendu d'Examen" />
+		
+	<!-- Definition du contenu de l'ecran principal  -->
+		<ui:define name="ecranPrincipalContenu">
+		
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Examtation" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:panelGroup>
+								<h:outputText value="Examen" />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
+							<h:panelGroup>
+							<h:inputText id="inpt_codCon" value="#{cpteRenduExamCtrl.defaultVue.entiteCourante.tabExam.codExam}" style="width: 20%" 
+								required="true" requiredMessage="Valeur obligatoire"
+								readonly="true" title="Code" disabled="false">
+								<a4j:support event="onchange" ajaxSingle="true" 
+									reRender="poids_1,poids_2,ten_1,ten_2,pou_1,pou_2"/>
+							</h:inputText>	
+							<h:inputText id="inpt_libcon" value="#{cpteRenduExamCtrl.defaultVue.entiteCourante.tabExam.libExam}" style="width: 40%" 
+									required="false"
+									readonly="true"  
+									title="#{locale.libelle}" disabled="false"> 
+									<a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
+							<h:panelGroup>
+								<a4j:commandButton   value="..." action="#{cpteRenduExamCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" >   	
+		           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
+		         						<f:setPropertyActionListener value="CpteRenduExamEdition" target="#{examCtrl.defaultVue.navigationMgr.selectionSource}" />
+		         						<!-- MAJ de la destination en mode Selection   --> 
+		           						<f:setPropertyActionListener value="true" target="#{examCtrl.defaultVue.navigationMgr.enSelection}" />  
+		           						<!-- Nom du Controlleur de l'entite source  --> 
+		          						<f:setPropertyActionListener value="cpteRenduExamCtrl" target="#{examCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
+		          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
+		          						<f:setPropertyActionListener value="ExamListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
+		          						<!-- Nom de la propriete a selectionner -->							         						             						
+		          						<f:setPropertyActionListener value="tabExam" target="#{defaultVue.navigationMgr.selectionPropertyName}" />            						             						          						             				            					      						
+				             	</a4j:commandButton>
+				             	<rich:message for="inpt_codCon" errorClass="msg_error" />
+							</h:panelGroup>
+						</h:panelGroup>
+							
+							<h:panelGroup id="poids_1">
+								<h:outputText value="Type d'examen" rendered="#{! empty cpteRenduExamCtrl.defaultVue.entiteCourante.tabExam.codExam}" />
+							</h:panelGroup>
+							<h:panelGroup id="poids_2">							
+								<h:inputText  value="#{cpteRenduExamCtrl.defaultVue.entiteCourante.tabExam.tabTypExam.libTypExam}" style="width: 40%" readonly="true"  title="Type d'examen" rendered="#{! empty cpteRenduExamCtrl.defaultVue.entiteCourante.tabExam.codExam}"/>
+							</h:panelGroup>
+							
+							<h:panelGroup id="ten_1">
+								<h:outputText value="Objet" rendered="#{! empty cpteRenduExamCtrl.defaultVue.entiteCourante.tabExam.codExam}"/>	
+							</h:panelGroup>		
+							<h:panelGroup id="ten_2">								
+								<h:inputText  value="#{cpteRenduExamCtrl.defaultVue.entiteCourante.tabExam.libObj}" style="width: 40%" readonly="true"  title="Objet" rendered="#{! empty cpteRenduExamCtrl.defaultVue.entiteCourante.tabExam.codExam}"/>
+							</h:panelGroup>
+							
+							<h:panelGroup id="pou_1">
+								<h:outputText value="Statut" rendered="#{! empty cpteRenduExamCtrl.defaultVue.entiteCourante.tabExam.codExam}"/>	
+							</h:panelGroup>		
+							<h:panelGroup id="pou_2">								
+								<h:inputText  value="#{cpteRenduExamCtrl.defaultVue.entiteCourante.tabExam.libStatut}" style="width: 40%" readonly="true"  title="Statut" rendered="#{! empty cpteRenduExamCtrl.defaultVue.entiteCourante.tabExam.codExam}"/>
+							</h:panelGroup>
+							
+						</h:panelGrid>
+							
+						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdLColRightDynamic" cellspacing="10" >
+							
+						</h:panelGrid>
+					</h:panelGrid>
+         	
+				</fieldset>								
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Compte rendu" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+							
+							<h:outputText value="#{locale.resultat}"/>
+							<h:inputTextarea id="inpt_hist" value="#{cpteRenduExamCtrl.defaultVue.entiteCourante.libResul}"  
+								 required="false" style="width: 60%" title="#{locale.resultat}" >
+								 <a4j:support event="onchanged" ajaxSingle="true" />
+							</h:inputTextarea>
+							
+							<h:outputText value="Conclusion"/>
+							<h:inputTextarea  value="#{cpteRenduExamCtrl.defaultVue.entiteCourante.libConclu}"  
+								 required="false" style="width: 60%" title="Conclusion" >
+								 <a4j:support event="onchanged" ajaxSingle="true" />
+							</h:inputTextarea>
+							
+							<h:outputText value="Date Compte Rendu" />
+							<h:panelGroup >					
+								<rich:calendar value="#{cpteRenduExamCtrl.defaultVue.entiteCourante.date}" inputStyle="width: 30%"  title="Date " 
+										styleClass="selectDate"  datePattern="dd/MM/yyyy" >
+									<a4j:support event="onchanged" ajaxSingle="true" />
+								</rich:calendar>
+							</h:panelGroup>
+							
+
+         			</h:panelGrid>  
+         				
+         			<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+							
+         			</h:panelGrid> 
+         				         		         		
+         		</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+		</ui:define>
+													
+	</ui:composition>
+	
+</html>

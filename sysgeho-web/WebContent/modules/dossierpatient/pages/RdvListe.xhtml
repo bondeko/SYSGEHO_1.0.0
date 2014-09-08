@@ -21,19 +21,19 @@
 				<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
 				
 					<h:outputText value="Code Rendez-vous" />          				
-         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.codRdv}" style="width: 30%" immediate="true"/> 
+         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.codRdv}" style="width: 60%" immediate="true"/> 
          			
          			<h:outputText value="Type Rendez-vous" />          				
-         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.libTypRdv}" style="width: 30%" immediate="true"/>  
+         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.tabTypRdv.libTypRdv}" style="width: 60%" immediate="true"/>  
          			
          			<h:panelGroup>
          				<h:outputText value="#{locale.annule} ?" />
-						<h:selectBooleanCheckbox value="#{rdvCtrl.defaultVue.entiteCourante.BEstAnn}" />
+						<h:selectBooleanCheckbox value="#{rdvCtrl.defaultVue.entiteRecherche.BEstAnn}" />
          			</h:panelGroup>
          			
          			<h:panelGroup>
          				<h:outputText value="#{locale.confirme} ?" />
-						<h:selectBooleanCheckbox value="#{rdvCtrl.defaultVue.entiteCourante.BEstConf}" />
+						<h:selectBooleanCheckbox value="#{rdvCtrl.defaultVue.entiteRecherche.BEstConf}" />
          			</h:panelGroup>
 
 				</h:panelGrid>
@@ -41,13 +41,13 @@
 				<h:panelGrid columns="2" width="100%" border="0" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
 				
 					<h:outputText value="Nom patient" />          				
-         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.tabPat.libNom}" style="width: 40%" />  
+         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.tabPat.libNom}" style="width: 60%" />  
          			
          			<h:outputText value="Service d'admission" />          				
-         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.libSvc}" style="width: 40%" />  
+         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.tabSvc.libSvc}" style="width: 60%" />  
          			
          			<h:outputText value="#{locale.medecin}" />          				
-         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.tabUsr.libNom}" style="width: 40%" />  
+         			<h:inputText  value="#{rdvCtrl.defaultVue.entiteRecherche.tabUsr.libNom}" style="width: 60%" />  
 				
 				</h:panelGrid>
 														
@@ -65,11 +65,11 @@
 				<h:outputText value="#{entity.codRdv}" />				
 			</rich:column>
 			
-			<rich:column label="Type de rendez-vous" sortBy="#{entity.libTypRdv}" filterBy="#{entity.libTypRdv}" width="150" >
+			<rich:column label="Type de rendez-vous" sortBy="#{entity.tabTypRdv.libTypRdv}" filterBy="#{entity.tabTypRdv.libTypRdv}" width="150" >
 				<f:facet name="header">
 					<h:outputText value="Type de rendez-vous"  />
 				</f:facet>
-				<h:outputText value="#{entity.libTypRdv}" />				
+				<h:outputText value="#{entity.tabTypRdv.libTypRdv}" />				
 			</rich:column>
 			
 			<rich:column label="Patient" sortBy="#{entity.tabPat.libNom}" filterBy="#{entity.tabPat.libNom}"  >
@@ -79,11 +79,11 @@
 				<h:outputText value="#{entity.tabPat.libNom}" />				
 			</rich:column>
 			
-			<rich:column label="Service d'admission" sortBy="#{entity.libSvc}" filterBy="#{entity.libSvc}" width="150" >
+			<rich:column label="Service d'admission" sortBy="#{entity.tabSvc.libSvc}" filterBy="#{entity.tabSvc.libSvc}" width="150" >
 				<f:facet name="header">
 					<h:outputText value="Service d'admission"  />
 				</f:facet>
-				<h:outputText value="#{entity.libSvc}" />				
+				<h:outputText value="#{entity.tabSvc.libSvc}" />				
 			</rich:column>
 			
 			<rich:column label="#{locale.medecin}" sortBy="#{entity.tabUsr.libNom}" filterBy="#{entity.tabUsr.libNom}" width="150" >

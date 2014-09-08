@@ -18,22 +18,43 @@
 						</h:panelGrid>
 					</f:facet>
 					
-					<rich:menuItem submitMode="ajax" rendered="true" 
-	                    action="#{patCtrl.openHomePage}" 
-	                    ajaxSingle="true" >
-	                    <h:outputText value="Patients" />
-	                </rich:menuItem>
+	                <rich:menuGroup value="Patients" rendered="true">
+	                    <rich:menuItem submitMode="ajax" rendered="true" 
+		                    action="#{patCtrl.openHomePage}" 
+		                    ajaxSingle="true" >
+		                    <h:outputText value="Patients" />
+		                </rich:menuItem>
+		                
+		                <rich:menuItem submitMode="ajax" rendered="true" 
+		                    action="#{rdvCtrl.openHomePage}" 
+		                    ajaxSingle="true" >
+		                    <h:outputText value="Rendez-vous" />
+		                </rich:menuItem>
+	                </rich:menuGroup>
 	                
-	                <rich:menuItem submitMode="ajax" rendered="true" 
-	                    action="#{rdvCtrl.openHomePage}" 
-	                    ajaxSingle="true" >
-	                    <h:outputText value="Rendez-vous" />
-	                </rich:menuItem>
+	                <rich:menuSeparator />
+	                
+	                <rich:menuGroup value="Soins" rendered="true">
+	                    <rich:menuItem submitMode="ajax" rendered="true" 
+		                    action="#{soinCtrl.openHomePage}" 
+		                    ajaxSingle="true" >
+		                    <h:outputText value="Soins" />
+		                </rich:menuItem>
+	                </rich:menuGroup>
+	                
+	                <rich:menuSeparator />
+	                
+	                <rich:menuGroup value="Hospitalisations" rendered="true">
+	                     <rich:menuItem submitMode="ajax" rendered="true" 
+		                    action="#{hospiCtrl.openHomePage}" 
+		                    ajaxSingle="true" >
+		                    <h:outputText value="Hospitalisations" />
+		                </rich:menuItem>	
+	                </rich:menuGroup>
 	                
 	                <rich:menuSeparator />
 	                
 	                <rich:menuGroup value="Consultations" rendered="true">
-                    
 	                     <rich:menuItem submitMode="ajax" rendered="true" 
 			                 action="#{consulCtrl.openHomePage}" 
 			                 ajaxSingle="true" >
@@ -45,7 +66,22 @@
 			                 ajaxSingle="true" >
 			                 <h:outputText value="Comptes Rendus Consultations" />
 			             </rich:menuItem>
+	                </rich:menuGroup>
+	                
+	                <rich:menuSeparator />
+	                
+	                 <rich:menuGroup value="Examens" rendered="true">
+	                     <rich:menuItem submitMode="ajax" rendered="true" 
+			                 action="#{examCtrl.openHomePage}" 
+			                 ajaxSingle="true" >
+			                 <h:outputText value="Examens" />
+			             </rich:menuItem>	
 			             
+			             <rich:menuItem submitMode="ajax" rendered="true" 
+			                 action="#{cpteRenduExamCtrl.openHomePage}" 
+			                 ajaxSingle="true" >
+			                 <h:outputText value="Comptes Rendus Examens" />
+			             </rich:menuItem>
 	                </rich:menuGroup>
 	                
 	                <rich:menuSeparator />

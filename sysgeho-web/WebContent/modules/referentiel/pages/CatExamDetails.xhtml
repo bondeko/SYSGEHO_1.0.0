@@ -54,9 +54,11 @@
          				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
 
 							<h:outputText value="#{locale.specialite}"	 />
-							<h:inputText id="inpt_libSpec"  value="#{catExamCtrl.defaultVue.entiteCourante.libSpec}" style="width: 60%" readonly="true">							 	
-								<a4j:support event="onchange"  ajaxSingle="true" />											
-							</h:inputText>	
+							<h:panelGroup>
+								<h:inputText   value="#{catExamCtrl.defaultVue.entiteCourante.tabSpec.codSpec}" style="width: 20%" readonly="true" />	
+								<h:inputText   value="#{catExamCtrl.defaultVue.entiteCourante.tabSpec.libSpec}" style="width: 40%" readonly="true" />	
+							</h:panelGroup>
+													 	
 							
          				</h:panelGrid>  
          				

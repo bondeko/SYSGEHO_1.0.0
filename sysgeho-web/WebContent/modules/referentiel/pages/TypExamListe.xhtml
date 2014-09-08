@@ -53,11 +53,11 @@
 				<h:outputText value="#{entity.libTypExam}" />				
 			</rich:column>
 			
-			<rich:column label="#{locale.catexam}" sortBy="#{entity.libCatExam}" filterBy="#{entity.libCatExam}" width="150" >
+			<rich:column label="#{locale.catexam}" sortBy="#{entity.tabCatExam.libCatExam}" filterBy="#{entity.tabCatExam.libCatExam}" width="150" >
 				<f:facet name="header">
 					<h:outputText value="#{locale.catexam}"  />
 				</f:facet>
-				<h:outputText value="#{entity.libCatExam}" />				
+				<h:outputText value="#{entity.tabCatExam.libCatExam}" />				
 			</rich:column>
 			
 		</ui:define>

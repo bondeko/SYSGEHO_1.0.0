@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+     
+  	<ui:composition template="/shared/templates/templateFormulaireListe.xhtml">
+		
+		<ui:param name="managedBean" value="#{sessionScope[hospiCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" des Hospitalitions" />
+		
+		<!-- Criteres standards de recherche -->
+		<ui:define name="standardFilter"  >
+		
+			<h:panelGrid columns="2" width="100%"   columnClasses="pngdColMiddle" rowClasses="pngdRow" >
+			
+				<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				
+					<h:outputText value="Code " />          				
+         			<h:inputText  value="#{hospiCtrl.defaultVue.entiteRecherche.codHospi}" style="width: 60%" /> 
+         			
+					<h:outputText value="#{locale.chamnum}" />          				
+         			<h:inputText  value="#{hospiCtrl.defaultVue.entiteRecherche.libNumChbre}" style="width: 60%" />  
+         			
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2" width="100%" border="0" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+					<h:outputText value="Nom patient" />          				
+         			<h:inputText  value="#{hospiCtrl.defaultVue.entiteRecherche.tabPat.libNom}" style="width: 60%" />   
+         			
+         			<h:outputText value="Nom Service" />          				
+         			<h:inputText  value="#{hospiCtrl.defaultVue.entiteRecherche.tabSvc.libSvc}" style="width: 60%" />          					           					           					   					            				            				            			
+					
+				</h:panelGrid>
+														
+																																																	
+			</h:panelGrid>	
+						
+		</ui:define>
+		
+		<!-- Colonnes specifiques e l entite -->
+		<ui:define name="specificColumns"  >
+		
+			<rich:column label="Code " sortBy="#{entity.codHospi}" filterBy="#{entity.codHospi}" >
+				<f:facet name="header">
+					<h:outputText value="Code "  />
+				</f:facet>
+				<h:outputText value="#{entity.codHospi}" />				
+			</rich:column>
+			
+			<rich:column label="Date d'admission " sortBy="#{entity.dateAdmi}" filterBy="#{entity.dateAdmi}"  >
+				<f:facet name="header">
+					<h:outputText value="Date d'admission" />
+				</f:facet>
+				<h:outputText value="#{entity.dateAdmi}" >	
+					<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+				</h:outputText>			
+			</rich:column>
+			
+			<rich:column label="Patient" sortBy="#{entity.tabPat.libNom}" filterBy="#{entity.tabPat.libNom}"  >
+				<f:facet name="header">
+					<h:outputText value="Patient"  />
+				</f:facet>
+				<h:outputText value="#{entity.tabPat.libNom}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.chamnum} " sortBy="#{entity.libNumChbre}" filterBy="#{entity.libNumChbre}" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.chamnum}"  />
+				</f:facet>
+				<h:outputText value="#{entity.libNumChbre}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.linum} " sortBy="#{entity.libNumLit}" filterBy="#{entity.libNumLit}" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.linum}"  />
+				</f:facet>
+				<h:outputText value="#{entity.libNumLit}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.numcarnet}" sortBy="#{entity.libNumCarnet}" filterBy="#{entity.libNumCarnet}"  >
+				<f:facet name="header">
+					<h:outputText value="#{locale.numcarnet}"  />
+				</f:facet>
+				<h:outputText value="#{entity.libNumCarnet}" />				
+			</rich:column>
+			
+			<rich:column label="Service" sortBy="#{entity.tabSvc.libSvc}" filterBy="#{entity.tabSvc.libSvc}"  >
+				<f:facet name="header">
+					<h:outputText value="Service"  />
+				</f:facet>
+				<h:outputText value="#{entity.tabSvc.libSvc}" />				
+			</rich:column>
+			
+			<rich:column label="Motif" sortBy="#{entity.libMotif}" filterBy="#{entity.libMotif}"  >
+				<f:facet name="header">
+					<h:outputText value="Motif"  />
+				</f:facet>
+				<h:outputText value="#{entity.libMotif}" />				
+			</rich:column>
+			
+		</ui:define>
+		
+		<!-- Definition des modal panels  -->	
+		<ui:define name="modalPanel">			
+			<ui:include src="../include/modalPanel/SortieHospitalisation.xhtml" />
+		</ui:define>	
+													
+	</ui:composition>
+	
+</html>

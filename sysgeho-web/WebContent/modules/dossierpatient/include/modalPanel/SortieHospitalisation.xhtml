@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+
+   		<ui:composition >
+				
+			<rich:modalPanel id="mpnl_sortie_hospi"  autosized="true" minWidth="620" minHeight="100"  >
+			
+				<f:facet name="header">
+					<h:outputText value="Sortie d'hospitalisation" style="padding-right:15px;" />						
+				</f:facet>
+				
+				<h:form>
+				
+				<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic">
+				
+					<h:panelGroup>
+						<fieldset>
+						<legend> <h:outputText value="Sortie d'hospitalisation" styleClass="legend" /> </legend>
+							<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow">
+							    
+							  <h:form >
+					
+							<h:panelGrid columns="2" width="100%"  style="border:2px solid #{richSkin.panelBorderColor};" >
+																					
+								<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+									<h:panelGroup>
+										<h:outputText value="Date Sortie" />
+										<ui:include src="/shared/include/required.xhtml" />
+									</h:panelGroup>
+									<h:panelGroup >					
+										<rich:calendar value="#{hospiCtrl.defaultVue.entiteCourante.dateSortie}" inputStyle="width: 30%"  title="Date Sortie" 
+												styleClass="selectDate"  datePattern="dd/MM/yyyy HH:mm" required="true" requiredMessage="Valeur obligatoire">
+											<a4j:support event="onchanged" ajaxSingle="true" />
+										</rich:calendar>
+									</h:panelGroup>
+								
+									<h:outputText value="Prescription"/>
+									<h:inputTextarea id="inpt_prescri" value="#{hospiCtrl.defaultVue.entiteCourante.libPrescri}"  
+										 required="false" style="width: 60%" title="Prescription" >
+									</h:inputTextarea>
+									
+									<h:outputText value="" />
+									<h:panelGroup>
+										<a4j:commandButton  value="Valider" action="#{hospiCtrl.sortirHospitalisation}" reRender="pnel_main" oncomplete="#{rich:component('mpnl_sortie_hospi')}.hide();return true;" />
+										<a4j:commandButton  value="Annuler"  action="null"  oncomplete="#{rich:component('mpnl_sortie_hospi')}.hide();return false;"/>
+									</h:panelGroup>
+									
+									
+								</h:panelGrid>
+								
+								<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+								
+									
+								</h:panelGrid>
+																
+							</h:panelGrid>
+							
+							</h:form>
+							  
+							</h:panelGrid>
+						</fieldset>
+					</h:panelGroup>
+				
+				</h:panelGrid>
+				</h:form>
+				
+			</rich:modalPanel>
+        												
+		</ui:composition>
+		
+</html>

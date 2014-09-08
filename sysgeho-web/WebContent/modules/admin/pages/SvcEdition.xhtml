@@ -50,21 +50,14 @@
 							
 							<h:outputText value="Service parent"	 />
 							<h:panelGroup>	
-								<h:selectOneMenu id="somn_svc" value="#{svcCtrl.defaultVue.entiteCourante.codSvcPar}" style="width: 40%"  title="service parent"  >
+								<h:selectOneMenu id="somn_svc" value="#{svcCtrl.defaultVue.entiteCourante.tabSvcPar.codSvc}" style="width: 40%"  title="service parent"  >
 									<f:selectItem itemLabel="" itemValue="#{null}"/>
 									<f:selectItems  value="#{svcCtrl.defaultVue.listeSvc}"/> 
-									<a4j:support event="onchange" ajaxSingle="true" actionListener="#{defaultVue.updateLibSvc}" reRender="pngp_libSvc" />						
+									<a4j:support event="onchange" ajaxSingle="true" />						
 								</h:selectOneMenu>	
 								<rich:message for="somn_svc" errorClass="msg_error" />
 							</h:panelGroup> 
 							
-							<h:outputText value=""	 />
-							<h:panelGroup id="pngp_libSvc">
-								<h:panelGroup>
-									<h:inputText value="#{svcCtrl.defaultVue.entiteCourante.libSvcPar}" style="width: 60%" readonly="true"  rendered="#{! empty svcCtrl.defaultVue.entiteCourante.libSvcPar}" />
-								</h:panelGroup>								
-							</h:panelGroup>
-
 							<h:outputText value="Description"  />						
 							<h:inputTextarea   value="#{entiteCourante.libDesc}"   style="width: 60%"   >
 							  <a4j:support event="onchange"  ajaxSingle="true" />	
@@ -74,7 +67,6 @@
          				
          				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
          				</h:panelGrid>
-         				 
          					         		         		
          			</h:panelGrid>  
          	

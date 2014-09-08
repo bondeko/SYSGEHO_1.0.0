@@ -10,8 +10,8 @@
      
   	<ui:composition template="/shared/templates/templateFormulaireListe.xhtml">
 		
-		<ui:param name="managedBean" value="#{sessionScope[consulCtrl.nomManagedBean2]}" />
-		<ui:param name="entetePage" value=" des Consultations" />
+		<ui:param name="managedBean" value="#{sessionScope[examCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" des Examens" />
 		
 		<!-- Criteres standards de recherche -->
 		<ui:define name="standardFilter"  >
@@ -21,13 +21,17 @@
 				<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
 				
 					<h:outputText value="Code " />          				
-         			<h:inputText  value="#{consulCtrl.defaultVue.entiteRecherche.codConsul}" style="width: 30%" /> 
+         			<h:inputText  value="#{examCtrl.defaultVue.entiteRecherche.codExam}" style="width: 30%" /> 
          			
 					<h:outputText value="Nom Patient" />          				
-         			<h:inputText  value="#{consulCtrl.defaultVue.entiteRecherche.tabPat.libNom}" style="width: 30%" />  
+         			<h:inputText  value="#{examCtrl.defaultVue.entiteRecherche.tabPat.libNom}" style="width: 30%" />  
          			
-         			<h:outputText value="#{locale.medecinayantrealise}" />          				
-         			<h:inputText  value="#{consulCtrl.defaultVue.entiteRecherche.tabUsr.libNom}" style="width: 30%" />           					           					           					   					            				            				            			
+         			<h:outputText value="Type d'examen" />       
+         			<h:selectOneMenu value="#{examCtrl.defaultVue.entiteRecherche.tabTypExam.codTypExam}" style="width: 40%"  title="Type d'examen" >
+						<f:selectItem itemLabel="" itemValue="#{null}"/>
+						<f:selectItems  value="#{examCtrl.defaultVue.listeTypExam}"/> 
+						<a4j:support event="onchange" ajaxSingle="true"  />						
+					</h:selectOneMenu>	   				
 
 				</h:panelGrid>
 				
@@ -42,11 +46,18 @@
 		<!-- Colonnes specifiques e l entite -->
 		<ui:define name="specificColumns"  >
 		
-			<rich:column label="Code " sortBy="#{entity.codConsul}" filterBy="#{entity.codConsul}" >
+			<rich:column label="Code " sortBy="#{entity.codExam}" filterBy="#{entity.codExam}" >
 				<f:facet name="header">
 					<h:outputText value="Code "  />
 				</f:facet>
-				<h:outputText value="#{entity.codConsul}" />				
+				<h:outputText value="#{entity.codExam}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.libelle} " sortBy="#{entity.libExam}" filterBy="#{entity.libExam}" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.libelle} "  />
+				</f:facet>
+				<h:outputText value="#{entity.libExam}" />				
 			</rich:column>
 			
 			<rich:column label="Patient" sortBy="#{entity.tabPat.libNom}" filterBy="#{entity.tabPat.libNom}"  >
@@ -56,48 +67,28 @@
 				<h:outputText value="#{entity.tabPat.libNom}" />				
 			</rich:column>
 			
-			<rich:column label="Poids " sortBy="#{entity.valPoids}" filterBy="#{entity.valPoids}" >
+			<rich:column label="Type  d'examen" sortBy="#{entity.tabTypExam.libTypExam}" filterBy="#{entity.tabTypExam.libTypExam}"  >
 				<f:facet name="header">
-					<h:outputText value="Poids"  />
+					<h:outputText value="Type  d'examen"  />
 				</f:facet>
-				<h:outputText value="#{entity.valPoids}" />				
+				<h:outputText value="#{entity.tabTypExam.libTypExam}" />				
 			</rich:column>
 			
-			<rich:column label="Tension " sortBy="#{entity.valTension}" filterBy="#{entity.valTension}" >
+						
+			<rich:column label="Date de l'examen" sortBy="#{entity.dateExam}" filterBy="#{entity.dateExam}"  >
 				<f:facet name="header">
-					<h:outputText value="Tension"  />
+					<h:outputText value="Date de l'examen" />
 				</f:facet>
-				<h:outputText value="#{entity.valTension}" />				
-			</rich:column>
-			
-			<rich:column label="Pou " sortBy="#{entity.valPou}" filterBy="#{entity.valPou}" >
-				<f:facet name="header">
-					<h:outputText value="Pou"  />
-				</f:facet>
-				<h:outputText value="#{entity.valPou}" />				
-			</rich:column>
-			
-			<rich:column label="Taille " sortBy="#{entity.valTaille}" filterBy="#{entity.valTaille}" >
-				<f:facet name="header">
-					<h:outputText value="Taille"  />
-				</f:facet>
-				<h:outputText value="#{entity.valTaille}" />				
-			</rich:column>
-			
-			<rich:column label="Date de consultation" sortBy="#{entity.dateConsul}" filterBy="#{entity.dateConsul}"  >
-				<f:facet name="header">
-					<h:outputText value="Date de consultation" />
-				</f:facet>
-				<h:outputText value="#{entity.dateConsul}" >	
+				<h:outputText value="#{entity.dateExam}" >	
 					<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
 				</h:outputText>			
 			</rich:column>
 			
-			<rich:column label="#{locale.medecinayantrealise}" sortBy="#{entity.tabUsr.libNom}" filterBy="#{entity.tabUsr.libNom}" >
+			<rich:column label="Prescripteur" sortBy="#{entity.libPres}" filterBy="#{entity.libPres}"  >
 				<f:facet name="header">
-					<h:outputText value="#{locale.medecinayantrealise}"  />
+					<h:outputText value="Prescripteur" />
 				</f:facet>
-				<h:outputText value="#{entity.tabUsr.libNom}" />				
+				<h:outputText value="#{entity.libPres}" />	
 			</rich:column>
 			
 			<rich:column label="Montant TTC"  sortBy="#{entity.valMntTtc}" filterBy="#{entity.valMntTtc}"  >
@@ -105,6 +96,13 @@
 					<h:outputText value="Montant TTC" />
 				</f:facet>	
 				<h:outputText value="#{entity.valMntTtc}" />		
+			</rich:column>
+			
+			<rich:column label="Objet" sortBy="#{entity.libObj}" filterBy="#{entity.libObj}" >
+				<f:facet name="header">
+					<h:outputText value="Objet"  />
+				</f:facet>
+				<h:outputText value="#{entity.libObj}" />				
 			</rich:column>
 			
 			<rich:column label="Statut " sortBy="#{entity.libStatut}" filterBy="#{entity.libStatut}" >

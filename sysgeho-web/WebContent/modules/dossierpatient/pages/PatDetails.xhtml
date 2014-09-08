@@ -24,10 +24,20 @@
         							         		
          				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
 
-							<h:outputText value="Matricule" />
-							<h:inputText id="inpt_mat"  value="#{entiteCourante.libMat}" style="width: 30%" readonly="true" >							 	
+							<h:outputText value="Code" />
+							<h:inputText id="inpt_cod"  value="#{entiteCourante.codPat}" style="width: 20%" readonly="true" >							 	
 								<a4j:support event="onchange"  ajaxSingle="true" />											
 							</h:inputText>	
+
+							<h:outputText value="Matricule" />
+							<h:inputText id="inpt_mat"  value="#{entiteCourante.libMat}" style="width: 20%" readonly="true" >							 	
+								<a4j:support event="onchange"  ajaxSingle="true" />											
+							</h:inputText>	
+							
+							<h:outputText value="Titre" />
+							<h:inputText id="inpt_titre"  value="#{entiteCourante.LEnuTitre}" style="width: 20%" readonly="true">							 	
+								<a4j:support event="onchange"  ajaxSingle="true" />											
+							</h:inputText>
 							
 							<h:outputText value="Nom patient" />
 							<h:inputText id="inpt_nom"  value="#{entiteCourante.libNom}" style="width: 60%" readonly="true">							 	
@@ -53,16 +63,8 @@
 							<h:outputText value="Statut matrimoniale" />											
 							<h:inputText  value="#{patCtrl.defaultVue.entiteCourante.LEnuStaMat}" style="width: 30%" readonly="true"  title="Statut matrimoniale"/>
 						
-							<h:outputText value="#{locale.telephone}"  />						
-							<h:inputText   value="#{entiteCourante.libNumTel}"   style="width: 60%" readonly="true" >
-							  <a4j:support event="onchange"  ajaxSingle="true" />	
-							</h:inputText>																					
-			
-							<h:outputText value="Adresse"  />						
-							<h:inputTextarea   value="#{entiteCourante.libAdr}"   style="width: 60%" readonly="true">
-							  <a4j:support event="onchange"  ajaxSingle="true" />	
-							</h:inputTextarea>	
-							
+							<h:outputText value="#{locale.numcni}"  />						
+							<h:inputText   value="#{entiteCourante.libNumCni}"   style="width: 30%"   readonly="true"/>
 							
          				</h:panelGrid>  
          				
@@ -75,20 +77,15 @@
 							
 							<h:outputText value="#{locale.societe}" />
 							<h:panelGroup>
-								<h:inputText id="inpt_codSoc" value="#{patCtrl.defaultVue.entiteCourante.codSoc}" style="width: 20%" 
+								<h:inputText value="#{patCtrl.defaultVue.entiteCourante.tabSoc.codSoc}" style="width: 20%" 
 									readonly="true" title="Code" disabled="false">
 									<a4j:support event="onchange" ajaxSingle="true" />
 								</h:inputText>	
-								<h:inputText id="inpt_libSoc" value="#{patCtrl.defaultVue.entiteCourante.libSoc}" style="width: 40%" 
+								<h:inputText  value="#{patCtrl.defaultVue.entiteCourante.tabSoc.libSoc}" style="width: 40%" 
 										readonly="true"  title="#{locale.libelle}" disabled="false"> 
 										<a4j:support event="onchange" ajaxSingle="true" />
 								</h:inputText>
 							</h:panelGroup>
-							
-							<h:outputText value="Titre" />
-							<h:inputText id="inpt_titre"  value="#{entiteCourante.libTit}" style="width: 60%" readonly="true">							 	
-								<a4j:support event="onchange"  ajaxSingle="true" />											
-							</h:inputText>	
 							
 							<h:outputText value="Profession" />
 							<h:inputText id="inpt_prof"  value="#{entiteCourante.libProf}" style="width: 60%" readonly="true">							 	
@@ -109,6 +106,16 @@
 							<h:inputText value="#{entiteCourante.dateEnreg}" readonly="true" style="width: 30%" title="Date enregistrement"  >
 								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
 							</h:inputText>
+							
+							<h:outputText value="#{locale.telephone}"  />						
+							<h:inputText   value="#{entiteCourante.libNumTel}"   style="width: 30%" readonly="true" >
+							  <a4j:support event="onchange"  ajaxSingle="true" />	
+							</h:inputText>																					
+			
+							<h:outputText value="Adresse"  />						
+							<h:inputTextarea   value="#{entiteCourante.libAdr}"   style="width: 60%" readonly="true">
+							  <a4j:support event="onchange"  ajaxSingle="true" />	
+							</h:inputTextarea>
 							
          				</h:panelGrid> 
          				         		         		
@@ -131,7 +138,7 @@
 							</h:inputText>
 							
 							<h:outputText value="#{locale.numtel}" />
-							<h:inputText  value="#{entiteCourante.libNumTelPerCon}" style="width: 60%" readonly="true">							 	
+							<h:inputText  value="#{entiteCourante.libNumTelPerCon}" style="width: 30%" readonly="true">							 	
 								<a4j:support event="onchange"  ajaxSingle="true" />											
 							</h:inputText>
 							
@@ -163,11 +170,11 @@
 								<h:outputText value="Assureur" rendered="#{patCtrl.defaultVue.entiteCourante.BEstAss}" />
 							</h:panelGroup>
 							<h:panelGroup id="ass_2"> 
-								<h:inputText id="inpt_codAss" value="#{patCtrl.defaultVue.entiteCourante.codAss}" style="width: 20%" 
+								<h:inputText id="inpt_codAss" value="#{patCtrl.defaultVue.entiteCourante.tabAss.codAss}" style="width: 20%" 
 									readonly="true" title="Code" disabled="false" rendered="#{patCtrl.defaultVue.entiteCourante.BEstAss}">
 									<a4j:support event="onchange" ajaxSingle="true" />
 								</h:inputText>	
-								<h:inputText id="inpt_libAss" value="#{patCtrl.defaultVue.entiteCourante.libAss}" style="width: 40%" 
+								<h:inputText id="inpt_libAss" value="#{patCtrl.defaultVue.entiteCourante.tabAss.libAss}" style="width: 40%" 
 										readonly="true"  title="#{locale.libelle}" disabled="false" rendered="#{patCtrl.defaultVue.entiteCourante.BEstAss}">  
 										<a4j:support event="onchange" ajaxSingle="true" />
 								</h:inputText>

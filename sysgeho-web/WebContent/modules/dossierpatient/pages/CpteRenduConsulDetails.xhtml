@@ -72,6 +72,11 @@
         							         		
          				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
          				
+         					<h:outputText value="Code"/>
+							<h:inputText id="inpt_code" value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.codCpteRenduConsul}"  
+								 readonly="true" style="width: 30%" title="Code" >
+							</h:inputText>
+         				
          					<h:outputText value="Motif"/>
 							<h:inputText id="inpt_mot" value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libMotifConsul}"  
 								 readonly="true" style="width: 60%" title="Motif" >

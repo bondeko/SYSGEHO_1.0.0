@@ -22,6 +22,26 @@
   <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.CpteRenduConsulCtrl</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>hospiCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.HospiCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>examCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.ExamCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>cpteRenduExamCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.CpteRenduExamCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>soinCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.SoinCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
  <navigation-rule>
   <from-view-id>*</from-view-id>
   <navigation-case>
@@ -80,6 +100,66 @@
   <navigation-case>
    <from-outcome>CpteRenduConsulListe</from-outcome>
    <to-view-id>/modules/dossierpatient/pages/CpteRenduConsulListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>HospiDetails</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/HospiDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>HospiEdition</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/HospiEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>HospiListe</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/HospiListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>ExamDetails</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/ExamDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>ExamEdition</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/ExamEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>ExamListe</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/ExamListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>CpteRenduExamDetails</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/CpteRenduExamDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>CpteRenduExamEdition</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/CpteRenduExamEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>CpteRenduExamListe</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/CpteRenduExamListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>SoinDetails</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/SoinDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>SoinEdition</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/SoinEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>SoinListe</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/SoinListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
   

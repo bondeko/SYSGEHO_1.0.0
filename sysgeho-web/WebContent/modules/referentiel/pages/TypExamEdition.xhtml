@@ -77,28 +77,14 @@
 								<ui:include src="/shared/include/required.xhtml" />
 							</h:panelGroup>
 							<h:panelGroup>	
-								<h:selectOneMenu id="cod_cat" value="#{typExamCtrl.defaultVue.entiteCourante.codCatExam}" style="width: 40%"  title="#{locale.catexam}"  
+								<h:selectOneMenu id="cod_cat" value="#{typExamCtrl.defaultVue.entiteCourante.tabCatExam.codCatExam}" style="width: 40%"  title="#{locale.catexam}"  
 										required="true"  requiredMessage="Validation obligatoire">
 									<f:selectItem itemLabel="" itemValue="#{null}"/>
 									<f:selectItems  value="#{typExamCtrl.defaultVue.listeCatExam}"/> 
-									<a4j:support event="onchange" ajaxSingle="true" actionListener="#{defaultVue.updateLibCatExam}" reRender="pngp_libcatexam,pngp_libSpec" />						
+									<a4j:support event="onchange" ajaxSingle="true" />						
 								</h:selectOneMenu>	
 								<rich:message for="cod_cat" errorClass="msg_error" />
 							</h:panelGroup> 
-							
-							<h:outputText value=""	 />
-							<h:panelGroup id="pngp_libcatexam">
-								<h:panelGroup>
-									<h:inputText value="#{typExamCtrl.defaultVue.entiteCourante.libCatExam}" style="width: 60%" readonly="true"  rendered="#{! empty typExamCtrl.defaultVue.entiteCourante.libCatExam}" />
-								</h:panelGroup>								
-							</h:panelGroup>
-							
-							<h:outputText value=""	 />
-							<h:panelGroup id="pngp_libSpec">
-								<h:panelGroup>
-									<h:inputText value="#{typExamCtrl.defaultVue.entiteCourante.libSpec}" style="width: 60%" readonly="true"  rendered="#{! empty typExamCtrl.defaultVue.entiteCourante.libSpec}" />
-								</h:panelGroup>								
-							</h:panelGroup>
 							
          				</h:panelGrid>  
          				

@@ -72,21 +72,14 @@
 								<ui:include src="/shared/include/required.xhtml" />
 							</h:panelGroup>
 							<h:panelGroup>	
-								<h:selectOneMenu id="cod_spec" value="#{catExamCtrl.defaultVue.entiteCourante.codSpec}" style="width: 40%"  title="#{locale.specialite}"  
+								<h:selectOneMenu id="cod_spec" value="#{catExamCtrl.defaultVue.entiteCourante.tabSpec.codSpec}" style="width: 40%"  title="#{locale.specialite}"  
 										required="true"  requiredMessage="Validation obligatoire">
 									<f:selectItem itemLabel="" itemValue="#{null}"/>
 									<f:selectItems  value="#{catExamCtrl.defaultVue.listeSpec}"/> 
-									<a4j:support event="onchange" ajaxSingle="true" actionListener="#{defaultVue.updateLibSpec}" reRender="pngp_libSpec" />						
+									<a4j:support event="onchange" ajaxSingle="true" />						
 								</h:selectOneMenu>	
 								<rich:message for="cod_spec" errorClass="msg_error" />
 							</h:panelGroup> 
-							
-							<h:outputText value=""	 />
-							<h:panelGroup id="pngp_libSpec">
-								<h:panelGroup>
-									<h:inputText value="#{catExamCtrl.defaultVue.entiteCourante.libSpec}" style="width: 60%" readonly="true"  rendered="#{! empty catExamCtrl.defaultVue.entiteCourante.libSpec}" />
-								</h:panelGroup>								
-							</h:panelGroup>
 							
          				</h:panelGrid>  
          				

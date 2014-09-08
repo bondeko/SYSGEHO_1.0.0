@@ -59,10 +59,11 @@
          				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
 
 							<h:outputText value="#{locale.catexam}"	 />
-							<h:inputText id="inpt_libcatexam"  value="#{typExamCtrl.defaultVue.entiteCourante.libCatExam}" style="width: 60%" readonly="true">							 	
-								<a4j:support event="onchange"  ajaxSingle="true" />											
-							</h:inputText>	
-							
+							<h:panelGroup>
+								<h:inputText  value="#{typExamCtrl.defaultVue.entiteCourante.tabCatExam.libCatExam}" style="width: 20%" readonly="true"/>		
+								<h:inputText  value="#{typExamCtrl.defaultVue.entiteCourante.tabCatExam.libCatExam}" style="width: 40%" readonly="true"/>		
+							</h:panelGroup>
+												 	
          				</h:panelGrid>  
          				
          				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >

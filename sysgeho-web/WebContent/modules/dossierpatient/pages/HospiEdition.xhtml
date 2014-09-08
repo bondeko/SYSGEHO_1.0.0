@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+ 	<ui:composition template="/shared/templates/templateFormulaireEdition.xhtml">
+   			
+		<ui:param name="managedBean" value="#{sessionScope[hospiCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" d'une Hospitalition" />
+		
+	<!-- Definition du contenu de l'ecran principal  -->
+		<ui:define name="ecranPrincipalContenu">
+		
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Informations Patient" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:panelGroup>
+								<h:outputText value="Patient" />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
+							<h:panelGroup>
+							<h:inputText id="inpt_codPat" value="#{hospiCtrl.defaultVue.entiteCourante.tabPat.codPat}" style="width: 20%" 
+								required="true" requiredMessage="Valeur obligatoire"
+								readonly="true" title="Code" disabled="false">
+								<a4j:support event="onchange" ajaxSingle="true" 
+									reRender="prenom_1,prenom_2,datnais_1,datnais_2,aff_1,aff_2,soc_1,soc_2,med_1,med_2,enreg_1,enreg_2"/>
+							</h:inputText>	
+							<h:inputText id="inpt_libPat" value="#{hospiCtrl.defaultVue.entiteCourante.tabPat.libNom}" style="width: 40%" 
+									required="false" readonly="true"  
+									title="#{locale.libelle}" disabled="false"> 
+									<a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
+							<h:panelGroup>
+								<a4j:commandButton   value="..." action="#{hospiCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" >   	
+		           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
+		         						<f:setPropertyActionListener value="HospiEdition" target="#{patCtrl.defaultVue.navigationMgr.selectionSource}" />
+		         						<!-- MAJ de la destination en mode Selection   --> 
+		           						<f:setPropertyActionListener value="true" target="#{patCtrl.defaultVue.navigationMgr.enSelection}" />  
+		           						<!-- Nom du Controlleur de l'entite source  --> 
+		          						<f:setPropertyActionListener value="hospiCtrl" target="#{patCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
+		          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
+		          						<f:setPropertyActionListener value="PatListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
+		          						<!-- Nom de la propriete a selectionner -->							         						             						
+		          						<f:setPropertyActionListener value="tabPat" target="#{defaultVue.navigationMgr.selectionPropertyName}" />            						             						          						             				            					      						
+				             	</a4j:commandButton>
+				             	<rich:message for="inpt_codPat" errorClass="msg_error" />
+							</h:panelGroup>
+						</h:panelGroup>
+							
+							<h:panelGroup id="prenom_1">
+								<h:outputText value="#{locale.prenom}" rendered="#{! empty hospiCtrl.defaultVue.entiteCourante.tabPat.codPat}" />
+							</h:panelGroup>
+							<h:panelGroup id="prenom_2">							
+								<h:inputText  value="#{hospiCtrl.defaultVue.entiteCourante.tabPat.libPre}" style="width: 40%" readonly="true"  title="#{locale.prenom}" rendered="#{! empty hospiCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+							</h:panelGroup>
+							
+							<h:panelGroup id="datnais_1">
+								<h:outputText value="Date de naissance" rendered="#{! empty hospiCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+							</h:panelGroup>	
+							<h:panelGroup id="datnais_2">
+								<h:inputText value="#{hospiCtrl.defaultVue.entiteCourante.tabPat.dateNais}" readonly="true" style="width: 30%" title="Date de naissance" rendered="#{! empty hospiCtrl.defaultVue.entiteCourante.tabPat.codPat}" >
+									<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+								</h:inputText>
+							</h:panelGroup>
+							
+							<h:panelGroup id="enreg_1">
+								<h:outputText value="Date enregistrement" rendered="#{! empty hospiCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+							</h:panelGroup>
+							<h:panelGroup id="enreg_2">
+								<h:inputText value="#{hospiCtrl.defaultVue.entiteCourante.tabPat.dateEnreg}" readonly="true" style="width: 30%" title="Date enregistrement"  rendered="#{! empty hospiCtrl.defaultVue.entiteCourante.tabPat.codPat}">
+									<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+								</h:inputText>
+							</h:panelGroup>
+							
+							
+						</h:panelGrid>
+							
+						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdLColRightDynamic" cellspacing="10" >
+							
+							<h:panelGroup id="soc_1">
+								<h:outputText value="#{locale.societe}" rendered="#{! empty hospiCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+							</h:panelGroup>
+							<h:panelGroup id="soc_2">
+								<h:inputText id="inpt_codSoc" value="#{hospiCtrl.defaultVue.entiteCourante.tabPat.tabSoc.codSoc}" style="width: 20%" 
+									readonly="true" title="Code" disabled="false" rendered="#{! empty hospiCtrl.defaultVue.entiteCourante.tabPat.codPat}">
+									<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>	
+								<h:inputText id="inpt_libSoc" value="#{hospiCtrl.defaultVue.entiteCourante.tabPat.tabSoc.libSoc}" style="width: 40%" 
+										readonly="true"  title="#{locale.libelle}" disabled="false" rendered="#{! empty hospiCtrl.defaultVue.entiteCourante.tabPat.codPat}"> 
+										<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+							</h:panelGroup>
+							
+							<h:panelGroup id="med_1">
+								<h:outputText value="#{locale.medecintraitant}" rendered="#{! empty hospiCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+							</h:panelGroup>
+							<h:panelGroup id="med_2">
+								<h:inputText  value="#{hospiCtrl.defaultVue.entiteCourante.tabPat.libMed}" style="width: 60%" readonly="true" rendered="#{! empty hospiCtrl.defaultVue.entiteCourante.tabPat.codPat}">							 	
+									<a4j:support event="onchange"  ajaxSingle="true" />											
+								</h:inputText>
+							</h:panelGroup>
+							
+							<h:panelGroup id="aff_1">
+								<h:outputText value="#{locale.estaffilie} ?" rendered="#{! empty hospiCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+							</h:panelGroup>
+							<h:panelGroup id="aff_2">
+								<h:selectBooleanCheckbox value="#{hospiCtrl.defaultVue.entiteCourante.tabPat.BEstAff}"  disabled="true" rendered="#{! empty hospiCtrl.defaultVue.entiteCourante.tabPat.codPat}">
+									<a4j:support ajaxSingle="true"  event="onchange" />
+								</h:selectBooleanCheckbox>
+							</h:panelGroup>
+							
+						</h:panelGrid>
+					</h:panelGrid>
+         	
+				</fieldset>								
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="#{locale.medecinsignataire}" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:panelGroup>
+								<h:outputText value="#{locale.medecin}" />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
+						
+							<h:panelGroup >	
+								<h:selectOneMenu id="cod_med" value="#{hospiCtrl.defaultVue.entiteCourante.tabUsr.codUsr}" style="width: 60%"  title="#{locale.medecin}" 
+												required="true" requiredMessage="Valeur obligatoire">
+									<f:selectItem itemLabel="" itemValue="#{null}"/>
+									<f:selectItems  value="#{hospiCtrl.defaultVue.listeMed}"/> 
+									<a4j:support event="onchange" ajaxSingle="true" />						
+								</h:selectOneMenu>	
+								<rich:message for="cod_med" errorClass="msg_error" />
+							</h:panelGroup> 
+							
+         			</h:panelGrid>  
+         				
+         			<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+							
+         			</h:panelGrid> 
+         				         		         		
+         		</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Service" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:panelGroup>
+								<h:outputText value="Service" />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
+						
+							<h:panelGroup >	
+								<h:selectOneMenu id="cod_ser" value="#{hospiCtrl.defaultVue.entiteCourante.tabSvc.codSvc}" style="width: 60%"  title="#{locale.medecin}" 
+										required="true" requiredMessage="Valeur obligatoire">
+									<f:selectItem itemLabel="" itemValue="#{null}"/>
+									<f:selectItems  value="#{hospiCtrl.defaultVue.listeSvc}"/> 
+									<a4j:support event="onchange" ajaxSingle="true" />						
+								</h:selectOneMenu>	
+								<rich:message for="cod_ser" errorClass="msg_error" />
+							</h:panelGroup> 
+							
+         			</h:panelGrid>  
+         				
+         			<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+							
+         			</h:panelGrid> 
+         				         		         		
+         		</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="#{locale.infocompl}" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         					<h:outputText value="Date d'admission" />
+							<h:panelGroup >					
+								<rich:calendar value="#{hospiCtrl.defaultVue.entiteCourante.dateAdmi}" inputStyle="width: 30%"  title="Date " 
+										styleClass="selectDate"  datePattern="dd/MM/yyyy" >
+									<a4j:support event="onchanged" ajaxSingle="true" />
+								</rich:calendar>
+							</h:panelGroup>
+         				
+							<h:outputText value="#{locale.numcarnet}"/>
+							<h:inputText id="inpt_numcar" value="#{hospiCtrl.defaultVue.entiteCourante.libNumCarnet}"  
+								 required="false" style="width: 30%" title="#{locale.numcarnet}" >
+							</h:inputText>
+							
+							<h:outputText value="#{locale.chamnum}"/>
+							<h:inputText id="inpt_numcbre" value="#{hospiCtrl.defaultVue.entiteCourante.libNumChbre}"  
+								 required="false" style="width: 30%" title="#{locale.chamnum}" >
+							</h:inputText>
+							
+							<h:outputText value="#{locale.linum}"/>
+							<h:inputText id="inpt_numlit" value="#{hospiCtrl.defaultVue.entiteCourante.libNumLit}"  
+								 required="false" style="width: 30%" title="#{locale.linum}" >
+							</h:inputText>
+							
+							<h:outputText value="Montant TTC" />
+							<h:inputText id="inpt_mntttc" value="#{hospiCtrl.defaultVue.entiteCourante.valMnt}"  styleClass="money"
+								 required="false"  style="width: 30%" 
+								 title="Montant TTC"
+								 converterMessage="#{msg['erreur.conversion.entiere']}"   >
+								 <f:convertNumber currencySymbol="F CFA" pattern="#,###"   />
+							</h:inputText>
+							
+							<h:outputText value="Motif"/>
+							<h:inputText id="inpt_mtf" value="#{hospiCtrl.defaultVue.entiteCourante.libMotif}"  
+								 required="false" style="width: 60%" title="Motif" >
+							</h:inputText>
+							
+							<h:outputText value="Observation"/>
+							<h:inputTextarea id="inpt_stat" value="#{hospiCtrl.defaultVue.entiteCourante.libObs}"  
+								 required="false" style="width: 60%" title="Observation" >
+							</h:inputTextarea>
+							
+         				</h:panelGrid>  
+         				
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         				</h:panelGrid> 
+         				         		         		
+         			</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+		</ui:define>
+													
+	</ui:composition>
+	
+</html>

@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+ 	<ui:composition template="/shared/templates/templateFormulaireEdition.xhtml">
+   			
+		<ui:param name="managedBean" value="#{sessionScope[soinCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" d'un Soin " />
+		
+	<!-- Definition du contenu de l'ecran principal  -->
+		<ui:define name="ecranPrincipalContenu">
+		
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Informations Patient" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:panelGroup>
+								<h:outputText value="Patient" />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
+							<h:panelGroup>
+							<h:inputText id="inpt_codPat" value="#{soinCtrl.defaultVue.entiteCourante.tabPat.codPat}" style="width: 20%" 
+								required="true" requiredMessage="Valeur obligatoire"
+								readonly="true" 
+								title="Code" disabled="false">
+								<a4j:support event="onchange" ajaxSingle="true" 
+									reRender="prenom_1,prenom_2,datnais_1,datnais_2,aff_1,aff_2,soc_1,soc_2,med_1,med_2,enreg_1,enreg_2"/>
+							</h:inputText>	
+							<h:inputText id="inpt_libPat" value="#{soinCtrl.defaultVue.entiteCourante.tabPat.libNom}" style="width: 40%" 
+									required="false"
+									readonly="true"  
+									title="#{locale.libelle}" disabled="false"> 
+									<a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
+							<h:panelGroup>
+								<a4j:commandButton   value="..." action="#{soinCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" >   	
+		           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
+		         						<f:setPropertyActionListener value="SoinEdition" target="#{patCtrl.defaultVue.navigationMgr.selectionSource}" />
+		         						<!-- MAJ de la destination en mode Selection   --> 
+		           						<f:setPropertyActionListener value="true" target="#{patCtrl.defaultVue.navigationMgr.enSelection}" />  
+		           						<!-- Nom du Controlleur de l'entite source  --> 
+		          						<f:setPropertyActionListener value="soinCtrl" target="#{patCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
+		          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
+		          						<f:setPropertyActionListener value="PatListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
+		          						<!-- Nom de la propriete a selectionner -->							         						             						
+		          						<f:setPropertyActionListener value="tabPat" target="#{defaultVue.navigationMgr.selectionPropertyName}" />            						             						          						             				            					      						
+				             	</a4j:commandButton>
+				             	<rich:message for="inpt_codPat" errorClass="msg_error" />
+							</h:panelGroup>
+						</h:panelGroup>
+							
+							<h:panelGroup id="prenom_1">
+								<h:outputText value="#{locale.prenom}" rendered="#{! empty soinCtrl.defaultVue.entiteCourante.tabPat.codPat}" />
+							</h:panelGroup>
+							<h:panelGroup id="prenom_2">							
+								<h:inputText  value="#{soinCtrl.defaultVue.entiteCourante.tabPat.libPre}" style="width: 40%" readonly="true"  title="#{locale.prenom}" rendered="#{! empty soinCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+							</h:panelGroup>
+							
+							<h:panelGroup id="datnais_1">
+								<h:outputText value="Date de naissance" rendered="#{! empty soinCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+							</h:panelGroup>	
+							<h:panelGroup id="datnais_2">
+								<h:inputText value="#{soinCtrl.defaultVue.entiteCourante.tabPat.dateNais}" readonly="true" style="width: 30%" title="Date de naissance" rendered="#{! empty soinCtrl.defaultVue.entiteCourante.tabPat.codPat}" >
+									<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+								</h:inputText>
+							</h:panelGroup>
+							
+							<h:panelGroup id="enreg_1">
+								<h:outputText value="Date enregistrement" rendered="#{! empty soinCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+							</h:panelGroup>
+							<h:panelGroup id="enreg_2">
+								<h:inputText value="#{soinCtrl.defaultVue.entiteCourante.tabPat.dateEnreg}" readonly="true" style="width: 30%" title="Date enregistrement"  rendered="#{! empty soinCtrl.defaultVue.entiteCourante.tabPat.codPat}">
+									<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+								</h:inputText>
+							</h:panelGroup>
+							
+							
+						</h:panelGrid>
+							
+						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdLColRightDynamic" cellspacing="10" >
+							
+							<h:panelGroup id="soc_1">
+								<h:outputText value="#{locale.societe}" rendered="#{! empty soinCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+							</h:panelGroup>
+							<h:panelGroup id="soc_2">
+								<h:inputText id="inpt_codSoc" value="#{soinCtrl.defaultVue.entiteCourante.tabPat.tabSoc.codSoc}" style="width: 20%" 
+									readonly="true" title="Code" disabled="false" rendered="#{! empty soinCtrl.defaultVue.entiteCourante.tabPat.codPat}">
+									<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>	
+								<h:inputText id="inpt_libSoc" value="#{soinCtrl.defaultVue.entiteCourante.tabPat.tabSoc.libSoc}" style="width: 40%" 
+										readonly="true"  title="#{locale.libelle}" disabled="false" rendered="#{! empty soinCtrl.defaultVue.entiteCourante.tabPat.codPat}"> 
+										<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+							</h:panelGroup>
+							
+							<h:panelGroup id="med_1">
+								<h:outputText value="#{locale.medecintraitant}" rendered="#{! empty soinCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+							</h:panelGroup>
+							<h:panelGroup id="med_2">
+								<h:inputText  value="#{soinCtrl.defaultVue.entiteCourante.tabPat.libMed}" style="width: 60%" readonly="true" rendered="#{! empty soinCtrl.defaultVue.entiteCourante.tabPat.codPat}">							 	
+									<a4j:support event="onchange"  ajaxSingle="true" />											
+								</h:inputText>
+							</h:panelGroup>
+							
+							<h:panelGroup id="aff_1">
+								<h:outputText value="#{locale.estaffilie} ?" rendered="#{! empty soinCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+							</h:panelGroup>
+							<h:panelGroup id="aff_2">
+								<h:selectBooleanCheckbox value="#{soinCtrl.defaultVue.entiteCourante.tabPat.BEstAff}"  disabled="true" rendered="#{! empty soinCtrl.defaultVue.entiteCourante.tabPat.codPat}">
+									<a4j:support ajaxSingle="true"  event="onchange" />
+								</h:selectBooleanCheckbox>
+							</h:panelGroup>
+							
+						</h:panelGrid>
+					</h:panelGrid>
+         	
+				</fieldset>								
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Type de soin" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:panelGroup>
+								<h:outputText value="Type de soin" />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
+							<h:panelGroup>
+							<h:inputText id="inpt_codtypSoin" value="#{soinCtrl.defaultVue.entiteCourante.tabTypSoin.codTypSoin}" style="width: 20%" 
+								required="true" readonly="true"  requiredMessage="Valeur obligatoire"
+								title="Code" disabled="false">
+								<a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>	
+							<h:inputText id="inpt_libMed" value="#{soinCtrl.defaultVue.entiteCourante.tabTypSoin.libTypSoin}" style="width: 40%" 
+									required="false"
+									readonly="true"  
+									title="#{locale.libelle}" disabled="false"> 
+									<a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
+							<h:panelGroup>
+								<a4j:commandButton   value="..." action="#{soinCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" >   	
+		           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
+		         							<f:setPropertyActionListener value="SoinEdition" target="#{typSoinCtrl.defaultVue.navigationMgr.selectionSource}" />
+		         						<!-- MAJ de la destination en mode Selection   --> 
+		           						<f:setPropertyActionListener value="true" target="#{typSoinCtrl.defaultVue.navigationMgr.enSelection}" />  
+		           						<!-- Nom du Controlleur de l'entite source  --> 
+		          						<f:setPropertyActionListener value="soinCtrl" target="#{typSoinCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
+		          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
+		          						<f:setPropertyActionListener value="TypSoinListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
+		          						<!-- Nom de la propriete a selectionner -->							         						             						
+		          						<f:setPropertyActionListener value="tabTypSoin" target="#{defaultVue.navigationMgr.selectionPropertyName}" />            						             						          						             				            					      						
+				             	</a4j:commandButton>
+				             	<rich:message for="inpt_codtypSoin" errorClass="msg_error" />
+							</h:panelGroup>
+						</h:panelGroup>
+						
+         			</h:panelGrid>  
+         				
+         			<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         			</h:panelGrid> 
+         				         		         		
+         		</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Autres Informations" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         					<h:panelGroup>
+         						<h:outputText value="#{locale.libelle} Soin"	 />
+								<ui:include src="/shared/include/required.xhtml" />
+         					</h:panelGroup>
+         					<h:panelGroup>
+	         					<h:inputText id="inpt_libSoin" value="#{soinCtrl.defaultVue.entiteCourante.libSoin}"  
+									 required="true" style="width: 60%" title="#{locale.libelle} Soin" >
+									 <a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+								<rich:message for="inpt_libSoin" errorClass="msg_error" />
+							</h:panelGroup>
+							
+							<h:outputText value="Motif"	 />
+							<h:inputText  value="#{soinCtrl.defaultVue.entiteCourante.libMotif}"  
+								 required="false" style="width: 60%" title="Objet" >
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							
+							<h:outputText value="Date Soin" />
+							<h:panelGroup >					
+								<rich:calendar value="#{soinCtrl.defaultVue.entiteCourante.dateSoin}" inputStyle="width: 30%"  title="Date Soin" 
+										styleClass="selectDate"  datePattern="dd/MM/yyyy" >
+									<a4j:support event="onchanged" ajaxSingle="true" />
+								</rich:calendar>
+							</h:panelGroup>
+							
+							<h:outputText value="Montant TTC" />
+							<h:inputText id="inpt_mntttc" value="#{soinCtrl.defaultVue.entiteCourante.valMntTtc}"  styleClass="money"
+								 required="false"  style="width: 30%" 
+								 title="Montant TTC"
+								 converterMessage="#{msg['erreur.conversion.entiere']}"   >
+								 <f:convertNumber currencySymbol="F CFA" pattern="#,###"   />
+							</h:inputText>
+							
+							<h:outputText value="Observation"	 />
+							<h:inputTextarea  value="#{soinCtrl.defaultVue.entiteCourante.libObs}"  
+								 required="false" style="width: 60%" title="Observation" >
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputTextarea>
+							
+							
+         				</h:panelGrid>  
+         				
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         				</h:panelGrid> 
+         				         		         		
+         			</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+		</ui:define>
+													
+	</ui:composition>
+	
+</html>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+ 	<ui:composition template="/shared/templates/templateFormulaireDetails.xhtml">
+   			
+		<ui:param name="managedBean" value="#{sessionScope[examCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" d'un Examen " />
+		
+	<!-- Definition du contenu de l'ecran principal  -->
+		<ui:define name="ecranPrincipalContenu">
+
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Informations Patient" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:outputText value="Patient" />
+							<h:panelGroup>
+								<h:inputText id="inpt_codPat" value="#{examCtrl.defaultVue.entiteCourante.tabPat.codPat}" style="width: 20%" 
+									readonly="true" title="Code" >
+									<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>	
+								<h:inputText id="inpt_libPat" value="#{examCtrl.defaultVue.entiteCourante.tabPat.libNom}" style="width: 40%" 
+										readonly="true"  title="#{locale.libelle}" > 
+										<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+							</h:panelGroup>
+							
+							<h:outputText value="#{locale.prenom}" />
+							<h:inputText  value="#{examCtrl.defaultVue.entiteCourante.tabPat.libPre}" style="width: 40%" readonly="true"  title="#{locale.prenom}" />
+							
+							<h:outputText value="Date de naissance" />
+							<h:inputText value="#{examCtrl.defaultVue.entiteCourante.tabPat.dateNais}" readonly="true" style="width: 30%" title="Date de naissance"  >
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+							</h:inputText>
+							
+							<h:outputText value="Date enregistrement" />
+							<h:inputText value="#{examCtrl.defaultVue.entiteCourante.tabPat.dateEnreg}" readonly="true" style="width: 30%" title="Date enregistrement" >
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+							</h:inputText>
+							
+						</h:panelGrid>
+							
+						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdLColRightDynamic" cellspacing="10" >
+							
+							<h:outputText value="#{locale.societe}" />
+							<h:panelGroup id="soc_2">
+								<h:inputText id="inpt_codSoc" value="#{examCtrl.defaultVue.entiteCourante.tabPat.tabSoc.codSoc}" style="width: 20%" 
+									readonly="true" title="Code" disabled="false" >
+									<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>	
+								<h:inputText id="inpt_libSoc" value="#{examCtrl.defaultVue.entiteCourante.tabPat.tabSoc.libSoc}" style="width: 40%" 
+										readonly="true"  title="#{locale.libelle}" disabled="false" > 
+										<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+							</h:panelGroup>
+							
+							<h:outputText value="#{locale.medecintraitant}" />
+							<h:inputText  value="#{examCtrl.defaultVue.entiteCourante.tabPat.libMed}" style="width: 60%" readonly="true" >							 	
+								<a4j:support event="onchange"  ajaxSingle="true" />											
+							</h:inputText>
+							
+							<h:outputText value="#{locale.estaffilie} ?" />
+							<h:selectBooleanCheckbox value="#{examCtrl.defaultVue.entiteCourante.tabPat.BEstAff}"  disabled="true" >
+								<a4j:support ajaxSingle="true"  event="onchange" />
+							</h:selectBooleanCheckbox>
+							
+						</h:panelGrid>
+					</h:panelGrid>
+         	
+				</fieldset>								
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Type d'examen" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:outputText value="Type d'examen" />
+							<h:panelGroup>
+							<h:inputText id="inpt_codtypExam" value="#{examCtrl.defaultVue.entiteCourante.tabTypExam.codTypExam}" style="width: 20%" 
+								readonly="true" 
+								title="Code" disabled="false">
+								<a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>	
+							<h:inputText id="inpt_libMed" value="#{examCtrl.defaultVue.entiteCourante.tabTypExam.libTypExam}" style="width: 40%" 
+									readonly="true"  
+									title="#{locale.libelle}" disabled="false"> 
+									<a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+						</h:panelGroup>
+						
+						<h:outputText value="Categorie" />	
+						<h:panelGroup >
+							<h:inputText  value="#{examCtrl.defaultVue.entiteCourante.tabTypExam.tabCatExam.codCatExam}" style="width: 20%" readonly="true"  title="Categorie" />
+							<h:inputText  value="#{examCtrl.defaultVue.entiteCourante.tabTypExam.tabCatExam.libCatExam}" style="width: 40%"  readonly="true" />	
+						</h:panelGroup>
+							
+         			</h:panelGrid>  
+         				
+         			<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         			</h:panelGrid> 
+         				         		         		
+         		</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Informations examen" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         					<h:outputText value="Code de l'Examen"	 />
+         					<h:inputText id="inpt_codExam" value="#{examCtrl.defaultVue.entiteCourante.codExam}"  
+								 required="true" style="width: 30%" title="Code de l'Examen" readonly="true">
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+         				
+         					<h:outputText value="#{locale.libelle} de l'Examen"	 />
+         					<h:inputText id="inpt_libExam" value="#{examCtrl.defaultVue.entiteCourante.libExam}"  
+								 required="true" style="width: 60%" title="#{locale.libelle} de l'Examen"  readonly="true">
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							
+							<h:outputText value="Objet"	 />
+							<h:inputText  value="#{examCtrl.defaultVue.entiteCourante.libObj}"  
+								 required="false" style="width: 60%" title="Objet" readonly="true">
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							
+							<h:outputText value="Statut"	 />
+							<h:inputText  value="#{examCtrl.defaultVue.entiteCourante.libStatut}"  
+								 required="false" style="width: 60%" title="Statut" readonly="true">
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							
+							<h:outputText value="Prescipteur"	 />
+							<h:inputText  value="#{examCtrl.defaultVue.entiteCourante.libPres}"  
+								 required="false" style="width: 60%" title="Prescipteur" readonly="true">
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							
+							<h:outputText value="Date Examen" />
+							<h:inputText value="#{examCtrl.defaultVue.entiteCourante.dateExam}" readonly="true" style="width: 30%" title="Date Examen"  >
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+							</h:inputText>
+							
+							<h:outputText value="Montant TTC" />
+							<h:inputText id="inpt_mntttc" value="#{examCtrl.defaultVue.entiteCourante.valMntTtc}"  styleClass="money"
+								 required="false"  style="width: 30%" 
+								 title="Montant TTC"
+								 converterMessage="#{msg['erreur.conversion.entiere']}"   readonly="true">
+								 <f:convertNumber currencySymbol="F CFA" pattern="#,###"   />
+							</h:inputText>
+							
+							
+         				</h:panelGrid>  
+         				
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         				</h:panelGrid> 
+         				         		         		
+         			</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+		</ui:define>
+	
+	</ui:composition>
+	
+</html>

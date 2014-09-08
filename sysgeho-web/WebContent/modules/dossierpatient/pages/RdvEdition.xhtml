@@ -26,20 +26,14 @@
          				
 							<h:outputText value="Type de rendez-vous" />
 							<h:panelGroup >	
-								<h:selectOneMenu id="cod_typrdv" value="#{rdvCtrl.defaultVue.entiteCourante.codTypRdv}" style="width: 40%"  title="Type de rendez-vous" required="true">
+								<h:selectOneMenu id="cod_typrdv" value="#{rdvCtrl.defaultVue.entiteCourante.tabTypRdv.codTypRdv}" style="width: 40%"  
+										title="Type de rendez-vous" required="true" requiredMessage="Valeur obligatoire">
 									<f:selectItem itemLabel="" itemValue="#{null}"/>
 									<f:selectItems  value="#{rdvCtrl.defaultVue.listeTypRdv}"/> 
-									<a4j:support event="onchange" ajaxSingle="true" actionListener="#{defaultVue.updateLibTypRdv}" reRender="pngp_libTypRdv" />						
+									<a4j:support event="onchange" ajaxSingle="true" />						
 								</h:selectOneMenu>	
 								<rich:message for="cod_typrdv" errorClass="msg_error" />
 							</h:panelGroup> 
-							
-							<h:outputText value=""	 />
-							<h:panelGroup id="pngp_libTypRdv">
-								<h:panelGroup>
-									<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.libTypRdv}" style="width: 60%" readonly="true"  rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.libTypRdv}" />
-								</h:panelGroup>								
-							</h:panelGroup>
 							
          				</h:panelGrid>  
          				
@@ -62,20 +56,14 @@
          				
 							<h:outputText value="Service d'admission" />
 							<h:panelGroup >	
-								<h:selectOneMenu id="cod_Serc" value="#{rdvCtrl.defaultVue.entiteCourante.codSvc}" style="width: 40%"  title="Service d'admission" required="true">
+								<h:selectOneMenu id="cod_Serc" value="#{rdvCtrl.defaultVue.entiteCourante.tabSvc.codSvc}" style="width: 40%"  
+										title="Service d'admission" required="true" requiredMessage="Valeur obligatoire">
 									<f:selectItem itemLabel="" itemValue="#{null}"/>
 									<f:selectItems  value="#{rdvCtrl.defaultVue.listeSvc}"/> 
-									<a4j:support event="onchange" ajaxSingle="true" actionListener="#{defaultVue.updateLibSvc}" reRender="pngp_libSvc" />						
+									<a4j:support event="onchange" ajaxSingle="true" />						
 								</h:selectOneMenu>	
 								<rich:message for="cod_Serc" errorClass="msg_error" />
 							</h:panelGroup> 
-							
-							<h:outputText value=""	 />
-							<h:panelGroup id="pngp_libSvc">
-								<h:panelGroup>
-									<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.libSvc}" style="width: 60%" readonly="true"  rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.libSvc}" />
-								</h:panelGroup>								
-							</h:panelGroup>
 							
          				</h:panelGrid>  
          				
@@ -107,7 +95,7 @@
 								readonly="true" 
 								title="Code" disabled="false">
 								<a4j:support event="onchange" ajaxSingle="true" 
-									reRender="prenom_1,prenom_2,mat_1,mat_2,datnais_1,datnais_2,sexe_1,sexe_2,aff_1,aff_2,soc_1,soc_2,prof_1,prof_2,med_1,med_2,enreg_1,enreg_2"/>
+									reRender="prenom_1,prenom_2,datnais_1,datnais_2,aff_1,aff_2,soc_1,soc_2,prof_1,prof_2,med_1,med_2,enreg_1,enreg_2"/>
 							</h:inputText>	
 							<h:inputText id="inpt_libPat" value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.libNom}" style="width: 40%" 
 									required="false"
@@ -137,14 +125,7 @@
 								<h:outputText value="#{locale.prenom}" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}" />
 							</h:panelGroup>
 							<h:panelGroup id="prenom_2">							
-								<h:inputText  value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.libPre}" style="width: 40%" readonly="true"  title="#{locale.prenom}" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
-							</h:panelGroup>
-							
-							<h:panelGroup id="mat_1">
-								<h:outputText value="Matricule" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>	
-							</h:panelGroup>		
-							<h:panelGroup id="mat_2">								
-								<h:inputText  value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.libMat}" style="width: 40%" readonly="true"  title="Matricule" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+								<h:inputText  value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.libPre}" style="width: 60%" readonly="true"  title="#{locale.prenom}" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
 							</h:panelGroup>
 							
 							<h:panelGroup id="datnais_1">
@@ -156,38 +137,28 @@
 								</h:inputText>
 							</h:panelGroup>
 							
-							<h:panelGroup id="sexe_1">
-								<h:outputText value="Sexe"  rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
-							</h:panelGroup>	
-							<h:panelGroup id="sexe_2">
-								<h:selectOneRadio  value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.libSex}" disabled="true" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}">
-									<f:selectItem itemLabel="M" itemValue="M"  />
-									<f:selectItem itemLabel="F" itemValue="F"/>
-								</h:selectOneRadio>
-							</h:panelGroup>	
+							<h:panelGroup id="enreg_1">
+								<h:outputText value="Date enregistrement" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+							</h:panelGroup>
+							<h:panelGroup id="enreg_2">
+								<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.dateEnreg}" readonly="true" style="width: 30%" title="Date enregistrement"  rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}">
+									<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+								</h:inputText>
+							</h:panelGroup>
 							
 						</h:panelGrid>
 							
 						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdLColRightDynamic" cellspacing="10" >
 							
-							<h:panelGroup id="aff_1">
-								<h:outputText value="#{locale.estaffilie} ?" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
-							</h:panelGroup>
-							<h:panelGroup id="aff_2">
-								<h:selectBooleanCheckbox value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.BEstAff}"  disabled="true" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}">
-									<a4j:support ajaxSingle="true"  event="onchange" />
-								</h:selectBooleanCheckbox>
-							</h:panelGroup>
-							
 							<h:panelGroup id="soc_1">
 								<h:outputText value="#{locale.societe}" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
 							</h:panelGroup>
 							<h:panelGroup id="soc_2">
-								<h:inputText id="inpt_codSoc" value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.codSoc}" style="width: 20%" 
+								<h:inputText id="inpt_codSoc" value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.tabSoc.codSoc}" style="width: 20%" 
 									readonly="true" title="Code" disabled="false" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}">
 									<a4j:support event="onchange" ajaxSingle="true" />
 								</h:inputText>	
-								<h:inputText id="inpt_libSoc" value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.libSoc}" style="width: 40%" 
+								<h:inputText id="inpt_libSoc" value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.tabSoc.libSoc}" style="width: 40%" 
 										readonly="true"  title="#{locale.libelle}" disabled="false" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}"> 
 										<a4j:support event="onchange" ajaxSingle="true" />
 								</h:inputText>
@@ -211,13 +182,13 @@
 								</h:inputText>
 							</h:panelGroup>
 							
-							<h:panelGroup id="enreg_1">
-								<h:outputText value="Date enregistrement" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+							<h:panelGroup id="aff_1">
+								<h:outputText value="#{locale.estaffilie} ?" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
 							</h:panelGroup>
-							<h:panelGroup id="enreg_2">
-								<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.dateEnreg}" readonly="true" style="width: 30%" title="Date enregistrement"  rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}">
-									<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
-								</h:inputText>
+							<h:panelGroup id="aff_2">
+								<h:selectBooleanCheckbox value="#{rdvCtrl.defaultVue.entiteCourante.tabPat.BEstAff}"  disabled="true" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabPat.codPat}">
+									<a4j:support ajaxSingle="true"  event="onchange" />
+								</h:selectBooleanCheckbox>
 							</h:panelGroup>
 							
 						</h:panelGrid>
@@ -279,18 +250,14 @@
 							<h:outputText value="Services" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
 						</h:panelGroup>								
 						<h:panelGroup id="ser_2">
-							<h:inputText  value="#{rdvCtrl.defaultVue.entiteCourante.tabUsr.libSvc}" style="width: 60%"  readonly="true" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>	
+							<h:inputText  value="#{rdvCtrl.defaultVue.entiteCourante.tabUsr.tabSvc.libSvc}" style="width: 60%"  readonly="true" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>	
 						</h:panelGroup>	
-							
-         			</h:panelGrid>  
-         				
-         			<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
-         				
-         				<h:panelGroup id="rol_1">
+						
+						<h:panelGroup id="rol_1">
 							<h:outputText value="#{locale.role}" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
 						</h:panelGroup>
 						<h:panelGroup id="rol_2">
-							<h:inputText  value="#{rdvCtrl.defaultVue.entiteCourante.tabUsr.libRol}" style="width: 60%"  readonly="true" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
+							<h:inputText  value="#{rdvCtrl.defaultVue.entiteCourante.tabUsr.tabRol.libRol}" style="width: 60%"  readonly="true" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
 						</h:panelGroup>
          					
 						<h:panelGroup id="adr_1">
@@ -300,6 +267,10 @@
 							<h:inputText  value="#{rdvCtrl.defaultVue.entiteCourante.tabUsr.libAdr}" style="width: 60%"  readonly="true" rendered="#{! empty rdvCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
 						</h:panelGroup>	
 							
+         			</h:panelGrid>  
+         				
+         			<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
          			</h:panelGrid> 
          				         		         		
          		</h:panelGrid>  
@@ -331,11 +302,7 @@
 								</rich:calendar>
 							</h:panelGroup>
 							
-         				</h:panelGrid>  
-         				
-         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
-         				
-         					<h:outputText value="#{locale.numordre}"/>
+							<h:outputText value="#{locale.numordre}"/>
 							<h:inputText id="inpt_num" value="#{rdvCtrl.defaultVue.entiteCourante.valNumOrdre}"  styleClass="money" 
 								 required="false" style="width: 10%" 
 								  title="Effectif"
@@ -347,6 +314,10 @@
 								  title="Observations">
 							</h:inputTextarea>
 							
+         				</h:panelGrid>  
+         				
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
          				</h:panelGrid> 
          				         		         		
          			</h:panelGrid>  

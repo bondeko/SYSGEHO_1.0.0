@@ -79,25 +79,32 @@
 				</h:outputText>			
 			</rich:column>
 			
-			<rich:column label="Profession" sortBy="#{entity.libProf}" filterBy="#{entity.libProf}" width="150" >
+			<rich:column label="#{locale.numcni}" sortBy="#{entity.libNumCni}" filterBy="#{entity.libNumCni}"  >
+				<f:facet name="header">
+					<h:outputText value="#{locale.numcni}"  />
+				</f:facet>
+				<h:outputText value="#{entity.libNumCni}" />				
+			</rich:column>
+			
+			<rich:column label="Profession" sortBy="#{entity.libProf}" filterBy="#{entity.libProf}" >
 				<f:facet name="header">
 					<h:outputText value="Profession"  />
 				</f:facet>
 				<h:outputText value="#{entity.libProf}" />				
 			</rich:column>
 			
-			<rich:column label="#{locale.estaffilie}?" sortBy="#{entity.BEstAff}" filterBy="#{entity.BEstAff}" width="150" >
+			<rich:column label="#{locale.estaffilie}?" sortBy="#{entity.BEstAff}" filterBy="#{entity.BEstAff}"  >
 				<f:facet name="header">
 					<h:outputText value="#{locale.estaffilie}?"  />
 				</f:facet>
 				<h:outputText value="#{entity.BEstAff}" />				
 			</rich:column>
 			
-			<rich:column label="#{locale.societe}" sortBy="#{entity.libSoc}" filterBy="#{entity.libSoc}" width="150" >
+			<rich:column label="#{locale.societe}" sortBy="#{entity.tabSoc.libSoc}" filterBy="#{entity.tabSoc.libSoc}"  >
 				<f:facet name="header">
 					<h:outputText value="#{locale.societe}" />
 				</f:facet>
-				<h:outputText value="#{entity.libSoc}" />	
+				<h:outputText value="#{entity.tabSoc.libSoc}" />	
 			</rich:column>
 			
 			<rich:column label="#{locale.estassure}?" sortBy="#{entity.BEstAss}" filterBy="#{entity.BEstAss}" width="150" >
@@ -107,11 +114,11 @@
 				<h:outputText value="#{entity.BEstAss}" />				
 			</rich:column>
 			
-			<rich:column label="Assureur" sortBy="#{entity.libAss}" filterBy="#{entity.libAss}" width="150" >
+			<rich:column label="Assureur" sortBy="#{entity.tabAss.libAss}" filterBy="#{entity.tabAss.libAss}" width="150" >
 				<f:facet name="header">
 					<h:outputText value="Assureur" />
 				</f:facet>
-				<h:outputText value="#{entity.libAss}" />	
+				<h:outputText value="#{entity.tabAss.libAss}" />	
 			</rich:column>
 			
 		</ui:define>
@@ -119,3 +126,4 @@
 	</ui:composition>
 	
 </html>
+
