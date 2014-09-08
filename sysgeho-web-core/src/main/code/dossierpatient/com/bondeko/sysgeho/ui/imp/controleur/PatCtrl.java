@@ -33,11 +33,7 @@ import com.bondeko.sysgeho.be.imp.entity.TabSoin;
 import com.bondeko.sysgeho.be.ref.entity.TabAss;
 import com.bondeko.sysgeho.be.ref.entity.TabSoc;
 import com.bondeko.sysgeho.be.util.EntFichier;
-<<<<<<< .mine
 import com.bondeko.sysgeho.be.util.OutputType;
-import com.bondeko.sysgeho.ui.core.base.DataValidationException;
-=======
->>>>>>> .r53
 import com.bondeko.sysgeho.ui.core.base.ExportFormatElt;
 import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
@@ -101,7 +97,7 @@ public class PatCtrl extends SysGehoCtrl<TabPat, TabPat>{
 		
 		v$mapTrt.put(DossierPatientTrt.ENREG_HOSPI.getKey(), new Traitement(DossierPatientTrt.ENREG_HOSPI));
 		
-<<<<<<< .mine
+
 		// Générer l'état des mouvements du conteneur
 		Traitement v$traitementGenListPat = new Traitement(
 				DossierPatientTrt.ETA_LIST_PAT);
@@ -110,7 +106,6 @@ public class PatCtrl extends SysGehoCtrl<TabPat, TabPat>{
 		v$traitementGenListPat.setMethode("genEtatListPat");
 		v$mapTrt.put(v$traitementGenListPat.getKey(), v$traitementGenListPat);
 		
-=======
 		v$mapTrt.put(DossierPatientTrt.ENREG_CONSUL.getKey(), new Traitement(DossierPatientTrt.ENREG_CONSUL));
 		
 		v$mapTrt.put(DossierPatientTrt.ENREG_EXAM.getKey(), new Traitement(DossierPatientTrt.ENREG_EXAM));
@@ -119,7 +114,7 @@ public class PatCtrl extends SysGehoCtrl<TabPat, TabPat>{
 		
 		v$mapTrt.put(DossierPatientTrt.EXP_ETA_PAT.getKey(), new Traitement(DossierPatientTrt.EXP_ETA_PAT));
 		
->>>>>>> .r53
+
 		Traitement v$traitement = new Traitement(
 				DossierPatientTrt.NAVIGUER_RDV.naviguerVersFormulaireListe(),
 				DossierPatientTrt.NAVIGUER_RDV);
@@ -959,5 +954,4 @@ public class PatCtrl extends SysGehoCtrl<TabPat, TabPat>{
 		return "SoinEdition";
 	}
 	
->>>>>>> .r53
 }
