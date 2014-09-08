@@ -16,24 +16,24 @@ import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.IBaseSisv;
 import com.bondeko.sysgeho.be.core.svco.base.BaseSvco;
-import com.bondeko.sysgeho.be.imp.entity.TabCpteRenduConsul;
-import com.bondeko.sysgeho.be.imp.sisv.ISisvCpteRenduConsul;
+import com.bondeko.sysgeho.be.imp.entity.TabExam;
+import com.bondeko.sysgeho.be.imp.sisv.ISisvExam;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class SvcoCpteRenduConsul extends BaseSvco<TabCpteRenduConsul> implements IRemoteCpteRenduConsul, ILocalCpteRenduConsul{
+public class SvcoExam extends BaseSvco<TabExam> implements IRemoteExam, ILocalExam{
 	
 	@EJB
-	ISisvCpteRenduConsul sisvCpteRenduConsul;
+	ISisvExam sisvExam;
 	
 	@Resource
 	SessionContext session;
 
-	private static BaseLogger logger = BaseLogger.getLogger(SvcoCpteRenduConsul.class);
+	private static BaseLogger logger = BaseLogger.getLogger(SvcoExam.class);
 	
 	@Override
-	protected IBaseSisv<TabCpteRenduConsul, String> getBaseSisv() {
-		return sisvCpteRenduConsul;
+	protected IBaseSisv<TabExam, String> getBaseSisv() {
+		return sisvExam;
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class SvcoCpteRenduConsul extends BaseSvco<TabCpteRenduConsul> implements
 	public <X extends BaseEntity> X rechercher(X entity, Serializable id)
 			throws SysGehoAppException {
 		try {
-			return sisvCpteRenduConsul.rechercher(entity,id);
+			return sisvExam.rechercher(entity,id);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -55,7 +55,7 @@ public class SvcoCpteRenduConsul extends BaseSvco<TabCpteRenduConsul> implements
 	public <X extends BaseEntity> List<X> rechercherTout(X entity)
 			throws SysGehoAppException {
 		try {
-			return sisvCpteRenduConsul.rechercherTout(entity);
+			return sisvExam.rechercherTout(entity);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -67,7 +67,7 @@ public class SvcoCpteRenduConsul extends BaseSvco<TabCpteRenduConsul> implements
 	public <X extends BaseEntity> List<X> rechercherParCritere(X entity)
 			throws SysGehoAppException {
 		try {
-			return sisvCpteRenduConsul.rechercherParCritere(entity);
+			return sisvExam.rechercherParCritere(entity);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -76,9 +76,9 @@ public class SvcoCpteRenduConsul extends BaseSvco<TabCpteRenduConsul> implements
 	}
 	
 	@Override
-	public TabCpteRenduConsul valider(TabCpteRenduConsul $pCpteRduConsul) throws SysGehoAppException {
+	public TabExam valider(TabExam $pExam) throws SysGehoAppException {
 		try {
-			return sisvCpteRenduConsul.valider($pCpteRduConsul);
+			return sisvExam.valider($pExam);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
