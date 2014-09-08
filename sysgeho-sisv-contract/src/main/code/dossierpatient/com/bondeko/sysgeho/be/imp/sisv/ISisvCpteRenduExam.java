@@ -4,12 +4,12 @@ import javax.ejb.Local;
 
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.IBaseSisv;
-import com.bondeko.sysgeho.be.imp.entity.TabCpteRenduConsul;
+import com.bondeko.sysgeho.be.imp.entity.TabCpteRenduExam;
 
 @Local
-public interface ISisvCpteRenduConsul extends IBaseSisv<TabCpteRenduConsul, String>{
+public interface ISisvCpteRenduExam extends IBaseSisv<TabCpteRenduExam, String>{
 
-	TabCpteRenduConsul valider(TabCpteRenduConsul $pCpteRduConsul)
+	TabCpteRenduExam valider(TabCpteRenduExam $pCpteRduExam)
 			throws SysGehoSystemException; 
 
 }
