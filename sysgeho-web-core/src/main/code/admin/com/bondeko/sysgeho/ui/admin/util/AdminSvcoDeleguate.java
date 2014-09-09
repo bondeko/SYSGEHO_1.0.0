@@ -46,6 +46,7 @@ public class AdminSvcoDeleguate {
 	public static IRemoteRol getSvcoRol() throws ServiceLocatorException{
         return (IRemoteRol) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoRol", IRemoteRol.class));
     }
+	
 
 	public BaseLogger getLogger() {
 		return logger;

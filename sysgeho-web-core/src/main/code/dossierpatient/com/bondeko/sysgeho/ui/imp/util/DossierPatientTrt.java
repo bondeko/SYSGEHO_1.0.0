@@ -235,6 +235,4 @@ public class DossierPatientTrt extends SysGehoTrt{
 	}
 	
 	
-	
->>>>>>> .r53
 }
