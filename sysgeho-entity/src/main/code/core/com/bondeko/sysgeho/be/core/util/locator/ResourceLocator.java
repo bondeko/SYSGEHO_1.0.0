@@ -11,7 +11,7 @@ public class ResourceLocator {
 	/***
 	 * configuration du répertoire de stockage du fichier resource "Config"
 	 */
-	private static String BUNDLE_PATH_NAME = "com.bondeko.sysgeho.Config";
+	private static String BUNDLE_PATH_NAME = "com.gss.gevee.Config";
 	
 	/****
 	 * Proriété de configuration du chemin de stockage des fichiers détat compilé Jasper
