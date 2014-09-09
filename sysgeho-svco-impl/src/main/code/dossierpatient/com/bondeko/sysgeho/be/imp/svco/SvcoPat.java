@@ -18,8 +18,7 @@ import com.bondeko.sysgeho.be.core.sisv.base.IBaseSisv;
 import com.bondeko.sysgeho.be.core.svco.base.BaseSvco;
 import com.bondeko.sysgeho.be.imp.entity.TabPat;
 import com.bondeko.sysgeho.be.imp.sisv.ISisvPat;
-import com.bondeko.sysgeho.be.imp.svco.ILocalPat;
-import com.bondeko.sysgeho.be.imp.svco.IRemotePat;
+import com.bondeko.sysgeho.be.util.EntFichier;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -70,6 +69,18 @@ public class SvcoPat extends BaseSvco<TabPat> implements IRemotePat, ILocalPat{
 			throws SysGehoAppException {
 		try {
 			return sisvPat.rechercherParCritere(entity);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
+	
+	@Override
+	public EntFichier  genererEtatListPat(TabPat pat)
+	throws SysGehoAppException {
+		try {
+			return sisvPat.genererEtatListPatient(pat);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
