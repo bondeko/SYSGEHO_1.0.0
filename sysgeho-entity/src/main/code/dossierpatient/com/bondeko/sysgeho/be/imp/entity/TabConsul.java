@@ -79,6 +79,12 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "BOO_CPTE_RENDU")
 	private BigDecimal booCpteRendu;
 	
+	@Column(name = "BOO_PAIE")
+	private BigDecimal booPaie;
+	
+	@Column(name = "REF_FAC")
+	private String refFac;
+	
 	@Transient
 	private String libSpec;
 	
@@ -240,6 +246,22 @@ private static final long serialVersionUID = 1L;
 
 	public String getLibSpec() {
 		return libSpec;
+	}
+
+	public void setBooPaie(BigDecimal booPaie) {
+		this.booPaie = booPaie;
+	}
+
+	public BigDecimal getBooPaie() {
+		return booPaie;
+	}
+
+	public void setRefFac(String refFac) {
+		this.refFac = refFac;
+	}
+
+	public String getRefFac() {
+		return refFac;
 	}
 
 }

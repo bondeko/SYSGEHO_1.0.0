@@ -66,6 +66,28 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "BOO_VAL")
 	private BigDecimal booVal;
 	
+	@Column(name = "BOO_PAIE")
+	private BigDecimal booPaie;
+	
+	@Column(name = "REF_FAC")
+	private String refFac;
+	
+	public BigDecimal getBooPaie() {
+		return booPaie;
+	}
+
+	public void setBooPaie(BigDecimal booPaie) {
+		this.booPaie = booPaie;
+	}
+
+	public String getRefFac() {
+		return refFac;
+	}
+
+	public void setRefFac(String refFac) {
+		this.refFac = refFac;
+	}
+
 	public String getCodSoin() {
 		return codSoin;
 	}

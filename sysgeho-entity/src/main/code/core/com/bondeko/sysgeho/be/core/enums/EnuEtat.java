@@ -28,6 +28,8 @@ public enum EnuEtat {
 	EN_COURS("2009", "En cours"),
 	
 	TERMINE("2010", "Terminé"),
+	
+	PAYE("2011", "Payé"),
 
 	SUPP("2001", "Supprimé");
 

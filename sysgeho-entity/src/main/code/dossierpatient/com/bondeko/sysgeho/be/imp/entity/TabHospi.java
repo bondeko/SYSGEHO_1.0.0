@@ -86,6 +86,12 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "LIB_PRESCRI")
 	private String libPrescri;
 	
+	@Column(name = "BOO_PAIE")
+	private BigDecimal booPaie;
+	
+	@Column(name = "REF_FAC")
+	private String refFac;
+	
 	
 	public Date getDateAdmi() {
 		if (this.datAdmi == null || this.datAdmi.trim().isEmpty())
@@ -271,6 +277,22 @@ private static final long serialVersionUID = 1L;
 
 	public void setLibPrescri(String libPrescri) {
 		this.libPrescri = libPrescri;
+	}
+
+	public void setBooPaie(BigDecimal booPaie) {
+		this.booPaie = booPaie;
+	}
+
+	public BigDecimal getBooPaie() {
+		return booPaie;
+	}
+
+	public void setRefFac(String refFac) {
+		this.refFac = refFac;
+	}
+
+	public String getRefFac() {
+		return refFac;
 	}
 
 }
