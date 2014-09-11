@@ -19,6 +19,7 @@ import com.bondeko.sysgeho.be.core.exception.SysGehoPersistenceException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.BaseSisv;
 import com.bondeko.sysgeho.be.imp.dao.IDaoHospi;
+import com.bondeko.sysgeho.be.imp.entity.TabConsul;
 import com.bondeko.sysgeho.be.imp.entity.TabHospi;
 
 @Stateless
@@ -106,6 +107,7 @@ public class SisvHospi extends BaseSisv<TabHospi, String> implements ISisvHospi{
 	
 	private TabHospi initialiserDonnees(TabHospi Hospi){
 		Hospi.setBooSor(BigDecimal.ZERO);
+		Hospi.setBooPaie(BigDecimal.ZERO);
 		return Hospi;
 	}
 	
@@ -126,6 +128,30 @@ public class SisvHospi extends BaseSisv<TabHospi, String> implements ISisvHospi{
 			tabHospi.setEtatEnt(EnuEtat.TERMINE.getValue());
 			return daoHospi.update(tabHospi);
 		} catch (SysGehoPersistenceException e) {
+			e.printStackTrace();
+			SysGehoSystemException sbr = new SysGehoSystemException(e);
+			throw sbr;
+		}
+	}
+	
+	@Override
+	public List<TabHospi> rechercherParRefFac(String refFac) throws SysGehoSystemException  {
+		try {
+			return daoHospi.findByRefFac(refFac);
+		} catch (SysGehoPersistenceException e) {
+			logger.debug("Erreur rechercherParRefFac");
+			e.printStackTrace();
+			SysGehoSystemException sbr = new SysGehoSystemException(e);
+			throw sbr;
+		}
+	}
+	
+	@Override
+	public List<TabHospi> rechercherHospiNonPaieParPatient(String codPat) throws SysGehoSystemException  {
+		try {
+			return daoHospi.findHospiNonPaieByPatient(codPat);
+		} catch (SysGehoPersistenceException e) {
+			logger.debug("Erreur rechercherHospiNonPaieParPatient");
 			e.printStackTrace();
 			SysGehoSystemException sbr = new SysGehoSystemException(e);
 			throw sbr;

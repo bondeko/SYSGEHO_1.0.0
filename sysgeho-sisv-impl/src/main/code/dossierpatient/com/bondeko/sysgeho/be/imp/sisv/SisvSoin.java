@@ -19,7 +19,7 @@ import com.bondeko.sysgeho.be.core.exception.SysGehoPersistenceException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.BaseSisv;
 import com.bondeko.sysgeho.be.imp.dao.IDaoSoin;
-import com.bondeko.sysgeho.be.imp.entity.TabSoin;
+import com.bondeko.sysgeho.be.imp.entity.TabExam;
 import com.bondeko.sysgeho.be.imp.entity.TabSoin;
 
 @Stateless
@@ -105,6 +105,7 @@ public class SisvSoin extends BaseSisv<TabSoin, String> implements ISisvSoin{
 	
 	private TabSoin initialiserDonnees(TabSoin exam){
 		exam.setBooVal(BigDecimal.ZERO);
+		exam.setBooPaie(BigDecimal.ZERO);
 		return exam;
 	}
 	
@@ -116,6 +117,30 @@ public class SisvSoin extends BaseSisv<TabSoin, String> implements ISisvSoin{
 			return getBaseDao().update($pSoin);
 		} catch (SysGehoPersistenceException e) {
 			logger.debug("Erreur de validation du soin");
+			e.printStackTrace();
+			SysGehoSystemException sbr = new SysGehoSystemException(e);
+			throw sbr;
+		}
+	}
+	
+	@Override
+	public List<TabSoin> rechercherParRefFac(String refFac) throws SysGehoSystemException  {
+		try {
+			return daoSoin.findByRefFac(refFac);
+		} catch (SysGehoPersistenceException e) {
+			logger.debug("Erreur rechercherParRefFac");
+			e.printStackTrace();
+			SysGehoSystemException sbr = new SysGehoSystemException(e);
+			throw sbr;
+		}
+	}
+	
+	@Override
+	public List<TabSoin> rechercherSoinNonPaieParPatient(String codPat) throws SysGehoSystemException  {
+		try {
+			return daoSoin.findSoinNonPaieByPatient(codPat);
+		} catch (SysGehoPersistenceException e) {
+			logger.debug("Erreur rechercherSoinNonPaieParPatient");
 			e.printStackTrace();
 			SysGehoSystemException sbr = new SysGehoSystemException(e);
 			throw sbr;

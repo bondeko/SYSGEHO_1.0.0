@@ -20,6 +20,7 @@ import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.BaseSisv;
 import com.bondeko.sysgeho.be.imp.dao.IDaoExam;
 import com.bondeko.sysgeho.be.imp.entity.TabExam;
+import com.bondeko.sysgeho.be.imp.entity.TabHospi;
 
 @Stateless
 public class SisvExam extends BaseSisv<TabExam, String> implements ISisvExam{
@@ -105,6 +106,7 @@ public class SisvExam extends BaseSisv<TabExam, String> implements ISisvExam{
 	private TabExam initialiserDonnees(TabExam exam){
 		exam.setBooCpteRendu(BigDecimal.ZERO);
 		exam.setBooVal(BigDecimal.ZERO);
+		exam.setBooPaie(BigDecimal.ZERO);
 		return exam;
 	}
 	
@@ -116,6 +118,30 @@ public class SisvExam extends BaseSisv<TabExam, String> implements ISisvExam{
 			return getBaseDao().update($pExam);
 		} catch (SysGehoPersistenceException e) {
 			logger.debug("Erreur de validation de l'examen");
+			e.printStackTrace();
+			SysGehoSystemException sbr = new SysGehoSystemException(e);
+			throw sbr;
+		}
+	}
+	
+	@Override
+	public List<TabExam> rechercherParRefFac(String refFac) throws SysGehoSystemException  {
+		try {
+			return daoExam.findByRefFac(refFac);
+		} catch (SysGehoPersistenceException e) {
+			logger.debug("Erreur rechercherParRefFac");
+			e.printStackTrace();
+			SysGehoSystemException sbr = new SysGehoSystemException(e);
+			throw sbr;
+		}
+	}
+	
+	@Override
+	public List<TabExam> rechercherExamNonPaieParPatient(String codPat) throws SysGehoSystemException  {
+		try {
+			return daoExam.findExamNonPaieByPatient(codPat);
+		} catch (SysGehoPersistenceException e) {
+			logger.debug("Erreur rechercherExamNonPaieParPatient");
 			e.printStackTrace();
 			SysGehoSystemException sbr = new SysGehoSystemException(e);
 			throw sbr;

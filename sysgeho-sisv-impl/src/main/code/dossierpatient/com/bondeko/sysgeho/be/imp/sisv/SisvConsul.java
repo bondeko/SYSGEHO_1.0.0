@@ -105,6 +105,7 @@ public class SisvConsul extends BaseSisv<TabConsul, String> implements ISisvCons
 	private TabConsul initialiserDonnees(TabConsul consul){
 		consul.setBooCpteRendu(BigDecimal.ZERO);
 		consul.setBooVal(BigDecimal.ZERO);
+		consul.setBooPaie(BigDecimal.ZERO);
 		return consul;
 	}
 	
@@ -116,6 +117,30 @@ public class SisvConsul extends BaseSisv<TabConsul, String> implements ISisvCons
 			return getBaseDao().update($pConsul);
 		} catch (SysGehoPersistenceException e) {
 			logger.debug("Erreur de validation de la consultation");
+			e.printStackTrace();
+			SysGehoSystemException sbr = new SysGehoSystemException(e);
+			throw sbr;
+		}
+	}
+	
+	@Override
+	public List<TabConsul> rechercherParRefFac(String refFac) throws SysGehoSystemException  {
+		try {
+			return daoConsul.findByRefFac(refFac);
+		} catch (SysGehoPersistenceException e) {
+			logger.debug("Erreur rechercherParRefFac");
+			e.printStackTrace();
+			SysGehoSystemException sbr = new SysGehoSystemException(e);
+			throw sbr;
+		}
+	}
+	
+	@Override
+	public List<TabConsul> rechercherConsulNonPaieParPatient(String codPat) throws SysGehoSystemException  {
+		try {
+			return daoConsul.findConsulNonPaieByPatient(codPat);
+		} catch (SysGehoPersistenceException e) {
+			logger.debug("Erreur rechercherConsulNonPaieParPatient");
 			e.printStackTrace();
 			SysGehoSystemException sbr = new SysGehoSystemException(e);
 			throw sbr;
