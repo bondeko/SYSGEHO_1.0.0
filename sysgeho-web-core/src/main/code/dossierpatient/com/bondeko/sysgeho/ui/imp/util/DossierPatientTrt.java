@@ -106,7 +106,7 @@ public class DossierPatientTrt extends SysGehoTrt{
 		
 		ETA_LIST_PAT = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "List_Pat" , /* Libellé */ "Génerer liste des patients" , /* Commentaire */ "" , /* Méthode */ "genEtatListPat",
 				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
-				/* Type de modal panel */ Traitement.MODAL_SPECIAL, /* Message du modal panel */ "Confirmer la génération ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer la génération ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
 				/* Raccourci clavier */ "Shift+F2", /* index */ "14", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
 	}
 	public static Traitement SORTIE_HOSPI;	
@@ -233,6 +233,5 @@ public class DossierPatientTrt extends SysGehoTrt{
 				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer Enregistrement ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
 				/* Raccourci clavier */ "Shift+F8", /* index */ "08", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
 	}
-	
 	
 }

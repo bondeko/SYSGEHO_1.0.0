@@ -97,14 +97,7 @@ public class PatCtrl extends SysGehoCtrl<TabPat, TabPat>{
 		
 		v$mapTrt.put(DossierPatientTrt.ENREG_HOSPI.getKey(), new Traitement(DossierPatientTrt.ENREG_HOSPI));
 		
-
-		// Générer l'état des mouvements du conteneur
-		Traitement v$traitementGenListPat = new Traitement(
-				DossierPatientTrt.ETA_LIST_PAT);
-		v$traitementGenListPat.setModalType(Traitement.MODAL_SPECIAL);
-		//v$traitementGenMouv.setModalPanel("mpnl_date_gen_mouv_con"); 
-		v$traitementGenListPat.setMethode("genEtatListPat");
-		v$mapTrt.put(v$traitementGenListPat.getKey(), v$traitementGenListPat);
+		v$mapTrt.put(DossierPatientTrt.ETA_LIST_PAT.getKey(), new Traitement(DossierPatientTrt.ETA_LIST_PAT));
 		
 		v$mapTrt.put(DossierPatientTrt.ENREG_CONSUL.getKey(), new Traitement(DossierPatientTrt.ENREG_CONSUL));
 		
@@ -730,10 +723,6 @@ public class PatCtrl extends SysGehoCtrl<TabPat, TabPat>{
 		try {
 			PatVue v$vue = (PatVue) defaultVue;
 
-//			String choix = defaultVue.getEntiteCourante().getChoix();
-//			String enuTypMouv = defaultVue.getEntiteCourante().getEnuTypMouv() ;
-//			String datDeb = defaultVue.getEntiteCourante().getDatDeb();
-//			String datFin = defaultVue.getEntiteCourante().getDatFin();
 			// Mise à jour de l'entité courante selon le contexte du Formulaire
 			defaultVue.setEntiteCouranteOfPageContext();
 
