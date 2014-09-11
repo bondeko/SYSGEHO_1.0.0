@@ -1,4 +1,4 @@
-package com.bondeko.sysgeho.be.imp.svco;
+package com.bondeko.sysgeho.be.fac.svco;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,24 +16,24 @@ import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.IBaseSisv;
 import com.bondeko.sysgeho.be.core.svco.base.BaseSvco;
-import com.bondeko.sysgeho.be.imp.entity.TabConsul;
-import com.bondeko.sysgeho.be.imp.sisv.ISisvConsul;
+import com.bondeko.sysgeho.be.fac.entity.TabFacCour;
+import com.bondeko.sysgeho.be.fac.sisv.ISisvFacCour;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class SvcoConsul extends BaseSvco<TabConsul> implements IRemoteConsul, ILocalConsul{
+public class SvcoFacCour extends BaseSvco<TabFacCour> implements IRemoteFacCour, ILocalFacCour{
 	
 	@EJB
-	ISisvConsul sisvConsul;
+	ISisvFacCour sisvFacCour;
 	
 	@Resource
 	SessionContext session;
 
-	private static BaseLogger logger = BaseLogger.getLogger(SvcoConsul.class);
+	private static BaseLogger logger = BaseLogger.getLogger(SvcoFacCour.class);
 	
 	@Override
-	protected IBaseSisv<TabConsul, String> getBaseSisv() {
-		return sisvConsul;
+	protected IBaseSisv<TabFacCour, String> getBaseSisv() {
+		return sisvFacCour;
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class SvcoConsul extends BaseSvco<TabConsul> implements IRemoteConsul, IL
 	public <X extends BaseEntity> X rechercher(X entity, Serializable id)
 			throws SysGehoAppException {
 		try {
-			return sisvConsul.rechercher(entity,id);
+			return sisvFacCour.rechercher(entity,id);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -55,7 +55,7 @@ public class SvcoConsul extends BaseSvco<TabConsul> implements IRemoteConsul, IL
 	public <X extends BaseEntity> List<X> rechercherTout(X entity)
 			throws SysGehoAppException {
 		try {
-			return sisvConsul.rechercherTout(entity);
+			return sisvFacCour.rechercherTout(entity);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -67,7 +67,7 @@ public class SvcoConsul extends BaseSvco<TabConsul> implements IRemoteConsul, IL
 	public <X extends BaseEntity> List<X> rechercherParCritere(X entity)
 			throws SysGehoAppException {
 		try {
-			return sisvConsul.rechercherParCritere(entity);
+			return sisvFacCour.rechercherParCritere(entity);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -76,9 +76,9 @@ public class SvcoConsul extends BaseSvco<TabConsul> implements IRemoteConsul, IL
 	}
 	
 	@Override
-	public TabConsul valider(TabConsul $pConsul) throws SysGehoAppException {
+	public TabFacCour valider(TabFacCour $pFacCour) throws SysGehoAppException {
 		try {
-			return sisvConsul.valider($pConsul);
+			return sisvFacCour.valider($pFacCour);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -87,20 +87,9 @@ public class SvcoConsul extends BaseSvco<TabConsul> implements IRemoteConsul, IL
 	}
 	
 	@Override
-	public List<TabConsul> rechercherParRefFac(String refFac) throws SysGehoAppException {
+	public TabFacCour payer(TabFacCour $pFacCour) throws SysGehoAppException {
 		try {
-			return sisvConsul.rechercherParRefFac(refFac);
-		} catch (SysGehoSystemException e) {
-			e.printStackTrace();
-			SysGehoAppException sdr = new SysGehoAppException(e);
-			throw sdr;
-		}
-	}
-	
-	@Override
-	public List<TabConsul> rechercherConsulNonPaieParPatient(String codPat) throws SysGehoAppException {
-		try {
-			return sisvConsul.rechercherConsulNonPaieParPatient(codPat);
+			return sisvFacCour.payer($pFacCour);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);

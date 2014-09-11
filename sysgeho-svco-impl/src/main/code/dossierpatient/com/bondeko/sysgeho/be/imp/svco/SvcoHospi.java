@@ -97,4 +97,26 @@ public class SvcoHospi extends BaseSvco<TabHospi> implements IRemoteHospi, ILoca
 			throw sbr;
 		}
 	}
+	
+	@Override
+	public List<TabHospi> rechercherParRefFac(String refFac) throws SysGehoAppException {
+		try {
+			return sisvHospi.rechercherParRefFac(refFac);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
+	
+	@Override
+	public List<TabHospi> rechercherHospiNonPaieParPatient(String codPat) throws SysGehoAppException {
+		try {
+			return sisvHospi.rechercherHospiNonPaieParPatient(codPat);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
 }

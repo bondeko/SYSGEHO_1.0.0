@@ -86,4 +86,26 @@ public class SvcoExam extends BaseSvco<TabExam> implements IRemoteExam, ILocalEx
 		}
 	}
 	
+	@Override
+	public List<TabExam> rechercherParRefFac(String refFac) throws SysGehoAppException {
+		try {
+			return sisvExam.rechercherParRefFac(refFac);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
+	
+	@Override
+	public List<TabExam> rechercherExamNonPaieParPatient(String codPat) throws SysGehoAppException {
+		try {
+			return sisvExam.rechercherExamNonPaieParPatient(codPat);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
+	
 }

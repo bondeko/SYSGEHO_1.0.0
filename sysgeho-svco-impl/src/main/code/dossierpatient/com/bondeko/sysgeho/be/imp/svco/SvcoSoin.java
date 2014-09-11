@@ -86,4 +86,26 @@ public class SvcoSoin extends BaseSvco<TabSoin> implements IRemoteSoin, ILocalSo
 		}
 	}
 	
+	@Override
+	public List<TabSoin> rechercherParRefFac(String refFac) throws SysGehoAppException {
+		try {
+			return sisvSoin.rechercherParRefFac(refFac);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
+	
+	@Override
+	public List<TabSoin> rechercherSoinNonPaieParPatient(String codPat) throws SysGehoAppException {
+		try {
+			return sisvSoin.rechercherSoinNonPaieParPatient(codPat);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
+	
 }
