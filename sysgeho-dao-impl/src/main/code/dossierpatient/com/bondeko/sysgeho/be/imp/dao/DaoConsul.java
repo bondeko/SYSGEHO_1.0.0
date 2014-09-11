@@ -101,5 +101,47 @@ public class DaoConsul extends BaseDao<TabConsul, String> implements IDaoConsul{
 			throw sdr;
 		}
 	}
+	
+	@Override
+	public List<TabConsul> findByRefFac(String refFac)
+	throws SysGehoPersistenceException {
+		try{
+			String query = "SELECT o FROM TabConsul o where o.refFac='" + refFac +
+			"' ORDER BY o.codConsul ";
+
+			logger.debug("Requete <" + query + ">");
+
+			List<TabConsul> v$list = getManager().createQuery(query).getResultList();
+
+			getLogger().debug("Nombre d'éléments trouvés : " + (v$list == null ? "0" : v$list.size()));
+			if ((v$list == null) || (v$list.size() <= 0)) {
+				return new ArrayList<TabConsul>();
+			}
+			return v$list;
+		}catch(SysGehoPersistenceException sdr){
+			throw sdr;
+		}
+	}
+	 
+	@Override
+	public List<TabConsul> findConsulNonPaieByPatient(String codPat)
+	throws SysGehoPersistenceException {
+		try{
+			String query = "SELECT o FROM TabConsul o where o.booPaie='0' AND o.tabPat.codPat='" + codPat +
+			"' ORDER BY o.codConsul ";
+
+			logger.debug("Requete <" + query + ">");
+
+			List<TabConsul> v$list = getManager().createQuery(query).getResultList();
+
+			getLogger().debug("Nombre d'éléments trouvés : " + (v$list == null ? "0" : v$list.size()));
+			if ((v$list == null) || (v$list.size() <= 0)) {
+				return new ArrayList<TabConsul>();
+			}
+			return v$list;
+		}catch(SysGehoPersistenceException sdr){
+			throw sdr;
+		}
+	}
 
 }

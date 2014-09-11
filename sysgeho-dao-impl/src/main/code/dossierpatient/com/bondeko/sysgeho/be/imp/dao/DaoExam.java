@@ -101,5 +101,47 @@ public class DaoExam extends BaseDao<TabExam, String> implements IDaoExam{
 			throw sdr;
 		}
 	}
+	
+	@Override
+	public List<TabExam> findByRefFac(String refFac)
+	throws SysGehoPersistenceException {
+		try{
+			String query = "SELECT o FROM TabExam o where o.refFac='" + refFac +
+			"' ORDER BY o.codExam ";
+
+			logger.debug("Requete <" + query + ">");
+
+			List<TabExam> v$list = getManager().createQuery(query).getResultList();
+
+			getLogger().debug("Nombre d'éléments trouvés : " + (v$list == null ? "0" : v$list.size()));
+			if ((v$list == null) || (v$list.size() <= 0)) {
+				return new ArrayList<TabExam>();
+			}
+			return v$list;
+		}catch(SysGehoPersistenceException sdr){
+			throw sdr;
+		}
+	}
+	 
+	@Override
+	public List<TabExam> findExamNonPaieByPatient(String codPat)
+	throws SysGehoPersistenceException {
+		try{
+			String query = "SELECT o FROM TabExam o where o.booPaie='0' AND o.tabPat.codPat='" + codPat +
+			"' ORDER BY o.codExam ";
+
+			logger.debug("Requete <" + query + ">");
+
+			List<TabExam> v$list = getManager().createQuery(query).getResultList();
+
+			getLogger().debug("Nombre d'éléments trouvés : " + (v$list == null ? "0" : v$list.size()));
+			if ((v$list == null) || (v$list.size() <= 0)) {
+				return new ArrayList<TabExam>();
+			}
+			return v$list;
+		}catch(SysGehoPersistenceException sdr){
+			throw sdr;
+		}
+	}
 
 }

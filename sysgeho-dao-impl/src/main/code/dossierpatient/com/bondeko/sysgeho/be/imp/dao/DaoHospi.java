@@ -153,5 +153,47 @@ public class DaoHospi extends BaseDao<TabHospi, String> implements IDaoHospi{
 			throw sdr;
 		}
 	}
+	
+	@Override
+	public List<TabHospi> findByRefFac(String refFac)
+	throws SysGehoPersistenceException {
+		try{
+			String query = "SELECT o FROM TabHospi o where o.refFac='" + refFac +
+			"' ORDER BY o.codHospi ";
+
+			logger.debug("Requete <" + query + ">");
+
+			List<TabHospi> v$list = getManager().createQuery(query).getResultList();
+
+			getLogger().debug("Nombre d'éléments trouvés : " + (v$list == null ? "0" : v$list.size()));
+			if ((v$list == null) || (v$list.size() <= 0)) {
+				return new ArrayList<TabHospi>();
+			}
+			return v$list;
+		}catch(SysGehoPersistenceException sdr){
+			throw sdr;
+		}
+	}
+	 
+	@Override
+	public List<TabHospi> findHospiNonPaieByPatient(String codPat)
+	throws SysGehoPersistenceException {
+		try{
+			String query = "SELECT o FROM TabHospi o where o.booPaie='0' AND o.tabPat.codPat='" + codPat +
+			"' ORDER BY o.codHospi ";
+
+			logger.debug("Requete <" + query + ">");
+
+			List<TabHospi> v$list = getManager().createQuery(query).getResultList();
+
+			getLogger().debug("Nombre d'éléments trouvés : " + (v$list == null ? "0" : v$list.size()));
+			if ((v$list == null) || (v$list.size() <= 0)) {
+				return new ArrayList<TabHospi>();
+			}
+			return v$list;
+		}catch(SysGehoPersistenceException sdr){
+			throw sdr;
+		}
+	}
 
 }
