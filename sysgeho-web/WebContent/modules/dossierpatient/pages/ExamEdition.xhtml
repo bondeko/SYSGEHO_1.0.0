@@ -240,6 +240,7 @@
 								 required="false"  style="width: 30%" 
 								 title="Montant TTC"
 								 converterMessage="#{msg['erreur.conversion.entiere']}"   >
+								  <a4j:support event="onchange" ajaxSingle="true" />
 								 <f:convertNumber currencySymbol="F CFA" pattern="#,###"   />
 							</h:inputText>
 							

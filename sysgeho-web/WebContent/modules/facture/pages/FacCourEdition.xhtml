@@ -1,0 +1,1083 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+
+	<ui:composition template="/shared/templates/templateFormulaireEdition.xhtml">
+  	
+		<ui:param name="managedBean" value="#{sessionScope[facCourCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value="d'une Facture Courante" />
+		
+		<!-- L'entete devra etre redefinie dans le formulaire  -->
+		<ui:define name="entete">			
+			<h:outputText value="Creation " rendered="#{! facCourCtrl.defaultVue.navigationMgr.enModification}" />
+			<h:outputText value="Modification " rendered="#{facCourCtrl.defaultVue.navigationMgr.enModification}" />
+			<h:outputText value="#{entetePage}" />
+									
+			<ui:insert name="nomPage">
+				<h:inputHidden id="iphd_page" binding="#{managedBean.hidden}" value="#{nomPage}" />	
+			</ui:insert>
+			
+			<script type="text/javascript" src="../../shared/js/manageSubmitTable.js"></script>
+			<script type="text/javascript" src="../../../shared/js/manageSubmitTable.js"></script>
+			<script type="text/javascript" src="../../../../shared/js/manageSubmitTable.js"></script>
+			<script type="text/javascript" src="../../../../../shared/js/manageSubmitTable.js"></script>
+			<script type="text/javascript" src="../../../../../../shared/js/manageSubmitTable.js"></script>
+							
+			<script type="text/javascript">
+	
+				function setTotauxTransfert(){
+					alerte("Mise � jour des totaux de la grande fiche");
+					try{
+						// Total des montants en d�bit
+						setTotalByColumn("contentForm:tble_table_titre", "optt_VMnt2", "optt_totalVMnt", true);						
+					}catch(e){
+						alerte("Probl�me survenu lors de la mise � jour des totaux de la grande fiche");
+						alerte(e.toString());
+					}
+				}
+
+				function setTotauxTransfertHospi(){
+					alerte("Mise � jour des totaux de la grande fiche");
+					try{
+						// Total des montants en d�bit
+						setTotalByColumn("contentForm:tble_table_titre1", "optt_VMnt2_hospi", "optt_totalVMnt_hospi", true);						
+					}catch(e){
+						alerte("Probl�me survenu lors de la mise � jour des totaux de la grande fiche");
+						alerte(e.toString());
+					}
+				}
+
+				function setTotauxTransfertExam(){
+					alerte("Mise � jour des totaux de la grande fiche");
+					try{
+						// Total des montants en d�bit
+						setTotalByColumn("contentForm:tble_table_titre2", "optt_VMnt2_exam", "optt_totalVMnt_exam", true);						
+					}catch(e){
+						alerte("Probl�me survenu lors de la mise � jour des totaux de la grande fiche");
+						alerte(e.toString());
+					}
+				}
+
+				function setTotauxTransfertSoin(){
+					alerte("Mise � jour des totaux de la grande fiche");
+					try{
+						// Total des montants en d�bit
+						setTotalByColumn("contentForm:tble_table_titre3", "optt_VMnt2_soin", "optt_totalVMnt_soin", true);						
+					}catch(e){
+						alerte("Probl�me survenu lors de la mise � jour des totaux de la grande fiche");
+						alerte(e.toString());
+					}
+				}
+							
+			</script>	
+							
+				
+		</ui:define>		
+		
+		<!-- Definition du contenu de l'ecran principal  -->
+		<ui:define name="ecranPrincipalContenu">
+		
+			<h:panelGroup >
+				<fieldset>
+					<legend> <h:outputText value="#{locale.details}" styleClass="legend" />  </legend>
+					
+					<h:panelGrid id="pngd_details" columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow" >
+						
+						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+							
+							<h:panelGroup>
+								<h:outputText value="#{locale.reffac}" />	
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
+							<h:panelGroup>
+								<h:inputText id="inpt_reffea" value="#{facCourCtrl.defaultVue.entiteCourante.refFacCour}" style="width: 60%" readonly="#{facCourCtrl.defaultVue.navigationMgr.enModification}" title="#{locale.reffac}">
+									<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>	
+								<rich:message for="inpt_reffea" errorClass="msg_error" />
+							</h:panelGroup>
+							
+							<h:panelGroup>
+								<h:outputText value="Patient" />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
+							<h:panelGroup>
+							<h:inputText id="inpt_codPat" value="#{facCourCtrl.defaultVue.entiteCourante.tabPat.codPat}" style="width: 20%" 
+								required="true" requiredMessage="Valeur obligatoire"
+								readonly="true" title="Code" disabled="false">
+								<a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>	
+							<h:inputText id="inpt_libPat" value="#{facCourCtrl.defaultVue.entiteCourante.tabPat.libNom}" style="width: 40%" 
+									required="false" readonly="true"  
+									title="#{locale.libelle}" disabled="false"> 
+									<a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
+							<h:panelGroup>
+								<a4j:commandButton   value="..." action="#{facCourCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" >   	
+		           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
+		         						<f:setPropertyActionListener value="FacCourEdition" target="#{patCtrl.defaultVue.navigationMgr.selectionSource}" />
+		         						<!-- MAJ de la destination en mode Selection   --> 
+		           						<f:setPropertyActionListener value="true" target="#{patCtrl.defaultVue.navigationMgr.enSelection}" />  
+		           						<!-- Nom du Controlleur de l'entite source  --> 
+		          						<f:setPropertyActionListener value="facCourCtrl" target="#{patCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
+		          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
+		          						<f:setPropertyActionListener value="PatListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
+		          						<!-- Nom de la propriete a selectionner -->							         						             						
+		          						<f:setPropertyActionListener value="tabPat" target="#{defaultVue.navigationMgr.selectionPropertyName}" />            						             						          						             				            					      						
+				             	</a4j:commandButton>
+				             	<rich:message for="inpt_codPat" errorClass="msg_error" />
+							</h:panelGroup>
+						</h:panelGroup>
+							
+							<h:outputText value="Date Facture" />
+							<h:panelGroup >					
+								<rich:calendar value="#{facCourCtrl.defaultVue.entiteCourante.dateFac}" inputStyle="width: 30%"  title="Date Facture" 
+										styleClass="selectDate"  datePattern="dd/MM/yyyy" >
+									<a4j:support event="onchanged" ajaxSingle="true" />
+								</rich:calendar>
+							</h:panelGroup>
+						
+						</h:panelGrid>	
+							
+						
+						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+						
+							<h:outputText value="Montant Total :" rendered="#{facCourCtrl.defaultVue.navigationMgr.enModification}" />											
+							<h:inputText  value="#{facCourCtrl.defaultVue.entiteCourante.valMntTotal}" style="width: 60%" styleClass="money"  title="Montant total de la facture" 
+										rendered="#{facCourCtrl.defaultVue.navigationMgr.enModification}" readonly="#{facCourCtrl.defaultVue.navigationMgr.enModification}" >
+								<f:convertNumber currencySymbol="F CFA"  type="currency" pattern="#,###"  />
+							</h:inputText>	
+							
+							<h:outputText value="Objet" />
+							<h:inputTextarea id="inpt_objet"  value="#{facCourCtrl.defaultVue.entiteCourante.libObj}"   style="width: 60%" >
+								<a4j:support event="onchange" ajaxSingle="true"/>
+							</h:inputTextarea>
+							
+							<h:outputText value="Infos Compl." />
+							<h:panelGroup>
+								<h:inputTextarea id="inpt_infoCmpl"  value="#{facCourCtrl.defaultVue.entiteCourante.libInfCompl}"   style="width: 60%"  >
+									<a4j:support event="onchange" ajaxSingle="true"/>
+								</h:inputTextarea>
+							</h:panelGroup>															
+																																														           																																																																																																					
+						</h:panelGrid>
+																																	
+					</h:panelGrid>
+									
+				</fieldset>								
+			</h:panelGroup>	
+			
+			<h:panelGroup>
+				<rich:tabPanel width="100%" selectedTab="tab1" switchType="ajax" >
+					 <rich:tab id="tab1" name="tab1"  label="Rechercher des Consultations" >
+					 	
+					 	<fieldset>
+							<legend> 
+								<h:outputText value="Selection des consultations #{locale.a} facturer " styleClass="legend" />  
+							</legend>	
+							
+							<h:panelGrid columns="1" width="100%"  columnClasses="pngdCol" >
+								
+								<h:panelGrid  columns="2" width="100%" columnClasses="pngdCol"  >
+				         			<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+										<a4j:commandButton  value="Rechercher" actionListener="#{facCourCtrl.rechercherConsul}" ajaxSingle="true" reRender="tble_table_recherche,pnel_table1" status="stus_actions" />
+									</h:panelGrid>
+									
+									<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+										
+									</h:panelGrid>
+								</h:panelGrid>
+								
+								<h:panelGrid columns="1" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+									<rich:panel  id="pnel_table1" >
+									<f:facet name="header"> 
+									<h:outputText value="Consultations #{locale.trouvees} (#{facCourCtrl.defaultVue.consulRechercheMgr.rowCount})  " />  
+									</f:facet>
+									
+								
+										<rich:dataTable id="tble_table_recherche" value="#{facCourCtrl.defaultVue.consulRechercheMgr.listeRecherche}"  var="consul"  width="100%"  				
+										rows="30"  onRowClick="selectedRow=this;" 
+										onRowMouseOver="this.style.backgroundColor='#F1F1F1'" cellpadding="0" cellspacing="0" border="0"
+		                  					onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"  >
+												
+					      				<f:facet name="header">
+					                        <rich:columnGroup>
+					                        	
+					                            <rich:column >
+					                                <h:outputText value="Code consultation" />
+					                            </rich:column>
+					                            <rich:column>
+					                                <h:outputText value="Date consultation" />
+					                            </rich:column>
+					                            <rich:column>
+					                                <h:outputText value="Montant " />
+					                            </rich:column>
+					                           
+					                            <rich:column width="20">
+					                            
+					                            </rich:column>
+					                            
+	                                            <rich:column width="0">
+													<h:inputHidden value="" />				                                
+					                            </rich:column>			                            					                            
+					                            					                            
+					                        </rich:columnGroup>
+					                    </f:facet>
+					                    
+										<rich:column >
+											<h:outputText value="#{consul.codConsul}" />				
+										</rich:column>
+					
+										<rich:column >
+											<h:outputText  value="#{consul.dateConsul}" >	
+												<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+											</h:outputText>											
+										</rich:column>
+										
+										<rich:column >
+											<h:panelGrid width="100%" styleClass="money" >
+												<h:outputText id="optt_VMnt" value="#{consul.valMntTtc}"   >
+													<f:convertNumber pattern="#,###" />
+												</h:outputText>	
+											</h:panelGrid>				
+										</rich:column>
+										
+										<rich:column>
+											<h:panelGrid columns="1" width="100%" style="text-align:center" >	
+												<a4j:commandLink value="Ajouter"  action="#{facCourCtrl.selectionnerConsul}"  reRender="tble_table_titre,tble_table_recherche,pnel_table2"  ajaxSingle="true" immediate="true"
+																 title="Selectionner cette consultation"   >
+													<f:setPropertyActionListener  value="#{consul.specialId}" target="#{defaultVue.consulRechercheMgr.key}"  />
+												</a4j:commandLink>
+											</h:panelGrid>																															
+										</rich:column>																							
+				                    	
+										<rich:column width="0">
+											
+										</rich:column>									
+																																																																			 						 						 
+									</rich:dataTable>	
+															
+																
+									<!--  Gestionnaire de Paginnation -->					
+									<rich:datascroller for="tble_table_recherche" onpagechange="initMapInput();" />
+										
+								</rich:panel>	
+									
+									
+									
+								</h:panelGrid>
+							</h:panelGrid>	
+							
+							
+						</fieldset>
+					 </rich:tab>
+					 <rich:tab id="tab2" name="tab2"  label="Consultations #{locale.a} facturer" >
+					 	
+					 	<rich:panel  id="pnel_table2" >
+							<f:facet name="header"> 
+								<h:outputText value="Verification des consultations #{locale.a} facturer (#{facCourCtrl.defaultVue.consulAPayerMgr.rowCount})  " />  
+							</f:facet>
+							
+					 		<h:panelGroup id="pnel_list_titre_selected">
+									
+								<rich:dataTable id="tble_table_titre" value="#{facCourCtrl.defaultVue.consulAPayerMgr.listeRecherche}"  var="consul"  width="100%"  				
+								rows="30"  onRowClick="selectedRow=this;" 
+								onRowMouseOver="this.style.backgroundColor='#F1F1F1'" cellpadding="0" cellspacing="0" border="0"
+                  					onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"  >
+										
+			      				<f:facet name="header">
+			                        <rich:columnGroup>
+			                        	
+			                            <rich:column >
+			                                <h:outputText value="Code consultation" />
+			                            </rich:column>
+			                            <rich:column>
+			                                <h:outputText value="Date consultation" />
+			                            </rich:column>
+			                            <rich:column>
+			                                <h:outputText value="Montant" />
+			                            </rich:column>
+			                           
+			                            <rich:column width="20">
+			                            
+			                            </rich:column>
+			                            
+                                           <rich:column width="0">
+                                              	
+											<h:inputHidden value="" />				                                
+			                            </rich:column>			                            					                            
+			      						
+			                            					                            
+			                        </rich:columnGroup>
+			                    </f:facet>
+			                    
+								<rich:column >
+									<h:outputText value="#{consul.codConsul}" />				
+								</rich:column>
+			
+								<rich:column >
+									<h:outputText  value="#{consul.dateConsul}" >	
+										<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+									</h:outputText>										
+								</rich:column>
+								
+								<rich:column >
+									<h:panelGrid width="100%" styleClass="money" >
+										<h:outputText id="optt_VMnt2" value="#{consul.valMntTtc}"   >
+											<f:convertNumber pattern="#,###" />
+										</h:outputText>	
+									</h:panelGrid>				
+								</rich:column>
+													
+																		
+								<rich:column>
+									<h:panelGrid columns="1" width="100%" style="text-align:center" >	
+											<a4j:commandLink value="X"  action="#{facCourCtrl.supprimerConsul}" reRender="tble_table_titre,pnel_table2" ajaxSingle="true" immediate="true"  style="COLOR: #ff0000;"
+															 title="Supprimer cette consultation" oncomplete="setTotauxTransfert();" >
+												<f:setPropertyActionListener  value="#{consul.specialId}" target="#{defaultVue.consulAPayerMgr.key}"  />
+											</a4j:commandLink>
+										</h:panelGrid>																															
+								</rich:column>																							
+		                    	
+								<rich:column width="0">
+									
+								</rich:column>									
+								<f:facet name="footer">
+						                
+										<rich:columnGroup >
+																					
+											<rich:column>
+												<h:outputText value="TOTAL " />
+											</rich:column>
+																																			
+											<rich:column>
+												<h:outputText value="" />
+											</rich:column>
+											
+											<rich:column>
+												<h:panelGrid width="100%" styleClass="number" >
+													<h:outputText  id="optt_totalVMnt" value="0"  >
+														<f:convertNumber pattern="#,###" />
+													</h:outputText>	
+												</h:panelGrid>	
+											</rich:column>
+											
+											<rich:column width="0" rendered="true"  >
+												<h:outputText value="" />
+											</rich:column>
+										</rich:columnGroup>
+									</f:facet>																																																										 						 						 
+							</rich:dataTable>							
+																
+									
+									<script type="text/javascript">																				
+										// Calcul des totaux du tableaux des titres
+										setTotauxTransfert();
+									</script>
+								<!--  Gestionnaire de Paginnation -->					
+								<rich:datascroller for="tble_table_recherche" onpagechange="initMapInput();" />	
+						</h:panelGroup>
+							
+						</rich:panel>	
+					 </rich:tab>
+				</rich:tabPanel>	
+			</h:panelGroup>							   	           				             																																																									
+		
+			<h:panelGroup>
+				<rich:tabPanel width="100%" selectedTab="tab1" switchType="ajax" >
+					 <rich:tab id="tab3" name="tab3"  label="Rechercher des Hospitalisations" >
+						
+						<fieldset>
+							<legend> 
+								<h:outputText value="Selection des hospitalisations #{locale.a} facturer " styleClass="legend" />  
+							</legend>	
+							
+							<h:panelGrid columns="1" width="100%"  columnClasses="pngdCol" >
+								
+								<h:panelGrid  columns="2" width="100%" columnClasses="pngdCol"  >
+									<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+										<a4j:commandButton  value="Rechercher" actionListener="#{facCourCtrl.rechercherHospi}" ajaxSingle="true" reRender="tble_table_recherche1,pnel_table3" status="stus_actions" />
+									</h:panelGrid>
+									
+									<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+										
+									</h:panelGrid>
+								</h:panelGrid>
+								
+								<h:panelGrid columns="1" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+									<rich:panel  id="pnel_table3" >
+									<f:facet name="header"> 
+									<h:outputText value="Hospitalisations #{locale.trouvees} (#{facCourCtrl.defaultVue.hospiRechercheMgr.rowCount})  " />  
+									</f:facet>
+									
+								
+										<rich:dataTable id="tble_table_recherche1" value="#{facCourCtrl.defaultVue.hospiRechercheMgr.listeRecherche}"  var="hospi"  width="100%"  				
+										rows="30"  onRowClick="selectedRow=this;" 
+										onRowMouseOver="this.style.backgroundColor='#F1F1F1'" cellpadding="0" cellspacing="0" border="0"
+											onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"  >
+												
+										<f:facet name="header">
+											<rich:columnGroup>
+												
+												<rich:column >
+													<h:outputText value="Code hospitalisation" />
+												</rich:column>
+												<rich:column>
+													<h:outputText value="Date d'admission" />
+												</rich:column>
+												<rich:column>
+													<h:outputText value="Montant " />
+												</rich:column>
+											   
+												<rich:column width="20">
+												
+												</rich:column>
+												
+												<rich:column width="0">
+													<h:inputHidden value="" />				                                
+												</rich:column>			                            					                            
+																								
+											</rich:columnGroup>
+										</f:facet>
+										
+										<rich:column >
+											<h:outputText value="#{hospi.codHospi}" />				
+										</rich:column>
+					
+										<rich:column >
+											<h:outputText  value="#{hospi.dateAdmi}" >	
+												<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+											</h:outputText>											
+										</rich:column>
+										
+										<rich:column >
+											<h:panelGrid width="100%" styleClass="money" >
+												<h:outputText id="optt_VMnt_hospi" value="#{hospi.valMnt}"   >
+													<f:convertNumber pattern="#,###" />
+												</h:outputText>	
+											</h:panelGrid>				
+										</rich:column>
+										
+										<rich:column>
+											<h:panelGrid columns="1" width="100%" style="text-align:center" >	
+												<a4j:commandLink value="Ajouter"  action="#{facCourCtrl.selectionnerHospi}"  reRender="tble_table_titre1,tble_table_recherche1,pnel_table4"  ajaxSingle="true" immediate="true"
+																 title="Selectionner cet examen"   >
+													<f:setPropertyActionListener  value="#{hospi.specialId}" target="#{defaultVue.hospiRechercheMgr.key}"  />
+												</a4j:commandLink>
+											</h:panelGrid>																															
+										</rich:column>																							
+										
+										<rich:column width="0">
+											
+										</rich:column>									
+																																																																															 
+									</rich:dataTable>	
+															
+																
+									<!--  Gestionnaire de Paginnation -->					
+									<rich:datascroller for="tble_table_recherche1" onpagechange="initMapInput();" />
+										
+								</rich:panel>	
+									
+									
+									
+								</h:panelGrid>
+							</h:panelGrid>	
+							
+							
+						</fieldset>
+					 </rich:tab>
+					 <rich:tab id="tab4" name="tab4"  label="Hospitalisation #{locale.a} facturer" >
+						
+						<rich:panel  id="pnel_table4" >
+							<f:facet name="header"> 
+								<h:outputText value="Verification des hospitalisations #{locale.a} facturer (#{facCourCtrl.defaultVue.hospiAPayerMgr.rowCount})  " />  
+							</f:facet>
+							
+							<h:panelGroup id="pnel_list_titre_selected1">
+									
+								<rich:dataTable id="tble_table_titre1" value="#{facCourCtrl.defaultVue.hospiAPayerMgr.listeRecherche}"  var="hospi"  width="100%"  				
+								rows="30"  onRowClick="selectedRow=this;" 
+								onRowMouseOver="this.style.backgroundColor='#F1F1F1'" cellpadding="0" cellspacing="0" border="0"
+									onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"  >
+										
+								<f:facet name="header">
+									<rich:columnGroup>
+										
+										<rich:column >
+											<h:outputText value="Code hospitalisation" />
+										</rich:column>
+										<rich:column>
+											<h:outputText value="Date d'admission" />
+										</rich:column>
+										<rich:column>
+											<h:outputText value="Montant" />
+										</rich:column>
+									   
+										<rich:column width="20">
+										
+										</rich:column>
+										
+										   <rich:column width="0">
+												
+											<h:inputHidden value="" />				                                
+										</rich:column>			                            					                            
+										
+																						
+									</rich:columnGroup>
+								</f:facet>
+								
+								<rich:column >
+									<h:outputText value="#{hospi.codHospi}" />				
+								</rich:column>
+			
+								<rich:column >
+									<h:outputText  value="#{hospi.dateAdmi}" >	
+										<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+									</h:outputText>										
+								</rich:column>
+								
+								<rich:column >
+									<h:panelGrid width="100%" styleClass="money" >
+										<h:outputText id="optt_VMnt2_hospi" value="#{hospi.valMnt}"   >
+											<f:convertNumber pattern="#,###" />
+										</h:outputText>	
+									</h:panelGrid>				
+								</rich:column>
+													
+																		
+								<rich:column>
+									<h:panelGrid columns="1" width="100%" style="text-align:center" >	
+											<a4j:commandLink value="X"  action="#{facCourCtrl.supprimerHospi}" reRender="tble_table_titre1,pnel_table4" ajaxSingle="true" immediate="true"  style="COLOR: #ff0000;"
+															 title="Supprimer cette hospitalisation" oncomplete="setTotauxTransfertHospi();" >
+												<f:setPropertyActionListener  value="#{hospi.specialId}" target="#{defaultVue.hospiAPayerMgr.key}"  />
+											</a4j:commandLink>
+										</h:panelGrid>																															
+								</rich:column>																							
+								
+								<rich:column width="0">
+									
+								</rich:column>									
+								<f:facet name="footer">
+										
+										<rich:columnGroup >
+																					
+											<rich:column>
+												<h:outputText value="TOTAL " />
+											</rich:column>
+																																			
+											<rich:column>
+												<h:outputText value="" />
+											</rich:column>
+											
+											<rich:column>
+												<h:panelGrid width="100%" styleClass="number" >
+													<h:outputText  id="optt_totalVMnt_hospi" value="0"  >
+														<f:convertNumber pattern="#,###" />
+													</h:outputText>	
+												</h:panelGrid>	
+											</rich:column>
+											
+											<rich:column width="0" rendered="true"  >
+												<h:outputText value="" />
+											</rich:column>
+										</rich:columnGroup>
+									</f:facet>																																																										 						 						 
+							</rich:dataTable>							
+																
+									
+									<script type="text/javascript">																				
+										// Calcul des totaux du tableaux des titres
+										setTotauxTransfertHospi();
+									</script>
+								<!--  Gestionnaire de Paginnation -->					
+								<rich:datascroller for="tble_table_recherche1" onpagechange="initMapInput();" />	
+						</h:panelGroup>
+							
+						</rich:panel>	
+					 </rich:tab>
+				</rich:tabPanel>	
+			</h:panelGroup>	
+			
+			<h:panelGroup>
+				<rich:tabPanel width="100%" selectedTab="tab1" switchType="ajax" >
+					 <rich:tab id="tab5" name="tab5"  label="Rechercher des Examens" >
+						
+						<fieldset>
+							<legend> 
+								<h:outputText value="Selection des examens #{locale.a} facturer " styleClass="legend" />  
+							</legend>	
+							
+							<h:panelGrid columns="1" width="100%"  columnClasses="pngdCol" >
+								
+								<h:panelGrid  columns="2" width="100%" columnClasses="pngdCol"  >
+									<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+										<a4j:commandButton  value="Rechercher" actionListener="#{facCourCtrl.rechercherExam}" ajaxSingle="true" reRender="tble_table_recherche2,pnel_table5" status="stus_actions" />
+									</h:panelGrid>
+									
+									<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+										
+									</h:panelGrid>
+								</h:panelGrid>
+								
+								<h:panelGrid columns="1" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+									<rich:panel  id="pnel_table5" >
+									<f:facet name="header"> 
+									<h:outputText value="Examens #{locale.trouves} (#{facCourCtrl.defaultVue.examRechercheMgr.rowCount})  " />  
+									</f:facet>
+									
+								
+										<rich:dataTable id="tble_table_recherche2" value="#{facCourCtrl.defaultVue.examRechercheMgr.listeRecherche}"  var="exam"  width="100%"  				
+										rows="30"  onRowClick="selectedRow=this;" 
+										onRowMouseOver="this.style.backgroundColor='#F1F1F1'" cellpadding="0" cellspacing="0" border="0"
+											onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"  >
+												
+										<f:facet name="header">
+											<rich:columnGroup>
+												
+												<rich:column >
+													<h:outputText value="Code Examen" />
+												</rich:column>
+												
+												<rich:column >
+													<h:outputText value="#{locale.libelle} de l'Examen" />
+												</rich:column>
+												<rich:column>
+													<h:outputText value="Date de l'Examen" />
+												</rich:column>
+												<rich:column>
+													<h:outputText value="Montant " />
+												</rich:column>
+											   
+												<rich:column width="20">
+												
+												</rich:column>
+												
+												<rich:column width="0">
+													<h:inputHidden value="" />				                                
+												</rich:column>			                            					                            
+																								
+											</rich:columnGroup>
+										</f:facet>
+										
+										<rich:column >
+											<h:outputText value="#{exam.codExam}" />				
+										</rich:column>
+										
+										<rich:column >
+											<h:outputText value="#{exam.libExam}" />				
+										</rich:column>
+					
+										<rich:column >
+											<h:outputText  value="#{exam.dateExam}" >	
+												<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+											</h:outputText>											
+										</rich:column>
+										
+										<rich:column >
+											<h:panelGrid width="100%" styleClass="money" >
+												<h:outputText id="optt_VMnt_exam" value="#{exam.valMntTtc}"   >
+													<f:convertNumber pattern="#,###" />
+												</h:outputText>	
+											</h:panelGrid>				
+										</rich:column>
+										
+										<rich:column>
+											<h:panelGrid columns="1" width="100%" style="text-align:center" >	
+												<a4j:commandLink value="Ajouter"  action="#{facCourCtrl.selectionnerExam}"  reRender="tble_table_titre2,tble_table_recherche2,pnel_table6"  ajaxSingle="true" immediate="true"
+																 title="Selectionner cette hospitalisaton"   >
+													<f:setPropertyActionListener  value="#{exam.specialId}" target="#{defaultVue.examRechercheMgr.key}"  />
+												</a4j:commandLink>
+											</h:panelGrid>																															
+										</rich:column>																							
+										
+										<rich:column width="0">
+											
+										</rich:column>									
+																																																																															 
+									</rich:dataTable>	
+															
+																
+									<!--  Gestionnaire de Paginnation -->					
+									<rich:datascroller for="tble_table_recherche2" onpagechange="initMapInput();" />
+										
+								</rich:panel>	
+									
+									
+									
+								</h:panelGrid>
+							</h:panelGrid>	
+							
+							
+						</fieldset>
+					 </rich:tab>
+					 <rich:tab id="tab6" name="tab6"  label="Examens #{locale.a} facturer" >
+						
+						<rich:panel  id="pnel_table6" >
+							<f:facet name="header"> 
+								<h:outputText value="Verification des examens #{locale.a} facturer (#{facCourCtrl.defaultVue.examAPayerMgr.rowCount})  " />  
+							</f:facet>
+							
+							<h:panelGroup id="pnel_list_titre_selected2">
+									
+								<rich:dataTable id="tble_table_titre2" value="#{facCourCtrl.defaultVue.examAPayerMgr.listeRecherche}"  var="exam"  width="100%"  				
+								rows="30"  onRowClick="selectedRow=this;" 
+								onRowMouseOver="this.style.backgroundColor='#F1F1F1'" cellpadding="0" cellspacing="0" border="0"
+									onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"  >
+										
+								<f:facet name="header">
+									<rich:columnGroup>
+										
+										<rich:column >
+											<h:outputText value="Code Examen" />
+										</rich:column>
+										<rich:column >
+											<h:outputText value="#{locale.libelle} de l'Examen" />
+										</rich:column>
+										<rich:column>
+											<h:outputText value="Date de l'Examen" />
+										</rich:column>
+										<rich:column>
+											<h:outputText value="Montant" />
+										</rich:column>
+									   
+										<rich:column width="20">
+										
+										</rich:column>
+										
+										   <rich:column width="0">
+												
+											<h:inputHidden value="" />				                                
+										</rich:column>			                            					                            
+										
+																						
+									</rich:columnGroup>
+								</f:facet>
+								
+								<rich:column >
+									<h:outputText value="#{exam.codExam}" />				
+								</rich:column>
+								
+								<rich:column >
+									<h:outputText value="#{exam.libExam}" />				
+								</rich:column>
+			
+								<rich:column >
+									<h:outputText  value="#{exam.dateExam}" >	
+										<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+									</h:outputText>											
+								</rich:column>
+								
+								<rich:column >
+									<h:panelGrid width="100%" styleClass="money" >
+										<h:outputText id="optt_VMnt2_exam" value="#{exam.valMntTtc}"   >
+											<f:convertNumber pattern="#,###" />
+										</h:outputText>	
+									</h:panelGrid>				
+								</rich:column>
+													
+																		
+								<rich:column>
+									<h:panelGrid columns="1" width="100%" style="text-align:center" >	
+											<a4j:commandLink value="X"  action="#{facCourCtrl.supprimerExam}" reRender="tble_table_titre2,pnel_table6" ajaxSingle="true" immediate="true"  style="COLOR: #ff0000;"
+															 title="Supprimer cet examen" oncomplete="setTotauxTransfertExam();" >
+												<f:setPropertyActionListener  value="#{exam.specialId}" target="#{defaultVue.examAPayerMgr.key}"  />
+											</a4j:commandLink>
+										</h:panelGrid>																															
+								</rich:column>																							
+								
+								<rich:column width="0">
+									
+								</rich:column>									
+								<f:facet name="footer">
+										
+										<rich:columnGroup >
+																					
+											<rich:column>
+												<h:outputText value="TOTAL " />
+											</rich:column>
+																																			
+											<rich:column>
+												<h:outputText value="" />
+											</rich:column>
+											
+											<rich:column>
+												<h:outputText value="" />
+											</rich:column>
+											
+											<rich:column>
+												<h:panelGrid width="100%" styleClass="number" >
+													<h:outputText  id="optt_totalVMnt_exam" value="0"  >
+														<f:convertNumber pattern="#,###" />
+													</h:outputText>	
+												</h:panelGrid>	
+											</rich:column>
+											
+											<rich:column width="0" rendered="true"  >
+												<h:outputText value="" />
+											</rich:column>
+										</rich:columnGroup>
+									</f:facet>																																																										 						 						 
+							</rich:dataTable>							
+																
+									
+									<script type="text/javascript">																				
+										// Calcul des totaux du tableaux des titres
+										setTotauxTransfertExam();
+									</script>
+								<!--  Gestionnaire de Paginnation -->					
+								<rich:datascroller for="tble_table_recherche2" onpagechange="initMapInput();" />	
+						</h:panelGroup>
+							
+						</rich:panel>	
+					 </rich:tab>
+				</rich:tabPanel>	
+			</h:panelGroup>			
+			
+			<h:panelGroup>
+				<rich:tabPanel width="100%" selectedTab="tab1" switchType="ajax" >
+					 <rich:tab id="tab7" name="tab7"  label="Rechercher des Soins" >
+						
+						<fieldset>
+							<legend> 
+								<h:outputText value="Selection des Soins #{locale.a} facturer " styleClass="legend" />  
+							</legend>	
+							
+							<h:panelGrid columns="1" width="100%"  columnClasses="pngdCol" >
+								
+								<h:panelGrid  columns="2" width="100%" columnClasses="pngdCol"  >
+									<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+										<a4j:commandButton  value="Rechercher" actionListener="#{facCourCtrl.rechercherSoin}" ajaxSingle="true" reRender="tble_table_recherche3,pnel_table7" status="stus_actions" />
+									</h:panelGrid>
+									
+									<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+										
+									</h:panelGrid>
+								</h:panelGrid>
+								
+								<h:panelGrid columns="1" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+									<rich:panel  id="pnel_table7" >
+									<f:facet name="header"> 
+									<h:outputText value="Soins #{locale.trouves} (#{facCourCtrl.defaultVue.soinRechercheMgr.rowCount})  " />  
+									</f:facet>
+									
+								
+										<rich:dataTable id="tble_table_recherche3" value="#{facCourCtrl.defaultVue.soinRechercheMgr.listeRecherche}"  var="soin"  width="100%"  				
+										rows="30"  onRowClick="selectedRow=this;" 
+										onRowMouseOver="this.style.backgroundColor='#F1F1F1'" cellpadding="0" cellspacing="0" border="0"
+											onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"  >
+												
+										<f:facet name="header">
+											<rich:columnGroup>
+												
+												<rich:column >
+													<h:outputText value="Code Soin" />
+												</rich:column>
+												
+												<rich:column >
+													<h:outputText value="#{locale.libelle} du Soin" />
+												</rich:column>
+												<rich:column>
+													<h:outputText value="Date du Soin" />
+												</rich:column>
+												<rich:column>
+													<h:outputText value="Montant " />
+												</rich:column>
+											   
+												<rich:column width="20">
+												
+												</rich:column>
+												
+												<rich:column width="0">
+													<h:inputHidden value="" />				                                
+												</rich:column>			                            					                            
+																								
+											</rich:columnGroup>
+										</f:facet>
+										
+										<rich:column >
+											<h:outputText value="#{soin.codSoin}" />				
+										</rich:column>
+										
+										<rich:column >
+											<h:outputText value="#{soin.libSoin}" />				
+										</rich:column>
+					
+										<rich:column >
+											<h:outputText  value="#{soin.dateSoin}" >	
+												<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+											</h:outputText>											
+										</rich:column>
+										
+										<rich:column >
+											<h:panelGrid width="100%" styleClass="money" >
+												<h:outputText id="optt_VMnt_soin" value="#{soin.valMntTtc}"   >
+													<f:convertNumber pattern="#,###" />
+												</h:outputText>	
+											</h:panelGrid>				
+										</rich:column>
+										
+										<rich:column>
+											<h:panelGrid columns="1" width="100%" style="text-align:center" >	
+												<a4j:commandLink value="Ajouter"  action="#{facCourCtrl.selectionnerSoin}"  reRender="tble_table_titre3,tble_table_recherche3,pnel_table8"  ajaxSingle="true" immediate="true"
+																 title="Selectionner ce soin"   >
+													<f:setPropertyActionListener  value="#{soin.specialId}" target="#{defaultVue.soinRechercheMgr.key}"  />
+												</a4j:commandLink>
+											</h:panelGrid>																															
+										</rich:column>																							
+										
+										<rich:column width="0">
+											
+										</rich:column>									
+																																																																															 
+									</rich:dataTable>	
+															
+																
+									<!--  Gestionnaire de Paginnation -->					
+									<rich:datascroller for="tble_table_recherche3" onpagechange="initMapInput();" />
+										
+								</rich:panel>	
+									
+									
+									
+								</h:panelGrid>
+							</h:panelGrid>	
+							
+							
+						</fieldset>
+					 </rich:tab>
+					 <rich:tab id="tab8" name="tab8"  label="Soins #{locale.a} facturer" >
+						
+						<rich:panel  id="pnel_table8" >
+							<f:facet name="header"> 
+								<h:outputText value="Verification des soins #{locale.a} facturer (#{facCourCtrl.defaultVue.soinAPayerMgr.rowCount})  " />  
+							</f:facet>
+							
+							<h:panelGroup id="pnel_list_titre_selected3">
+									
+								<rich:dataTable id="tble_table_titre3" value="#{facCourCtrl.defaultVue.soinAPayerMgr.listeRecherche}"  var="soin"  width="100%"  				
+								rows="30"  onRowClick="selectedRow=this;" 
+								onRowMouseOver="this.style.backgroundColor='#F1F1F1'" cellpadding="0" cellspacing="0" border="0"
+									onRowMouseOut="this.style.backgroundColor='#{a4jSkin.tableBackgroundColor}'"  >
+										
+								<f:facet name="header">
+									<rich:columnGroup>
+										
+										<rich:column >
+											<h:outputText value="Code Soin" />
+										</rich:column>
+										<rich:column >
+											<h:outputText value="#{locale.libelle} du Soin" />
+										</rich:column>
+										<rich:column>
+											<h:outputText value="Date du Soin" />
+										</rich:column>
+										<rich:column>
+											<h:outputText value="Montant" />
+										</rich:column>
+									   
+										<rich:column width="20">
+										
+										</rich:column>
+										
+										   <rich:column width="0">
+												
+											<h:inputHidden value="" />				                                
+										</rich:column>			                            					                            
+										
+																						
+									</rich:columnGroup>
+								</f:facet>
+								
+								<rich:column >
+									<h:outputText value="#{soin.codSoin}" />				
+								</rich:column>
+								
+								<rich:column >
+									<h:outputText value="#{soin.libSoin}" />				
+								</rich:column>
+			
+								<rich:column >
+									<h:outputText  value="#{soin.dateSoin}" >	
+										<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+									</h:outputText>											
+								</rich:column>
+								
+								<rich:column >
+									<h:panelGrid width="100%" styleClass="money" >
+										<h:outputText id="optt_VMnt2_soin" value="#{soin.valMntTtc}"   >
+											<f:convertNumber pattern="#,###" />
+										</h:outputText>	
+									</h:panelGrid>				
+								</rich:column>
+													
+																		
+								<rich:column>
+									<h:panelGrid columns="1" width="100%" style="text-align:center" >	
+											<a4j:commandLink value="X"  action="#{facCourCtrl.supprimerSoin}" reRender="tble_table_titre3,pnel_table8" ajaxSingle="true" immediate="true"  style="COLOR: #ff0000;"
+															 title="Supprimer ce soin" oncomplete="setTotauxTransfertSoin();" >
+												<f:setPropertyActionListener  value="#{soin.specialId}" target="#{defaultVue.soinAPayerMgr.key}"  />
+											</a4j:commandLink>
+										</h:panelGrid>																															
+								</rich:column>																							
+								
+								<rich:column width="0">
+									
+								</rich:column>									
+								<f:facet name="footer">
+										
+										<rich:columnGroup >
+																					
+											<rich:column>
+												<h:outputText value="TOTAL " />
+											</rich:column>
+																																			
+											<rich:column>
+												<h:outputText value="" />
+											</rich:column>
+											
+											<rich:column>
+												<h:outputText value="" />
+											</rich:column>
+											
+											<rich:column>
+												<h:panelGrid width="100%" styleClass="number" >
+													<h:outputText  id="optt_totalVMnt_soin" value="0"  >
+														<f:convertNumber pattern="#,###" />
+													</h:outputText>	
+												</h:panelGrid>	
+											</rich:column>
+											
+											<rich:column width="0" rendered="true"  >
+												<h:outputText value="" />
+											</rich:column>
+										</rich:columnGroup>
+									</f:facet>																																																										 						 						 
+							</rich:dataTable>							
+																
+									
+									<script type="text/javascript">																				
+										// Calcul des totaux du tableaux des titres
+										setTotauxTransfertSoin();
+									</script>
+								<!--  Gestionnaire de Paginnation -->					
+								<rich:datascroller for="tble_table_recherche3" onpagechange="initMapInput();" />	
+						</h:panelGroup>
+							
+						</rich:panel>	
+					 </rich:tab>
+				</rich:tabPanel>	
+			</h:panelGroup>	
+			
+		</ui:define>
+													
+	</ui:composition>
+	
+</html>
