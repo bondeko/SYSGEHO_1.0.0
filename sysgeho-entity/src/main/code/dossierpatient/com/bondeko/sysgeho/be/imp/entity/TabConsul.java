@@ -80,7 +80,7 @@ private static final long serialVersionUID = 1L;
 	private BigDecimal booCpteRendu;
 	
 	@Column(name = "BOO_PAIE")
-	private BigDecimal booPaie;
+	private BigDecimal booPaie; 
 	
 	@Column(name = "REF_FAC")
 	private String refFac;
