@@ -19,8 +19,10 @@ import com.bondeko.sysgeho.be.core.exception.SysGehoPersistenceException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.BaseSisv;
 import com.bondeko.sysgeho.be.imp.dao.IDaoHospi;
-import com.bondeko.sysgeho.be.imp.entity.TabConsul;
 import com.bondeko.sysgeho.be.imp.entity.TabHospi;
+import com.bondeko.sysgeho.be.ref.dao.IDaoLit;
+import com.bondeko.sysgeho.be.ref.entity.TabLit;
+import com.bondeko.sysgeho.be.util.InfoUser;
 
 @Stateless
 public class SisvHospi extends BaseSisv<TabHospi, String> implements ISisvHospi{
@@ -33,6 +35,9 @@ public class SisvHospi extends BaseSisv<TabHospi, String> implements ISisvHospi{
 	} 
 	@EJB
 	IDaoHospi daoHospi; 
+	
+	@EJB
+	IDaoLit daoLit; 
 	
 	@EJB
 	IDaoIncCod daoIncCod;
@@ -78,6 +83,7 @@ public class SisvHospi extends BaseSisv<TabHospi, String> implements ISisvHospi{
 	
 	public <X extends BaseEntity> X creer(X p$entite) throws BaseException  {
 		TabHospi entCree = (TabHospi) p$entite; 
+		InfoUser info = entCree.getInfoUser();
 		if(rechercherParCodPat(entCree.getTabPat().getCodPat()) != null)
 			throw new BaseException("Il existe déjà une hospitalisation en cours pour le patient "+entCree.getTabPat().getLibNom());
 		entCree = initialiserDonnees(entCree);
@@ -88,6 +94,13 @@ public class SisvHospi extends BaseSisv<TabHospi, String> implements ISisvHospi{
 			throw new BaseException("Erreur : Cette entité existe déjà");
 		}
 		entCree.validateData();
+		if(entCree.getTabLit() != null && entCree.getTabLit().getCodLit() != null){
+			TabLit tabLit = daoLit.findById(new TabLit(), entCree.getTabLit().getCodLit());
+			tabLit.setInfoUser(info);
+			tabLit.setBooOqp(BigDecimal.ONE);
+			tabLit.setEtatEnt(EnuEtat.OCCUPE.getValue());
+			daoLit.update(tabLit);
+		}
 		return (X) getBaseDao().save(entCree);
 	}
 	
@@ -125,6 +138,13 @@ public class SisvHospi extends BaseSisv<TabHospi, String> implements ISisvHospi{
 	@Override
 	public TabHospi sortirHospitalisation(TabHospi tabHospi) throws SysGehoSystemException {
 		try {
+			TabLit tabLit = tabHospi.getTabLit();
+			tabLit.setInfoUser(tabHospi.getInfoUser());
+			if(tabLit != null){
+				tabLit.setBooOqp(BigDecimal.ZERO);
+				tabLit.setEtatEnt(EnuEtat.LIBRE.getValue());
+				daoLit.update(tabLit);
+			}
 			tabHospi.setEtatEnt(EnuEtat.TERMINE.getValue());
 			return daoHospi.update(tabHospi);
 		} catch (SysGehoPersistenceException e) {
