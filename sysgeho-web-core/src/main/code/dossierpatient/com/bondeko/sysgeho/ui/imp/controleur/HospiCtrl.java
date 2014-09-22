@@ -13,6 +13,8 @@ import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
 import com.bondeko.sysgeho.be.imp.entity.TabHospi;
 import com.bondeko.sysgeho.be.imp.entity.TabPat;
+import com.bondeko.sysgeho.be.ref.entity.TabChrHospi;
+import com.bondeko.sysgeho.be.ref.entity.TabLit;
 import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
 import com.bondeko.sysgeho.ui.core.base.SysGehoCtrl;
@@ -138,6 +140,14 @@ public class HospiCtrl extends SysGehoCtrl<TabHospi, TabHospi>{
 		if (v$propriete.equals("tabSvc")) {
 			TabSvc v$entite = (TabSvc) p$entite;
 			defaultVue.getEntiteCourante().setTabSvc(v$entite);
+		}
+		if (v$propriete.equals("tabChrHospi")) {
+			TabChrHospi v$entite = (TabChrHospi) p$entite;
+			defaultVue.getEntiteCourante().setTabChrHospi(v$entite);
+		}
+		if (v$propriete.equals("tabLit")) {
+			TabLit v$entite = (TabLit) p$entite;
+			defaultVue.getEntiteCourante().setTabLit(v$entite);
 		}
 	}
 	

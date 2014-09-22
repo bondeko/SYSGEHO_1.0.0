@@ -24,7 +24,7 @@
          			<h:inputText  value="#{hospiCtrl.defaultVue.entiteRecherche.codHospi}" style="width: 60%" /> 
          			
 					<h:outputText value="#{locale.chamnum}" />          				
-         			<h:inputText  value="#{hospiCtrl.defaultVue.entiteRecherche.libNumChbre}" style="width: 60%" />  
+         			<h:inputText  value="#{hospiCtrl.defaultVue.entiteRecherche.tabChrHospi.numChrHospi}" style="width: 60%" />  
          			
 				</h:panelGrid>
 				
@@ -68,18 +68,18 @@
 				<h:outputText value="#{entity.tabPat.libNom}" />				
 			</rich:column>
 			
-			<rich:column label="#{locale.chamnum} " sortBy="#{entity.libNumChbre}" filterBy="#{entity.libNumChbre}" >
+			<rich:column label="#{locale.chamnum} " sortBy="#{entity.tabChrHospi.numChrHospi}" filterBy="#{entity.tabChrHospi.numChrHospi}" >
 				<f:facet name="header">
 					<h:outputText value="#{locale.chamnum}"  />
 				</f:facet>
-				<h:outputText value="#{entity.libNumChbre}" />				
+				<h:outputText value="#{entity.tabChrHospi.numChrHospi}" />				
 			</rich:column>
 			
-			<rich:column label="#{locale.linum} " sortBy="#{entity.libNumLit}" filterBy="#{entity.libNumLit}" >
+			<rich:column label="#{locale.linum} " sortBy="#{entity.tabLit.numLit}" filterBy="#{entity.tabLit.numLit}" >
 				<f:facet name="header">
 					<h:outputText value="#{locale.linum}"  />
 				</f:facet>
-				<h:outputText value="#{entity.libNumLit}" />				
+				<h:outputText value="#{entity.tabLit.numLit}" />				
 			</rich:column>
 			
 			<rich:column label="#{locale.numcarnet}" sortBy="#{entity.libNumCarnet}" filterBy="#{entity.libNumCarnet}"  >
@@ -101,6 +101,13 @@
 					<h:outputText value="Motif"  />
 				</f:facet>
 				<h:outputText value="#{entity.libMotif}" />				
+			</rich:column>
+			
+			<rich:column label="Mode de prise en charge " sortBy="#{entity.LEnuModPchg}" filterBy="#{entity.LEnuModPchg}" >
+				<f:facet name="header">
+					<h:outputText value="Mode de prise en charge"  />
+				</f:facet>
+				<h:outputText value="#{entity.LEnuModPchg}" />				
 			</rich:column>
 			
 		</ui:define>

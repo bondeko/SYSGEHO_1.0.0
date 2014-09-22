@@ -223,6 +223,15 @@
 								 <f:convertNumber currencySymbol="F CFA" pattern="#,###"   />
 							</h:inputText>
 							
+							<h:outputText value="Mode de prise en charge" />
+							<h:panelGroup >
+								<h:selectOneMenu id="modpchg" value="#{soinCtrl.defaultVue.entiteCourante.enuModPchg}" style="width: 30%"
+										title="Mode de prise en charge"  immediate="true" >
+									<f:selectItems  value="#{soinCtrl.defaultVue.listeModPchg['map']}"/>
+									<a4j:support event="onchange" ajaxSingle="true" />						
+								</h:selectOneMenu>
+							</h:panelGroup>
+							
 							<h:outputText value="Observation"	 />
 							<h:inputTextarea  value="#{soinCtrl.defaultVue.entiteCourante.libObs}"  
 								 required="false" style="width: 60%" title="Observation" >

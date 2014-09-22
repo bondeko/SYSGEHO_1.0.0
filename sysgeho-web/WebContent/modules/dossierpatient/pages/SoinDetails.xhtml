@@ -154,6 +154,9 @@
 								 <f:convertNumber currencySymbol="F CFA" pattern="#,###"   />
 							</h:inputText>
 							
+							<h:outputText value="Mode de prise en charge" />											
+							<h:inputText  value="#{soinCtrl.defaultVue.entiteCourante.LEnuModPchg}" style="width: 30%" readonly="true"  title="Mode de prise en charge"/>
+							
 							<h:outputText value="Observation"	 />
 							<h:inputTextarea  value="#{soinCtrl.defaultVue.entiteCourante.libObs}"  
 								 required="false" style="width: 60%" title="Prescipteur" readonly="true">

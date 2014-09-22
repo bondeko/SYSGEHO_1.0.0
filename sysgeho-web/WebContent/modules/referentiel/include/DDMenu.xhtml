@@ -43,6 +43,18 @@
 		                 ajaxSingle="true" >
 		                 <h:outputText value="Types de Rendez-vous" />
 		             </rich:menuItem>
+		             
+		             <rich:menuItem submitMode="ajax" rendered="true" 
+		                 action="#{chrHospiCtrl.openHomePage}" 
+		                 ajaxSingle="true" >
+		                 <h:outputText value="Chambres" />
+		             </rich:menuItem>
+		             
+		             <rich:menuItem submitMode="ajax" rendered="true" 
+		                 action="#{litCtrl.openHomePage}" 
+		                 ajaxSingle="true" >
+		                 <h:outputText value="Lits" />
+		             </rich:menuItem>
                    
                 </rich:menuGroup>
 				
@@ -59,7 +71,7 @@
 		             <rich:menuItem submitMode="ajax" rendered="true" 
 		                 action="#{typExamCtrl.openHomePage}" 
 		                 ajaxSingle="true" >
-		                 <h:outputText value="Types Examens" />
+		                 <h:outputText value="Fichier des Examens" />
 		             </rich:menuItem>
                    
                 </rich:menuGroup>
@@ -71,7 +83,7 @@
                    <rich:menuItem submitMode="ajax" rendered="true" 
 	                 action="#{typSoinCtrl.openHomePage}" 
 	                 ajaxSingle="true" >
-	                 <h:outputText value="Types de Soins" />
+	                 <h:outputText value="Fichier des Soins" />
 	             </rich:menuItem>
 		             
                </rich:menuGroup>

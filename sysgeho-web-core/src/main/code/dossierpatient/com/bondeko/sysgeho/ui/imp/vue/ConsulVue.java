@@ -2,13 +2,16 @@ package com.bondeko.sysgeho.ui.imp.vue;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.model.SelectItem;
 
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
+import com.bondeko.sysgeho.be.core.enums.EnuModPchg;
 import com.bondeko.sysgeho.be.imp.entity.TabConsul;
 import com.bondeko.sysgeho.be.ref.entity.TabSpec;
 import com.bondeko.sysgeho.ui.core.base.AbstractNavigationManager;
+import com.bondeko.sysgeho.ui.core.base.SysGehoToolBox;
 import com.bondeko.sysgeho.ui.core.base.SysGehoVue;
 import com.bondeko.sysgeho.ui.core.base.TableManager;
 import com.bondeko.sysgeho.ui.ref.util.RefSvcoDeleguate;
@@ -16,6 +19,7 @@ import com.bondeko.sysgeho.ui.ref.util.RefSvcoDeleguate;
 public class ConsulVue extends SysGehoVue<TabConsul>{
 
 	private List<SelectItem> listeSpec;
+	private  Map<String, Object> listeModPchg;
 
 	public ConsulVue(){
 		super();
@@ -98,6 +102,14 @@ public class ConsulVue extends SysGehoVue<TabConsul>{
 			}
 		}
 		return listeSpec;
+	}
+	
+	public Map<String, Object> getListeModPchg() {
+		if(listeModPchg == null){
+			listeModPchg = SysGehoToolBox.getComboData(EnuModPchg.getMaps());
+			listeModPchg.put("", "");
+		}
+		return listeModPchg;
 	}
 
 }

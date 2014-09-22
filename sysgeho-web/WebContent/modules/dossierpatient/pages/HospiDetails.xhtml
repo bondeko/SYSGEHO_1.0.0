@@ -137,6 +137,22 @@
 										<a4j:support event="onchange" ajaxSingle="true" />
 								</h:inputText>
 							</h:panelGroup>
+							
+							<h:outputText value="Chambre"/>
+							<h:panelGroup>
+								<h:inputText id="inpt_numcbre" value="#{hospiCtrl.defaultVue.entiteCourante.tabChrHospi.numChrHospi}"  
+								 style="width: 20%" title="#{locale.chamnum}" readonly="true"/>
+								<h:inputText id="inpt_libcbre" value="#{hospiCtrl.defaultVue.entiteCourante.tabChrHospi.libChrHospi}"  
+								 style="width: 40%" title="#{locale.chamnum}" readonly="true"/>
+							</h:panelGroup>
+							
+							<h:outputText value="Lit"/>
+							<h:panelGroup>
+								<h:inputText id="inpt_numlit" value="#{hospiCtrl.defaultVue.entiteCourante.tabLit.numLit}"  
+								 style="width: 20%" title="Lit" readonly="true"/>
+								<h:inputText id="inpt_liblit" value="#{hospiCtrl.defaultVue.entiteCourante.tabLit.libLit}"  
+								 style="width: 40%" title="Lit" readonly="true"/>
+							</h:panelGroup>
 						
          			</h:panelGrid>  
          				
@@ -172,16 +188,6 @@
 								 required="false" style="width: 30%" title="#{locale.numcarnet}" readonly="true">
 							</h:inputText>
 							
-							<h:outputText value="#{locale.chamnum}"/>
-							<h:inputText id="inpt_numcbre" value="#{hospiCtrl.defaultVue.entiteCourante.libNumChbre}"  
-								 required="false" style="width: 30%" title="#{locale.chamnum}" readonly="true">
-							</h:inputText>
-							
-							<h:outputText value="#{locale.linum}"/>
-							<h:inputText id="inpt_numlit" value="#{hospiCtrl.defaultVue.entiteCourante.libNumLit}"  
-								 required="false" style="width: 30%" title="#{locale.linum}" readonly="true">
-							</h:inputText>
-							
 							<h:outputText value="Montant TTC" />
 							<h:inputText id="inpt_mntttc" value="#{hospiCtrl.defaultVue.entiteCourante.valMnt}"  styleClass="money"
 								 required="false"  style="width: 30%" 
@@ -189,6 +195,9 @@
 								 converterMessage="#{msg['erreur.conversion.entiere']}"   >
 								 <f:convertNumber currencySymbol="F CFA" pattern="#,###"   />
 							</h:inputText>
+							
+							<h:outputText value="Mode de prise en charge" />											
+							<h:inputText  value="#{hospiCtrl.defaultVue.entiteCourante.LEnuModPchg}" style="width: 30%" readonly="true"  title="Mode de prise en charge"/>
          				
 							<h:outputText value="Motif"/>
 							<h:inputText id="inpt_mtf" value="#{hospiCtrl.defaultVue.entiteCourante.libMotif}"  

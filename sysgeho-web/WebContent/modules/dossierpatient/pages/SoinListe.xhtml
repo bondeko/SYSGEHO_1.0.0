@@ -98,6 +98,13 @@
 				<h:outputText value="#{entity.valMntTtc}" />		
 			</rich:column>
 			
+			<rich:column label="Mode de prise en charge " sortBy="#{entity.LEnuModPchg}" filterBy="#{entity.LEnuModPchg}" >
+				<f:facet name="header">
+					<h:outputText value="Mode de prise en charge"  />
+				</f:facet>
+				<h:outputText value="#{entity.LEnuModPchg}" />				
+			</rich:column>
+			
 		</ui:define>
 													
 	</ui:composition>

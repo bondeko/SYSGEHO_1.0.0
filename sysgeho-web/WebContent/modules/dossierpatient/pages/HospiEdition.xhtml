@@ -172,7 +172,6 @@
 								<h:outputText value="Service" />
 								<ui:include src="/shared/include/required.xhtml" />
 							</h:panelGroup>
-						
 							<h:panelGroup >	
 								<h:selectOneMenu id="cod_ser" value="#{hospiCtrl.defaultVue.entiteCourante.tabSvc.codSvc}" style="width: 60%"  title="#{locale.medecin}" 
 										required="true" requiredMessage="Valeur obligatoire">
@@ -181,6 +180,33 @@
 									<a4j:support event="onchange" ajaxSingle="true" />						
 								</h:selectOneMenu>	
 								<rich:message for="cod_ser" errorClass="msg_error" />
+							</h:panelGroup> 
+							
+							<h:panelGroup>
+								<h:outputText value="Chambre" />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
+							<h:panelGroup >	
+								<h:selectOneMenu id="cod_chr" value="#{hospiCtrl.defaultVue.entiteCourante.tabChrHospi.numChrHospi}" style="width: 60%"  title="Chambre" 
+										required="true" requiredMessage="Valeur obligatoire">
+									<f:selectItem itemLabel="" itemValue="#{null}"/>
+									<f:selectItems  value="#{hospiCtrl.defaultVue.listeChr}"/> 
+									<a4j:support event="onchange" ajaxSingle="true" actionListener="#{hospiCtrl.defaultVue.updateListLit}" reRender="pngp_lit1,pngp_lit2"/>						
+								</h:selectOneMenu>	
+								<rich:message for="cod_chr" errorClass="msg_error" />
+							</h:panelGroup> 
+							
+							<h:panelGroup id="pngp_lit1">
+								<h:outputText value="Lit" rendered="#{! empty hospiCtrl.defaultVue.entiteCourante.tabChrHospi.numChrHospi}"/>
+							</h:panelGroup>
+							<h:panelGroup id="pngp_lit2">	
+								<h:selectOneMenu id="cod_lit" value="#{hospiCtrl.defaultVue.entiteCourante.tabLit.codLit}" style="width: 60%"  title="Lit" 
+										rendered="#{! empty hospiCtrl.defaultVue.entiteCourante.tabChrHospi.numChrHospi}">
+									<f:selectItem itemLabel="" itemValue="#{null}"/>
+									<f:selectItems  value="#{hospiCtrl.defaultVue.listeLit}"/> 
+									<a4j:support event="onchange" ajaxSingle="true" />						
+								</h:selectOneMenu>	
+								<rich:message for="cod_lit" errorClass="msg_error" />
 							</h:panelGroup> 
 							
          			</h:panelGrid>  
@@ -215,16 +241,6 @@
 								 required="false" style="width: 30%" title="#{locale.numcarnet}" >
 							</h:inputText>
 							
-							<h:outputText value="#{locale.chamnum}"/>
-							<h:inputText id="inpt_numcbre" value="#{hospiCtrl.defaultVue.entiteCourante.libNumChbre}"  
-								 required="false" style="width: 30%" title="#{locale.chamnum}" >
-							</h:inputText>
-							
-							<h:outputText value="#{locale.linum}"/>
-							<h:inputText id="inpt_numlit" value="#{hospiCtrl.defaultVue.entiteCourante.libNumLit}"  
-								 required="false" style="width: 30%" title="#{locale.linum}" >
-							</h:inputText>
-							
 							<h:outputText value="Montant TTC" />
 							<h:inputText id="inpt_mntttc" value="#{hospiCtrl.defaultVue.entiteCourante.valMnt}"  styleClass="money"
 								 required="false"  style="width: 30%" 
@@ -232,6 +248,15 @@
 								 converterMessage="#{msg['erreur.conversion.entiere']}"   >
 								 <f:convertNumber currencySymbol="F CFA" pattern="#,###"   />
 							</h:inputText>
+							
+							<h:outputText value="Mode de prise en charge" />
+							<h:panelGroup >
+								<h:selectOneMenu id="modpchg" value="#{hospiCtrl.defaultVue.entiteCourante.enuModPchg}" style="width: 30%"
+										title="Mode de prise en charge"  immediate="true" >
+									<f:selectItems  value="#{hospiCtrl.defaultVue.listeModPchg['map']}"/>
+									<a4j:support event="onchange" ajaxSingle="true" />						
+								</h:selectOneMenu>
+							</h:panelGroup>
 							
 							<h:outputText value="Motif"/>
 							<h:inputText id="inpt_mtf" value="#{hospiCtrl.defaultVue.entiteCourante.libMotif}"  

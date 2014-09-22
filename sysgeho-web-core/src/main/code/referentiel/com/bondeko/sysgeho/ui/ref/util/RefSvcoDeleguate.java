@@ -3,6 +3,8 @@ package com.bondeko.sysgeho.ui.ref.util;
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
 import com.bondeko.sysgeho.be.ref.svco.IRemoteAss;
 import com.bondeko.sysgeho.be.ref.svco.IRemoteCatExam;
+import com.bondeko.sysgeho.be.ref.svco.IRemoteChrHospi;
+import com.bondeko.sysgeho.be.ref.svco.IRemoteLit;
 import com.bondeko.sysgeho.be.ref.svco.IRemoteSoc;
 import com.bondeko.sysgeho.be.ref.svco.IRemoteSpec;
 import com.bondeko.sysgeho.be.ref.svco.IRemoteTypExam;
@@ -53,6 +55,14 @@ public class RefSvcoDeleguate {
 	
 	public static IRemoteTypRdv getSvcoTypRdv() throws ServiceLocatorException{
         return (IRemoteTypRdv) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoTypRdv", IRemoteTypRdv.class));
+    }
+	
+	public static IRemoteChrHospi getSvcoChrHospi() throws ServiceLocatorException{
+        return (IRemoteChrHospi) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoChrHospi", IRemoteChrHospi.class));
+    }
+	
+	public static IRemoteLit getSvcoLit() throws ServiceLocatorException{
+        return (IRemoteLit) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoLit", IRemoteLit.class));
     }
 
 	public BaseLogger getLogger() {

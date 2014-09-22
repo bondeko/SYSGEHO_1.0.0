@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+     
+  	<ui:composition template="/shared/templates/templateFormulaireListe.xhtml">
+		
+		<ui:param name="managedBean" value="#{sessionScope[litCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" des Chambres" />
+		
+		<!-- Criteres standards de recherche -->
+		<ui:define name="standardFilter"  >
+		
+			<h:panelGrid columns="2" width="100%"   columnClasses="pngdColMiddle" rowClasses="pngdRow" >
+			
+				<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				
+					<h:outputText value="#{locale.linum}" />           				
+         			<h:inputText  value="#{litCtrl.defaultVue.entiteRecherche.numLit}" style="width: 30%" /> 
+         			
+					<h:outputText value="#{locale.libelle}" />          				
+         			<h:inputText  value="#{litCtrl.defaultVue.entiteRecherche.libLit}" style="width: 30%" />  
+         			
+         			<h:outputText value="#{locale.chamnum}" />           				
+         			<h:inputText  value="#{litCtrl.defaultVue.entiteRecherche.tabChrHospi.numChrHospi}" style="width: 30%" />          					           					           					   					            				            				            			
+
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2" width="100%" border="0" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				</h:panelGrid>
+														
+																																																	
+			</h:panelGrid>	
+						
+		</ui:define>
+		
+		<!-- Colonnes specifiques e l entite -->
+		<ui:define name="specificColumns"  >
+		
+			<rich:column label="#{locale.linum}" sortBy="#{entity.numLit}" filterBy="#{entity.numLit}" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.linum}"  />
+				</f:facet>
+				<h:outputText value="#{entity.numLit}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.libelle}" sortBy="#{entity.libLit}" filterBy="#{entity.libLit}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.libelle}"  />
+				</f:facet>
+				<h:outputText value="#{entity.libLit}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.chamnum}" sortBy="#{entity.tabChrHospi.numChrHospi}" filterBy="#{entity.tabChrHospi.numChrHospi}" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.chamnum}"  />
+				</f:facet>
+				<h:outputText value="#{entity.tabChrHospi.numChrHospi}" />				
+			</rich:column>
+			
+		</ui:define>
+													
+	</ui:composition>
+	
+</html>

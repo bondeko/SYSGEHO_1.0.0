@@ -37,6 +37,16 @@
   <managed-bean-class>com.bondeko.sysgeho.ui.ref.controleur.TypRdvCtrl</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>chrHospiCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.ref.controleur.ChrHospiCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>litCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.ref.controleur.LitCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
  <navigation-rule>
   <from-view-id>*</from-view-id>
   <navigation-case>
@@ -138,6 +148,36 @@
   <navigation-case>
    <from-outcome>TypRdvListe</from-outcome>
    <to-view-id>/modules/referentiel/pages/TypRdvListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>ChrHospiDetails</from-outcome>
+   <to-view-id>/modules/referentiel/pages/ChrHospiDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>ChrHospiEdition</from-outcome>
+   <to-view-id>/modules/referentiel/pages/ChrHospiEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>ChrHospiListe</from-outcome>
+   <to-view-id>/modules/referentiel/pages/ChrHospiListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>LitDetails</from-outcome>
+   <to-view-id>/modules/referentiel/pages/LitDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>LitEdition</from-outcome>
+   <to-view-id>/modules/referentiel/pages/LitEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>LitListe</from-outcome>
+   <to-view-id>/modules/referentiel/pages/LitListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
   

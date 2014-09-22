@@ -2,13 +2,16 @@ package com.bondeko.sysgeho.ui.imp.vue;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.model.SelectItem;
 
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
+import com.bondeko.sysgeho.be.core.enums.EnuModPchg;
 import com.bondeko.sysgeho.be.imp.entity.TabExam;
 import com.bondeko.sysgeho.be.ref.entity.TabTypExam;
 import com.bondeko.sysgeho.ui.core.base.AbstractNavigationManager;
+import com.bondeko.sysgeho.ui.core.base.SysGehoToolBox;
 import com.bondeko.sysgeho.ui.core.base.SysGehoVue;
 import com.bondeko.sysgeho.ui.core.base.TableManager;
 import com.bondeko.sysgeho.ui.ref.util.RefSvcoDeleguate;
@@ -16,6 +19,8 @@ import com.bondeko.sysgeho.ui.ref.util.RefSvcoDeleguate;
 public class ExamVue extends SysGehoVue<TabExam>{
 	
 	private ArrayList<SelectItem> listeTypExam; 
+	
+	private  Map<String, Object> listeModPchg;
 
 	public ExamVue(){
 		super();
@@ -98,6 +103,14 @@ public class ExamVue extends SysGehoVue<TabExam>{
 			}
 		}
 		return listeTypExam;
+	}
+	
+	public Map<String, Object> getListeModPchg() {
+		if(listeModPchg == null){
+			listeModPchg = SysGehoToolBox.getComboData(EnuModPchg.getMaps());
+			listeModPchg.put("", "");
+		}
+		return listeModPchg;
 	}
 	
 }
