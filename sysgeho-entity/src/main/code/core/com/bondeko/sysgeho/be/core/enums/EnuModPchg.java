@@ -1,41 +1,17 @@
 package com.bondeko.sysgeho.be.core.enums;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-public enum EnuEtat {
+public enum EnuModPchg {
 
-
-	CREE("2000", "Crée"),
+	PERSO("2000", "Personnelle"),
 	
-	VALIDE("2002", "Validé"),
+	ENTRE("2002", "Entreprise"),
 	
-	DEMARRE("2003", "Démarré"),
-	
-	CLOTURE("2004", "Clôtuté"),
-	
-	LIVRE("2005", "Livré"),
-	
-	RECEPTIONNE("2006", "Réceptionné"),
-	
-	ANNULER("2007", "Annulé"),
-	
-	CONFIRME("2008", "Confirmé"),
-	
-	EN_COURS("2009", "En cours"),
-	
-	TERMINE("2010", "Terminé"),
-	
-	PAYE("2011", "Payé"),
-	
-	OCCUPE("2012", "Occupé"),
-	
-	LIBRE("2013", "Libre"),
-
-	SUPP("2001", "Supprimé");
+	ASS("2001", "Assurance");
 
 	/**
 	 * Valeur de l'énumération
@@ -51,7 +27,7 @@ public enum EnuEtat {
 	 * @param value : la valeur
 	 * @param libelle : le libellé
 	 */
-	private EnuEtat(String value, String libelle) {
+	private EnuModPchg(String value, String libelle) {
 		this.value = value;
 		this.libelle = libelle;
 
@@ -75,8 +51,8 @@ public enum EnuEtat {
 	 * @param enumValue
 	 * @return
 	 */
-	public static EnuEtat getByValue(String enumValue) {
-		for (EnuEtat enm : EnuEtat.class
+	public static EnuModPchg getByValue(String enumValue) {
+		for (EnuModPchg enm : EnuModPchg.class
 				.getEnumConstants()) {
 			if (enm.getValue().equalsIgnoreCase(enumValue))
 				return enm;
@@ -84,7 +60,7 @@ public enum EnuEtat {
 		return null;
 	}
 
-	private static List<EnuEtat> myList;
+	private static List<EnuModPchg> myList;
 	private static Map<String, String> myMap;
 
 	/***
@@ -96,19 +72,20 @@ public enum EnuEtat {
 		return myMap;
 	}
 
-	public static List<EnuEtat> getListe() {
+	public static List<EnuModPchg> getListe() {
 		return myList;
 	}
 
 	static {
-		myList = new ArrayList<EnuEtat>();
+		myList = new ArrayList<EnuModPchg>();
 		myMap = new TreeMap<String, String>();
 		myMap.put("", "");
-		for (EnuEtat enm : EnuEtat.class
+		for (EnuModPchg enm : EnuModPchg.class
 				.getEnumConstants()) {
 			myList.add(enm);
 			myMap.put(enm.getValue(), enm.getLibelle());
 		}
 	}
+	
 	
 }

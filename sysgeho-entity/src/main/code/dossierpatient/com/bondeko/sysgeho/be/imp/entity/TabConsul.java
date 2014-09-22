@@ -16,6 +16,7 @@ import javax.persistence.Transient;
 import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr;
 import com.bondeko.sysgeho.be.core.base.DateTools;
 import com.bondeko.sysgeho.be.core.base.SysGehoBaseEntity;
+import com.bondeko.sysgeho.be.core.enums.EnuModPchg;
 import com.bondeko.sysgeho.be.util.InfoUser;
 
 @Entity
@@ -84,6 +85,9 @@ private static final long serialVersionUID = 1L;
 	
 	@Column(name = "REF_FAC")
 	private String refFac;
+	
+	@Column(name = "ENU_MOD_PCHG")
+	private String enuModPchg;
 	
 	@Transient
 	private String libSpec;
@@ -262,6 +266,19 @@ private static final long serialVersionUID = 1L;
 
 	public String getRefFac() {
 		return refFac;
+	}
+
+	public void setEnuModPchg(String enuModPchg) {
+		this.enuModPchg = enuModPchg;
+	}
+
+	public String getEnuModPchg() {
+		return enuModPchg;
+	}
+	
+	public String getLEnuModPchg() {
+		EnuModPchg v$enum = EnuModPchg.getByValue(this.enuModPchg); 
+		return (v$enum == null)? null: v$enum.getLibelle();
 	}
 
 }

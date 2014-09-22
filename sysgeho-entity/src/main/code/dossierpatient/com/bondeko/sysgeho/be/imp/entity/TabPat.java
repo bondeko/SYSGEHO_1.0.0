@@ -18,7 +18,6 @@ import com.bondeko.sysgeho.be.core.enums.EnuStatutMat;
 import com.bondeko.sysgeho.be.core.enums.EnuTitre;
 import com.bondeko.sysgeho.be.ref.entity.TabAss;
 import com.bondeko.sysgeho.be.ref.entity.TabSoc;
-import com.bondeko.sysgeho.be.ref.entity.TabSpec;
 import com.bondeko.sysgeho.be.util.InfoUser;
 
 @Entity
@@ -95,6 +94,9 @@ public class TabPat extends SysGehoBaseEntity implements Serializable{
 	
 	@Column(name = "LIB_NUM_TEL_PER_CON")
 	private String libNumTelPerCon;
+	
+	@Column(name = "LIB_NUM_CNPS")
+	private String libNumCnps;
 	
 	@ManyToOne
 	@JoinColumn(name = "COD_ASS")
@@ -390,6 +392,14 @@ public class TabPat extends SysGehoBaseEntity implements Serializable{
 
 	public String getLibNumCni() {
 		return libNumCni;
+	}
+
+	public void setLibNumCnps(String libNumCnps) {
+		this.libNumCnps = libNumCnps;
+	}
+
+	public String getLibNumCnps() {
+		return libNumCnps;
 	}
 
 }

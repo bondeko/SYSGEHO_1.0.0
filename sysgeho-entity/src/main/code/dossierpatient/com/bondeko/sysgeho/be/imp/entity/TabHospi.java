@@ -16,6 +16,9 @@ import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabSvc;
 import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr;
 import com.bondeko.sysgeho.be.core.base.DateTools;
 import com.bondeko.sysgeho.be.core.base.SysGehoBaseEntity;
+import com.bondeko.sysgeho.be.core.enums.EnuModPchg;
+import com.bondeko.sysgeho.be.ref.entity.TabChrHospi;
+import com.bondeko.sysgeho.be.ref.entity.TabLit;
 import com.bondeko.sysgeho.be.util.InfoUser;
 
 @Entity
@@ -71,11 +74,17 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "VAL_MNT")
 	private BigDecimal valMnt;
 	
-	@Column(name = "LIB_NUM_CHBRE")
-	private String libNumChbre;
+//	@Column(name = "LIB_NUM_CHBRE")
+//	private String libNumChbre;
+	@ManyToOne
+	@JoinColumn(name = "NUM_CHR_HOSPI")
+	private TabChrHospi tabChrHospi;
 	
-	@Column(name = "LIB_NUM_LIT")
-	private String libNumLit;
+//	@Column(name = "LIB_NUM_LIT")
+//	private String libNumLit;
+	@ManyToOne
+	@JoinColumn(name = "COD_LIT")
+	private TabLit tabLit;
 	
 	@Column(name = "DAT_SORTIE")
 	private String datSortie;
@@ -91,6 +100,9 @@ private static final long serialVersionUID = 1L;
 	
 	@Column(name = "REF_FAC")
 	private String refFac;
+	
+	@Column(name = "ENU_MOD_PCHG")
+	private String enuModPchg;
 	
 	
 	public Date getDateAdmi() {
@@ -149,6 +161,8 @@ private static final long serialVersionUID = 1L;
 		tabPat = (tabPat == null ? new TabPat() : tabPat);
 		tabSvc = (tabSvc == null ? new TabSvc() : tabSvc);
 		tabUsr = (tabUsr == null ? new TabUsr() : tabUsr);
+		tabChrHospi = (tabChrHospi == null ? new TabChrHospi() : tabChrHospi);
+		tabLit = (tabLit == null ? new TabLit() : tabLit);
 
 	}
 	
@@ -165,6 +179,15 @@ private static final long serialVersionUID = 1L;
 		tabUsr = (tabUsr != null && 
 				(tabUsr.getCodUsr() == null || tabUsr.getCodUsr().trim().isEmpty())
 				? null : tabUsr);
+		
+		tabChrHospi = (tabChrHospi != null && 
+				(tabChrHospi.getNumChrHospi() == null || tabChrHospi.getNumChrHospi().trim().isEmpty())
+				? null : tabChrHospi);
+		
+		tabLit = (tabLit != null && 
+				(tabLit.getCodLit() == null || tabLit.getCodLit().trim().isEmpty())
+				? null : tabLit);
+		
 	}
 
 	public String getCodHospi() {
@@ -239,22 +262,22 @@ private static final long serialVersionUID = 1L;
 		this.valMnt = valMnt;
 	}
 
-	public String getLibNumChbre() {
-		return libNumChbre;
-	}
-
-	public void setLibNumChbre(String libNumChbre) {
-		this.libNumChbre = libNumChbre;
-	}
-
-	public String getLibNumLit() {
-		return libNumLit;
-	}
-
-	public void setLibNumLit(String libNumLit) {
-		this.libNumLit = libNumLit;
-	}
-	
+//	public String getLibNumChbre() {
+//		return libNumChbre;
+//	}
+//
+//	public void setLibNumChbre(String libNumChbre) {
+//		this.libNumChbre = libNumChbre;
+//	}
+//
+//	public String getLibNumLit() {
+//		return libNumLit;
+//	}
+//
+//	public void setLibNumLit(String libNumLit) {
+//		this.libNumLit = libNumLit;
+//	}
+//	
 	public String getDatSortie() {
 		return datSortie;
 	}
@@ -293,6 +316,34 @@ private static final long serialVersionUID = 1L;
 
 	public String getRefFac() {
 		return refFac;
+	}
+
+	public void setEnuModPchg(String enuModPchg) {
+		this.enuModPchg = enuModPchg;
+	}
+
+	public String getEnuModPchg() {
+		return enuModPchg;
+	}
+	public String getLEnuModPchg() {
+		EnuModPchg v$enum = EnuModPchg.getByValue(this.enuModPchg); 
+		return (v$enum == null)? null: v$enum.getLibelle();
+	}
+
+	public TabChrHospi getTabChrHospi() {
+		return tabChrHospi;
+	}
+
+	public void setTabChrHospi(TabChrHospi tabChrHospi) {
+		this.tabChrHospi = tabChrHospi;
+	}
+
+	public TabLit getTabLit() {
+		return tabLit;
+	}
+
+	public void setTabLit(TabLit tabLit) {
+		this.tabLit = tabLit;
 	}
 
 }

@@ -80,9 +80,10 @@ public class DaoHospi extends BaseDao<TabHospi, String> implements IDaoHospi{
 				&& !currentHospi.getCodHospi().equals("")){
 			clauseWhere = clauseWhere + "AND upper(o.codHospi) like '%"+currentHospi.getCodHospi()+"%'";
 		}
-		if(currentHospi != null && currentHospi.getLibNumChbre()!= null 
-				&& !currentHospi.getLibNumChbre().equals("")){
-			clauseWhere = clauseWhere + "AND upper(o.libNumChbre) like '%"+currentHospi.getLibNumChbre()+"%'";
+		if(currentHospi != null && currentHospi.getTabChrHospi()!= null 
+				&& currentHospi.getTabChrHospi().getNumChrHospi()!= null 
+				&& !currentHospi.getTabChrHospi().getNumChrHospi().equals("")){
+			clauseWhere = clauseWhere + "AND upper(o.tabChrHospi.numChrHospi) like '%"+currentHospi.getTabChrHospi().getNumChrHospi()+"%'";
 		}
 		if(currentHospi != null && currentHospi.getTabPat()!= null 
 				&& currentHospi.getTabPat().getLibNom() != null 

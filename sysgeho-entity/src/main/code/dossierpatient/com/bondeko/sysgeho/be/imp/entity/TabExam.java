@@ -14,6 +14,7 @@ import javax.persistence.Table;
 
 import com.bondeko.sysgeho.be.core.base.DateTools;
 import com.bondeko.sysgeho.be.core.base.SysGehoBaseEntity;
+import com.bondeko.sysgeho.be.core.enums.EnuModPchg;
 import com.bondeko.sysgeho.be.ref.entity.TabTypExam;
 import com.bondeko.sysgeho.be.util.InfoUser;
 
@@ -77,6 +78,9 @@ private static final long serialVersionUID = 1L;
 	
 	@Column(name = "REF_FAC")
 	private String refFac;
+	
+	@Column(name = "ENU_MOD_PCHG")
+	private String enuModPchg;
 	
 	public BigDecimal getBooPaie() {
 		return booPaie;
@@ -229,6 +233,18 @@ private static final long serialVersionUID = 1L;
 
 	public BigDecimal getBooVal() {
 		return booVal;
+	}
+
+	public void setEnuModPchg(String enuModPchg) {
+		this.enuModPchg = enuModPchg;
+	}
+
+	public String getEnuModPchg() {
+		return enuModPchg;
+	}
+	public String getLEnuModPchg() {
+		EnuModPchg v$enum = EnuModPchg.getByValue(this.enuModPchg); 
+		return (v$enum == null)? null: v$enum.getLibelle();
 	}
 
 }
