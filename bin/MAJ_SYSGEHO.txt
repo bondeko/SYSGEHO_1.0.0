@@ -1,19 +1,27 @@
 Liste de MAJ à intéger
 
 =====Général
-1-Ajouter sur toutes les prestations les champs booléen B_FACT et B_PAYE pour indiquer si la prestation est facturée et payée
-2-Ajouter sur toutes les prestations les champs le champs E_MOD_PCHG(mode de prise en charge) à renseigner à la création
-	E_MOD_PCHG=Personnelle, Entreprise, Assurance
+1-Ajouter sur toutes les prestations les champs booléen B_FACT et B_PAYE pour indiquer si la prestation est facturée et payée (OK)
+Commentaire : des champs REF_FAC et BOO_PAIE existe déjà dans toutes prestations
+------------
+
+2-Ajouter sur toutes les prestations le champs E_MOD_PCHG(mode de prise en charge) à renseigner à la création. E_MOD_PCHG=Personnelle, Entreprise, Assurance (OK)
+Commentaire : RAS
+------------
+
 3- Ajouter le champ navigable et non obligatoire visite médical sur toute les prestations(soins, examen, consultation, ) pour déterminer identifier les prestation d'une visite médical donnée
 
 ======Visite médical ( périodique / embauche)
 1- A implementer
+VM_PERSO(code, libellé, motif, date, société)
+VM_EMB(code, motif, patient, date, société )
 
 ======Referentiel
-1- Ajouter et implementer la gestion des salles d'hospitalisations dans 
-2- Remplacer dans le menu "Type Examen" par "Fichier des examens"
-3- Remplacer dans le menu "Type Soin" par "Fichier des soins"
+1- Ajouter et implementer la gestion des salles d'hospitalisations (code, libellé, service, nb de lit, responsable) (OK)
+2- Remplacer dans le menu "Type Examen" par "Fichier des examens" (OK)
+3- Remplacer dans le menu "Type Soin" par "Fichier des soins" (OK)
 
 ====Patient
-1-Ajouter le champs No CNPS
-2-
+1-Ajouter le champs No CNPS (OK)
+Commentaire : RAS
+------------
