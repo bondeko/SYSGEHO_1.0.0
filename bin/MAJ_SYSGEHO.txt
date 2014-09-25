@@ -9,12 +9,17 @@ Commentaire : des champs REF_FAC et BOO_PAIE existe déjà dans toutes prestations
 Commentaire : RAS
 ------------
 
-3- Ajouter le champ navigable et non obligatoire visite médical sur toute les prestations(soins, examen, consultation, ) pour déterminer identifier les prestation d'une visite médical donnée
+3- Ajouter le champ navigable et non obligatoire visite médical sur toute les prestations(soins, examen, consultation, ) pour déterminer identifier les prestations d'une visite médical donnée
 
 ======Visite médical ( périodique / embauche)
 1- A implementer
+
+Description: Une visite médicale consiste à un ensemble de prestations médicales(consultation, examens, soins) réalisé sur les employés d'une entreprise bien précise 
+             vue de determiner l'aptitude des employés a 
+
 VM_PERSO(code, libellé, motif, date, société)
 VM_EMB(code, motif, patient, date, société )
+
 
 ======Referentiel
 1- Ajouter et implementer la gestion des salles d'hospitalisations (code, libellé, service, nb de lit, responsable) (OK)
@@ -24,4 +29,15 @@ VM_EMB(code, motif, patient, date, société )
 ====Patient
 1-Ajouter le champs No CNPS (OK)
 Commentaire : RAS
-------------
+-------------------------------------------25/09/2014
+====Ref/Catégorie examens
+1-Dans le formulaire de création, les spécialité chargé dans le champ select doivent provenir de la table spécialité en BD
+
+====Ref/Fichier examen
+1-Ajouter le champ "coût" (cout tarifaire de l'examen) sur l'entité Type exame
+
+====Ref/Fichier soins
+1-Ajouter le champ "coût" (cout tarifaire du soin) sur l'entité Type soin
+
+====Dossier Patient/Compte Rendu Consultation
+1-Ajouter le champ texte Antécédent professionnelle pour saisir les antécedents du patients(CF Curriculum Labori)
