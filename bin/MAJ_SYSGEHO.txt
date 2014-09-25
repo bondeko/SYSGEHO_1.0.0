@@ -29,15 +29,38 @@ VM_EMB(code, motif, patient, date, société )
 ====Patient
 1-Ajouter le champs No CNPS (OK)
 Commentaire : RAS
--------------------------------------------25/09/2014
+
+-------------------------------------------25/09/2014----------------------------------------
+====Facture/Facture Conventionnelle
+1-Ajouter l'entité facture conventionnelle.
+	- Champ : code, reference, objet, société, effectif du personnel de la sté, tarification_fixe mensuelle pr la sté, prix unitaire par employé, montant_total de la facture, mois facturé, date édition
+2-Ajouter le menu Facture/Facture conventionnelle pr gérer les facture conventionelles générées à partir de l'action spécifique sur l'entité "Société"
+
 ====Ref/Catégorie examens
 1-Dans le formulaire de création, les spécialité chargé dans le champ select doivent provenir de la table spécialité en BD
 
+====Ref/Société
+1-Ajouter le champ Tarification Fixe qui est contient le montant fixe annuel à verser par la société 
+2-Dans le formulaire de création, Cacher les champs "prix unitaire" et "tarification fixe" par défaut et les afficher lorsque le champs "Est affilié" est coché
+3-Ajouter l'action spécifique: Génerer la facture conventionelle
+	- Cette action a pour paramètre : mois-AAAA de la facture
+	- Cette action génère entité Facture conventionelle visible dans le formulaire liste de facture courante
+	NB: faire toutes les vérification avant la génération : la société est elle afffiliée, la facture a t-elle déja été généré pour le mois indiqué, 
+
 ====Ref/Fichier examen
-1-Ajouter le champ "coût" (cout tarifaire de l'examen) sur l'entité Type exame
+1-Ajouter le champ "coût" (cout tarifaire de l'examen) sur l'entité Type examen
+2-Lors de l'enrégistrement d'un examen remplir automatiquement le champ montant avec le cout tarifaire de du type examen selectionné et le laisser le champ modifiable
 
 ====Ref/Fichier soins
 1-Ajouter le champ "coût" (cout tarifaire du soin) sur l'entité Type soin
+2-Lors de l'enregistrement d'un soin remplir automatiquement le champ montant avec le cout tarifaire de du type soin selectionné et le laisser le champ modifiable
 
 ====Dossier Patient/Compte Rendu Consultation
 1-Ajouter le champ texte Antécédent professionnelle pour saisir les antécedents du patients(CF Curriculum Labori)
+
+====Dossier Patient/Rendez-vous
+1-Ajouter le champ Date du rendez-vous
+2-Ajouter le champ Heure du rendez-vous
+3-Ajouter le champs select spécialité correspondant aux spécialité en BD
+
+
