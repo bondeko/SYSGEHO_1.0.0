@@ -60,11 +60,12 @@ Commentaire : RAS
 2-Ajouter le champ texte Antécédent personnel
 3-Ajouter le champ texte Antécédent familial
 4-Ajouter le champ texte "Examen Physique"
-2-Cacher le champ diagnostic secondaire sur lee formulaire
-2-Renomer sur le formulaire "Diagnotic secondaire" par "Diagnostic"
+5-Cacher le champ diagnostic secondaire sur lee formulaire
+6-Renomer sur le formulaire "Diagnotic secondaire" par "Diagnostic"
 
 ====Dossier Patient/Rendez-vous
-2-Ajouter le champ Heure du rendez-vous
-3-Ajouter le champs select spécialité du rdv correspondant aux spécialité en BD
-
+1-Ajouter le champ Heure du rendez-vous
+2-Ajouter le champs select spécialité du rdv correspondant aux spécialité en BD
+====Dossier Patient/Examen
+1-Ajouter le champs utilisateur indiquant l'user du systeme ayant réalisé et enrégistré l'examen dans le système
 
