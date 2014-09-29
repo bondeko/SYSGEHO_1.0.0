@@ -234,4 +234,16 @@ public class DossierPatientTrt extends SysGehoTrt{
 				/* Raccourci clavier */ "Shift+F8", /* index */ "08", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
 	}
 	
+	/***
+	 * GENERER_CPTE_RENDU_CONSUL
+	 */
+	public static Traitement GENERER_CPTE_RENDU_CONSUL;	
+	static{
+		
+		GENERER_CPTE_RENDU_CONSUL = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "Gen_Cpte_Rdu_Con" , /* Libellé */ "Generer Compte Rendu" , /* Commentaire */ "" , /* Méthode */ "genererCpteRenduCon",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Générer le compte rendu ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "Shift+F2", /* index */ "14", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
+	
 }
