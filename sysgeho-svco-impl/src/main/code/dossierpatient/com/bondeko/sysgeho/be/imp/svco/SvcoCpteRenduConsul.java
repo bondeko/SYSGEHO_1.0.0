@@ -18,6 +18,7 @@ import com.bondeko.sysgeho.be.core.sisv.base.IBaseSisv;
 import com.bondeko.sysgeho.be.core.svco.base.BaseSvco;
 import com.bondeko.sysgeho.be.imp.entity.TabCpteRenduConsul;
 import com.bondeko.sysgeho.be.imp.sisv.ISisvCpteRenduConsul;
+import com.bondeko.sysgeho.be.util.EntFichier;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -86,4 +87,15 @@ public class SvcoCpteRenduConsul extends BaseSvco<TabCpteRenduConsul> implements
 		}
 	}
 	
+	@Override
+	public EntFichier  genererEtatCpteRenduCon(TabCpteRenduConsul cpterendu)
+	throws SysGehoAppException {
+		try {
+			return sisvCpteRenduConsul.genererEtatCpteRenduCon(cpterendu);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
 }
