@@ -18,10 +18,20 @@ import com.bondeko.sysgeho.be.core.exception.BaseException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoPersistenceException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.BaseSisv;
+import com.bondeko.sysgeho.be.core.util.locator.ResourceLocator;
 import com.bondeko.sysgeho.be.imp.dao.IDaoConsul;
 import com.bondeko.sysgeho.be.imp.dao.IDaoCpteRenduConsul;
 import com.bondeko.sysgeho.be.imp.entity.TabConsul;
 import com.bondeko.sysgeho.be.imp.entity.TabCpteRenduConsul;
+import com.bondeko.sysgeho.be.imp.entity.TabPat;
+import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatCpteRenduConsul;
+import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatCpteRenduConsulElt;
+import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatListPat;
+import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatListPatElt;
+import com.bondeko.sysgeho.be.util.EntFichier;
+import com.bondeko.sysgeho.be.util.ReportNames;
+import com.bondeko.sysgeho.be.util.SysGehoOutput;
+import com.bondeko.sysgeho.be.util.SysGehoPrinterExportEnum;
 
 @Stateless
 public class SisvCpteRenduConsul extends BaseSisv<TabCpteRenduConsul, String> implements ISisvCpteRenduConsul{
@@ -133,5 +143,57 @@ public class SisvCpteRenduConsul extends BaseSisv<TabCpteRenduConsul, String> im
 			throw sbr;
 		}
 	}
+	
+		
+	private SrlEtatCpteRenduConsul getCpteRenduCon(TabCpteRenduConsul cpterendu) throws SysGehoSystemException {
+		SrlEtatCpteRenduConsul srlEtatCpteRenduConsul = new SrlEtatCpteRenduConsul();
+		try {
+			//Recherche tous les mouvements de ce conteneurs
+			List<TabCpteRenduConsul> listcpterendu = daoCpteRenduConsul.findByExample(cpterendu);
+			if(listcpterendu != null && listcpterendu.size() > 0){
+				//On parcour la liste des mouvement obtenus et on construit la sérialization  
+				for(TabCpteRenduConsul pat : listcpterendu){
+					srlEtatCpteRenduConsul.addElement(new SrlEtatCpteRenduConsulElt(pat));
+				}
+			}
+//			else{
+//				srlMouvCon.addElement(new SrlMouvConElt(conCour, null));
+//			}
+		} catch (SysGehoPersistenceException e) {
+			e.printStackTrace();
+			throw new SysGehoSystemException(e.getMessage());
+		}
+		return srlEtatCpteRenduConsul;
+	}
+	
+	@Override
+	public EntFichier genererEtatCpteRenduCon(TabCpteRenduConsul cpterendu) throws SysGehoSystemException{
+		
+		try{
+			SrlEtatCpteRenduConsul etatCpteRenCon = getCpteRenduCon(cpterendu);
+			getLogger().debug("SisvPat.genererEtatListPatient Serialisation ...");
+			SysGehoOutput result = fillAndExport(etatCpteRenCon,
+					ResourceLocator.getReportModel(ReportNames.ETAT_CPTE_RENDU_CON),
+					SysGehoPrinterExportEnum.PDF, null, null, null);
+			
+			// Construction du nom par défaut du fichier
+			String str = (ReportNames.ETAT_CPTE_RENDU_CON).getDefaulFileName() + "."
+					+ result.getFileExtention();
+			
+			// Création de l'entité fichier
+			getLogger().debug("SisvCon.genererEtatMouvCon Creation de l'entite fichier ..."+result.getUri());
+			EntFichier v$fichier = new EntFichier(result.getUri(), str,
+					result.getFileStream());
+			
+			logger.debug("Fichier généré " + str + " >> avec "
+					+ v$fichier.getLength() + "Ko.");
+			return v$fichier;
+			
+		}catch(Exception e){
+			throw new SysGehoSystemException(e.getMessage());
+		}
+		
+	}
+
 	
 }
