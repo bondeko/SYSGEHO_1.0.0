@@ -56,11 +56,15 @@ Commentaire : RAS
 2-Lors de l'enregistrement d'un soin remplir automatiquement le champ montant avec le cout tarifaire de du type soin selectionné et le laisser le champ modifiable
 
 ====Dossier Patient/Compte Rendu Consultation
-1-Ajouter le champ texte Antécédent professionnelle pour saisir les antécedents du patients(CF Curriculum Labori)
+1-Ajouter le champ texte Antécédent professionnel pour saisir les antécedents du patients(CF Curriculum Labori)
+2-Ajouter le champ texte Antécédent personnel
+3-Ajouter le champ texte Antécédent familial
+4-Ajouter le champ texte "Examen Physique"
+2-Cacher le champ diagnostic secondaire sur lee formulaire
+2-Renomer sur le formulaire "Diagnotic secondaire" par "Diagnostic"
 
 ====Dossier Patient/Rendez-vous
-1-Ajouter le champ Date du rendez-vous
 2-Ajouter le champ Heure du rendez-vous
-3-Ajouter le champs select spécialité correspondant aux spécialité en BD
+3-Ajouter le champs select spécialité du rdv correspondant aux spécialité en BD
 
 
