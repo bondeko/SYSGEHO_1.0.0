@@ -18,6 +18,7 @@ import com.bondeko.sysgeho.be.core.sisv.base.IBaseSisv;
 import com.bondeko.sysgeho.be.core.svco.base.BaseSvco;
 import com.bondeko.sysgeho.be.imp.entity.TabCpteRenduExam;
 import com.bondeko.sysgeho.be.imp.sisv.ISisvCpteRenduExam;
+import com.bondeko.sysgeho.be.util.EntFichier;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -79,6 +80,18 @@ public class SvcoCpteRenduExam extends BaseSvco<TabCpteRenduExam> implements IRe
 	public TabCpteRenduExam valider(TabCpteRenduExam $pCpteRduExam) throws SysGehoAppException {
 		try {
 			return sisvCpteRenduExam.valider($pCpteRduExam);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
+	
+	@Override
+	public EntFichier  genererEtatCpteRenduExam(TabCpteRenduExam cpterendu)
+	throws SysGehoAppException {
+		try {
+			return sisvCpteRenduExam.genererEtatCpteRenduExam(cpterendu);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
