@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<main>
+	<srlCRExam>
+		<body>
+		  <codCpteRenduExam>T001</codCpteRenduExam>
+		  <datCpteRenduExam>21/09/2014</datCpteRenduExam>
+		  <codExam>10001</codExam>
+		  <libExam>10001</libExam>
+		  <libCatExam>10001</libCatExam>
+		  <codPat>10001</codPat>
+		  <libTit>Mr</libTit>
+		  <libMat>05q437</libMat>
+		  <libNom>TEGUO ROMARIC Cyrille</libNom>
+		  <datNais>19/12/2013</datNais>
+		  <libSex>Masculin</libSex>
+		  <libSoc>CAMAIR-CO</libSoc>
+		  <libNumTel>989898985</libNumTel>
+		  <libMedTrait>Dr TEGUO Romaric Cyrille</libMedTrait>
+		  <libTechExam>Dr SINI</libTechExam>
+		  <libResul>- Mal de tete
+		  -mal de ventre
+		  -mal de dos
+		  -mal de nerfs</libResul>
+		  <libConclu>Présence de Plasmoduim dans le sang</libConclu>
+		</body>		
+	</srlCRExam>
+</main>
