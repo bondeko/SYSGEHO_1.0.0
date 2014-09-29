@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * @author STEPH
+ * @author Deco
  *
  */
 public class SrlEtatListPat implements Serializable{

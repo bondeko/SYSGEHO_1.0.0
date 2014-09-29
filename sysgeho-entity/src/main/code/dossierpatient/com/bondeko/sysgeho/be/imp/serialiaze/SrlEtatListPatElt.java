@@ -9,7 +9,7 @@ import com.bondeko.sysgeho.be.core.base.DateTools;
 import com.bondeko.sysgeho.be.imp.entity.TabPat;
 
 /**
- * @author STEPH
+ * @author Deco
  *
  */
 public class SrlEtatListPatElt {
