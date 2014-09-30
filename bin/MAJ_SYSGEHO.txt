@@ -6,19 +6,20 @@ Commentaire : des champs REF_FAC et BOO_PAIE existe déjà dans toutes prestations
 ------------
 
 2-Ajouter sur toutes les prestations le champs E_MOD_PCHG(mode de prise en charge) à renseigner à la création. E_MOD_PCHG=Personnelle, Entreprise, Assurance (OK)
-Commentaire : RAS
-------------
 
 3- Ajouter le champ navigable et non obligatoire visite médical sur toute les prestations(soins, examen, consultation, ) pour déterminer identifier les prestations d'une visite médical donnée
 
 ======Visite médical ( périodique / embauche)
-1- A implementer
+1- A implementer (OK)
 
+Commentaire : 
+------------
 Description: Une visite médicale consiste à un ensemble de prestations médicales(consultation, examens, soins) réalisé sur les employés d'une entreprise bien précise 
              vue de determiner l'aptitude des employés a 
 
 VM_PERSO(code, libellé, motif, date, société)
 VM_EMB(code, motif, patient, date, société )
+
 
 
 ======Referentiel
@@ -28,7 +29,7 @@ VM_EMB(code, motif, patient, date, société )
 
 ====Patient
 1-Ajouter le champs No CNPS (OK)
-Commentaire : RAS
+
 
 -------------------------------------------25/09/2014----------------------------------------
 ====Facture/Facture Conventionnelle
