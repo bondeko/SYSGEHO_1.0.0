@@ -16,6 +16,7 @@ import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabSvc;
 import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr;
 import com.bondeko.sysgeho.be.core.base.DateTools;
 import com.bondeko.sysgeho.be.core.base.SysGehoBaseEntity;
+import com.bondeko.sysgeho.be.ref.entity.TabSpec;
 import com.bondeko.sysgeho.be.ref.entity.TabTypRdv;
 import com.bondeko.sysgeho.be.util.InfoUser;
 
@@ -59,6 +60,10 @@ public class TabRdv extends SysGehoBaseEntity implements Serializable{
 	@ManyToOne
 	@JoinColumn(name = "COD_SVC")
 	private TabSvc tabSvc;
+	
+	@ManyToOne
+	@JoinColumn(name = "COD_SPEC")
+	private TabSpec tabSpec;
 	
 	//Date de demande
 	@Column(name = "DAT_DEM")
@@ -209,7 +214,7 @@ public class TabRdv extends SysGehoBaseEntity implements Serializable{
 		tabUsr = (tabUsr == null ? new TabUsr() : tabUsr);
 		tabSvc = (tabSvc == null ? new TabSvc() : tabSvc);
 		tabTypRdv = (tabTypRdv == null ? new TabTypRdv() : tabTypRdv);
-
+		tabSpec = (tabSpec == null ? new TabSpec() : tabSpec);
 	}
 	
 	@Override
@@ -229,6 +234,10 @@ public class TabRdv extends SysGehoBaseEntity implements Serializable{
 		tabSvc = (tabSvc != null && 
 				(tabSvc.getCodSvc() == null || tabSvc.getCodSvc().trim().isEmpty())
 				? null : tabSvc);
+		
+		tabSpec = (tabSpec != null && 
+				(tabSpec.getCodSpec() == null || tabSpec.getCodSpec().trim().isEmpty())
+				? null : tabSpec);
 	}
 
 	public boolean getBEstAnn() {
@@ -261,6 +270,14 @@ public class TabRdv extends SysGehoBaseEntity implements Serializable{
 
 	public TabSvc getTabSvc() {
 		return tabSvc;
+	}
+
+	public void setTabSpec(TabSpec tabSpec) {
+		this.tabSpec = tabSpec;
+	}
+
+	public TabSpec getTabSpec() {
+		return tabSpec;
 	}
 	
 }

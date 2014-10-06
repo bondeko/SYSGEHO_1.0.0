@@ -3,20 +3,22 @@ package com.bondeko.sysgeho.be.util;
 
 public enum ReportNames {
 
-	ETAT_LIST_PAT("ETAT_LISTE_PATIENT", "ETAT_LISTE_PATIENT", "ETAT_LISTE_PATIENT",
+	ETAT_LIST_PAT("EtatListePatient", "EtatListePatient", "EtatListePatient",
 			"ETAT LISTE DES PATIENTS",
 			" AND (1=1)", " AND (1=1)"),
 	
-	ETAT_DEC_IMP("ETAT_DECLARATION_IMPORT", "ETAT_DECLARATION_IMPORT", "ETAT_DECLARATION_IMPORT",
-			"ETAT DECLARATION D'IMPORTATION",
+	ETAT_FICHE_PAT("FichePatient", "FichePatient", "FichePatient",
+			"FICHE PATIENT",
 			" AND (1=1)", " AND (1=1)"),
-
-	ETAT_AUT_SPE_IMP("ETAT_AUTORISATION_SPEC_IMPORT", "ETAT_AUTORISATION_SPEC_IMPORT", "ETAT_AUTORISATION_SPEC_IMPORT",
-			"ETAT AUTORISATION SPECIALE D'IMPORTATION",
+	
+	ETAT_CPTE_RENDU_CON("ETAT_CPTE_RENDU_CON", "ETAT_CPTE_RENDU_CON", "ETAT_CPTE_RENDU_CON",
+			"COMPTE RENDU CONSULTATION",
+			" AND (1=1)", " AND (1=1)"),
+	
+	ETAT_CPTE_RENDU_EXAM("ETAT_CPTE_RENDU_EXAM", "ETAT_CPTE_RENDU_EXAM", "ETAT_CPTE_RENDU_EXAM",
+			"COMPTE RENDU EXAMEN",
 			" AND (1=1)", " AND (1=1)");
-
-
-
+	
 	private final String reportName;
 	private final String defaulFileName;
 	private final String description;

@@ -74,14 +74,10 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "VAL_MNT")
 	private BigDecimal valMnt;
 	
-//	@Column(name = "LIB_NUM_CHBRE")
-//	private String libNumChbre;
 	@ManyToOne
 	@JoinColumn(name = "NUM_CHR_HOSPI")
 	private TabChrHospi tabChrHospi;
 	
-//	@Column(name = "LIB_NUM_LIT")
-//	private String libNumLit;
 	@ManyToOne
 	@JoinColumn(name = "COD_LIT")
 	private TabLit tabLit;
@@ -103,6 +99,17 @@ private static final long serialVersionUID = 1L;
 	
 	@Column(name = "ENU_MOD_PCHG")
 	private String enuModPchg;
+	
+	@Column(name = "TYP_VIS_MED_SRC")
+	private String typVisMedSrc;
+	
+	@ManyToOne
+	@JoinColumn(name = "COD_VIS_MED_EMB")
+	private TabVisMedEmb tabVisMedEmb;
+	
+	@ManyToOne
+	@JoinColumn(name = "COD_VIS_MED_PERIO")
+	private TabVisMedPerio tabVisMedPerio;
 	
 	
 	public Date getDateAdmi() {
@@ -163,6 +170,8 @@ private static final long serialVersionUID = 1L;
 		tabUsr = (tabUsr == null ? new TabUsr() : tabUsr);
 		tabChrHospi = (tabChrHospi == null ? new TabChrHospi() : tabChrHospi);
 		tabLit = (tabLit == null ? new TabLit() : tabLit);
+		tabVisMedEmb = (tabVisMedEmb == null ? new TabVisMedEmb() : tabVisMedEmb);
+		tabVisMedPerio = (tabVisMedPerio == null ? new TabVisMedPerio() : tabVisMedPerio);
 
 	}
 	
@@ -187,6 +196,14 @@ private static final long serialVersionUID = 1L;
 		tabLit = (tabLit != null && 
 				(tabLit.getCodLit() == null || tabLit.getCodLit().trim().isEmpty())
 				? null : tabLit);
+		
+		tabVisMedEmb = (tabVisMedEmb != null && 
+				(tabVisMedEmb.getCodVisMedEmb() == null || tabVisMedEmb.getCodVisMedEmb().trim().isEmpty())
+				? null : tabVisMedEmb);
+		
+		tabVisMedPerio = (tabVisMedPerio != null && 
+				(tabVisMedPerio.getCodVisMedPerio() == null || tabVisMedPerio.getCodVisMedPerio().trim().isEmpty())
+				? null : tabVisMedPerio);
 		
 	}
 
@@ -262,22 +279,6 @@ private static final long serialVersionUID = 1L;
 		this.valMnt = valMnt;
 	}
 
-//	public String getLibNumChbre() {
-//		return libNumChbre;
-//	}
-//
-//	public void setLibNumChbre(String libNumChbre) {
-//		this.libNumChbre = libNumChbre;
-//	}
-//
-//	public String getLibNumLit() {
-//		return libNumLit;
-//	}
-//
-//	public void setLibNumLit(String libNumLit) {
-//		this.libNumLit = libNumLit;
-//	}
-//	
 	public String getDatSortie() {
 		return datSortie;
 	}
@@ -344,6 +345,30 @@ private static final long serialVersionUID = 1L;
 
 	public void setTabLit(TabLit tabLit) {
 		this.tabLit = tabLit;
+	}
+	
+	public void setTypVisMedSrc(String typVisMedSrc) {
+		this.typVisMedSrc = typVisMedSrc;
+	}
+
+	public String getTypVisMedSrc() {
+		return typVisMedSrc;
+	}
+
+	public void setTabVisMedEmb(TabVisMedEmb tabVisMedEmb) {
+		this.tabVisMedEmb = tabVisMedEmb;
+	}
+
+	public TabVisMedEmb getTabVisMedEmb() {
+		return tabVisMedEmb;
+	}
+
+	public void setTabVisMedPerio(TabVisMedPerio tabVisMedPerio) {
+		this.tabVisMedPerio = tabVisMedPerio;
+	}
+
+	public TabVisMedPerio getTabVisMedPerio() {
+		return tabVisMedPerio;
 	}
 
 }

@@ -92,6 +92,17 @@ private static final long serialVersionUID = 1L;
 	@Transient
 	private String libSpec;
 	
+	@Column(name = "TYP_VIS_MED_SRC")
+	private String typVisMedSrc;
+	
+	@ManyToOne
+	@JoinColumn(name = "COD_VIS_MED_EMB")
+	private TabVisMedEmb tabVisMedEmb;
+	
+	@ManyToOne
+	@JoinColumn(name = "COD_VIS_MED_PERIO")
+	private TabVisMedPerio tabVisMedPerio;
+	
 	public String getCodConsul() {
 		return codConsul;
 	}
@@ -214,6 +225,8 @@ private static final long serialVersionUID = 1L;
 	public void initData() {
 		tabPat = (tabPat == null ? new TabPat() : tabPat);
 		tabUsr = (tabUsr == null ? new TabUsr() : tabUsr);
+		tabVisMedEmb = (tabVisMedEmb == null ? new TabVisMedEmb() : tabVisMedEmb);
+		tabVisMedPerio = (tabVisMedPerio == null ? new TabVisMedPerio() : tabVisMedPerio);
 
 	}
 	
@@ -226,6 +239,14 @@ private static final long serialVersionUID = 1L;
 		tabUsr = (tabUsr != null && 
 				(tabUsr.getCodUsr() == null || tabUsr.getCodUsr().trim().isEmpty())
 				? null : tabUsr);
+		
+		tabVisMedEmb = (tabVisMedEmb != null && 
+				(tabVisMedEmb.getCodVisMedEmb() == null || tabVisMedEmb.getCodVisMedEmb().trim().isEmpty())
+				? null : tabVisMedEmb);
+		
+		tabVisMedPerio = (tabVisMedPerio != null && 
+				(tabVisMedPerio.getCodVisMedPerio() == null || tabVisMedPerio.getCodVisMedPerio().trim().isEmpty())
+				? null : tabVisMedPerio);
 	}
 
 	public void setBooVal(BigDecimal booVal) {
@@ -279,6 +300,30 @@ private static final long serialVersionUID = 1L;
 	public String getLEnuModPchg() {
 		EnuModPchg v$enum = EnuModPchg.getByValue(this.enuModPchg); 
 		return (v$enum == null)? null: v$enum.getLibelle();
+	}
+
+	public void setTypVisMedSrc(String typVisMedSrc) {
+		this.typVisMedSrc = typVisMedSrc;
+	}
+
+	public String getTypVisMedSrc() {
+		return typVisMedSrc;
+	}
+
+	public void setTabVisMedEmb(TabVisMedEmb tabVisMedEmb) {
+		this.tabVisMedEmb = tabVisMedEmb;
+	}
+
+	public TabVisMedEmb getTabVisMedEmb() {
+		return tabVisMedEmb;
+	}
+
+	public void setTabVisMedPerio(TabVisMedPerio tabVisMedPerio) {
+		this.tabVisMedPerio = tabVisMedPerio;
+	}
+
+	public TabVisMedPerio getTabVisMedPerio() {
+		return tabVisMedPerio;
 	}
 
 }

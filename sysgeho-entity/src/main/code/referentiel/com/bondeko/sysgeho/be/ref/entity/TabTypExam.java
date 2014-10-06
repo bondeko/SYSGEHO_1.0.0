@@ -1,6 +1,7 @@
 package com.bondeko.sysgeho.be.ref.entity;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,6 +37,9 @@ private static final long serialVersionUID = 1L;
 
 	@Column(name = "LIB_TYP_EXAM")
 	private String libTypExam;
+	
+	@Column(name = "VAL_COUT")
+	private BigDecimal valCout;
 	
 	@Column(name = "LIB_DESC")
 	private String libDesc;
@@ -99,6 +103,14 @@ private static final long serialVersionUID = 1L;
 
 	public TabCatExam getTabCatExam() {
 		return tabCatExam;
+	}
+
+	public void setValCout(BigDecimal valCout) {
+		this.valCout = valCout;
+	}
+
+	public BigDecimal getValCout() {
+		return valCout;
 	}
 
 }

@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr;
 import com.bondeko.sysgeho.be.core.base.DateTools;
 import com.bondeko.sysgeho.be.core.base.SysGehoBaseEntity;
 import com.bondeko.sysgeho.be.core.enums.EnuModPchg;
@@ -49,6 +50,10 @@ private static final long serialVersionUID = 1L;
 	@JoinColumn(name = "COD_PAT")
 	private TabPat tabPat;
 	
+	@ManyToOne
+	@JoinColumn(name = "COD_USR")
+	private TabUsr tabUsr;
+	
 	@Column(name = "LIB_EXAM")
 	private String libExam;
 	
@@ -81,6 +86,17 @@ private static final long serialVersionUID = 1L;
 	
 	@Column(name = "ENU_MOD_PCHG")
 	private String enuModPchg;
+	
+	@Column(name = "TYP_VIS_MED_SRC")
+	private String typVisMedSrc;
+	
+	@ManyToOne
+	@JoinColumn(name = "COD_VIS_MED_EMB")
+	private TabVisMedEmb tabVisMedEmb;
+	
+	@ManyToOne
+	@JoinColumn(name = "COD_VIS_MED_PERIO")
+	private TabVisMedPerio tabVisMedPerio;
 	
 	public BigDecimal getBooPaie() {
 		return booPaie;
@@ -158,6 +174,8 @@ private static final long serialVersionUID = 1L;
 		this.tabPat = tabPat;
 	}
 	
+	
+	
 	@Override
 	public Serializable getId() {
 		return getCodExam();
@@ -173,6 +191,9 @@ private static final long serialVersionUID = 1L;
 	public void initData() {
 		tabPat = (tabPat == null ? new TabPat() : tabPat);
 		tabTypExam = (tabTypExam == null ? new TabTypExam() : tabTypExam);
+		tabVisMedEmb = (tabVisMedEmb == null ? new TabVisMedEmb() : tabVisMedEmb);
+		tabVisMedPerio = (tabVisMedPerio == null ? new TabVisMedPerio() : tabVisMedPerio);
+		tabUsr = (tabUsr == null ? new TabUsr() : tabUsr);
 
 	}
 	
@@ -185,6 +206,18 @@ private static final long serialVersionUID = 1L;
 		tabTypExam = (tabTypExam != null && 
 				(tabTypExam.getCodTypExam() == null || tabTypExam.getCodTypExam().trim().isEmpty())
 				? null : tabTypExam);
+		
+		tabVisMedEmb = (tabVisMedEmb != null && 
+				(tabVisMedEmb.getCodVisMedEmb() == null || tabVisMedEmb.getCodVisMedEmb().trim().isEmpty())
+				? null : tabVisMedEmb);
+		
+		tabVisMedPerio = (tabVisMedPerio != null && 
+				(tabVisMedPerio.getCodVisMedPerio() == null || tabVisMedPerio.getCodVisMedPerio().trim().isEmpty())
+				? null : tabVisMedPerio);
+		
+		tabUsr = (tabUsr != null && 
+				(tabUsr.getCodUsr() == null || tabUsr.getCodUsr().trim().isEmpty())
+				? null : tabUsr);
 	}
 
 	public void setBooCpteRendu(BigDecimal booCpteRendu) {
@@ -245,6 +278,38 @@ private static final long serialVersionUID = 1L;
 	public String getLEnuModPchg() {
 		EnuModPchg v$enum = EnuModPchg.getByValue(this.enuModPchg); 
 		return (v$enum == null)? null: v$enum.getLibelle();
+	}
+	
+	public void setTypVisMedSrc(String typVisMedSrc) {
+		this.typVisMedSrc = typVisMedSrc;
+	}
+
+	public String getTypVisMedSrc() {
+		return typVisMedSrc;
+	}
+
+	public void setTabVisMedEmb(TabVisMedEmb tabVisMedEmb) {
+		this.tabVisMedEmb = tabVisMedEmb;
+	}
+
+	public TabVisMedEmb getTabVisMedEmb() {
+		return tabVisMedEmb;
+	}
+
+	public void setTabVisMedPerio(TabVisMedPerio tabVisMedPerio) {
+		this.tabVisMedPerio = tabVisMedPerio;
+	}
+
+	public TabVisMedPerio getTabVisMedPerio() {
+		return tabVisMedPerio;
+	}
+
+	public void setTabUsr(TabUsr tabUsr) {
+		this.tabUsr = tabUsr;
+	}
+
+	public TabUsr getTabUsr() {
+		return tabUsr;
 	}
 
 }

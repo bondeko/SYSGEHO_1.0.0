@@ -67,6 +67,18 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "LIB_TRAIT_PRES")
 	private String libTraitPres;
 	
+	@Column(name = "LIB_ANTE_PRO")
+	private String libAntePro;
+	
+	@Column(name = "LIB_ANTE_PERSO")
+	private String libAntePerso;
+	
+	@Column(name = "LIB_ANTE_FAMI")
+	private String libAnteFami;
+	
+	@Column(name = "LIB_EXAM_PHY")
+	private String libExamPhy;
+	
 	@Column(name = "LIB_CONCL")
 	private String libConcl;
 	
@@ -213,6 +225,7 @@ private static final long serialVersionUID = 1L;
 		tabConsul = (tabConsul != null && 
 				(tabConsul.getCodConsul() == null || tabConsul.getCodConsul().trim().isEmpty())
 				? null : tabConsul);
+		tabConsul.validateData();
 	}
 
 	public void setBooVal(BigDecimal booVal) {
@@ -221,6 +234,38 @@ private static final long serialVersionUID = 1L;
 
 	public BigDecimal getBooVal() {
 		return booVal;
+	}
+
+	public void setLibAntePro(String libAntePro) {
+		this.libAntePro = libAntePro;
+	}
+
+	public String getLibAntePro() {
+		return libAntePro;
+	}
+
+	public void setLibAntePerso(String libAntePerso) {
+		this.libAntePerso = libAntePerso;
+	}
+
+	public String getLibAntePerso() {
+		return libAntePerso;
+	}
+
+	public void setLibAnteFami(String libAnteFami) {
+		this.libAnteFami = libAnteFami;
+	}
+
+	public String getLibAnteFami() {
+		return libAnteFami;
+	}
+
+	public void setLibExamPhy(String libExamPhy) {
+		this.libExamPhy = libExamPhy;
+	}
+
+	public String getLibExamPhy() {
+		return libExamPhy;
 	}
 	
 }
