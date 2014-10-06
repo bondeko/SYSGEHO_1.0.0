@@ -13,4 +13,7 @@ public interface ISisvPat extends IBaseSisv<TabPat, String>{
 	EntFichier genererEtatListPatient(TabPat patient)
 			throws SysGehoSystemException;
 
+	EntFichier genererEtatFichePatient(TabPat patient)
+			throws SysGehoSystemException;
+
 }
