@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
 import com.bondeko.sysgeho.be.core.enums.EnuModPchg;
 import com.bondeko.sysgeho.be.imp.entity.TabConsul;
+import com.bondeko.sysgeho.be.imp.entity.TabVisMedEmb;
+import com.bondeko.sysgeho.be.imp.entity.TabVisMedPerio;
 import com.bondeko.sysgeho.be.ref.entity.TabSpec;
 import com.bondeko.sysgeho.ui.core.base.AbstractNavigationManager;
 import com.bondeko.sysgeho.ui.core.base.SysGehoToolBox;
@@ -20,6 +23,9 @@ public class ConsulVue extends SysGehoVue<TabConsul>{
 
 	private List<SelectItem> listeSpec;
 	private  Map<String, Object> listeModPchg;
+	
+	private boolean visEmb;
+	private boolean visPerio;
 
 	public ConsulVue(){
 		super();
@@ -111,5 +117,49 @@ public class ConsulVue extends SysGehoVue<TabConsul>{
 		}
 		return listeModPchg;
 	}
+	
+	public void updateCodVis(ActionEvent evt){
+		if(getEntiteCourante() != null && getEntiteCourante().getTypVisMedSrc() !=null ){
+			if(getEntiteCourante().getTypVisMedSrc().equals("VM_EMB")){
+				getEntiteCourante().setTabVisMedPerio(new TabVisMedPerio());
+//				getEntiteCourante().getTabVisMedPerio().setCodVisMedPerio(null);
+//				getEntiteCourante().getTabVisMedPerio().setLibMotif(null);
+			}else if(getEntiteCourante().getTypVisMedSrc().equals("VM_PERIO")){
+				getEntiteCourante().setTabVisMedEmb(new TabVisMedEmb());
+//				getEntiteCourante().getTabVisMedEmb().setCodVisMedEmb(null);
+//				getEntiteCourante().getTabVisMedEmb().setLibMotif(null);
+			}
+		}
+	}
+	
+	public boolean isVisEmb() {
+		boolean isEmb = false;
+		TabConsul consul= getEntiteCourante();
+		if(consul != null && consul.getTypVisMedSrc() !=null ){
+			if(consul.getTypVisMedSrc().equals("VM_EMB")){
+				isEmb = true;
+			}
+		}
+		return isEmb;
+	}
 
+	public void setVisEmb(boolean visEmb) {
+		this.visEmb = visEmb;
+	}
+	
+	public boolean isVisPerio() {
+		boolean isPerio = false;
+		TabConsul consul= getEntiteCourante();
+		if(consul != null && consul.getTypVisMedSrc() !=null ){
+			if(consul.getTypVisMedSrc().equals("VM_PERIO")){
+				isPerio = true;
+			}
+		}
+		return isPerio;
+	}
+
+	public void setVisPerio(boolean visPerio) {
+		this.visPerio = visPerio;
+	}
+	
 }

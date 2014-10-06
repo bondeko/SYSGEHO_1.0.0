@@ -70,7 +70,7 @@ public class CatExamVue extends SysGehoVue<TabCatExam>{
 	}	
 	
 	public List<SelectItem> getListeSpec() {
-
+		listeSpec = null;
 		if(listeSpec == null){
 			
 			listeSpec = new ArrayList<SelectItem>();

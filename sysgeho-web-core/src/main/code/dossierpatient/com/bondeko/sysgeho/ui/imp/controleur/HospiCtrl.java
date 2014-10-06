@@ -11,10 +11,14 @@ import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr;
 import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
+import com.bondeko.sysgeho.be.imp.entity.TabConsul;
 import com.bondeko.sysgeho.be.imp.entity.TabHospi;
 import com.bondeko.sysgeho.be.imp.entity.TabPat;
+import com.bondeko.sysgeho.be.imp.entity.TabVisMedEmb;
+import com.bondeko.sysgeho.be.imp.entity.TabVisMedPerio;
 import com.bondeko.sysgeho.be.ref.entity.TabChrHospi;
 import com.bondeko.sysgeho.be.ref.entity.TabLit;
+import com.bondeko.sysgeho.ui.core.base.DataValidationException;
 import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
 import com.bondeko.sysgeho.ui.core.base.SysGehoCtrl;
@@ -22,6 +26,7 @@ import com.bondeko.sysgeho.ui.core.base.SysGehoToolBox;
 import com.bondeko.sysgeho.ui.core.base.Traitement;
 import com.bondeko.sysgeho.ui.imp.util.DossierPatientSvcoDeleguate;
 import com.bondeko.sysgeho.ui.imp.util.DossierPatientTrt;
+import com.bondeko.sysgeho.ui.imp.vue.ConsulVue;
 import com.bondeko.sysgeho.ui.imp.vue.HospiVue;
 
 public class HospiCtrl extends SysGehoCtrl<TabHospi, TabHospi>{
@@ -149,6 +154,15 @@ public class HospiCtrl extends SysGehoCtrl<TabHospi, TabHospi>{
 			TabLit v$entite = (TabLit) p$entite;
 			defaultVue.getEntiteCourante().setTabLit(v$entite);
 		}
+		if (v$propriete.equals("tabVisMedEmb")) {
+			TabVisMedEmb v$entite = (TabVisMedEmb) p$entite;
+			defaultVue.getEntiteCourante().setTabVisMedEmb(v$entite);
+		}
+		
+		if (v$propriete.equals("tabVisMedPerio")) {
+			TabVisMedPerio v$entite = (TabVisMedPerio) p$entite;
+			defaultVue.getEntiteCourante().setTabVisMedPerio(v$entite);
+		}
 	}
 	
 	public String sortieHospiPreModal(){
@@ -221,6 +235,21 @@ public class HospiCtrl extends SysGehoCtrl<TabHospi, TabHospi>{
 
 	public void setSortie(boolean sortie) {
 		this.sortie = sortie;
+	}
+	
+	public void preEnregistrer() throws DataValidationException {
+		HospiVue vue = (HospiVue)defaultVue;
+		TabHospi hospi= defaultVue.getEntiteCourante();
+		if(vue.isVisEmb() && hospi.getTabPat()!=null && hospi.getTabVisMedEmb()!= null 
+				&& hospi.getTabVisMedEmb().getTabPat() != null 
+				&& !hospi.getTabVisMedEmb().getTabPat().getCodPat().equals(hospi.getTabPat().getCodPat())){
+			throw new DataValidationException("Données invalides : La visite médicale source n'est pas celui du patient sélectionné");
+		}
+		if(vue.isVisPerio() && hospi.getTabPat()!= null && hospi.getTabVisMedPerio()!= null 
+				&& hospi.getTabVisMedPerio().getTabSoc() != null && hospi.getTabPat().getTabSoc() != null 
+				&& !hospi.getTabVisMedPerio().getTabSoc().getCodSoc().equals(hospi.getTabPat().getTabSoc().getCodSoc())){
+			throw new DataValidationException("Données invalides : La société de la visite médicale source ne correspond pas à celui du patient sélectionné");
+		}
 	}
 
 	

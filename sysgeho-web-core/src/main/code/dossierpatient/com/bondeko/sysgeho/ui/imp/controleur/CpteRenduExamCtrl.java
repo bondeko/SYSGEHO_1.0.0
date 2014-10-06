@@ -7,7 +7,6 @@ import java.util.TreeMap;
 import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
-import com.bondeko.sysgeho.be.imp.entity.TabCpteRenduConsul;
 import com.bondeko.sysgeho.be.imp.entity.TabCpteRenduExam;
 import com.bondeko.sysgeho.be.imp.entity.TabExam;
 import com.bondeko.sysgeho.be.util.EntFichier;
@@ -19,7 +18,6 @@ import com.bondeko.sysgeho.ui.core.base.SysGehoToolBox;
 import com.bondeko.sysgeho.ui.core.base.Traitement;
 import com.bondeko.sysgeho.ui.imp.util.DossierPatientSvcoDeleguate;
 import com.bondeko.sysgeho.ui.imp.util.DossierPatientTrt;
-import com.bondeko.sysgeho.ui.imp.vue.CpteRenduConsulVue;
 import com.bondeko.sysgeho.ui.imp.vue.CpteRenduExamVue;
 
 public class CpteRenduExamCtrl extends SysGehoCtrl<TabCpteRenduExam, TabCpteRenduExam>{

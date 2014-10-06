@@ -12,6 +12,8 @@ import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr;
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
 import com.bondeko.sysgeho.be.core.enums.EnuModPchg;
 import com.bondeko.sysgeho.be.imp.entity.TabHospi;
+import com.bondeko.sysgeho.be.imp.entity.TabVisMedEmb;
+import com.bondeko.sysgeho.be.imp.entity.TabVisMedPerio;
 import com.bondeko.sysgeho.be.ref.entity.TabChrHospi;
 import com.bondeko.sysgeho.be.ref.entity.TabLit;
 import com.bondeko.sysgeho.ui.admin.util.AdminSvcoDeleguate;
@@ -32,6 +34,9 @@ public class HospiVue extends SysGehoVue<TabHospi>{
 	private List<SelectItem> listeLit;
 	
 	private  Map<String, Object> listeModPchg;
+	
+	private boolean visEmb;
+	private boolean visPerio;
 	
 	public HospiVue(){
 		super();
@@ -235,6 +240,50 @@ public class HospiVue extends SysGehoVue<TabHospi>{
 			SelectItem v$item = new SelectItem(v$lit.getCodLit(),v$lit.getNumLit()+" - "+v$lit.getLibLit());
 			listeLit.add(v$item);
 		}
+	}
+	
+	public void updateCodVis(ActionEvent evt){
+		if(getEntiteCourante() != null && getEntiteCourante().getTypVisMedSrc() !=null ){
+			if(getEntiteCourante().getTypVisMedSrc().equals("VM_EMB")){
+				getEntiteCourante().setTabVisMedPerio(new TabVisMedPerio());
+//				getEntiteCourante().getTabVisMedPerio().setCodVisMedPerio(null);
+//				getEntiteCourante().getTabVisMedPerio().setLibMotif(null);
+			}else if(getEntiteCourante().getTypVisMedSrc().equals("VM_PERIO")){
+				getEntiteCourante().setTabVisMedEmb(new TabVisMedEmb());
+//				getEntiteCourante().getTabVisMedEmb().setCodVisMedEmb(null);
+//				getEntiteCourante().getTabVisMedEmb().setLibMotif(null);
+			}
+		}
+	}
+	
+	public boolean isVisEmb() {
+		boolean isEmb = false;
+		TabHospi hospi= getEntiteCourante();
+		if(hospi != null && hospi.getTypVisMedSrc() !=null ){
+			if(hospi.getTypVisMedSrc().equals("VM_EMB")){
+				isEmb = true;
+			}
+		}
+		return isEmb;
+	}
+
+	public void setVisEmb(boolean visEmb) {
+		this.visEmb = visEmb;
+	}
+	
+	public boolean isVisPerio() {
+		boolean isPerio = false;
+		TabHospi hospi= getEntiteCourante();
+		if(hospi != null && hospi.getTypVisMedSrc() !=null ){
+			if(hospi.getTypVisMedSrc().equals("VM_PERIO")){
+				isPerio = true;
+			}
+		}
+		return isPerio;
+	}
+
+	public void setVisPerio(boolean visPerio) {
+		this.visPerio = visPerio;
 	}
 	
 }

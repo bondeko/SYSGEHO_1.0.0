@@ -7,9 +7,13 @@ import java.util.TreeMap;
 import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
+import com.bondeko.sysgeho.be.imp.entity.TabConsul;
 import com.bondeko.sysgeho.be.imp.entity.TabPat;
 import com.bondeko.sysgeho.be.imp.entity.TabSoin;
+import com.bondeko.sysgeho.be.imp.entity.TabVisMedEmb;
+import com.bondeko.sysgeho.be.imp.entity.TabVisMedPerio;
 import com.bondeko.sysgeho.be.ref.entity.TabTypSoin;
+import com.bondeko.sysgeho.ui.core.base.DataValidationException;
 import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
 import com.bondeko.sysgeho.ui.core.base.SysGehoCtrl;
@@ -17,6 +21,7 @@ import com.bondeko.sysgeho.ui.core.base.SysGehoToolBox;
 import com.bondeko.sysgeho.ui.core.base.Traitement;
 import com.bondeko.sysgeho.ui.imp.util.DossierPatientSvcoDeleguate;
 import com.bondeko.sysgeho.ui.imp.util.DossierPatientTrt;
+import com.bondeko.sysgeho.ui.imp.vue.ConsulVue;
 import com.bondeko.sysgeho.ui.imp.vue.SoinVue;
 
 public class SoinCtrl extends SysGehoCtrl<TabSoin, TabSoin>{
@@ -123,11 +128,22 @@ public class SoinCtrl extends SysGehoCtrl<TabSoin, TabSoin>{
 		if (v$propriete.equals("tabTypSoin")) {
 			TabTypSoin v$entite = (TabTypSoin) p$entite;
 			defaultVue.getEntiteCourante().setTabTypSoin(v$entite);
+			defaultVue.getEntiteCourante().setValMntTtc(v$entite.getValCout());
 		}
 
 		if (v$propriete.equals("tabPat")) {
 			TabPat v$entite = (TabPat) p$entite;
 			defaultVue.getEntiteCourante().setTabPat(v$entite);
+		}
+		
+		if (v$propriete.equals("tabVisMedEmb")) {
+			TabVisMedEmb v$entite = (TabVisMedEmb) p$entite;
+			defaultVue.getEntiteCourante().setTabVisMedEmb(v$entite);
+		}
+		
+		if (v$propriete.equals("tabVisMedPerio")) {
+			TabVisMedPerio v$entite = (TabVisMedPerio) p$entite;
+			defaultVue.getEntiteCourante().setTabVisMedPerio(v$entite);
 		}
 
 	}
@@ -183,6 +199,21 @@ public class SoinCtrl extends SysGehoCtrl<TabSoin, TabSoin>{
 		} finally {
 			// Retour à la page adéquate
 			return v$navigation;
+		}
+	}
+	
+	public void preEnregistrer() throws DataValidationException {
+		SoinVue vue = (SoinVue)defaultVue;
+		TabSoin soin= defaultVue.getEntiteCourante();
+		if(vue.isVisEmb() && soin.getTabPat()!=null && soin.getTabVisMedEmb()!= null 
+				&& soin.getTabVisMedEmb().getTabPat() != null 
+				&& !soin.getTabVisMedEmb().getTabPat().getCodPat().equals(soin.getTabPat().getCodPat())){
+			throw new DataValidationException("Données invalides : La visite médicale source n'est pas celui du patient sélectionné");
+		}
+		if(vue.isVisPerio() && soin.getTabPat()!= null && soin.getTabVisMedPerio()!= null 
+				&& soin.getTabVisMedPerio().getTabSoc() != null && soin.getTabPat().getTabSoc() != null 
+				&& !soin.getTabVisMedPerio().getTabSoc().getCodSoc().equals(soin.getTabPat().getTabSoc().getCodSoc())){
+			throw new DataValidationException("Données invalides : La société de la visite médicale source ne correspond pas à celui du patient sélectionné");
 		}
 	}
 }

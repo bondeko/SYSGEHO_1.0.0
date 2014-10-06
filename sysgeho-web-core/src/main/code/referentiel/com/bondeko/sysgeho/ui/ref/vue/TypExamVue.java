@@ -72,6 +72,7 @@ public class TypExamVue extends SysGehoVue<TabTypExam>{
 	
 	public List<SelectItem> getListeCatExam() {
 
+		listeCatExam = null;
 		if(listeCatExam == null){
 			
 			listeCatExam = new ArrayList<SelectItem>();

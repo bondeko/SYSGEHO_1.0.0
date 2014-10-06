@@ -9,6 +9,8 @@ import com.bondeko.sysgeho.be.imp.svco.IRemoteHospi;
 import com.bondeko.sysgeho.be.imp.svco.IRemotePat;
 import com.bondeko.sysgeho.be.imp.svco.IRemoteRdv;
 import com.bondeko.sysgeho.be.imp.svco.IRemoteSoin;
+import com.bondeko.sysgeho.be.imp.svco.IRemoteVisMedEmb;
+import com.bondeko.sysgeho.be.imp.svco.IRemoteVisMedPerio;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
 import com.bondeko.sysgeho.ui.core.base.SysGehoSvcoDeleguate;
 
@@ -58,6 +60,14 @@ public class DossierPatientSvcoDeleguate {
 	
 	public static IRemoteSoin getSvcoSoin() throws ServiceLocatorException{
         return (IRemoteSoin) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoSoin", IRemoteSoin.class));
+    }
+	
+	public static IRemoteVisMedEmb getSvcoVisMedEmb() throws ServiceLocatorException{
+        return (IRemoteVisMedEmb) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoVisMedEmb", IRemoteVisMedEmb.class));
+    }
+	
+	public static IRemoteVisMedPerio getSvcoVisMedPerio() throws ServiceLocatorException{
+        return (IRemoteVisMedPerio) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoVisMedPerio", IRemoteVisMedPerio.class));
     }
 
 	public BaseLogger getLogger() {

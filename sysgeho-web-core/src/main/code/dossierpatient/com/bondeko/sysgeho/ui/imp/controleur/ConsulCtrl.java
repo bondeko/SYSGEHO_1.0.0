@@ -12,7 +12,10 @@ import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
 import com.bondeko.sysgeho.be.imp.entity.TabConsul;
 import com.bondeko.sysgeho.be.imp.entity.TabCpteRenduConsul;
 import com.bondeko.sysgeho.be.imp.entity.TabPat;
+import com.bondeko.sysgeho.be.imp.entity.TabVisMedEmb;
+import com.bondeko.sysgeho.be.imp.entity.TabVisMedPerio;
 import com.bondeko.sysgeho.be.ref.entity.TabSpec;
+import com.bondeko.sysgeho.ui.core.base.DataValidationException;
 import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
 import com.bondeko.sysgeho.ui.core.base.SysGehoCtrl;
@@ -29,6 +32,8 @@ public class ConsulCtrl extends SysGehoCtrl<TabConsul, TabConsul>{
 	 * Nom du Bean managé par JSF dans le fichier de Configuration 
 	 */
 	private static String nomManagedBean = "consulCtrl";
+	
+	
 	
 	public ConsulCtrl(){		
 		defaultVue = new ConsulVue();		
@@ -156,6 +161,16 @@ public class ConsulCtrl extends SysGehoCtrl<TabConsul, TabConsul>{
 			TabPat v$entite = (TabPat) p$entite;
 			defaultVue.getEntiteCourante().setTabPat(v$entite);
 		}
+		
+		if (v$propriete.equals("tabVisMedEmb")) {
+			TabVisMedEmb v$entite = (TabVisMedEmb) p$entite;
+			defaultVue.getEntiteCourante().setTabVisMedEmb(v$entite);
+		}
+		
+		if (v$propriete.equals("tabVisMedPerio")) {
+			TabVisMedPerio v$entite = (TabVisMedPerio) p$entite;
+			defaultVue.getEntiteCourante().setTabVisMedPerio(v$entite);
+		}
 
 	}
 	
@@ -277,5 +292,21 @@ public class ConsulCtrl extends SysGehoCtrl<TabConsul, TabConsul>{
 				e.printStackTrace();
 			}
 	}
+	
+	public void preEnregistrer() throws DataValidationException {
+		ConsulVue vue = (ConsulVue)defaultVue;
+		TabConsul consul= defaultVue.getEntiteCourante();
+		if(vue.isVisEmb() && consul.getTabPat()!=null && consul.getTabVisMedEmb()!= null 
+				&& consul.getTabVisMedEmb().getTabPat() != null 
+				&& !consul.getTabVisMedEmb().getTabPat().getCodPat().equals(consul.getTabPat().getCodPat())){
+			throw new DataValidationException("Données invalides : La visite médicale source n'est pas celui du patient sélectionné");
+		}
+		if(vue.isVisPerio() && consul.getTabPat()!= null && consul.getTabVisMedPerio()!= null 
+				&& consul.getTabVisMedPerio().getTabSoc() != null && consul.getTabPat().getTabSoc() != null 
+				&& !consul.getTabVisMedPerio().getTabSoc().getCodSoc().equals(consul.getTabPat().getTabSoc().getCodSoc())){
+			throw new DataValidationException("Données invalides : La société de la visite médicale source ne correspond pas à celui du patient sélectionné");
+		}
+	}
+	
 	
 }

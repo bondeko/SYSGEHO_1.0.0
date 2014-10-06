@@ -5,13 +5,17 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr;
 import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
 import com.bondeko.sysgeho.be.imp.entity.TabCpteRenduExam;
 import com.bondeko.sysgeho.be.imp.entity.TabExam;
 import com.bondeko.sysgeho.be.imp.entity.TabPat;
+import com.bondeko.sysgeho.be.imp.entity.TabVisMedEmb;
+import com.bondeko.sysgeho.be.imp.entity.TabVisMedPerio;
 import com.bondeko.sysgeho.be.ref.entity.TabTypExam;
+import com.bondeko.sysgeho.ui.core.base.DataValidationException;
 import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
 import com.bondeko.sysgeho.ui.core.base.SysGehoCtrl;
@@ -145,11 +149,27 @@ public class ExamCtrl extends SysGehoCtrl<TabExam, TabExam>{
 		if (v$propriete.equals("tabTypExam")) {
 			TabTypExam v$entite = (TabTypExam) p$entite;
 			defaultVue.getEntiteCourante().setTabTypExam(v$entite);
+			defaultVue.getEntiteCourante().setValMntTtc(v$entite.getValCout());
 		}
 
 		if (v$propriete.equals("tabPat")) {
 			TabPat v$entite = (TabPat) p$entite;
 			defaultVue.getEntiteCourante().setTabPat(v$entite);
+		}
+		
+		if (v$propriete.equals("tabVisMedEmb")) {
+			TabVisMedEmb v$entite = (TabVisMedEmb) p$entite;
+			defaultVue.getEntiteCourante().setTabVisMedEmb(v$entite);
+		}
+		
+		if (v$propriete.equals("tabVisMedPerio")) {
+			TabVisMedPerio v$entite = (TabVisMedPerio) p$entite;
+			defaultVue.getEntiteCourante().setTabVisMedPerio(v$entite);
+		}
+		
+		if (v$propriete.equals("tabUsr")) {
+			TabUsr v$entite = (TabUsr) p$entite;
+			defaultVue.getEntiteCourante().setTabUsr(v$entite);
 		}
 
 	}
@@ -253,6 +273,21 @@ public class ExamCtrl extends SysGehoCtrl<TabExam, TabExam>{
 			e.printStackTrace();
 		}
 		return "CpteRenduExamEdition";
+	}
+	
+	public void preEnregistrer() throws DataValidationException {
+		ExamVue vue = (ExamVue)defaultVue;
+		TabExam exam= defaultVue.getEntiteCourante();
+		if(vue.isVisEmb() && exam.getTabPat()!=null && exam.getTabVisMedEmb()!= null 
+				&& exam.getTabVisMedEmb().getTabPat() != null 
+				&& !exam.getTabVisMedEmb().getTabPat().getCodPat().equals(exam.getTabPat().getCodPat())){
+			throw new DataValidationException("Données invalides : La visite médicale source n'est pas celui du patient sélectionné");
+		}
+		if(vue.isVisPerio() && exam.getTabPat()!= null && exam.getTabVisMedPerio()!= null 
+				&& exam.getTabVisMedPerio().getTabSoc() != null && exam.getTabPat().getTabSoc() != null 
+				&& !exam.getTabVisMedPerio().getTabSoc().getCodSoc().equals(exam.getTabPat().getTabSoc().getCodSoc())){
+			throw new DataValidationException("Données invalides : La société de la visite médicale source ne correspond pas à celui du patient sélectionné");
+		}
 	}
 	
 }

@@ -107,7 +107,7 @@ public class DossierPatientTrt extends SysGehoTrt{
 		ETA_LIST_PAT = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "List_Pat" , /* Libellé */ "Génerer liste des patients" , /* Commentaire */ "" , /* Méthode */ "genEtatListPat",
 				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
 				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer la génération ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
-				/* Raccourci clavier */ "Shift+F2", /* index */ "14", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+				/* Raccourci clavier */ "", /* index */ "14", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
 	}
 	public static Traitement SORTIE_HOSPI;	
 	static{
@@ -155,7 +155,7 @@ public class DossierPatientTrt extends SysGehoTrt{
 		
 		VALIDER_CPTE_RENDU_EXAM = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "Val_Cpte_Rdu_Exam" , /* Libellé */ "Valider" , /* Commentaire */ "" , /* Méthode */ "valider",
 				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
-				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Valider le compte rendu ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer la validation du compte rendu ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
 				/* Raccourci clavier */ "Shift+F2", /* index */ "12", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
 	}
 	
@@ -167,7 +167,7 @@ public class DossierPatientTrt extends SysGehoTrt{
 		
 		VALIDER_EXAM = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "Val_Exam" , /* Libellé */ "Valider" , /* Commentaire */ "" , /* Méthode */ "valider",
 				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
-				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Valider Examen ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer la Validation de l Examen ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
 				/* Raccourci clavier */ "Shift+F2", /* index */ "12", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
 	}
 	
@@ -232,6 +232,42 @@ public class DossierPatientTrt extends SysGehoTrt{
 				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
 				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer Enregistrement ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
 				/* Raccourci clavier */ "Shift+F8", /* index */ "08", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
+	
+	/***
+	 * VALIDER_VIS_MED_EMB
+	 */
+	public static Traitement VALIDER_VIS_MED_EMB;	
+	static{
+		
+		VALIDER_VIS_MED_EMB = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "Val_VisMedEmb" , /* Libellé */ "Valider" , /* Commentaire */ "" , /* Méthode */ "valider",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer la validation de la visite médicale ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "Shift+F2", /* index */ "12", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
+	
+	/***
+	 * VALIDER_VIS_MED_PERIO
+	 */
+	public static Traitement VALIDER_VIS_MED_PERIO;	
+	static{
+		
+		VALIDER_VIS_MED_PERIO = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "Val_VisMedPerio" , /* Libellé */ "Valider" , /* Commentaire */ "" , /* Méthode */ "valider",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer la validation de la visite médicale ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "Shift+F2", /* index */ "12", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
+	
+	/***
+	 * ETA_LIST_PAT
+	 */
+	public static Traitement ETA_FICHE_PAT;	
+	static{
+		
+		ETA_FICHE_PAT = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "Fiche_Pat" , /* Libellé */ "Générer la fiche du patient" , /* Commentaire */ "" , /* Méthode */ "genEtatFichePat",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer la génération ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "", /* index */ "18", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
 	}
 	
 	/***

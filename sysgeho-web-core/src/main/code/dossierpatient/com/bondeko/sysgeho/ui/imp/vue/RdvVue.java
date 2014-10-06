@@ -8,6 +8,7 @@ import javax.faces.model.SelectItem;
 import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabSvc;
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
 import com.bondeko.sysgeho.be.imp.entity.TabRdv;
+import com.bondeko.sysgeho.be.ref.entity.TabSpec;
 import com.bondeko.sysgeho.be.ref.entity.TabTypRdv;
 import com.bondeko.sysgeho.ui.admin.util.AdminSvcoDeleguate;
 import com.bondeko.sysgeho.ui.core.base.AbstractNavigationManager;
@@ -20,6 +21,8 @@ public class RdvVue extends SysGehoVue<TabRdv>{
 	private List<SelectItem> listeSvc;
 	
 	private List<SelectItem> listeTypRdv;
+	
+	private List<SelectItem> listeSpec;
 	
 	public RdvVue(){
 		super();
@@ -134,6 +137,37 @@ public class RdvVue extends SysGehoVue<TabRdv>{
 			}
 		}
 		return listeTypRdv;
+	}
+	
+	public List<SelectItem> getListeSpec() {
+		listeSpec = null;
+		if(listeSpec == null){
+			
+			listeSpec = new ArrayList<SelectItem>();
+			
+			List<TabSpec> v$Specs = null;
+						
+			// Critères de recherche des comptes de dépôt	
+			TabSpec v$critere = new TabSpec();	
+			
+			// Recherche des comptes en BD 			
+			try {
+				v$Specs = RefSvcoDeleguate.getSvcoSpec().rechercherTout(v$critere);
+			} 
+			catch (Exception e) {
+				getLogger().error(e.getMessage(), e);
+				e.printStackTrace();
+			} 
+			
+			v$Specs = (v$Specs != null)? v$Specs : new ArrayList<TabSpec>();
+			
+			// Création de la liste des élements pour le comboBox
+			for(TabSpec v$Spec: v$Specs){
+				SelectItem v$item = new SelectItem(v$Spec.getCodSpec(),v$Spec.getLibSpec());
+				listeSpec.add(v$item);
+			}
+		}
+		return listeSpec;
 	}
 
 }
