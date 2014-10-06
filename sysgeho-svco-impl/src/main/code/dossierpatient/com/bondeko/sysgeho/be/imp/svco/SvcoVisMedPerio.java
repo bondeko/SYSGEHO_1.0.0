@@ -16,25 +16,24 @@ import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.IBaseSisv;
 import com.bondeko.sysgeho.be.core.svco.base.BaseSvco;
-import com.bondeko.sysgeho.be.imp.entity.TabPat;
-import com.bondeko.sysgeho.be.imp.sisv.ISisvPat;
-import com.bondeko.sysgeho.be.util.EntFichier;
+import com.bondeko.sysgeho.be.imp.entity.TabVisMedPerio;
+import com.bondeko.sysgeho.be.imp.sisv.ISisvVisMedPerio;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class SvcoPat extends BaseSvco<TabPat> implements IRemotePat, ILocalPat{
+public class SvcoVisMedPerio extends BaseSvco<TabVisMedPerio> implements IRemoteVisMedPerio, ILocalVisMedPerio{
 	
 	@EJB
-	ISisvPat sisvPat;
+	ISisvVisMedPerio sisvVisMedPerio;
 	
 	@Resource
 	SessionContext session;
 
-	private static BaseLogger logger = BaseLogger.getLogger(SvcoPat.class);
+	private static BaseLogger logger = BaseLogger.getLogger(SvcoVisMedPerio.class);
 	
 	@Override
-	protected IBaseSisv<TabPat, String> getBaseSisv() {
-		return sisvPat;
+	protected IBaseSisv<TabVisMedPerio, String> getBaseSisv() {
+		return sisvVisMedPerio;
 	}
 
 	@Override
@@ -45,7 +44,7 @@ public class SvcoPat extends BaseSvco<TabPat> implements IRemotePat, ILocalPat{
 	public <X extends BaseEntity> X rechercher(X entity, Serializable id)
 			throws SysGehoAppException {
 		try {
-			return sisvPat.rechercher(entity,id);
+			return sisvVisMedPerio.rechercher(entity,id);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -56,7 +55,7 @@ public class SvcoPat extends BaseSvco<TabPat> implements IRemotePat, ILocalPat{
 	public <X extends BaseEntity> List<X> rechercherTout(X entity)
 			throws SysGehoAppException {
 		try {
-			return sisvPat.rechercherTout(entity);
+			return sisvVisMedPerio.rechercherTout(entity);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -68,7 +67,7 @@ public class SvcoPat extends BaseSvco<TabPat> implements IRemotePat, ILocalPat{
 	public <X extends BaseEntity> List<X> rechercherParCritere(X entity)
 			throws SysGehoAppException {
 		try {
-			return sisvPat.rechercherParCritere(entity);
+			return sisvVisMedPerio.rechercherParCritere(entity);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -77,10 +76,9 @@ public class SvcoPat extends BaseSvco<TabPat> implements IRemotePat, ILocalPat{
 	}
 	
 	@Override
-	public EntFichier  genererEtatListPat(TabPat pat)
-	throws SysGehoAppException {
+	public TabVisMedPerio valider(TabVisMedPerio $pVisMedPerio) throws SysGehoAppException {
 		try {
-			return sisvPat.genererEtatListPatient(pat);
+			return sisvVisMedPerio.valider($pVisMedPerio);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -88,16 +86,5 @@ public class SvcoPat extends BaseSvco<TabPat> implements IRemotePat, ILocalPat{
 		}
 	}
 	
-	@Override
-	public EntFichier  genererEtatFichePatient(TabPat pat)
-	throws SysGehoAppException {
-		try {
-			return sisvPat.genererEtatFichePatient(pat);
-		} catch (SysGehoSystemException e) {
-			e.printStackTrace();
-			SysGehoAppException sdr = new SysGehoAppException(e);
-			throw sdr;
-		}
-	}
 
 }
