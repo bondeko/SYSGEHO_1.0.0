@@ -133,13 +133,8 @@
 								 required="false" style="width: 60%" title="Histoire de la maladie" >
 							</h:inputTextarea>
 							
-							<h:outputText value="Diagnostic Principal"/>
+							<h:outputText value="Diagnostic"/>
 							<h:inputTextarea  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libDiagPrin}"  
-								 required="false" style="width: 60%" title="Diagnostic Principal" >
-							</h:inputTextarea>
-							
-							<h:outputText value="Diagnostic Secondaire"/>
-							<h:inputTextarea  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libDiagSenc}"  
 								 required="false" style="width: 60%" title="Diagnostic Principal" >
 							</h:inputTextarea>
 							
@@ -147,11 +142,7 @@
 							<h:inputTextarea  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libExamBio}"  
 								 required="false" style="width: 60%" title="Examen Biologique" >
 							</h:inputTextarea>
-
-         			</h:panelGrid>  
-         				
-         			<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
-         				
+							
 							<h:outputText value="Exploration Fonctionnelle"/>
 							<h:inputTextarea  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libExploFonc}"  
 								 required="false" style="width: 60%" title="Exploration Fonctionnelle" >
@@ -160,6 +151,30 @@
 							<h:outputText value="Examen Imagerie"/>
 							<h:inputTextarea  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libExamImag}"  
 								 required="false" style="width: 60%" title="Examen Imagerie" >
+							</h:inputTextarea>
+							
+         			</h:panelGrid>  
+         				
+         			<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         					<h:outputText value="#{locale.antepro}"/>
+							<h:inputTextarea  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libAntePro}"  
+								 required="false" style="width: 60%" title="#{locale.antepro}" >
+							</h:inputTextarea>
+							
+							<h:outputText value="#{locale.anteperso}"/>
+							<h:inputTextarea  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libAntePerso}"  
+								 required="false" style="width: 60%" title="#{locale.anteperso}" >
+							</h:inputTextarea>
+							
+							<h:outputText value="#{locale.antefam}"/>
+							<h:inputTextarea  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libAnteFami}"  
+								 required="false" style="width: 60%" title="#{locale.antefam}" >
+							</h:inputTextarea>
+							
+							<h:outputText value="Examen physique"/>
+							<h:inputTextarea  value="#{cpteRenduConsulCtrl.defaultVue.entiteCourante.libExamPhy}"  
+								 required="false" style="width: 60%" title="Examen physique" >
 							</h:inputTextarea>
 							
 							<h:outputText value="Traitements Prescrits"/>

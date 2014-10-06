@@ -10,8 +10,8 @@
      
   	<ui:composition template="/shared/templates/templateFormulaireListe.xhtml">
 		
-		<ui:param name="managedBean" value="#{sessionScope[examCtrl.nomManagedBean2]}" />
-		<ui:param name="entetePage" value=" des Examens" />
+		<ui:param name="managedBean" value="#{sessionScope[visMedEmbCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" des #{locale.visitemedicalemb}" />
 		
 		<!-- Criteres standards de recherche -->
 		<ui:define name="standardFilter"  >
@@ -21,17 +21,13 @@
 				<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
 				
 					<h:outputText value="Code " />          				
-         			<h:inputText  value="#{examCtrl.defaultVue.entiteRecherche.codExam}" style="width: 30%" /> 
+         			<h:inputText  value="#{visMedEmbCtrl.defaultVue.entiteRecherche.codVisMedEmb}" style="width: 60%" /> 
          			
 					<h:outputText value="Nom Patient" />          				
-         			<h:inputText  value="#{examCtrl.defaultVue.entiteRecherche.tabPat.libNom}" style="width: 30%" />  
+         			<h:inputText  value="#{visMedEmbCtrl.defaultVue.entiteRecherche.tabPat.libNom}" style="width: 60%" />  
          			
-         			<h:outputText value="Type d'examen" />       
-         			<h:selectOneMenu value="#{examCtrl.defaultVue.entiteRecherche.tabTypExam.codTypExam}" style="width: 40%"  title="Type d'examen" >
-						<f:selectItem itemLabel="" itemValue="#{null}"/>
-						<f:selectItems  value="#{examCtrl.defaultVue.listeTypExam}"/> 
-						<a4j:support event="onchange" ajaxSingle="true"  />						
-					</h:selectOneMenu>	   				
+         			<h:outputText value="#{locale.medecinayantrealise}" />          				
+         			<h:inputText  value="#{visMedEmbCtrl.defaultVue.entiteRecherche.tabUsr.libNom}" style="width: 60%" />           					           					           					   					            				            				            			
 
 				</h:panelGrid>
 				
@@ -46,18 +42,11 @@
 		<!-- Colonnes specifiques e l entite -->
 		<ui:define name="specificColumns"  >
 		
-			<rich:column label="Code " sortBy="#{entity.codExam}" filterBy="#{entity.codExam}" >
+			<rich:column label="Code " sortBy="#{entity.codVisMedEmb}" filterBy="#{entity.codVisMedEmb}" >
 				<f:facet name="header">
 					<h:outputText value="Code "  />
 				</f:facet>
-				<h:outputText value="#{entity.codExam}" />				
-			</rich:column>
-			
-			<rich:column label="#{locale.libelle} " sortBy="#{entity.libExam}" filterBy="#{entity.libExam}" >
-				<f:facet name="header">
-					<h:outputText value="#{locale.libelle} "  />
-				</f:facet>
-				<h:outputText value="#{entity.libExam}" />				
+				<h:outputText value="#{entity.codVisMedEmb}" />				
 			</rich:column>
 			
 			<rich:column label="Patient" sortBy="#{entity.tabPat.libNom}" filterBy="#{entity.tabPat.libNom}"  >
@@ -67,28 +56,20 @@
 				<h:outputText value="#{entity.tabPat.libNom}" />				
 			</rich:column>
 			
-			<rich:column label="Type  d'examen" sortBy="#{entity.tabTypExam.libTypExam}" filterBy="#{entity.tabTypExam.libTypExam}"  >
+			<rich:column label="Date de la visite" sortBy="#{entity.dateVisMed}" filterBy="#{entity.dateVisMed}"  >
 				<f:facet name="header">
-					<h:outputText value="Type  d'examen"  />
+					<h:outputText value="Date de la visite" />
 				</f:facet>
-				<h:outputText value="#{entity.tabTypExam.libTypExam}" />				
-			</rich:column>
-			
-						
-			<rich:column label="Date de l'examen" sortBy="#{entity.dateExam}" filterBy="#{entity.dateExam}"  >
-				<f:facet name="header">
-					<h:outputText value="Date de l'examen" />
-				</f:facet>
-				<h:outputText value="#{entity.dateExam}" >	
+				<h:outputText value="#{entity.dateVisMed}" >	
 					<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
 				</h:outputText>			
 			</rich:column>
 			
-			<rich:column label="Prescripteur" sortBy="#{entity.libPres}" filterBy="#{entity.libPres}"  >
+			<rich:column label="Motif" sortBy="#{entity.libMotif}" filterBy="#{entity.libMotif}" >
 				<f:facet name="header">
-					<h:outputText value="Prescripteur" />
+					<h:outputText value="Motif"  />
 				</f:facet>
-				<h:outputText value="#{entity.libPres}" />	
+				<h:outputText value="#{entity.libMotif}" />				
 			</rich:column>
 			
 			<rich:column label="#{locale.medecinayantrealise}" sortBy="#{entity.tabUsr.libNom}" filterBy="#{entity.tabUsr.libNom}" >
@@ -103,20 +84,6 @@
 					<h:outputText value="Montant TTC" />
 				</f:facet>	
 				<h:outputText value="#{entity.valMntTtc}" />		
-			</rich:column>
-			
-			<rich:column label="Mode de prise en charge " sortBy="#{entity.LEnuModPchg}" filterBy="#{entity.LEnuModPchg}" >
-				<f:facet name="header">
-					<h:outputText value="Mode de prise en charge"  />
-				</f:facet>
-				<h:outputText value="#{entity.LEnuModPchg}" />				
-			</rich:column>
-			
-			<rich:column label="Statut " sortBy="#{entity.libStatut}" filterBy="#{entity.libStatut}" >
-				<f:facet name="header">
-					<h:outputText value="Statut"  />
-				</f:facet>
-				<h:outputText value="#{entity.libStatut}" />				
 			</rich:column>
 			
 		</ui:define>

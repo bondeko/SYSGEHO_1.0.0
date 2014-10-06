@@ -42,6 +42,16 @@
   <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.SoinCtrl</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>visMedEmbCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.VisMedEmbCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>visMedPerioCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.VisMedPerioCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
  <navigation-rule>
   <from-view-id>*</from-view-id>
   <navigation-case>
@@ -160,6 +170,36 @@
   <navigation-case>
    <from-outcome>SoinListe</from-outcome>
    <to-view-id>/modules/dossierpatient/pages/SoinListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>VisMedEmbDetails</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/VisMedEmbDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>VisMedEmbEdition</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/VisMedEmbEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>VisMedEmbListe</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/VisMedEmbListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>VisMedPerioDetails</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/VisMedPerioDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>VisMedPerioEdition</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/VisMedPerioEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>VisMedPerioListe</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/VisMedPerioListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
   

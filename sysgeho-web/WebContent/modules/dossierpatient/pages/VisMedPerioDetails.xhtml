@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+ 	<ui:composition template="/shared/templates/templateFormulaireDetails.xhtml">
+   			
+		<ui:param name="managedBean" value="#{sessionScope[visMedPerioCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" d'une #{locale.dunevisitemedicaleperio}" />
+		
+	<!-- Definition du contenu de l'ecran principal  -->
+		<ui:define name="ecranPrincipalContenu">
+				
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Informations #{locale.societe}" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:outputText value="#{locale.societe}" />
+							<h:panelGroup>
+								<h:inputText id="inpt_codSoc" value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.codSoc}" style="width: 20%" 
+									readonly="true" title="Code" disabled="false">
+									<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>	
+								<h:inputText id="inpt_libSoc" value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.libSoc}" style="width: 40%" 
+									readonly="true"  title="#{locale.libelle}" disabled="false"> 
+									<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+							</h:panelGroup>
+							
+							<h:outputText value="Nom du responsable" />
+							<h:inputText  value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.libResp}" style="width: 60%" readonly="true"  title="Nom du responsable" />
+						
+							<h:outputText value="#{locale.siege}" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.codSoc}" />
+							<h:inputText  value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.libSiege}" style="width: 60%" readonly="true"  title="#{locale.siege}" />
+						
+							<h:outputText value="#{locale.telephone}" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.codSoc}" />
+							<h:inputText  value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.libTel}" style="width: 40%" readonly="true"  title="#{locale.telephone}" />
+							
+							<h:outputText value="#{locale.estaffilie} ?" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.codSoc}"/>
+							<h:selectBooleanCheckbox value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.BEstAff}"  disabled="true" >
+								<a4j:support ajaxSingle="true"  event="onchange" />
+							</h:selectBooleanCheckbox>
+							
+						</h:panelGrid>
+							
+						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdLColRightDynamic" cellspacing="10" >
+							
+						</h:panelGrid>
+						
+					</h:panelGrid>
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="#{locale.medecinayantrealise}" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:outputText value="#{locale.medecin}" />
+							<h:panelGroup>
+								<h:inputText id="inpt_codMed" value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.codUsr}" style="width: 20%" 
+									readonly="true" title="Code" disabled="false">
+									<a4j:support event="onchange" ajaxSingle="true"/>
+								</h:inputText>	
+								<h:inputText id="inpt_libMed" value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.libNom}" style="width: 40%" 
+										readonly="true"  title="#{locale.libelle}" disabled="false"> 
+										<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+							</h:panelGroup>
+						
+							<h:outputText value="#{locale.prenom}" />	
+							<h:inputText  value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.libPre}" style="width: 40%" readonly="true"  title="#{locale.prenom}" />
+								
+							<h:outputText value="Services" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
+							<h:inputText  value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.tabSvc.libSvc}" style="width: 60%"  readonly="true" />	
+						
+							<h:outputText value="#{locale.role}" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
+							<h:inputText  value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.tabRol.libRol}" style="width: 60%"  readonly="true" />
+         					
+							<h:outputText value="Adresse" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
+							<h:inputText  value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.libAdr}" style="width: 60%"  readonly="true" />
+							
+         			</h:panelGrid>  
+         				
+         			<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         			</h:panelGrid> 
+         				         		         		
+         		</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="#{locale.infocompl}" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         					
+         					<h:outputText value="Code de la visite"/>
+							<h:inputText id="inpt_code" value="#{visMedPerioCtrl.defaultVue.entiteCourante.codVisMedPerio}"  
+								 required="false" style="width: 60%" title="Code de la visite" >
+							</h:inputText>
+         					
+							<h:outputText value="#{locale.libelle} de la visite"/>
+							<h:inputText id="inpt_libvis" value="#{visMedPerioCtrl.defaultVue.entiteCourante.libVisMedPerio}"  
+								 readonly="true" style="width: 60%" title="#{locale.libelle} de la visite" >
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+         				
+         					<h:outputText value="Date de la visite" />
+							<h:inputText value="#{visMedPerioCtrl.defaultVue.entiteCourante.dateVisMed}" readonly="true" style="width: 30%" title="Date de la visite"  >
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+							</h:inputText>
+							
+							<h:outputText value="Date de la #{locale.deniere} visite" />
+							<h:inputText value="#{visMedPerioCtrl.defaultVue.entiteCourante.dateVisMed}" readonly="true" style="width: 30%" title="Date de la #{locale.deniere} visite"  >
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+							</h:inputText>
+							
+							<h:outputText value="Nombre d'#{locale.employe}" />
+							<h:inputText id="inpt_nbr" value="#{visMedPerioCtrl.defaultVue.entiteCourante.valNbr}"  styleClass="money"
+								 readonly="true" style="width: 20%" title="Montant TTC"
+								 converterMessage="#{msg['erreur.conversion.entiere']}"   >
+								 <f:convertNumber currencySymbol="F CFA" pattern="#,###"   />
+							</h:inputText>
+							
+							<h:outputText value="Motif"/>
+							<h:inputText id="inpt_mtf" value="#{visMedPerioCtrl.defaultVue.entiteCourante.libMotif}"  
+								 readonly="true" style="width: 60%" title="Motif" >
+							</h:inputText>
+							
+							<h:outputText value="Observation"/>
+							<h:inputTextarea id="inpt_obs" value="#{visMedPerioCtrl.defaultVue.entiteCourante.libObs}"  
+								readonly="true" style="width: 60%" title="Observation" >
+							</h:inputTextarea>
+							
+							<h:outputText value="Montant TTC" />
+							<h:inputText id="inpt_mntttc" value="#{visMedPerioCtrl.defaultVue.entiteCourante.valMntTtc}"  styleClass="money"
+								 readonly="true"  style="width: 30%" title="Montant TTC"
+								 converterMessage="#{msg['erreur.conversion.entiere']}"   >
+								 <f:convertNumber currencySymbol="F CFA" pattern="#,###"   />
+							</h:inputText>
+							
+         				</h:panelGrid>  
+         				
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         				</h:panelGrid> 
+         				         		         		
+         			</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+		</ui:define>
+	
+	</ui:composition>
+	
+</html>

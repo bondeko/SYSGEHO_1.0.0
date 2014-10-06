@@ -34,22 +34,18 @@
 	                
 	                <rich:menuSeparator />
 	                
-	                <rich:menuGroup value="Soins" rendered="true">
-	                    <rich:menuItem submitMode="ajax" rendered="true" 
-		                    action="#{soinCtrl.openHomePage}" 
-		                    ajaxSingle="true" >
-		                    <h:outputText value="Soins" />
-		                </rich:menuItem>
-	                </rich:menuGroup>
-	                
-	                <rich:menuSeparator />
-	                
-	                <rich:menuGroup value="Hospitalisations" rendered="true">
+	                <rich:menuGroup value="#{locale.visitemedical}" rendered="true">
 	                     <rich:menuItem submitMode="ajax" rendered="true" 
-		                    action="#{hospiCtrl.openHomePage}" 
-		                    ajaxSingle="true" >
-		                    <h:outputText value="Hospitalisations" />
-		                </rich:menuItem>	
+			                 action="#{visMedEmbCtrl.openHomePage}" 
+			                 ajaxSingle="true" >
+			                 <h:outputText value="#{locale.visitemedicalemb}" />
+			             </rich:menuItem>	
+			             
+			             <rich:menuItem submitMode="ajax" rendered="true" 
+			                 action="#{visMedPerioCtrl.openHomePage}" 
+			                 ajaxSingle="true" >
+			                 <h:outputText value="#{locale.visitemedicalperio}" />
+			             </rich:menuItem>
 	                </rich:menuGroup>
 	                
 	                <rich:menuSeparator />
@@ -82,6 +78,26 @@
 			                 ajaxSingle="true" >
 			                 <h:outputText value="Comptes Rendus Examens" />
 			             </rich:menuItem>
+	                </rich:menuGroup>
+	                
+	                 <rich:menuSeparator />
+	                 
+	                  <rich:menuGroup value="Hospitalisations" rendered="true">
+	                     <rich:menuItem submitMode="ajax" rendered="true" 
+		                    action="#{hospiCtrl.openHomePage}" 
+		                    ajaxSingle="true" >
+		                    <h:outputText value="Hospitalisations" />
+		                </rich:menuItem>	
+	                </rich:menuGroup>
+	                
+	                <rich:menuSeparator />
+	                 
+	                <rich:menuGroup value="Soins" rendered="true">
+	                    <rich:menuItem submitMode="ajax" rendered="true" 
+		                    action="#{soinCtrl.openHomePage}" 
+		                    ajaxSingle="true" >
+		                    <h:outputText value="Soins" />
+		                </rich:menuItem>
 	                </rich:menuGroup>
 	                
 	                <rich:menuSeparator />

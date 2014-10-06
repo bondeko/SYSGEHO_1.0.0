@@ -72,6 +72,13 @@
 				<h:outputText value="#{entity.tabTypRdv.libTypRdv}" />				
 			</rich:column>
 			
+			<rich:column label="#{locale.specialite}" sortBy="#{entity.tabSpec.libSpec}" filterBy="#{entity.tabSpec.libSpec}" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.specialite}"  title="#{locale.specialite}"/>
+				</f:facet>
+				<h:outputText value="#{entity.tabSpec.libSpec}" />				
+			</rich:column>
+			
 			<rich:column label="Patient" sortBy="#{entity.tabPat.libNom}" filterBy="#{entity.tabPat.libNom}"  >
 				<f:facet name="header">
 					<h:outputText value="Patient"  />
@@ -102,12 +109,12 @@
 				</h:outputText>			
 			</rich:column>
 			
-			<rich:column label="Date du rendez-vous" sortBy="#{entity.dateRdv}" filterBy="#{entity.dateRdv}"  >
+			<rich:column label="Date/Heure du rendez-vous" sortBy="#{entity.dateRdv}" filterBy="#{entity.dateRdv}"  >
 				<f:facet name="header">
-					<h:outputText value="Date du rendez-vous" />
+					<h:outputText value="Date/Heure du rendez-vous" />
 				</f:facet>
 				<h:outputText value="#{entity.dateRdv}" >	
-					<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+					<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy HH:mm" timeZone="GMT+1" />
 				</h:outputText>			
 			</rich:column>
 			

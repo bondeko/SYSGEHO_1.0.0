@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+ 	<ui:composition template="/shared/templates/templateFormulaireEdition.xhtml">
+   			
+		<ui:param name="managedBean" value="#{sessionScope[visMedPerioCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" d'une #{locale.dunevisitemedicaleperio}" />
+		
+	<!-- Definition du contenu de l'ecran principal  -->
+		<ui:define name="ecranPrincipalContenu">
+		
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Informations #{locale.societe}" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:panelGroup>
+								<h:outputText value="#{locale.societe}" />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
+							<h:panelGroup>
+								<h:inputText id="inpt_codSoc" value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.codSoc}" style="width: 20%" 
+									readonly="true" title="Code" disabled="false">
+									<a4j:support event="onchange" ajaxSingle="true" 
+									reRender="respo_1,respo_2,siege_1,siege_2,aff_1,aff_2,tel_1,tel_2"/>
+								</h:inputText>	
+								<h:inputText id="inpt_libSoc" value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.libSoc}" style="width: 40%" 
+										readonly="true"  title="#{locale.libelle}" disabled="false"> 
+										<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+								<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
+								<h:panelGroup>
+									<a4j:commandButton   value="..." action="#{visMedPerioCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" >   	
+			           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
+			         						<f:setPropertyActionListener value="VisMedPerioEdition" target="#{socCtrl.defaultVue.navigationMgr.selectionSource}" />
+			         						<!-- MAJ de la destination en mode Selection   --> 
+			           						<f:setPropertyActionListener value="true" target="#{socCtrl.defaultVue.navigationMgr.enSelection}" />  
+			           						<!-- Nom du Controlleur de l'entite source  --> 
+			          						<f:setPropertyActionListener value="visMedPerioCtrl" target="#{socCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
+			          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
+			          						<f:setPropertyActionListener value="SocListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
+			          						<!-- Nom de la propriete a selectionner -->							         						             						
+			          						<f:setPropertyActionListener value="tabSoc" target="#{defaultVue.navigationMgr.selectionPropertyName}" />            						             						          						             				            					      						
+					             	</a4j:commandButton>
+					             	<rich:message for="inpt_codSoc" errorClass="msg_error" />
+								</h:panelGroup>
+							</h:panelGroup>
+							
+							<h:panelGroup id="respo_1">
+								<h:outputText value="Nom du responsable" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.codSoc}" />
+							</h:panelGroup>
+							<h:panelGroup id="respo_2">							
+								<h:inputText  value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.libResp}" style="width: 60%" readonly="true"  title="Nom du responsable" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.codSoc}"/>
+							</h:panelGroup>
+							
+							<h:panelGroup id="siege_1">
+								<h:outputText value="#{locale.siege}" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.codSoc}" />
+							</h:panelGroup>
+							<h:panelGroup id="siege_2">							
+								<h:inputText  value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.libSiege}" style="width: 60%" readonly="true"  title="#{locale.siege}" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.codSoc}"/>
+							</h:panelGroup>
+							
+							<h:panelGroup id="tel_1">
+								<h:outputText value="#{locale.telephone}" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.codSoc}" />
+							</h:panelGroup>
+							<h:panelGroup id="tel_2">							
+								<h:inputText  value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.libTel}" style="width: 40%" readonly="true"  title="#{locale.telephone}" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.codSoc}"/>
+							</h:panelGroup>
+							
+							<h:panelGroup id="aff_1">
+								<h:outputText value="#{locale.estaffilie} ?" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.codSoc}"/>
+							</h:panelGroup>
+							<h:panelGroup id="aff_2">
+								<h:selectBooleanCheckbox value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.BEstAff}"  disabled="true" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabSoc.codSoc}">
+									<a4j:support ajaxSingle="true"  event="onchange" />
+								</h:selectBooleanCheckbox>
+							</h:panelGroup>
+							
+						</h:panelGrid>
+							
+						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdLColRightDynamic" cellspacing="10" >
+							
+						</h:panelGrid>
+					</h:panelGrid>
+         	
+				</fieldset>								
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="#{locale.medecinayantrealise}" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:panelGroup>
+								<h:outputText value="#{locale.medecin}" />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
+							<h:panelGroup>
+							<h:inputText id="inpt_codMed" value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.codUsr}" style="width: 20%" 
+								required="true" readonly="true"  requiredMessage="Valeur obligatoire"
+								title="Code" disabled="false">
+								<a4j:support event="onchange" ajaxSingle="true" reRender="prenomusr_1,prenomusr_2,ser_1,ser_2,rol_1,rol_2,adr1_1,adr_2"/>
+							</h:inputText>	
+							<h:inputText id="inpt_libMed" value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.libNom}" style="width: 40%" 
+									required="false"
+									readonly="true"  
+									title="#{locale.libelle}" disabled="false"> 
+									<a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
+							<h:panelGroup>
+								<a4j:commandButton   value="..." action="#{visMedPerioCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" >   	
+		           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
+		         							<f:setPropertyActionListener value="VisMedPerioEdition" target="#{usrCtrl.defaultVue.navigationMgr.selectionSource}" />
+		         						<!-- MAJ de la destination en mode Selection   --> 
+		           						<f:setPropertyActionListener value="true" target="#{usrCtrl.defaultVue.navigationMgr.enSelection}" />  
+		           						<!-- Nom du Controlleur de l'entite source  --> 
+		          						<f:setPropertyActionListener value="visMedPerioCtrl" target="#{usrCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
+		          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
+		          						<f:setPropertyActionListener value="UsrListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
+		          						<!-- Nom de la propriete a selectionner -->							         						             						
+		          						<f:setPropertyActionListener value="tabUsr" target="#{defaultVue.navigationMgr.selectionPropertyName}" />            						             						          						             				            					      						
+				             	</a4j:commandButton>
+				             	<rich:message for="inpt_codMed" errorClass="msg_error" />
+							</h:panelGroup>
+						</h:panelGroup>
+						
+						<h:panelGroup id="prenomusr_1">
+							<h:outputText value="#{locale.prenom}" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>	
+						</h:panelGroup>
+						<h:panelGroup id="prenomusr_2">
+							<h:inputText  value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.libPre}" style="width: 40%" readonly="true"  title="#{locale.prenom}" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
+						</h:panelGroup>
+								
+						<h:panelGroup id="ser_1">
+							<h:outputText value="Services" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
+						</h:panelGroup>								
+						<h:panelGroup id="ser_2">
+							<h:inputText  value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.tabSvc.libSvc}" style="width: 60%"  readonly="true" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>	
+						</h:panelGroup>	
+						
+						<h:panelGroup id="rol_1">
+							<h:outputText value="#{locale.role}" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
+						</h:panelGroup>
+						<h:panelGroup id="rol_2">
+							<h:inputText  value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.tabRol.libRol}" style="width: 60%"  readonly="true" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
+						</h:panelGroup>
+         					
+						<h:panelGroup id="adr_1">
+							<h:outputText value="Adresse" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
+						</h:panelGroup>	
+						<h:panelGroup id="adr_2">
+							<h:inputText  value="#{visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.libAdr}" style="width: 60%"  readonly="true" rendered="#{! empty visMedPerioCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
+						</h:panelGroup>	
+							
+         			</h:panelGrid>  
+         				
+         			<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         			</h:panelGrid> 
+         				         		         		
+         		</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="#{locale.infocompl}" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         					
+         					<h:panelGroup>
+								<h:outputText value="#{locale.libelle} de la visite"/>
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
+							<h:panelGroup>
+								<h:inputText id="inpt_libvis" value="#{visMedPerioCtrl.defaultVue.entiteCourante.libVisMedPerio}"  
+									 required="true" requiredMessage="Valeur obligatoire" style="width: 60%" title="#{locale.libelle} de la visite" >
+									 <a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+								<rich:message for="inpt_libvis" errorClass="msg_error" />
+							</h:panelGroup>
+         				
+         					<h:outputText value="Date de la visite" />
+							<h:panelGroup >					
+								<rich:calendar value="#{visMedPerioCtrl.defaultVue.entiteCourante.dateVisMed}" inputStyle="width: 30%"  title="Date " 
+										styleClass="selectDate"  datePattern="dd/MM/yyyy" >
+									<a4j:support event="onchanged" ajaxSingle="true" />
+								</rich:calendar>
+							</h:panelGroup>
+							
+							<h:outputText value="Date de la #{locale.deniere} visite" />
+							<h:panelGroup >					
+								<rich:calendar value="#{visMedPerioCtrl.defaultVue.entiteCourante.dateDerVisMed}" inputStyle="width: 30%"  title="Date " 
+										styleClass="selectDate"  datePattern="dd/MM/yyyy" >
+									<a4j:support event="onchanged" ajaxSingle="true" />
+								</rich:calendar>
+							</h:panelGroup>
+
+							<h:outputText value="Nombre d'#{locale.employe}" />
+							<h:inputText id="inpt_nbr" value="#{visMedPerioCtrl.defaultVue.entiteCourante.valNbr}"  styleClass="money"
+								 required="false"  style="width: 20%" 
+								 title="Montant TTC"
+								 converterMessage="#{msg['erreur.conversion.entiere']}"   >
+								 <f:convertNumber currencySymbol="F CFA" pattern="#,###"   />
+							</h:inputText>
+							
+							<h:outputText value="Motif"/>
+							<h:inputText id="inpt_mtf" value="#{visMedPerioCtrl.defaultVue.entiteCourante.libMotif}"  
+								 required="false" style="width: 60%" title="Poids" >
+							</h:inputText>
+							
+							<h:outputText value="Observation"/>
+							<h:inputTextarea id="inpt_obs" value="#{visMedPerioCtrl.defaultVue.entiteCourante.libObs}"  
+								 required="false" style="width: 60%" title="Statut" >
+							</h:inputTextarea>
+							
+							<h:outputText value="Montant TTC" />
+							<h:inputText id="inpt_mntttc" value="#{visMedPerioCtrl.defaultVue.entiteCourante.valMntTtc}"  styleClass="money"
+								 required="false"  style="width: 30%" 
+								 title="Montant TTC"
+								 converterMessage="#{msg['erreur.conversion.entiere']}"   >
+								 <f:convertNumber currencySymbol="F CFA" pattern="#,###"   />
+							</h:inputText>
+							
+         				</h:panelGrid>  
+         				
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         				</h:panelGrid> 
+         				         		         		
+         			</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+		</ui:define>
+													
+	</ui:composition>
+	
+</html>

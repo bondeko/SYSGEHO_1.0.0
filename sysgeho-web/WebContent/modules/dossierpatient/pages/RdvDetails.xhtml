@@ -43,6 +43,32 @@
 			
 			<h:panelGroup>
 				<fieldset>
+					<legend> <h:outputText value="#{locale.specialite}" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:outputText value="#{locale.specialite}"	 />
+							<h:panelGroup>
+								<h:inputText   value="#{rdvCtrl.defaultVue.entiteCourante.tabSpec.codSpec}" style="width: 20%" readonly="true" />	
+								<h:inputText   value="#{rdvCtrl.defaultVue.entiteCourante.tabSpec.libSpec}" style="width: 40%" readonly="true" />	
+							</h:panelGroup>
+													 	
+							
+         				</h:panelGrid>  
+         				
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         						
+         				</h:panelGrid> 
+         				         		         		
+         			</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+			<h:panelGroup>
+				<fieldset>
 					<legend> <h:outputText value="Service d'admission" styleClass="legend" />  </legend>
 
         			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
@@ -196,9 +222,9 @@
 								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
 							</h:inputText>
 							
-							<h:outputText value="Date du rendez vous" />
-							<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.dateRdv}" readonly="true" style="width: 30%" title="Date du rendez vous"  >
-								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+							<h:outputText value="Date/Heure du rendez vous" />
+							<h:inputText value="#{rdvCtrl.defaultVue.entiteCourante.dateRdv}" readonly="true" style="width: 30%" title="Date/Heure du rendez vous"  >
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy HH:mm" timeZone="GMT+1" />
 							</h:inputText>
 							
 							<h:outputText value="#{locale.numordre}"/>

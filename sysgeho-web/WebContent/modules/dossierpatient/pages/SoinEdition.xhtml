@@ -144,7 +144,7 @@
 							<h:inputText id="inpt_codtypSoin" value="#{soinCtrl.defaultVue.entiteCourante.tabTypSoin.codTypSoin}" style="width: 20%" 
 								required="true" readonly="true"  requiredMessage="Valeur obligatoire"
 								title="Code" disabled="false">
-								<a4j:support event="onchange" ajaxSingle="true" />
+								<a4j:support event="onchange" ajaxSingle="true" reRender="cout_1,cout_2"/>
 							</h:inputText>	
 							<h:inputText id="inpt_libMed" value="#{soinCtrl.defaultVue.entiteCourante.tabTypSoin.libTypSoin}" style="width: 40%" 
 									required="false"
@@ -168,6 +168,19 @@
 				             	</a4j:commandButton>
 				             	<rich:message for="inpt_codtypSoin" errorClass="msg_error" />
 							</h:panelGroup>
+						</h:panelGroup>
+						
+						<h:panelGroup id="cout_1" >
+							<h:outputText value="#{locale.coutsoin}" rendered="#{! empty soinCtrl.defaultVue.entiteCourante.tabTypSoin.codTypSoin}"/>
+						</h:panelGroup>
+						<h:panelGroup id="cout_2">
+							<h:inputText id="inpt_cout" value="#{soinCtrl.defaultVue.entiteCourante.tabTypSoin.valCout}"  styleClass="money" rendered="#{! empty soinCtrl.defaultVue.entiteCourante.tabTypSoin.codTypSoin}"
+							 	readonly="true"  style="width: 20%" 
+								 title="#{locale.coutsoin}"
+								 converterMessage="#{msg['erreur.conversion.entiere']}"   >
+								 <a4j:support event="onchange" ajaxSingle="true" />
+								 <f:convertNumber currencySymbol="F CFA" pattern="#,###"   />
+							</h:inputText>
 						</h:panelGroup>
 						
          			</h:panelGrid>  
@@ -246,6 +259,126 @@
          				</h:panelGrid> 
          				         		         		
          			</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="#{locale.vismedsrc}" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+							
+							<h:outputText value="Type de visite" />
+						    <h:panelGroup>
+								<h:selectOneRadio id="sord_typvis" value="#{entiteCourante.typVisMedSrc}" >
+									<f:selectItem itemLabel="#{locale.dunevisitemedicaleemb}" itemValue="VM_EMB"  />
+									<f:selectItem itemLabel="#{locale.dunevisitemedicaleperio}" itemValue="VM_PERIO"/>
+									<a4j:support event="onchange"  ajaxSingle="true" actionListener="#{soinCtrl.defaultVue.updateCodVis}" 
+									reRender="vmamb_1,vmamb_2,vmamb_3,vmamb_4,vmamb_5,vmamb_6,datvisemb_1,datvisemb_2,socvis1,socvis2,datvis1,datvis2"/>
+								</h:selectOneRadio> 
+							</h:panelGroup>
+							
+							<h:panelGroup id ="vmamb_1">
+								<h:outputText value="#{locale.dunevisitemedicaleemb}" rendered="#{soinCtrl.defaultVue.visEmb}"/>
+							</h:panelGroup>
+							<h:panelGroup id ="vmamb_2">
+							<h:inputText id="inpt_codvmemb" value="#{entiteCourante.tabVisMedEmb.codVisMedEmb}" style="width: 20%" 
+								readonly="true" title="Code" disabled="false" rendered="#{soinCtrl.defaultVue.visEmb}">
+								<a4j:support event="onchange" ajaxSingle="true" reRender="datvisemb_1,datvisemb_2"/>
+							</h:inputText>	
+							<h:inputText id="inpt_libmtfvmemb" value="#{entiteCourante.tabVisMedEmb.libMotif}" style="width: 40%" 
+									readonly="true"  title="Motif de la visite" disabled="false" rendered="#{soinCtrl.defaultVue.visEmb}"> 
+									<a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText >
+							<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
+							<h:panelGroup id ="vmamb_3">
+								<a4j:commandButton   value="..." action="#{soinCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false"  rendered="#{soinCtrl.defaultVue.visEmb}">   	
+		           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
+		         							<f:setPropertyActionListener value="SoinEdition" target="#{visMedEmbCtrl.defaultVue.navigationMgr.selectionSource}" />
+		         						<!-- MAJ de la destination en mode Selection   --> 
+		           						<f:setPropertyActionListener value="true" target="#{visMedEmbCtrl.defaultVue.navigationMgr.enSelection}" />  
+		           						<!-- Nom du Controlleur de l'entite source  --> 
+		          						<f:setPropertyActionListener value="soinCtrl" target="#{visMedEmbCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
+		          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
+		          						<f:setPropertyActionListener value="VisMedEmbListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
+		          						<!-- Nom de la propriete a selectionner -->							         						             						
+		          						<f:setPropertyActionListener value="tabVisMedEmb" target="#{defaultVue.navigationMgr.selectionPropertyName}" />            						             						          						             				            					      						
+				             	</a4j:commandButton>
+							</h:panelGroup>
+						</h:panelGroup>
+						
+						<h:panelGroup id="datvisemb_1">
+							<h:outputText value="Date de la visite" rendered="#{! empty entiteCourante.tabVisMedEmb.codVisMedEmb}"/>
+						</h:panelGroup>
+						<h:panelGroup id="datvisemb_2">
+							<h:inputText value="#{entiteCourante.tabVisMedEmb.dateVisMed}" readonly="true" style="width: 30%" title="Date de la visite"  rendered="#{! empty entiteCourante.tabVisMedEmb.codVisMedEmb}">
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+							</h:inputText>
+						</h:panelGroup>
+						
+						
+						<h:panelGroup id ="vmamb_4">
+							<h:outputText value="#{locale.dunevisitemedicaleperio}" rendered="#{soinCtrl.defaultVue.visPerio}"/>
+						</h:panelGroup>
+						<h:panelGroup id ="vmamb_5">
+						<h:inputText id="inpt_codvmperio" value="#{entiteCourante.tabVisMedPerio.codVisMedPerio}" style="width: 20%" 
+							readonly="true" title="Code" disabled="false" rendered="#{soinCtrl.defaultVue.visPerio}">
+							<a4j:support event="onchange" ajaxSingle="true" reRender="socvis1,socvis2,datvis1,datvis2"/>
+						</h:inputText>	
+						<h:inputText id="inpt_libmtfvmperio" value="#{entiteCourante.tabVisMedPerio.libMotif}" style="width: 40%" 
+								readonly="true"  title="Motif de la visite" disabled="false" rendered="#{soinCtrl.defaultVue.visPerio}"> 
+								<a4j:support event="onchange" ajaxSingle="true" />
+						</h:inputText>
+						<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
+						<h:panelGroup id ="vmamb_6">
+							<a4j:commandButton   value="..." action="#{soinCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" rendered="#{soinCtrl.defaultVue.visPerio}">   	
+	           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
+	         							<f:setPropertyActionListener value="SoinEdition" target="#{visMedPerioCtrl.defaultVue.navigationMgr.selectionSource}" />
+	         						<!-- MAJ de la destination en mode Selection   --> 
+	           						<f:setPropertyActionListener value="true" target="#{visMedPerioCtrl.defaultVue.navigationMgr.enSelection}" />  
+	           						<!-- Nom du Controlleur de l'entite source  --> 
+	          						<f:setPropertyActionListener value="soinCtrl" target="#{visMedPerioCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
+	          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
+	          						<f:setPropertyActionListener value="VisMedPerioListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
+	          						<!-- Nom de la propriete a selectionner -->							         						             						
+	          						<f:setPropertyActionListener value="tabVisMedPerio" target="#{defaultVue.navigationMgr.selectionPropertyName}" />            						             						          						             				            					      						
+			             	</a4j:commandButton>
+						</h:panelGroup>
+					</h:panelGroup>
+					
+					<h:panelGroup id="socvis1">
+						<h:outputText value="#{locale.societe}" rendered="#{! empty entiteCourante.tabVisMedPerio.codVisMedPerio}"/>
+					</h:panelGroup>
+					<h:panelGroup id="socvis2">
+						<h:inputText id="inpt_codSocvis" value="#{entiteCourante.tabVisMedPerio.tabSoc.codSoc}" style="width: 20%" 
+							readonly="true" title="Code" disabled="false" rendered="#{! empty entiteCourante.tabVisMedPerio.codVisMedPerio}">
+							<a4j:support event="onchange" ajaxSingle="true" />
+						</h:inputText>	
+						<h:inputText id="inpt_libSocvis" value="#{entiteCourante.tabVisMedPerio.tabSoc.libSoc}" style="width: 40%" 
+								readonly="true"  title="#{locale.libelle}" disabled="false" rendered="#{! empty entiteCourante.tabVisMedPerio.codVisMedPerio}"> 
+								<a4j:support event="onchange" ajaxSingle="true" />
+						</h:inputText>
+					</h:panelGroup>
+						
+						<h:panelGroup id="datvis1">
+							<h:outputText value="Date de la visite" rendered="#{! empty entiteCourante.tabVisMedPerio.codVisMedPerio}"/>
+						</h:panelGroup>
+						<h:panelGroup id="datvis2">
+							<h:inputText value="#{entiteCourante.tabVisMedPerio.dateVisMed}" readonly="true" style="width: 30%" title="Date de la visite"  rendered="#{! empty entiteCourante.tabVisMedPerio.codVisMedPerio}">
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+							</h:inputText>
+						</h:panelGroup>
+							
+         			</h:panelGrid>  
+         				
+         			<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         			</h:panelGrid> 
+         				         		         		
+         		</h:panelGrid>  
          	
 				</fieldset>								
 			</h:panelGroup>
