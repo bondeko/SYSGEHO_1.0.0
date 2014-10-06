@@ -33,6 +33,15 @@
 							<h:inputText id="inpt_nom"  value="#{entiteCourante.libTypExam}" style="width: 60%" readonly="true">							 	
 								<a4j:support event="onchange"  ajaxSingle="true" />											
 							</h:inputText>	
+							
+							<h:outputText value="#{locale.coutexam}" />
+							<h:inputText id="inpt_cout" value="#{entiteCourante.valCout}"  styleClass="money"
+								 readonly="true"  style="width: 20%" 
+								 title="#{locale.coutexam}"
+								 converterMessage="#{msg['erreur.conversion.entiere']}"   >
+								 <a4j:support event="onchange" ajaxSingle="true" />
+								 <f:convertNumber currencySymbol="F CFA" pattern="#,###"   />
+							</h:inputText>
 
 							<h:outputText value="Description"  />						
 							<h:inputTextarea value="#{entiteCourante.libDesc}"   style="width: 60%"   readonly="true">

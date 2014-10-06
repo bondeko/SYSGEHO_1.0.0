@@ -47,6 +47,15 @@
 								</h:inputText>	
 								<rich:message for="inpt_nom" errorClass="msg_error" />						
 							</h:panelGroup>	
+							
+							<h:outputText value="#{locale.coutexam}" />
+							<h:inputText id="inpt_cout" value="#{entiteCourante.valCout}"  styleClass="money"
+								 required="false"  style="width: 30%" 
+								 title="#{locale.coutexam}"
+								 converterMessage="#{msg['erreur.conversion.entiere']}"   >
+								 <a4j:support event="onchange" ajaxSingle="true" />
+								 <f:convertNumber currencySymbol="F CFA" pattern="#,###"   />
+							</h:inputText>
 
 							<h:outputText value="Description"  />						
 							<h:inputTextarea value="#{entiteCourante.libDesc}"   style="width: 60%"   >

@@ -53,6 +53,13 @@
 				<h:outputText value="#{entity.libTypExam}" />				
 			</rich:column>
 			
+			<rich:column label="#{locale.coutexam}" sortBy="#{entity.valCout}" filterBy="#{entity.valCout}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.coutexam}"  />
+				</f:facet>
+				<h:outputText value="#{entity.valCout}" />				
+			</rich:column>
+			
 			<rich:column label="#{locale.catexam}" sortBy="#{entity.tabCatExam.libCatExam}" filterBy="#{entity.tabCatExam.libCatExam}" width="150" >
 				<f:facet name="header">
 					<h:outputText value="#{locale.catexam}"  />

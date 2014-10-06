@@ -53,6 +53,13 @@
 				<h:outputText value="#{entity.libTypSoin}" />				
 			</rich:column>
 			
+			<rich:column label="#{locale.coutsoin}" sortBy="#{entity.valCout}" filterBy="#{entity.valCout}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.coutsoin}"  />
+				</f:facet>
+				<h:outputText value="#{entity.valCout}" />				
+			</rich:column>
+			
 		</ui:define>
 													
 	</ui:composition>
