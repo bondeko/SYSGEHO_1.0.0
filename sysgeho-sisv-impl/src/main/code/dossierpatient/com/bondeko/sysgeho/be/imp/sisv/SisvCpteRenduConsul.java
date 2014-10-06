@@ -100,11 +100,11 @@ public class SisvCpteRenduConsul extends BaseSisv<TabCpteRenduConsul, String> im
 		if(entRech != null){
 			throw new BaseException("Erreur : Cette entité existe déjà");
 		}
+		p$entite.validateData();
 		//Met à jour la consultation Boo_Cpte_Rendu = 1
 		TabConsul consul = cpteRenduCree.getTabConsul();
 		consul.setBooCpteRendu(BigDecimal.ONE);
 		daoConsul.update(consul);
-		
 		return getBaseDao().save(p$entite);
 	}
 	

@@ -100,6 +100,7 @@ public class SisvCpteRenduExam extends BaseSisv<TabCpteRenduExam, String> implem
 		if(entRech != null){
 			throw new BaseException("Erreur : Cette entité existe déjà");
 		}
+		p$entite.validateData();
 		//Met à jour la examtation Boo_Cpte_Rendu = 1
 		TabExam exam = cpteRenduCree.getTabExam();
 		exam.setBooCpteRendu(BigDecimal.ONE);

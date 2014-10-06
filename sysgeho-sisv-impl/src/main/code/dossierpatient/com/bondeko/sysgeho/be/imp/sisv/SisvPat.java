@@ -20,6 +20,8 @@ import com.bondeko.sysgeho.be.core.sisv.base.BaseSisv;
 import com.bondeko.sysgeho.be.core.util.locator.ResourceLocator;
 import com.bondeko.sysgeho.be.imp.dao.IDaoPat;
 import com.bondeko.sysgeho.be.imp.entity.TabPat;
+import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatFichePat;
+import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatFichePatElt;
 import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatListPat;
 import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatListPatElt;
 import com.bondeko.sysgeho.be.util.EntFichier;
@@ -110,17 +112,12 @@ public class SisvPat extends BaseSisv<TabPat, String> implements ISisvPat{
 	private SrlEtatListPat getListPatient(TabPat patient) throws SysGehoSystemException {
 		SrlEtatListPat srlEtatListPat = new SrlEtatListPat();
 		try {
-			//Recherche tous les mouvements de ce conteneurs
 			List<TabPat> listPat = daoPat.findAll(patient);
 			if(listPat != null && listPat.size() > 0){
-				//On parcour la liste des mouvement obtenus et on construit la sérialization  
 				for(TabPat pat : listPat){
 					srlEtatListPat.addElement(new SrlEtatListPatElt(pat));
 				}
 			}
-//			else{
-//				srlMouvCon.addElement(new SrlMouvConElt(conCour, null));
-//			}
 		} catch (SysGehoPersistenceException e) {
 			e.printStackTrace();
 			throw new SysGehoSystemException(e.getMessage());
@@ -155,6 +152,41 @@ public class SisvPat extends BaseSisv<TabPat, String> implements ISisvPat{
 			throw new SysGehoSystemException(e.getMessage());
 		}
 		
+	}
+	
+	@Override
+	public EntFichier genererEtatFichePatient(TabPat patient) throws SysGehoSystemException{
+		
+		try{
+			SrlEtatFichePat etatFichePat = getFichePatient(patient);
+			getLogger().debug("SisvPat.genererEtatFichePatient Serialisation ...");
+			SysGehoOutput result = fillAndExport(etatFichePat,
+					ResourceLocator.getReportModel(ReportNames.ETAT_FICHE_PAT),
+					SysGehoPrinterExportEnum.PDF, null, null, null);
+			
+			// Construction du nom par défaut du fichier
+			String str = (ReportNames.ETAT_FICHE_PAT).getDefaulFileName() + "."
+					+ result.getFileExtention();
+			
+			// Création de l'entité fichier
+			getLogger().debug("SisvPat.genererEtatFichePatient Creation de l'entite fichier ..."+result.getUri());
+			EntFichier v$fichier = new EntFichier(result.getUri(), str,
+					result.getFileStream());
+			
+			logger.debug("Fichier généré " + str + " >> avec "
+					+ v$fichier.getLength() + "Ko.");
+			return v$fichier;
+			
+		}catch(Exception e){
+			throw new SysGehoSystemException(e.getMessage());
+		}
+		
+	}
+	
+	private SrlEtatFichePat getFichePatient(TabPat patient) throws SysGehoSystemException {
+		SrlEtatFichePat srlEtatFichePat = new SrlEtatFichePat();
+		srlEtatFichePat.addElement(new SrlEtatFichePatElt(patient));
+		return srlEtatFichePat;
 	}
 
 }
