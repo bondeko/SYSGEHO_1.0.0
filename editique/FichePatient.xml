@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<main>
+	<srlEtatFichePat>
+		<body>
+		  <codPat>201400005</codPat>
+		  <libMat>05s024</libMat>
+		  <libTit>Dr.</libTit>
+		  <libNom>NANFACK FEUDJIO</libNom>
+		  <libPre>Beauclair Papix</libPre>
+		  <libStaMat>Célibataire</libStaMat>
+		  <datNais>19/12/2013</datNais>
+		  <libSex>M.</libSex>
+		  <libAdd>Douala V, Bepanda</libAdd>
+		  <libTel>00237 78 85 39 40.</libTel>
+		  <libCni>02154789965</libCni>
+		  <libProf>Ingénieur en informatique</libProf>
+		  <libFonc>Developpeur</libFonc>
+		  <booAff>OUI</booAff>
+		  <booAss>OUI</booAss>
+		  <libPerCon>DONGMO CHRISTINE</libPerCon>
+		  <libNumTelPerCon>00237 56 89 54 123</libNumTelPerCon>
+		  <libNumCnps>PR/01245/UOiett</libNumCnps>
+		  <libAss>Activa assurance</libAss>
+		  <libSoc>Citech Cameroun</libSoc>
+		  <siegeSoc>Bonapriso</siegeSoc>
+		  <villeSoc>Douala</villeSoc>
+		  <telSoc>22358924488</telSoc>
+		  <respoSoc>Zakiatou dalil zénabou</respoSoc>
+		  <addSoc>Rue Njo njo immeuble carré d'or</addSoc>
+		  <datEnreg>15/09/2001</datEnreg>
+		  <libMed>Antoine Bayomack helpiche</libMed>
+		</body>
+	</srlEtatFichePat>
+</main>

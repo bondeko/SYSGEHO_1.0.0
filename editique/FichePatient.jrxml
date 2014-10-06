@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FichePatient" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="161"/>
+	<queryString language="xPath">
+		<![CDATA[/*/*/*]]>
+	</queryString>
+	<field name="codPat" class="java.lang.String">
+		<fieldDescription><![CDATA[codPat]]></fieldDescription>
+	</field>
+	<field name="libMat" class="java.lang.String">
+		<fieldDescription><![CDATA[libMat]]></fieldDescription>
+	</field>
+	<field name="libTit" class="java.lang.String">
+		<fieldDescription><![CDATA[libTit]]></fieldDescription>
+	</field>
+	<field name="libNom" class="java.lang.String">
+		<fieldDescription><![CDATA[libNom]]></fieldDescription>
+	</field>
+	<field name="libPre" class="java.lang.String">
+		<fieldDescription><![CDATA[libPre]]></fieldDescription>
+	</field>
+	<field name="libStaMat" class="java.lang.String">
+		<fieldDescription><![CDATA[libStaMat]]></fieldDescription>
+	</field>
+	<field name="datNais" class="java.lang.String">
+		<fieldDescription><![CDATA[datNais]]></fieldDescription>
+	</field>
+	<field name="libSex" class="java.lang.String">
+		<fieldDescription><![CDATA[libSex]]></fieldDescription>
+	</field>
+	<field name="libAdd" class="java.lang.String">
+		<fieldDescription><![CDATA[libAdd]]></fieldDescription>
+	</field>
+	<field name="libTel" class="java.lang.String">
+		<fieldDescription><![CDATA[libTel]]></fieldDescription>
+	</field>
+	<field name="libCni" class="java.lang.String">
+		<fieldDescription><![CDATA[libCni]]></fieldDescription>
+	</field>
+	<field name="libProf" class="java.lang.String">
+		<fieldDescription><![CDATA[libProf]]></fieldDescription>
+	</field>
+	<field name="libFonc" class="java.lang.String">
+		<fieldDescription><![CDATA[libFonc]]></fieldDescription>
+	</field>
+	<field name="booAff" class="java.lang.String">
+		<fieldDescription><![CDATA[booAff]]></fieldDescription>
+	</field>
+	<field name="booAss" class="java.lang.String">
+		<fieldDescription><![CDATA[booAss]]></fieldDescription>
+	</field>
+	<field name="libPerCon" class="java.lang.String">
+		<fieldDescription><![CDATA[libPerCon]]></fieldDescription>
+	</field>
+	<field name="libNumTelPerCon" class="java.lang.String">
+		<fieldDescription><![CDATA[libNumTelPerCon]]></fieldDescription>
+	</field>
+	<field name="libNumCnps" class="java.lang.String">
+		<fieldDescription><![CDATA[libNumCnps]]></fieldDescription>
+	</field>
+	<field name="libAss" class="java.lang.String">
+		<fieldDescription><![CDATA[libAss]]></fieldDescription>
+	</field>
+	<field name="libSoc" class="java.lang.String">
+		<fieldDescription><![CDATA[libSoc]]></fieldDescription>
+	</field>
+	<field name="datEnreg" class="java.lang.String">
+		<fieldDescription><![CDATA[datEnreg]]></fieldDescription>
+	</field>
+	<field name="libMed" class="java.lang.String">
+		<fieldDescription><![CDATA[libMed]]></fieldDescription>
+	</field>
+	<field name="siegeSoc" class="java.lang.String">
+		<fieldDescription><![CDATA[siegeSoc]]></fieldDescription>
+	</field>
+	<field name="villeSoc" class="java.lang.String">
+		<fieldDescription><![CDATA[villeSoc]]></fieldDescription>
+	</field>
+	<field name="telSoc" class="java.lang.String">
+		<fieldDescription><![CDATA[telSoc]]></fieldDescription>
+	</field>
+	<field name="respoSoc" class="java.lang.String">
+		<fieldDescription><![CDATA[respoSoc]]></fieldDescription>
+	</field>
+	<field name="addSoc" class="java.lang.String">
+		<fieldDescription><![CDATA[addSoc]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="212" splitType="Stretch">
+			<image>
+				<reportElement x="107" y="0" width="448" height="182"/>
+				<imageExpression class="java.lang.String"><![CDATA["Logo_bondeko2.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement key="staticText" x="0" y="186" width="555" height="26"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fiche Patient]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="328" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="328"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="26" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="26"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[  Informations générales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="32" width="75" height="20"/>
+				<textElement>
+					<font isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Code Patient : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="52" width="33" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nom :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="52" width="48" height="20"/>
+				<textElement/>
+				<text><![CDATA[Prénom :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="52" width="47" height="20"/>
+				<textElement/>
+				<text><![CDATA[Civilité : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="72" width="36" height="20"/>
+				<textElement/>
+				<text><![CDATA[Sexe : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="169" y="72" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Date de Naissance : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="72" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Statut matrimonial :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="92" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[N° CNI/Passeport :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="169" y="92" width="65" height="20"/>
+				<textElement/>
+				<text><![CDATA[Profession :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="92" width="48" height="20"/>
+				<textElement/>
+				<text><![CDATA[N° Tel :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="112" width="48" height="20"/>
+				<textElement/>
+				<text><![CDATA[Adresse :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="112" width="75" height="20"/>
+				<textElement/>
+				<text><![CDATA[Est afflilié ? :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="169" y="112" width="112" height="20"/>
+				<textElement/>
+				<text><![CDATA[Date d'enregistrement :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="132" width="121" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nom médécin traitant :]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="172" width="555" height="24" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="0" y="176" width="555" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[  Société]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="201" width="37" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nom :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="168" y="201" width="33" height="20"/>
+				<textElement/>
+				<text><![CDATA[Siège :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="221" width="36" height="20"/>
+				<textElement/>
+				<text><![CDATA[N° Tel :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="201" width="27" height="20"/>
+				<textElement/>
+				<text><![CDATA[Ville :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="221" width="89" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nom responsable :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="169" y="221" width="52" height="20"/>
+				<textElement/>
+				<text><![CDATA[Adresse :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="132" width="122" height="20"/>
+				<textElement/>
+				<text><![CDATA[Compagnie d'assurance :]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="258" width="555" height="23" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="6" y="261" width="411" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[Personne à contacter]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="6" y="291" width="37" height="20"/>
+				<textElement/>
+				<text><![CDATA[Nom :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="291" width="48" height="20"/>
+				<textElement/>
+				<text><![CDATA[N° Tel :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="81" y="32" width="88" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codPat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="54" y="52" width="100" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{libTit}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="43" y="72" width="100" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{libSex}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="94" y="92" width="75" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{libCni}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="69" y="112" width="100" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{booAff}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="118" y="132" width="216" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{libMed}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="169" y="32" width="52" height="20"/>
+				<textElement/>
+				<text><![CDATA[Matricule :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="344" y="32" width="48" height="20"/>
+				<textElement/>
+				<text><![CDATA[N° Cnps :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="466" y="132" width="89" height="40"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{libAss}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="112" width="163" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{libAdd}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="221" y="32" width="123" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{libMat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="32" width="163" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{libNumCnps}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="52" width="143" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{libNom}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="52" width="163" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{libPre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="268" y="72" width="76" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{datNais}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="72" width="111" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{libStaMat}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="92" width="163" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{libTel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="226" y="92" width="118" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{libProf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="281" y="112" width="100" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{datEnreg}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="43" y="291" width="301" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{libPerCon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="291" width="163" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{libNumTelPerCon}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="38" y="201" width="130" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{libSoc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="221" width="122" height="37"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{respoSoc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="381" y="201" width="174" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{villeSoc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="201" y="201" width="133" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{siegeSoc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="215" y="221" width="129" height="37"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{addSoc}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="43" y="221" width="125" height="20"/>
+				<textElement>
+					<font isItalic="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{telSoc}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="14" splitType="Stretch">
+			<staticText>
+				<reportElement x="4" y="0" width="39" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[Edité le]]></text>
+			</staticText>
+			<textField pattern="EEEEE, dd MMMMM yyyy à HH:mm:ss">
+				<reportElement x="43" y="0" width="150" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="false">
+				<reportElement key="textField" x="433" y="0" width="66" height="12"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page " + $V{PAGE_NUMBER} + " / "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="215" y="0" width="141" height="10"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[Rapport généré par SYSGEHO]]></text>
+			</staticText>
+			<textField evaluationTime="Report" isBlankWhenNull="false">
+				<reportElement key="textField" x="499" y="0" width="51" height="12"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["" + $V{PAGE_NUMBER} + ""]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
