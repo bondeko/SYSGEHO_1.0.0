@@ -7,7 +7,8 @@ Commentaire : des champs REF_FAC et BOO_PAIE existe déjà dans toutes prestations
 
 2-Ajouter sur toutes les prestations le champs E_MOD_PCHG(mode de prise en charge) à renseigner à la création. E_MOD_PCHG=Personnelle, Entreprise, Assurance (OK)
 
-3- Ajouter le champ navigable et non obligatoire visite médical sur toute les prestations(soins, examen, consultation, ) pour déterminer identifier les prestations d'une visite médical donnée
+3- Ajouter le champ navigable et non obligatoire visite médical sur toute les prestations(soins, examen, consultation, ) pour déterminer identifier les prestations d'une visite médical 
+donnée (OK)
 
 ======Visite médical ( périodique / embauche)
 1- A implementer (OK)
@@ -34,11 +35,12 @@ VM_EMB(code, motif, patient, date, société )
 -------------------------------------------25/09/2014----------------------------------------
 ====Facture/Facture Conventionnelle
 1-Ajouter l'entité facture conventionnelle.
-	- Champ : code, reference, objet, société, effectif du personnel de la sté, tarification_fixe mensuelle pr la sté, prix unitaire par employé, montant_total de la facture, mois facturé, date édition
+	- Champ : code, reference, objet, société, effectif du personnel de la sté, tarification_fixe mensuelle pr la sté, prix unitaire par employé, montant_total de la facture, mois facturé, 
+date édition
 2-Ajouter le menu Facture/Facture conventionnelle pr gérer les facture conventionelles générées à partir de l'action spécifique sur l'entité "Société"
 
 ====Ref/Catégorie examens
-1-Dans le formulaire de création, les spécialité chargé dans le champ select doivent provenir de la table spécialité en BD
+1-Dans le formulaire de création, les spécialité chargé dans le champ select doivent provenir de la table spécialité en BD (OK)
 
 ====Ref/Société
 1-Ajouter le champ Tarification Fixe qui est contient le montant fixe annuel à verser par la société 
@@ -49,24 +51,28 @@ VM_EMB(code, motif, patient, date, société )
 	NB: faire toutes les vérification avant la génération : la société est elle afffiliée, la facture a t-elle déja été généré pour le mois indiqué, 
 
 ====Ref/Fichier examen
-1-Ajouter le champ "coût" (cout tarifaire de l'examen) sur l'entité Type examen
-2-Lors de l'enrégistrement d'un examen remplir automatiquement le champ montant avec le cout tarifaire de du type examen selectionné et le laisser le champ modifiable
+1-Ajouter le champ "coût" (cout tarifaire de l'examen) sur l'entité Type examen (OK)
+2-Lors de l'enrégistrement d'un examen remplir automatiquement le champ montant avec le cout tarifaire de du type examen selectionné et le laisser le champ modifiable (OK)
 
 ====Ref/Fichier soins
-1-Ajouter le champ "coût" (cout tarifaire du soin) sur l'entité Type soin
-2-Lors de l'enregistrement d'un soin remplir automatiquement le champ montant avec le cout tarifaire de du type soin selectionné et le laisser le champ modifiable
+1-Ajouter le champ "coût" (cout tarifaire du soin) sur l'entité Type soin(OK)
+2-Lors de l'enregistrement d'un soin remplir automatiquement le champ montant avec le cout tarifaire de du type soin selectionné et le laisser le champ modifiable (OK)
 
 ====Dossier Patient/Compte Rendu Consultation
-1-Ajouter le champ texte Antécédent professionnel pour saisir les antécedents du patients(CF Curriculum Labori)
-2-Ajouter le champ texte Antécédent personnel
-3-Ajouter le champ texte Antécédent familial
-4-Ajouter le champ texte "Examen Physique"
-5-Cacher le champ diagnostic secondaire sur lee formulaire
-6-Renomer sur le formulaire "Diagnotic secondaire" par "Diagnostic"
+1-Ajouter le champ texte Antécédent professionnel pour saisir les antécedents du patients(CF Curriculum Labori) (OK)
+2-Ajouter le champ texte Antécédent personnel (OK)
+3-Ajouter le champ texte Antécédent familial (OK)
+4-Ajouter le champ texte "Examen Physique" (OK)
+5-Cacher le champ diagnostic secondaire sur lee formulaire (OK)
+6-Renomer sur le formulaire "Diagnotic secondaire" par "Diagnostic" (OK)
+Commentaire :  pour le 6- je suppose qu'il s'agit de "Diagnotic primaire"
+-----------
 
 ====Dossier Patient/Rendez-vous
-1-Ajouter le champ Heure du rendez-vous
-2-Ajouter le champs select spécialité du rdv correspondant aux spécialité en BD
+1-Ajouter le champ Heure du rendez-vous (OK)
+Commentaire :  c'est ce qui est fais depuis, il faut juste savoir manipuler le composant
+-----------
+2-Ajouter le champs select spécialité du rdv correspondant aux spécialité en BD (OK)
 ====Dossier Patient/Examen
-1-Ajouter le champs utilisateur indiquant l'user du systeme ayant réalisé et enrégistré l'examen dans le système
+1-Ajouter le champs utilisateur indiquant l'user du systeme ayant réalisé et enrégistré l'examen dans le système (OK)
 
