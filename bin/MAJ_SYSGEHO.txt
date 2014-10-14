@@ -76,3 +76,24 @@ Commentaire :  c'est ce qui est fais depuis, il faut juste savoir manipuler le c
 ====Dossier Patient/Examen
 1-Ajouter le champs utilisateur indiquant l'user du systeme ayant réalisé et enrégistré l'examen dans le système (OK)
 
+---------------------------------------------------14/10/2014----------------------------------
+
+=====Referentiel/Lit
+1-Les actions de base ne sont pas visile (pas de déroulement au passage de la souris)
+=====Menu général
+1-Creer le nouveau menu principal rendez-vous avec deux sous-menu :
+	* Rendez-vous
+	* Type Rendez-vous
+2-Supprimer le sous menu visite médical de menu dossier patient
+3-Creer le nouveau menu principal Visite médicale avec deux sous-menu :
+	* Visite Médical périodique
+	* Visite médical embauche
+=======Traitement valider sur toutes les entité
+1-Implementer le controle pendant l'exécution du traitement valider pour empecher de valider une entité déja à l'état validé
+========Dossier Patient/Examen et Consultation
+1-Erreur de création d'un compte rendu examen, d'un compte rendu de consultation
+	MSG: org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before merging: com.bondeko.sysgeho.be.imp.entity.TabVisMedPerio
+2-Erreur de la validation d'une consultation, dun examen
+	MSG:  org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before merging: com.bondeko.sysgeho.be.imp.entity.TabVisMedEmb
+3-
+
