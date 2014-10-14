@@ -3,7 +3,7 @@ package com.bondeko.sysgeho.be.util;
 
 public enum ReportNames {
 
-	ETAT_LIST_PAT("EtatListePatient", "EtatListePatient", "EtatListePatient",
+	ETAT_LIST_PAT("ETAT_LISTE_PATIENT", "ETAT_LISTE_PATIENT", "ETAT_LISTE_PATIENT",
 			"ETAT LISTE DES PATIENTS",
 			" AND (1=1)", " AND (1=1)"),
 	
