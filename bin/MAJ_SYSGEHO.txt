@@ -95,5 +95,7 @@ Commentaire :  c'est ce qui est fais depuis, il faut juste savoir manipuler le c
 	MSG: org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before merging: com.bondeko.sysgeho.be.imp.entity.TabVisMedPerio
 2-Erreur de la validation d'une consultation, dun examen
 	MSG:  org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before merging: com.bondeko.sysgeho.be.imp.entity.TabVisMedEmb
-3-
+========Dossier patient
+1-Inmposible de sortir d'une hospitalisation
+	MSG: Caused by: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): com.bondeko.sysgeho.be.ref.entity.TabLit
 
