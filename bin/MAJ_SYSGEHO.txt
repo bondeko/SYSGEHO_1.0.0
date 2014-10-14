@@ -98,4 +98,8 @@ Commentaire :  c'est ce qui est fais depuis, il faut juste savoir manipuler le c
 ========Dossier patient
 1-Inmposible de sortir d'une hospitalisation
 	MSG: Caused by: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): com.bondeko.sysgeho.be.ref.entity.TabLit
-
+========Facture Courante
+1-Impossible de créer une facture courante
+	MSG: org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before merging: com.bondeko.sysgeho.be.imp.entity.TabVisMedPerio
+========Visite Médical
+1-Ajouter la navigation vers les consultation, examen, soins lié a la visite médical périodique et faire de meme pour la visite médical d'embauche
