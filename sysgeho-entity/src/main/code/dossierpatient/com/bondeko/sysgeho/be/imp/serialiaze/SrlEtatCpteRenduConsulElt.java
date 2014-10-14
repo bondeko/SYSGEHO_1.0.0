@@ -104,22 +104,27 @@ public class SrlEtatCpteRenduConsulElt {
 			  this.libMotifConsul=ERROR_VALUE ;
 		  }
 		  try {
+			  this.libTraitPres = cpterendu.getLibTraitPres();
+		  }catch (Exception e) {
+			  this.libTraitPres=ERROR_VALUE ;
+		  }
+		  try {
 			  this.libHisMal = cpterendu.getLibHisMal();
 		  }catch (Exception e) {
 			  this.libHisMal=ERROR_VALUE ;
 		  }
 		  try {
-			  this.libAntFami = "pas de champs en BD";
+			  this.libAntFami = cpterendu.getLibAnteFami();
 		  }catch (Exception e) {
 			  this.libAntFami=ERROR_VALUE ;
 		  }
 		  try {
-			  this.libAntProf = "pas de champs en BD";
+			  this.libAntProf = cpterendu.getLibAntePro();
 		  }catch (Exception e) {
 			  this.libAntProf=ERROR_VALUE ;
 		  }
 		  try {
-			  this.libAntPers = "pas de champs en BD";
+			  this.libAntPers = cpterendu.getLibAntePerso();
 		  }catch (Exception e) {
 			  this.libAntPers=ERROR_VALUE ;
 		  }
@@ -140,7 +145,7 @@ public class SrlEtatCpteRenduConsulElt {
 		  }
 		  
 		  try {
-			  this.libExamPhy = "Pas de champs en BD";
+			  this.libExamPhy = cpterendu.getLibExamPhy();
 		  }catch (Exception e) {
 			  this.libExamPhy=ERROR_VALUE ;
 		  }
@@ -153,11 +158,6 @@ public class SrlEtatCpteRenduConsulElt {
 			  this.libExploFonc = cpterendu.getLibExploFonc();
 		  }catch (Exception e) {
 			  this.libExploFonc=ERROR_VALUE ;
-		  }
-		  try {
-			  this.libTraitPres = cpterendu.getLibTraitPres();
-		  }catch (Exception e) {
-			  this.libTraitPres=ERROR_VALUE ;
 		  }
 		  try {
 			  this.libConcl = cpterendu.getLibConcl();

@@ -66,7 +66,7 @@ public class SrlEtatCpteRenduExamElt {
 			  this.libExam=ERROR_VALUE ;
 		  }
 		  try {
-			  this.setLibCatExam(cpterendu.getTabExam().getTabTypExam().getTabCatExam().getLibCatExam());
+			  this.libCatExam = cpterendu.getTabExam().getTabTypExam().getTabCatExam().getLibCatExam();
 		  }catch (Exception e) {
 			  this.setLibCatExam(ERROR_VALUE) ;
 		  }
