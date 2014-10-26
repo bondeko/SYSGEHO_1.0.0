@@ -11,7 +11,6 @@ import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr;
 import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
-import com.bondeko.sysgeho.be.imp.entity.TabConsul;
 import com.bondeko.sysgeho.be.imp.entity.TabHospi;
 import com.bondeko.sysgeho.be.imp.entity.TabPat;
 import com.bondeko.sysgeho.be.imp.entity.TabVisMedEmb;
@@ -26,7 +25,6 @@ import com.bondeko.sysgeho.ui.core.base.SysGehoToolBox;
 import com.bondeko.sysgeho.ui.core.base.Traitement;
 import com.bondeko.sysgeho.ui.imp.util.DossierPatientSvcoDeleguate;
 import com.bondeko.sysgeho.ui.imp.util.DossierPatientTrt;
-import com.bondeko.sysgeho.ui.imp.vue.ConsulVue;
 import com.bondeko.sysgeho.ui.imp.vue.HospiVue;
 
 public class HospiCtrl extends SysGehoCtrl<TabHospi, TabHospi>{

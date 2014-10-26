@@ -192,6 +192,16 @@ public class ExamCtrl extends SysGehoCtrl<TabExam, TabExam>{
 
 			// Sauvegarde de l'entité avant traitement specifique
 			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+			TabExam entity = defaultVue.getEntiteCourante();
+			if(entity.getBooVal() != null && entity.getBooVal().equals(BigDecimal.ONE)){
+				FacesUtil.addWarnMessage("", "Warning : Vous n'avez plus le droit d'exécuter le traitement Valider pour cet examen");
+				return null;
+			}
+			
+			if(entity.getBooPaie() != null && entity.getBooPaie().equals(BigDecimal.ONE)){
+				FacesUtil.addWarnMessage("", "Warning : Impossible de valider un examen déjà payé");
+				return null;
+			}
 
 			// Consommation de l'EJB distant selon l'operation spécifique car
 			// l'entite courante est connue

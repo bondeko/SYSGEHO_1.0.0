@@ -14,23 +14,24 @@
 					<f:facet name="label">
 						<h:panelGrid cellpadding="0" cellspacing="0" columns="2"
 							style="vertical-align:middle">
-							<h:outputText value="Facturation" title="gestion des types de factures"/>
+							<h:outputText value="Rendez-vous" title="gestion des rendez-vous"/>
 						</h:panelGrid>
 					</f:facet>
 					
 					<rich:menuItem submitMode="ajax" rendered="true" 
-	                    action="#{facCourCtrl.openHomePage}" 
+		                 action="#{typRdvCtrl.openHomePage}" 
+		                 ajaxSingle="true" >
+		                 <h:outputText value="Types de Rendez-vous" />
+		             </rich:menuItem>
+					
+					 <rich:menuSeparator />
+					
+					 <rich:menuItem submitMode="ajax" rendered="true" 
+	                    action="#{rdvCtrl.openHomePage}" 
 	                    ajaxSingle="true" >
-	                    <h:outputText value="Facture courante" />
+	                    <h:outputText value="Rendez-vous" />
 	                </rich:menuItem>
 	                
-	                <rich:menuSeparator />
-	                
-	                <rich:menuItem submitMode="ajax" rendered="true" 
-	                    action="#{facConvCtrl.openHomePage}" 
-	                    ajaxSingle="true" >
-	                    <h:outputText value="Facture conventionnelle" />
-	                </rich:menuItem>
 				</rich:dropDownMenu>	
 				
    			</ui:composition>

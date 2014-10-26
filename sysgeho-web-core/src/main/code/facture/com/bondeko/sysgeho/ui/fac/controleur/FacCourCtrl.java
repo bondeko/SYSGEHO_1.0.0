@@ -3,6 +3,7 @@
  */
 package com.bondeko.sysgeho.ui.fac.controleur;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,8 @@ import com.bondeko.sysgeho.be.imp.entity.TabExam;
 import com.bondeko.sysgeho.be.imp.entity.TabHospi;
 import com.bondeko.sysgeho.be.imp.entity.TabPat;
 import com.bondeko.sysgeho.be.imp.entity.TabSoin;
+import com.bondeko.sysgeho.be.util.EntFichier;
+import com.bondeko.sysgeho.be.util.OutputType;
 import com.bondeko.sysgeho.ui.core.base.DataValidationException;
 import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
@@ -28,10 +31,12 @@ import com.bondeko.sysgeho.ui.core.base.Traitement;
 import com.bondeko.sysgeho.ui.fac.util.FactureSvcoDeleguate;
 import com.bondeko.sysgeho.ui.fac.util.FactureTrt;
 import com.bondeko.sysgeho.ui.imp.util.DossierPatientSvcoDeleguate;
+import com.bondeko.sysgeho.ui.imp.util.DossierPatientTrt;
 import com.bondeko.sysgeho.ui.imp.vue.ConsulVue;
 import com.bondeko.sysgeho.ui.imp.vue.ExamVue;
 import com.bondeko.sysgeho.ui.imp.vue.FacCourVue;
 import com.bondeko.sysgeho.ui.imp.vue.HospiVue;
+import com.bondeko.sysgeho.ui.imp.vue.PatVue;
 import com.bondeko.sysgeho.ui.imp.vue.SoinVue;
 
 
@@ -88,6 +93,8 @@ public class FacCourCtrl extends SysGehoCtrl<TabFacCour, TabFacCour> {
 		v$mapTrt.put(FactureTrt.VALIDER_FACTURE_COURANTE.getKey(), new Traitement(FactureTrt.VALIDER_FACTURE_COURANTE));
 		
 		v$mapTrt.put(FactureTrt.PAYER_FACTURE_COURANTE.getKey(), new Traitement(FactureTrt.PAYER_FACTURE_COURANTE));
+		
+		v$mapTrt.put(FactureTrt.GEN_FAC_COUR.getKey(), new Traitement(FactureTrt.GEN_FAC_COUR));
 		
 		listeTraitements = Traitement.getOrderedTrt(v$mapTrt);
 		return listeTraitements;
@@ -514,6 +521,16 @@ public class FacCourCtrl extends SysGehoCtrl<TabFacCour, TabFacCour> {
 
 			// Sauvegarde de l'entité avant traitement specifique
 			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+			TabFacCour entity = defaultVue.getEntiteCourante();
+			if(entity.getBooVal() != null && entity.getBooVal().equals(BigDecimal.ONE)){
+				FacesUtil.addWarnMessage("", "Warning : Vous n'avez plus le droit d'exécuter le traitement Valider pour cette facture");
+				return null;
+			}
+			
+			if(entity.getBooPaie() != null && entity.getBooPaie().equals(BigDecimal.ONE)){
+				FacesUtil.addWarnMessage("", "Warning : Impossible de valider une facture déjà payée");
+				return null;
+			}
 
 			// Consommation de l'EJB distant selon l'operation spécifique car
 			// l'entite courante est connue
@@ -602,6 +619,79 @@ public class FacCourCtrl extends SysGehoCtrl<TabFacCour, TabFacCour> {
 			// Retour à la page adéquate
 			return v$navigation;
 		}
+	}
+	
+	/**
+	 * @return un message  sur l'état de l'opération
+	 */
+	@SuppressWarnings("finally")
+	public String genererFacCour() {
+	// Determine vers quelle page ou Formulaire l'on doit se diriger
+		String v$navigation = null;
+
+		// Message d'information
+		String v$msgDetails = "GENERATION_SUCCES";
+
+		try {
+			FacCourVue v$vue = (FacCourVue) defaultVue;
+
+			// Mise à jour de l'entité courante selon le contexte du Formulaire
+			defaultVue.setEntiteCouranteOfPageContext();
+
+			// Sauvegarde de l'entité avant traitement specifique
+			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+
+			// Spécification du type de génération du fichier
+			OutputType outputType = OutputType.PDF;
+
+			// Consommation du service distant
+			TabFacCour facCour = defaultVue.getEntiteCourante();
+			
+			
+			EntFichier v$fichier = FactureSvcoDeleguate.getSvcoFacCour().genererFacCour(facCour);
+
+			// création de dossier et fichiers temporaires et affichage de
+			// l'état généré
+			v$navigation = preview(v$fichier, outputType.getExtension());
+			
+			// L'on remplace l'ancienne entité de la liste par la nouvelle issue
+			// du résultat du traitement spécifiques
+			 defaultVue.getTableMgr().replace(defaultVue.getEntiteTemporaire(),
+					 defaultVue.getEntiteCourante());
+
+			// Si nous sommes en Consultation ==> sur le formulaire Details
+			if (defaultVue.getNavigationMgr().isFromDetails()) {
+				// Traitements particuliers
+			}
+
+			// Par contre si nous sommes sur le formulaire Liste
+			else if (defaultVue.getNavigationMgr().isFromListe()) {
+				// Traitements particuliers
+			}
+			FacesUtil.addInfoMessage("GENERATION_SUCCES", v$msgDetails);
+
+		} catch (SysGehoAppException e) {
+			// Aucune navigation possible
+			v$navigation = null;
+
+			// Message utilisateur
+			FacesUtil
+					.addWarnMessage("TRAITEMENT_ALL_ECHEC", e.getMessage());
+			getLogger().error(e.getMessage(), e);
+		} catch (Exception e) {
+			// Aucune navigation possible
+			e.printStackTrace();
+			v$navigation = null;
+			// Message utilisateur
+			FacesUtil
+					.addWarnMessage(
+							"TRAITEMENT_ALL_ECHEC","TRAITEMENT_ALL_ECHEC_INCONNU");
+			getLogger().error(e.getMessage(), e);
+		} finally {
+			// Retour à la page adéquate
+			return v$navigation;
+		}
+
 	}
 
 

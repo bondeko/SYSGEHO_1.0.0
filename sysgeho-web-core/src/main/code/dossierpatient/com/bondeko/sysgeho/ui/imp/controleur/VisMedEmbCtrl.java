@@ -1,5 +1,6 @@
 package com.bondeko.sysgeho.ui.imp.controleur;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -8,7 +9,12 @@ import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr;
 import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
+import com.bondeko.sysgeho.be.fac.entity.TabFacConv;
+import com.bondeko.sysgeho.be.imp.entity.TabConsul;
+import com.bondeko.sysgeho.be.imp.entity.TabExam;
+import com.bondeko.sysgeho.be.imp.entity.TabHospi;
 import com.bondeko.sysgeho.be.imp.entity.TabPat;
+import com.bondeko.sysgeho.be.imp.entity.TabSoin;
 import com.bondeko.sysgeho.be.imp.entity.TabVisMedEmb;
 import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
@@ -18,6 +24,7 @@ import com.bondeko.sysgeho.ui.core.base.Traitement;
 import com.bondeko.sysgeho.ui.imp.util.DossierPatientSvcoDeleguate;
 import com.bondeko.sysgeho.ui.imp.util.DossierPatientTrt;
 import com.bondeko.sysgeho.ui.imp.vue.VisMedEmbVue;
+import com.bondeko.sysgeho.ui.ref.util.RefTrt;
 
 public class VisMedEmbCtrl extends SysGehoCtrl<TabVisMedEmb, TabVisMedEmb>{
 	
@@ -70,6 +77,26 @@ public class VisMedEmbCtrl extends SysGehoCtrl<TabVisMedEmb, TabVisMedEmb>{
 		
 		v$mapTrt.put(DossierPatientTrt.VALIDER_VIS_MED_EMB.getKey(), new Traitement(DossierPatientTrt.VALIDER_VIS_MED_EMB));
 		
+		Traitement v$traitement2 = new Traitement(
+				DossierPatientTrt.NAVIGUER_DE_VM_VERS_CONSULTATION.naviguerVersFormulaireListe(),
+				DossierPatientTrt.NAVIGUER_DE_VM_VERS_CONSULTATION);
+		v$mapTrt.put(v$traitement2.getKey(), v$traitement2);
+		
+		Traitement v$traitement3 = new Traitement(
+				DossierPatientTrt.NAVIGUER_DE_VM_VERS_HOSPI.naviguerVersFormulaireListe(),
+				DossierPatientTrt.NAVIGUER_DE_VM_VERS_HOSPI);
+		v$mapTrt.put(v$traitement3.getKey(), v$traitement3);
+		
+		Traitement v$traitement4 = new Traitement(
+				DossierPatientTrt.NAVIGUER_DE_VM_VERS_EXAMEN.naviguerVersFormulaireListe(),
+				DossierPatientTrt.NAVIGUER_DE_VM_VERS_EXAMEN);
+		v$mapTrt.put(v$traitement4.getKey(), v$traitement4);
+		
+		Traitement v$traitement5 = new Traitement(
+				DossierPatientTrt.NAVIGUER_DE_VM_VERS_SOIN.naviguerVersFormulaireListe(),
+				DossierPatientTrt.NAVIGUER_DE_VM_VERS_SOIN);
+		v$mapTrt.put(v$traitement5.getKey(), v$traitement5);
+		
 		listeTraitements = Traitement.getOrderedTrt(v$mapTrt);
 		return listeTraitements;
 	}
@@ -111,7 +138,65 @@ public class VisMedEmbCtrl extends SysGehoCtrl<TabVisMedEmb, TabVisMedEmb>{
 		 * 	2-Par ailleurs il devrait normalement déja existé du fait du passage de paramètres dans la page web
 		 */
 		SysGehoCtrl<BaseEntity, BaseEntity> v$controleur  =  (SysGehoCtrl<BaseEntity, BaseEntity>) FacesUtil.getSessionMapValue(SysGehoToolBox.getManagedBeanName(v$navigation));
+		
+		if (v$navigation.equals(DossierPatientTrt.NAVIGUER_DE_VM_VERS_CONSULTATION
+				.naviguerVersFormulaireListe())) {
+			
+			TabConsul consul = new TabConsul();
+			consul.initData();
+			consul.setTabVisMedEmb(defaultVue.getEntiteCourante());
 
+			try {
+				v$navigation = v$controleur.naviguerVersDetailsOuListe(consul);
+			} catch (Exception e) { 
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		if (v$navigation.equals(DossierPatientTrt.NAVIGUER_DE_VM_VERS_HOSPI
+				.naviguerVersFormulaireListe())) {
+			
+			TabHospi hospi = new TabHospi();
+			hospi.initData();
+			hospi.setTabVisMedEmb(defaultVue.getEntiteCourante());
+
+			try {
+				v$navigation = v$controleur.naviguerVersDetailsOuListe(hospi);
+			} catch (Exception e) { 
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if (v$navigation.equals(DossierPatientTrt.NAVIGUER_DE_VM_VERS_EXAMEN
+				.naviguerVersFormulaireListe())) {
+			
+			TabExam exam = new TabExam();
+			exam.initData();
+			exam.setTabVisMedEmb(defaultVue.getEntiteCourante());
+
+			try {
+				v$navigation = v$controleur.naviguerVersDetailsOuListe(exam);
+			} catch (Exception e) { 
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if (v$navigation.equals(DossierPatientTrt.NAVIGUER_DE_VM_VERS_SOIN
+				.naviguerVersFormulaireListe())) {
+			
+			TabSoin soin = new TabSoin();
+			soin.initData();
+			soin.setTabVisMedEmb(defaultVue.getEntiteCourante());
+
+			try {
+				v$navigation = v$controleur.naviguerVersDetailsOuListe(soin);
+			} catch (Exception e) { 
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		return v$navigation;
 	}
 	
@@ -150,6 +235,11 @@ public class VisMedEmbCtrl extends SysGehoCtrl<TabVisMedEmb, TabVisMedEmb>{
 
 			// Sauvegarde de l'entité avant traitement specifique
 			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+			TabVisMedEmb entity = defaultVue.getEntiteCourante();
+			if(entity.getBooEstVal() != null && entity.getBooEstVal().equals(BigDecimal.ONE)){
+				FacesUtil.addWarnMessage("", "Warning : Vous n'avez plus le droit d'exécuter le traitement Valider pour cette visite médicale");
+				return null;
+			}
 
 			// Consommation de l'EJB distant selon l'operation spécifique car
 			// l'entite courante est connue

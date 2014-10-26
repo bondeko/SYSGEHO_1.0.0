@@ -25,27 +25,6 @@
 		                    <h:outputText value="Patients" />
 		                </rich:menuItem>
 		                
-		                <rich:menuItem submitMode="ajax" rendered="true" 
-		                    action="#{rdvCtrl.openHomePage}" 
-		                    ajaxSingle="true" >
-		                    <h:outputText value="Rendez-vous" />
-		                </rich:menuItem>
-	                </rich:menuGroup>
-	                
-	                <rich:menuSeparator />
-	                
-	                <rich:menuGroup value="#{locale.visitemedical}" rendered="true">
-	                     <rich:menuItem submitMode="ajax" rendered="true" 
-			                 action="#{visMedEmbCtrl.openHomePage}" 
-			                 ajaxSingle="true" >
-			                 <h:outputText value="#{locale.visitemedicalemb}" />
-			             </rich:menuItem>	
-			             
-			             <rich:menuItem submitMode="ajax" rendered="true" 
-			                 action="#{visMedPerioCtrl.openHomePage}" 
-			                 ajaxSingle="true" >
-			                 <h:outputText value="#{locale.visitemedicalperio}" />
-			             </rich:menuItem>
 	                </rich:menuGroup>
 	                
 	                <rich:menuSeparator />

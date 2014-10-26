@@ -1,6 +1,7 @@
 package com.bondeko.sysgeho.ui.fac.util;
 
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
+import com.bondeko.sysgeho.be.fac.svco.IRemoteFacConv;
 import com.bondeko.sysgeho.be.fac.svco.IRemoteFacCour;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
 import com.bondeko.sysgeho.ui.core.base.SysGehoSvcoDeleguate;
@@ -23,6 +24,10 @@ public class FactureSvcoDeleguate {
 	
 	public static IRemoteFacCour getSvcoFacCour() throws ServiceLocatorException{
         return (IRemoteFacCour) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoFacCour", IRemoteFacCour.class));
+    }
+	
+	public static IRemoteFacConv getSvcoFacConv() throws ServiceLocatorException{
+        return (IRemoteFacConv) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoFacConv", IRemoteFacConv.class));
     }
 	
 	public BaseLogger getLogger() {

@@ -182,6 +182,11 @@
 							<h:inputText value="#{hospiCtrl.defaultVue.entiteCourante.dateAdmi}" readonly="true" style="width: 30%" title="Date d'admission"  >
 								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
 							</h:inputText>
+							
+							<h:outputText value="Date de sortie" />
+							<h:inputText value="#{hospiCtrl.defaultVue.entiteCourante.dateSortie}" readonly="true" style="width: 30%" title="Date de sortie"  >
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+							</h:inputText>
          				
 							<h:outputText value="#{locale.numcarnet}"/>
 							<h:inputText id="inpt_numcar" value="#{hospiCtrl.defaultVue.entiteCourante.libNumCarnet}"  
@@ -203,6 +208,11 @@
 							<h:inputText id="inpt_mtf" value="#{hospiCtrl.defaultVue.entiteCourante.libMotif}"  
 								 required="false" style="width: 60%" title="Motif" readonly="true">
 							</h:inputText>
+							
+							<h:outputText value="Prescription"/>
+							<h:inputTextarea id="inpt_presc" value="#{hospiCtrl.defaultVue.entiteCourante.libPrescri}"  
+								 required="false" style="width: 60%" title="Prescription" readonly="true">
+							</h:inputTextarea>
 							
 							<h:outputText value="Observation"/>
 							<h:inputTextarea id="inpt_stat" value="#{hospiCtrl.defaultVue.entiteCourante.libObs}"  

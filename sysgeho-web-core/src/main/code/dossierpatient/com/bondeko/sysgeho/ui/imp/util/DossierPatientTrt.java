@@ -294,4 +294,36 @@ public class DossierPatientTrt extends SysGehoTrt{
 				/* Raccourci clavier */ "Shift+F2", /* index */ "14", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
 	}
 	
+	public static Traitement NAVIGUER_DE_VM_VERS_CONSULTATION;
+	static{	
+		NAVIGUER_DE_VM_VERS_CONSULTATION = new Traitement  (/* Type */Traitement.NAVIGATION , /* Code */ "Consul" , /* Libellé */ "Naviguer vers les Consultations" , /* Commentaire */ "" , /* Méthode */ Traitement.METHODE_NAVIGATION,
+			/* Config IHM */ new boolean[]{true,true,true,false} , 
+			/* Controleur de la destination */ "consulCtrl", /* Type de progress bar */ Traitement.PROGRESS_NO, 
+			/* Raccourci clavier */ "", /* index */ "12");
+	}
+	
+	public static Traitement NAVIGUER_DE_VM_VERS_HOSPI;
+	static{	
+		NAVIGUER_DE_VM_VERS_HOSPI = new Traitement  (/* Type */Traitement.NAVIGATION , /* Code */ "Hospi" , /* Libellé */ "Naviguer vers les Hospitalisations" , /* Commentaire */ "" , /* Méthode */ Traitement.METHODE_NAVIGATION,
+			/* Config IHM */ new boolean[]{true,true,true,false} , 
+			/* Controleur de la destination */ "hospiCtrl", /* Type de progress bar */ Traitement.PROGRESS_NO, 
+			/* Raccourci clavier */ "", /* index */ "13");
+	}
+	
+	public static Traitement NAVIGUER_DE_VM_VERS_EXAMEN;
+	static{	
+		NAVIGUER_DE_VM_VERS_EXAMEN = new Traitement  (/* Type */Traitement.NAVIGATION , /* Code */ "Exam" , /* Libellé */ "Naviguer vers les Examens" , /* Commentaire */ "" , /* Méthode */ Traitement.METHODE_NAVIGATION,
+			/* Config IHM */ new boolean[]{true,true,true,false} , 
+			/* Controleur de la destination */ "examCtrl", /* Type de progress bar */ Traitement.PROGRESS_NO, 
+			/* Raccourci clavier */ "", /* index */ "14");
+	}
+	
+	public static Traitement NAVIGUER_DE_VM_VERS_SOIN;
+	static{	
+		NAVIGUER_DE_VM_VERS_SOIN = new Traitement  (/* Type */Traitement.NAVIGATION , /* Code */ "Soin" , /* Libellé */ "Naviguer vers les Soins" , /* Commentaire */ "" , /* Méthode */ Traitement.METHODE_NAVIGATION,
+			/* Config IHM */ new boolean[]{true,true,true,false} , 
+			/* Controleur de la destination */ "soinCtrl", /* Type de progress bar */ Traitement.PROGRESS_NO, 
+			/* Raccourci clavier */ "", /* index */ "15");
+	}
+	
 }

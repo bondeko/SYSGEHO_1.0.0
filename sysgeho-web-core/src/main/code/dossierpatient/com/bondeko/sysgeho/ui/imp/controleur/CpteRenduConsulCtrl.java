@@ -1,5 +1,6 @@
 package com.bondeko.sysgeho.ui.imp.controleur;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -146,7 +147,11 @@ public class CpteRenduConsulCtrl extends SysGehoCtrl<TabCpteRenduConsul, TabCpte
 
 			// Sauvegarde de l'entité avant traitement specifique
 			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
-
+			TabCpteRenduConsul entity = defaultVue.getEntiteCourante();
+			if(entity.getBooVal() != null && entity.getBooVal().equals(BigDecimal.ONE)){
+				FacesUtil.addWarnMessage("", "Warning : Vous n'avez plus le droit d'exécuter le traitement Valider pour ce compte rendu");
+				return null;
+			}
 			// Consommation de l'EJB distant selon l'operation spécifique car
 			// l'entite courante est connue
 			defaultVue.setEntiteCourante(DossierPatientSvcoDeleguate.getSvcoCpteRenduConsul()

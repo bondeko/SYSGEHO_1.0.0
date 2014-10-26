@@ -1,4 +1,7 @@
-package com.bondeko.sysgeho.ui.ref.vue;
+/**
+ * 
+ */
+package com.bondeko.sysgeho.ui.imp.vue;
 
 import java.util.Date;
 import java.util.Map;
@@ -6,68 +9,71 @@ import java.util.Map;
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
 import com.bondeko.sysgeho.be.core.base.DateTools;
 import com.bondeko.sysgeho.be.core.enums.EnuMois;
-import com.bondeko.sysgeho.be.ref.entity.TabSoc;
+import com.bondeko.sysgeho.be.fac.entity.TabFacConv;
 import com.bondeko.sysgeho.ui.core.base.AbstractNavigationManager;
 import com.bondeko.sysgeho.ui.core.base.SysGehoToolBox;
 import com.bondeko.sysgeho.ui.core.base.SysGehoVue;
 import com.bondeko.sysgeho.ui.core.base.TableManager;
 
-public class SocVue extends SysGehoVue<TabSoc>{
+
+public class FacConvVue extends SysGehoVue<TabFacConv> {
+	
+	/*=========================================================== ~ Debut Region ~ =================================================================*/
+	/**	~ Propriétés ~ 	**/    
+	/*=============================================================================================================================================*/
+	
+	private static BaseLogger logger = BaseLogger.getLogger(FacConvVue.class);
 	
 	private  Map<String, Object> listeMois;
 	
 	private String anneeEnCour;
 	
-	public SocVue(){
+	public FacConvVue() {	
 		super();
-		// Instance des propriétés génériques héritées  
 		this.tableMgr = new TableManager();
 		this.navigationMgr = new AbstractNavigationManager();
 	}
+
+	public BaseLogger getLogger(){
+		return logger;
+	}
+	
 	
 	/**
 	 * Retourne une nouvelle Instance de l'entité  
 	 * 
 	 * @return
 	 */	
-	public static TabSoc getTabSoc (){		
-		
-		TabSoc v$Soc = new TabSoc();
-		v$Soc.setInfoUser(getInfoUser());
-		v$Soc.initData();
-		return v$Soc ;	
-	}	
-	
+	public static TabFacConv getTabFacConv(){		
+		TabFacConv v$facConv = new TabFacConv();
+		v$facConv.setInfoUser(getInfoUser());
+		v$facConv.initData();
+		return v$facConv ;	
+	}
+
 	/**
 	 * Retourne une nouvelle instance d'une entité utile pour la recherche des données;  
 	 * 
 	 * @return
 	 */
-	public static TabSoc getTabSocForSearch (){		
-		TabSoc v$Soc = getTabSoc();
-		return v$Soc ;	
+	public static TabFacConv getTabFacConvForSearch(){		
+		TabFacConv v$facConv = getTabFacConv();
+		return v$facConv ;	
 	}	
-	/**
-	 * Retourne un Logger pour la Classe
-	 * 
-	 * @return
-	 */
-	public BaseLogger getLogger() {
-		return BaseLogger.getLogger(SocVue.class);
+
+	@Override
+	public TabFacConv getNewEntity() {		
+		return getTabFacConv();
 	}
-	
-	
-	public TabSoc getNewEntity(){
-		return getTabSoc();
-	}
-	
+
 	/***
 	 * Retourne une nouvelle instance d'une entité utile pour la recherche des données;  
 	 *  
 	 * @return
 	 */	
-	public TabSoc getEntityForSearch() {	
-		return getTabSocForSearch();
+	@Override
+	public TabFacConv getEntityForSearch() {	
+		return getTabFacConvForSearch();
 	}	
 	
 	public Map<String, Object> getListeMois() {
@@ -81,6 +87,7 @@ public class SocVue extends SysGehoVue<TabSoc>{
 	public String getAnneeEnCour(){
 		return DateTools.getYear(DateTools.formatDate(new Date()));
 	}
+	
 	public void setAnneeEnCour(String anneeEnCour) {
 		this.anneeEnCour = anneeEnCour;
 	}

@@ -89,7 +89,19 @@
 				</f:facet>
 				<h:outputText value="#{entity.valEff}" />				
 			</rich:column>
+			
+			<rich:column label="Tarification fixe mensuelle" sortBy="#{entity.valTarifFixMen}" filterBy="#{entity.valTarifFixMen}" width="150" >
+				<f:facet name="header">
+					<h:outputText value="Tarification fixe mensuelle"  />
+				</f:facet>
+				<h:outputText value="#{entity.valTarifFixMen}" />				
+			</rich:column>
 							
+		</ui:define>
+		
+		<!-- Definition des modal panels  -->	
+		<ui:define name="modalPanel">			
+			<ui:include src="../include/modalPanel/GenererFacConv.xhtml" />
 		</ui:define>
 													
 	</ui:composition>

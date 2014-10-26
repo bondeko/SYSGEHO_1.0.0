@@ -44,27 +44,7 @@
 								<a4j:support event="onchange"  ajaxSingle="true" />											
 							</h:inputText>	
 							
-							<h:outputText value="#{locale.estaffiliee} ?" />
-							<h:selectBooleanCheckbox value="#{socCtrl.defaultVue.entiteCourante.BEstAff}" disabled="true">
-								<a4j:support ajaxSingle="true"  event="onchange" />
-							</h:selectBooleanCheckbox>
-							
-							<h:outputText value="Date affiliation" rendered="#{socCtrl.defaultVue.entiteCourante.BEstAff}"/>
-							<h:inputText value="#{socCtrl.defaultVue.entiteCourante.dateAff}" inputStyle="width: 30%"  title="Date affiliation" readonly="true"
-												rendered="#{socCtrl.defaultVue.entiteCourante.BEstAff}">
-								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
-							</h:inputText>
-							
-							<h:outputText value="#{locale.datecreation}" />
-							<h:inputText value="#{socCtrl.defaultVue.entiteCourante.dateCre}" inputStyle="width: 30%"  title="#{locale.datecreation}" readonly="true">
-								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
-							</h:inputText>
-							
-         				</h:panelGrid>  
-         				
-         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
-         				
-         					<h:outputText value="#{locale.siege}"  />						
+							<h:outputText value="#{locale.siege}"  />						
 							<h:inputText  value="#{entiteCourante.libSiege}"   style="width: 60%"   readonly="true">
 							  <a4j:support event="onchange"  ajaxSingle="true" />	
 							</h:inputText>
@@ -72,6 +52,15 @@
 							 <h:outputText value="Ville"  />						
 							<h:inputText  value="#{entiteCourante.libVil}"   style="width: 60%"   readonly="true">
 							  <a4j:support event="onchange"  ajaxSingle="true" />	
+							</h:inputText>
+							
+         				</h:panelGrid>  
+         				
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         					<h:outputText value="#{locale.datecreation}" />
+							<h:inputText value="#{socCtrl.defaultVue.entiteCourante.dateCre}" inputStyle="width: 30%"  title="#{locale.datecreation}" readonly="true">
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
 							</h:inputText>
 													
 							<h:outputText value="#{locale.telephone}"  />						
@@ -91,14 +80,31 @@
 							
 							<h:outputText value="Effectif"/>
 							<h:inputText id="inpt_eff" value="#{socCtrl.defaultVue.entiteCourante.valEff}"  styleClass="money" 
-								 required="false" style="width: 20%" 
+								 required="false" style="width: 20%" readonly="true"
 								  title="Effectif" >
 							</h:inputText>
 							
-							<h:outputText value="Prix unitaire"/>
+							<h:outputText value="#{locale.estaffiliee} ?" />
+							<h:selectBooleanCheckbox value="#{socCtrl.defaultVue.entiteCourante.BEstAff}" disabled="true">
+								<a4j:support ajaxSingle="true"  event="onchange" />
+							</h:selectBooleanCheckbox>
+							
+							<h:outputText value="Date affiliation" rendered="#{socCtrl.defaultVue.entiteCourante.BEstAff}"/>
+							<h:inputText value="#{socCtrl.defaultVue.entiteCourante.dateAff}" inputStyle="width: 30%"  title="Date affiliation" readonly="true"
+												rendered="#{socCtrl.defaultVue.entiteCourante.BEstAff}">
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+							</h:inputText>
+							
+							<h:outputText value="Prix unitaire" rendered="#{socCtrl.defaultVue.entiteCourante.BEstAff}"/>
 							<h:inputText id="inpt_priuni" value="#{socCtrl.defaultVue.entiteCourante.valPriUni}"  styleClass="money" 
-								 required="false" style="width: 20%" 
+								 required="false" style="width: 20%" readonly="true" rendered="#{socCtrl.defaultVue.entiteCourante.BEstAff}"
 								  title="Prix unitaire" >
+							</h:inputText>
+							
+							<h:outputText value="Tarification fixe mensuelle" rendered="#{socCtrl.defaultVue.entiteCourante.BEstAff}"/>
+							<h:inputText id="inpt_tarf" value="#{socCtrl.defaultVue.entiteCourante.valTarifFixMen}"  styleClass="money" 
+								 required="false" style="width: 20%" rendered="#{socCtrl.defaultVue.entiteCourante.BEstAff}"
+								  title="Tarification fixe mensuelle" readonly="true">
 							</h:inputText>
          				
          				</h:panelGrid> 
@@ -108,6 +114,11 @@
 				</fieldset>								
 			</h:panelGroup>
 
+		</ui:define>
+		
+		<!-- Definition des modal panels  -->	
+		<ui:define name="modalPanel">			
+			<ui:include src="../include/modalPanel/GenererFacConv.xhtml" />
 		</ui:define>
 	
 													

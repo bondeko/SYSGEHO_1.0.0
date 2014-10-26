@@ -14,23 +14,24 @@
 					<f:facet name="label">
 						<h:panelGrid cellpadding="0" cellspacing="0" columns="2"
 							style="vertical-align:middle">
-							<h:outputText value="Facturation" title="gestion des types de factures"/>
+							<h:outputText value="#{locale.visitemedical}" title="gestion des #{locale.visitemedical}"/>
 						</h:panelGrid>
 					</f:facet>
 					
 					<rich:menuItem submitMode="ajax" rendered="true" 
-	                    action="#{facCourCtrl.openHomePage}" 
-	                    ajaxSingle="true" >
-	                    <h:outputText value="Facture courante" />
-	                </rich:menuItem>
-	                
-	                <rich:menuSeparator />
-	                
-	                <rich:menuItem submitMode="ajax" rendered="true" 
-	                    action="#{facConvCtrl.openHomePage}" 
-	                    ajaxSingle="true" >
-	                    <h:outputText value="Facture conventionnelle" />
-	                </rich:menuItem>
+			                 action="#{visMedEmbCtrl.openHomePage}" 
+		                 ajaxSingle="true" >
+		                 <h:outputText value="#{locale.visitemedicalemb}" />
+		             </rich:menuItem>	
+		             
+		             <rich:menuSeparator />
+		             
+		             <rich:menuItem submitMode="ajax" rendered="true" 
+		                 action="#{visMedPerioCtrl.openHomePage}" 
+		                 ajaxSingle="true" >
+		                 <h:outputText value="#{locale.visitemedicalperio}" />
+		             </rich:menuItem>
+					
 				</rich:dropDownMenu>	
 				
    			</ui:composition>

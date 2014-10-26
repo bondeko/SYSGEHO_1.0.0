@@ -9,6 +9,12 @@
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
  
+ <managed-bean>
+  <managed-bean-name>facConvCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.fac.controleur.FacConvCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ 
  <navigation-rule>
   <from-view-id>*</from-view-id>
   <navigation-case>
@@ -23,6 +29,21 @@
   <navigation-case>
    <from-outcome>FacCourListe</from-outcome>
    <to-view-id>/modules/facture/pages/FacCourListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>FacConvDetails</from-outcome>
+   <to-view-id>/modules/facture/pages/FacConvDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>FacConvEdition</from-outcome>
+   <to-view-id>/modules/facture/pages/FacConvEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>FacConvListe</from-outcome>
+   <to-view-id>/modules/facture/pages/FacConvListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
   

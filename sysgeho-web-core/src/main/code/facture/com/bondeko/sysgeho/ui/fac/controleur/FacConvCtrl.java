@@ -1,4 +1,7 @@
-package com.bondeko.sysgeho.ui.imp.controleur;
+/**
+ * 
+ */
+package com.bondeko.sysgeho.ui.fac.controleur;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -8,47 +11,47 @@ import java.util.TreeMap;
 import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
-import com.bondeko.sysgeho.be.imp.entity.TabPat;
-import com.bondeko.sysgeho.be.imp.entity.TabSoin;
-import com.bondeko.sysgeho.be.imp.entity.TabVisMedEmb;
-import com.bondeko.sysgeho.be.imp.entity.TabVisMedPerio;
-import com.bondeko.sysgeho.be.ref.entity.TabTypSoin;
-import com.bondeko.sysgeho.ui.core.base.DataValidationException;
+import com.bondeko.sysgeho.be.fac.entity.TabFacConv;
+import com.bondeko.sysgeho.be.imp.entity.TabConsul;
+import com.bondeko.sysgeho.be.ref.entity.TabSoc;
 import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
 import com.bondeko.sysgeho.ui.core.base.SysGehoCtrl;
 import com.bondeko.sysgeho.ui.core.base.SysGehoToolBox;
+import com.bondeko.sysgeho.ui.core.base.SysGehoTrt;
 import com.bondeko.sysgeho.ui.core.base.Traitement;
-import com.bondeko.sysgeho.ui.imp.util.DossierPatientSvcoDeleguate;
-import com.bondeko.sysgeho.ui.imp.util.DossierPatientTrt;
-import com.bondeko.sysgeho.ui.imp.vue.SoinVue;
+import com.bondeko.sysgeho.ui.fac.util.FactureSvcoDeleguate;
+import com.bondeko.sysgeho.ui.fac.util.FactureTrt;
+import com.bondeko.sysgeho.ui.imp.vue.FacConvVue;
 
-public class SoinCtrl extends SysGehoCtrl<TabSoin, TabSoin>{
-	
+
+public class FacConvCtrl extends SysGehoCtrl<TabFacConv, TabFacConv> {
+
+
 	/**
 	 * Nom du Bean managé par JSF dans le fichier de Configuration 
 	 */
-	private static String nomManagedBean = "soinCtrl";
-	
-	public SoinCtrl(){		
-		defaultVue = new SoinVue();		
+	private static String nomManagedBean = "facConvCtrl";	
+
+	public FacConvCtrl() {
+		defaultVue = new FacConvVue();					
 	}
-	
+
 	/**
 	 * Retourne le nom du Bean Managé par JSF dans le Fichier de Configuration
 	 * Utilile pour ne pas avoir a ecrire le nom des Beans en dur dans le Code
 	 * @return
 	 */
-	public String getNomManagedBean(){
+	public static String getNomManagedBean(){
 		return nomManagedBean;
 	}	
 	
-	public IBaseSvco<TabSoin> getEntitySvco() throws ServiceLocatorException{	
-		return DossierPatientSvcoDeleguate.getSvcoSoin();
+	public IBaseSvco<TabFacConv> getEntitySvco() throws ServiceLocatorException{	
+		return FactureSvcoDeleguate.getSvcoFacConv();
 	}
 	
-	public Class<SoinCtrl> getMyClass() {
-		return SoinCtrl.class;
+	public Class<FacConvCtrl> getMyClass() {
+		return FacConvCtrl.class;
 	}
 	
 	public String enregistrerModification(){
@@ -59,20 +62,24 @@ public class SoinCtrl extends SysGehoCtrl<TabSoin, TabSoin>{
 		} catch (ServiceLocatorException e) {
 			e.printStackTrace();
 		}
-		return "SoinDetails";
+		return "FacConvDetails";
 	}
-
+	
 	@Override
 	public List<Traitement> getListeTraitements() {
-		String v$codeEntite = "Soin";
+		String v$codeEntite = "FacConv";
 
-		System.out.println("SoinCtrl.getListeTraitements() ici il vaut : "
+		System.out.println("FacConvCtrl.getListeTraitements() ici il vaut : "
 				+ v$codeEntite);
 		// Ensemble des traitements standards
 		Map<String, Traitement> v$mapTrt = new TreeMap<String, Traitement>(
-				DossierPatientTrt.getTrtStandards(v$codeEntite));
+				FactureTrt.getTrtStandards(v$codeEntite));
+		Traitement v$traitement = new Traitement(Traitement.getCodeTrt(v$codeEntite, SysGehoTrt.AJOUTER.getCode()), SysGehoTrt.AJOUTER);
+		v$mapTrt.remove(v$traitement.getKey());
 		
-		v$mapTrt.put(DossierPatientTrt.VALIDER_EXAM.getKey(), new Traitement(DossierPatientTrt.VALIDER_EXAM));
+		v$mapTrt.put(FactureTrt.VALIDER_FACTURE_CONVENTIONNELLE.getKey(), new Traitement(FactureTrt.VALIDER_FACTURE_CONVENTIONNELLE));
+		
+		v$mapTrt.put(FactureTrt.PAYER_FACTURE_CONVENTIONNELLE.getKey(), new Traitement(FactureTrt.PAYER_FACTURE_CONVENTIONNELLE));
 		
 		listeTraitements = Traitement.getOrderedTrt(v$mapTrt);
 		return listeTraitements;
@@ -82,16 +89,16 @@ public class SoinCtrl extends SysGehoCtrl<TabSoin, TabSoin>{
 	@Override
 	public void buildListeTraitement() {
 		if(getMapTraitements() == null){
-			setMapTraitements(DossierPatientTrt.getTrtStandards("Soin")) ;
+			setMapTraitements(FactureTrt.getTrtStandards("FacConv")) ;
 		}
 	}
 	
 	@Override
-	public List<TabSoin> rechercherParCritere(TabSoin p$entity)
+	public List<TabFacConv> rechercherParCritere(TabFacConv p$entity)
 			throws SysGehoAppException {
 		try {
 			super.setTimeOfLastSearch();
-			return DossierPatientSvcoDeleguate.getSvcoSoin().rechercherParCritere(p$entity);
+			return FactureSvcoDeleguate.getSvcoFacConv().rechercherParCritere(p$entity);
 		} catch (ServiceLocatorException e) {
 			e.printStackTrace();
 		}catch (SysGehoAppException e) {
@@ -118,31 +125,15 @@ public class SoinCtrl extends SysGehoCtrl<TabSoin, TabSoin>{
 
 		return v$navigation;
 	}
-	
+
 	public void setSelectedEntity(BaseEntity p$entite) {
 
 		// Nom de la propriété à mettre à jour pour
 		String v$propriete = defaultVue.getNavigationMgr().getSelectionPropertyName();
 
-		if (v$propriete.equals("tabTypSoin")) {
-			TabTypSoin v$entite = (TabTypSoin) p$entite;
-			defaultVue.getEntiteCourante().setTabTypSoin(v$entite);
-			defaultVue.getEntiteCourante().setValMntTtc(v$entite.getValCout());
-		}
-
-		if (v$propriete.equals("tabPat")) {
-			TabPat v$entite = (TabPat) p$entite;
-			defaultVue.getEntiteCourante().setTabPat(v$entite);
-		}
-		
-		if (v$propriete.equals("tabVisMedEmb")) {
-			TabVisMedEmb v$entite = (TabVisMedEmb) p$entite;
-			defaultVue.getEntiteCourante().setTabVisMedEmb(v$entite);
-		}
-		
-		if (v$propriete.equals("tabVisMedPerio")) {
-			TabVisMedPerio v$entite = (TabVisMedPerio) p$entite;
-			defaultVue.getEntiteCourante().setTabVisMedPerio(v$entite);
+		if (v$propriete.equals("tabSoc")) {
+			TabSoc v$entite = (TabSoc) p$entite;
+			defaultVue.getEntiteCourante().setTabSoc(v$entite);
 		}
 
 	}
@@ -154,7 +145,7 @@ public class SoinCtrl extends SysGehoCtrl<TabSoin, TabSoin>{
 		String v$navigation = null;
 
 		// Message d'information
-		String v$msgDetails = "Le Soin n° ";
+		String v$msgDetails = "La Facture Référence n° ";
 
 		try {
 
@@ -165,30 +156,30 @@ public class SoinCtrl extends SysGehoCtrl<TabSoin, TabSoin>{
 
 			// Sauvegarde de l'entité avant traitement specifique
 			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
-			TabSoin entity = defaultVue.getEntiteCourante();
+			TabFacConv entity = defaultVue.getEntiteCourante();
 			if(entity.getBooVal() != null && entity.getBooVal().equals(BigDecimal.ONE)){
-				FacesUtil.addWarnMessage("", "Warning : Vous n'avez plus le droit d'exécuter le traitement Valider pour ce soin");
+				FacesUtil.addWarnMessage("", "Warning : Vous n'avez plus le droit d'exécuter le traitement Valider pour cette facture");
 				return null;
 			}
 			
 			if(entity.getBooPaie() != null && entity.getBooPaie().equals(BigDecimal.ONE)){
-				FacesUtil.addWarnMessage("", "Warning : Impossible de valider un soin déjà payé");
+				FacesUtil.addWarnMessage("", "Warning : Impossible de valider une facture déjà payée");
 				return null;
 			}
 
 			// Consommation de l'EJB distant selon l'operation spécifique car
 			// l'entite courante est connue
-			defaultVue.setEntiteCourante(DossierPatientSvcoDeleguate.getSvcoSoin()
+			defaultVue.setEntiteCourante(FactureSvcoDeleguate.getSvcoFacConv()
 					.valider(defaultVue.getEntiteCourante()));
 
-			v$msgDetails += defaultVue.getEntiteCourante().getCodSoin()+" a été validé";
+			v$msgDetails += defaultVue.getEntiteCourante().getRefFacConv()+" a été validé";
 
 			// L'on remplace l'ancienne entité de la liste par la nouvelle issue
 			// du résultat du traitement spécifiques
 			defaultVue.getTableMgr().replace(defaultVue.getEntiteTemporaire(),
 					defaultVue.getEntiteCourante());
 
-			// Si nous sommes en Sointation ==> sur le formulaire Details
+			// Si nous sommes en Consultation ==> sur le formulaire Details
 			if (defaultVue.getNavigationMgr().isFromDetails()) {
 				// Traitements particuliers
 			}
@@ -211,18 +202,59 @@ public class SoinCtrl extends SysGehoCtrl<TabSoin, TabSoin>{
 		}
 	}
 	
-	public void preEnregistrer() throws DataValidationException {
-		SoinVue vue = (SoinVue)defaultVue;
-		TabSoin soin= defaultVue.getEntiteCourante();
-		if(vue.isVisEmb() && soin.getTabPat()!=null && soin.getTabVisMedEmb()!= null 
-				&& soin.getTabVisMedEmb().getTabPat() != null 
-				&& !soin.getTabVisMedEmb().getTabPat().getCodPat().equals(soin.getTabPat().getCodPat())){
-			throw new DataValidationException("Données invalides : La visite médicale source n'est pas celui du patient sélectionné");
-		}
-		if(vue.isVisPerio() && soin.getTabPat()!= null && soin.getTabVisMedPerio()!= null 
-				&& soin.getTabVisMedPerio().getTabSoc() != null && soin.getTabPat().getTabSoc() != null 
-				&& !soin.getTabVisMedPerio().getTabSoc().getCodSoc().equals(soin.getTabPat().getTabSoc().getCodSoc())){
-			throw new DataValidationException("Données invalides : La société de la visite médicale source ne correspond pas à celui du patient sélectionné");
+	@SuppressWarnings("finally")
+	public String payer() {
+
+		// Determine vers quelle page ou Formulaire l'on doit se diriger
+		String v$navigation = null;
+
+		// Message d'information
+		String v$msgDetails = "La Facture Référence n° ";
+
+		try {
+
+			// Mise à jour de l'entité courante selon le contexte du Formulaire
+			if (defaultVue.getNavigationMgr().isFromListe())
+				defaultVue.setEntiteCourante(defaultVue.getTableMgr()
+						.getEntiteSelectionne());
+
+			// Sauvegarde de l'entité avant traitement specifique
+			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+
+			// Consommation de l'EJB distant selon l'operation spécifique car
+			// l'entite courante est connue
+			defaultVue.setEntiteCourante(FactureSvcoDeleguate.getSvcoFacConv()
+					.payer(defaultVue.getEntiteCourante()));
+
+			v$msgDetails += defaultVue.getEntiteCourante().getRefFacConv()+" a été payé";
+
+			// L'on remplace l'ancienne entité de la liste par la nouvelle issue
+			// du résultat du traitement spécifiques
+			defaultVue.getTableMgr().replace(defaultVue.getEntiteTemporaire(),
+					defaultVue.getEntiteCourante());
+
+			// Si nous sommes en Consultation ==> sur le formulaire Details
+			if (defaultVue.getNavigationMgr().isFromDetails()) {
+				// Traitements particuliers
+			}
+
+			// Par contre si nous sommes sur le formulaire Liste
+			else if (defaultVue.getNavigationMgr().isFromListe()) {
+				// Traitements particuliers
+			}
+			defaultVue.getTableMgr().updateDataModel();
+			FacesUtil.addInfoMessage("", v$msgDetails);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			// Aucune navigation possible
+			v$navigation = null;
+			getLogger().error(e.getMessage(), e);
+		} finally {
+			// Retour à la page adéquate
+			return v$navigation;
 		}
 	}
+
+
 }

@@ -192,6 +192,16 @@ public class ConsulCtrl extends SysGehoCtrl<TabConsul, TabConsul>{
 
 			// Sauvegarde de l'entité avant traitement specifique
 			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+			TabConsul entity = defaultVue.getEntiteCourante();
+			if(entity.getBooVal() != null && entity.getBooVal().equals(BigDecimal.ONE)){
+				FacesUtil.addWarnMessage("", "Warning : Vous n'avez plus le droit d'exécuter le traitement Valider pour cette consultation");
+				return null;
+			}
+			
+			if(entity.getBooPaie() != null && entity.getBooPaie().equals(BigDecimal.ONE)){
+				FacesUtil.addWarnMessage("", "Warning : Impossible de valider une consultation déjà payée");
+				return null;
+			}
 
 			// Consommation de l'EJB distant selon l'operation spécifique car
 			// l'entite courante est connue

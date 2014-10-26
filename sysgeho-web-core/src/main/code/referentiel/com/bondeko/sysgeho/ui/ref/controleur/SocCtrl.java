@@ -1,16 +1,25 @@
 package com.bondeko.sysgeho.ui.ref.controleur;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
+import com.bondeko.sysgeho.be.fac.entity.TabFacConv;
+import com.bondeko.sysgeho.be.imp.entity.TabHospi;
+import com.bondeko.sysgeho.be.imp.entity.TabRdv;
 import com.bondeko.sysgeho.be.ref.entity.TabSoc;
 import com.bondeko.sysgeho.ui.core.base.DataValidationException;
+import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
 import com.bondeko.sysgeho.ui.core.base.SysGehoCtrl;
+import com.bondeko.sysgeho.ui.core.base.SysGehoToolBox;
 import com.bondeko.sysgeho.ui.core.base.Traitement;
+import com.bondeko.sysgeho.ui.fac.util.FactureSvcoDeleguate;
+import com.bondeko.sysgeho.ui.imp.util.DossierPatientTrt;
 import com.bondeko.sysgeho.ui.ref.util.RefSvcoDeleguate;
 import com.bondeko.sysgeho.ui.ref.util.RefTrt;
 import com.bondeko.sysgeho.ui.ref.vue.SocVue;
@@ -62,6 +71,15 @@ public class SocCtrl extends SysGehoCtrl<TabSoc, TabSoc>{
 		Map<String, Traitement> v$mapTrt = new TreeMap<String, Traitement>(
 				RefTrt.getTrtStandards(v$codeEntite));
 		
+		Traitement v$traitement = new Traitement(RefTrt.GENERER_FACTURE_CONV);
+		v$traitement.setModalPanel("mpnl_gen_facconv");	// Id du modal panel			
+		v$mapTrt.put(v$traitement.getKey(), v$traitement);
+		
+		Traitement v$traitement2 = new Traitement(
+				RefTrt.NAVIGUER_VERS_FAC_CONV.naviguerVersFormulaireListe(),
+				RefTrt.NAVIGUER_VERS_FAC_CONV);
+		v$mapTrt.put(v$traitement2.getKey(), v$traitement2);
+		
 		listeTraitements = Traitement.getOrderedTrt(v$mapTrt);
 		return listeTraitements;
 	}
@@ -93,7 +111,122 @@ public class SocCtrl extends SysGehoCtrl<TabSoc, TabSoc>{
 	public void preEnregistrer() throws DataValidationException {
 		if(defaultVue.getEntiteCourante() != null  && defaultVue.getEntiteCourante().getBEstAff()==false){
 			defaultVue.getEntiteCourante().setDatAff(null);
+			defaultVue.getEntiteCourante().setValPriUni(null);
+			defaultVue.getEntiteCourante().setValTarifFixMen(null);
 		}
+	}
+	
+	public String genererFacConvPreModal(){
+		return null;
+	}
+	
+	@SuppressWarnings("finally")
+	public String genererFacConv() {
+		
+		// Determine vers quelle page ou Formulaire l'on doit se diriger
+		String v$navigation = null;
+
+		// Message d'information
+		String v$msgDetails = "La facture conventionnelle du mois de "+defaultVue.getEntiteCourante().getLEnuMoisFac();
+		String enuFacMois = defaultVue.getEntiteCourante().getEnuMoisFac();
+		String refFac = defaultVue.getEntiteCourante().getRefFacConv();
+		String libObj = defaultVue.getEntiteCourante().getLibObj();
+		String libInfoCmpl = defaultVue.getEntiteCourante().getLibInfCompl();
+		try {
+
+			// Mise à jour de l'entité courante selon le contexte du Formulaire
+			if (defaultVue.getNavigationMgr().isFromListe())
+				defaultVue.setEntiteCourante(defaultVue.getTableMgr()
+						.getEntiteSelectionne());
+
+			// Sauvegarde de l'entité avant traitement specifique
+			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+			
+			defaultVue.getEntiteCourante().setEnuMoisFac(enuFacMois);
+			defaultVue.getEntiteCourante().setRefFacConv(refFac);
+			defaultVue.getEntiteCourante().setLibObj(libObj);
+			defaultVue.getEntiteCourante().setLibInfCompl(libInfoCmpl);
+			
+			TabSoc tabSoc = defaultVue.getEntiteCourante();
+			if(tabSoc.getBooEstAff()== null || tabSoc.getBooEstAff().equals(BigDecimal.ZERO)){
+				FacesUtil.addWarnMessage("", "Erreur : La société " +  tabSoc.getLibSoc() + " n'est pas affiliée");
+				return null;
+			}
+//				throw new BaseException("Erreur : La société " +  tabSoc.getLibSoc() + " n'est pas affiliée");
+			
+			List<TabFacConv> facConvs = FactureSvcoDeleguate.getSvcoFacConv().rechercherConsulNonPaieParPatient(tabSoc.getCodSoc(), tabSoc.getEnuMoisFac(), tabSoc.getCodExeFis());
+			if(facConvs != null && facConvs.size() > 0){
+				FacesUtil.addWarnMessage("", "Erreur : La facture conventionnelle du mois de " + tabSoc.getLEnuMoisFac() +" a déjà été généré pour la société "+tabSoc.getLibSoc());
+				return null;
+			}
+//				throw new BaseException("Erreur : La facture conventionnelle du mois de " + tabSoc.getLEnuMoisFac() +"a déjà été généré pour la société :"+tabSoc.getLibSoc());
+			
+			
+			// Consommation de l'EJB distant selon l'operation spécifique car
+			// l'entite courante est connue
+			defaultVue.setEntiteCourante(RefSvcoDeleguate.getSvcoSoc()
+					.genererFacConv(defaultVue.getEntiteCourante()));
+
+			v$msgDetails += " a été généré pour la société " +defaultVue.getEntiteCourante().getLibSoc();
+
+			// L'on remplace l'ancienne entité de la liste par la nouvelle issue
+			// du résultat du traitement spécifiques
+			defaultVue.getTableMgr().replace(defaultVue.getEntiteTemporaire(),
+					defaultVue.getEntiteCourante());
+
+			// Si nous sommes en Consultation ==> sur le formulaire Details
+			if (defaultVue.getNavigationMgr().isFromDetails()) {
+				// Traitements particuliers
+			}
+
+			// Par contre si nous sommes sur le formulaire Liste
+			else if (defaultVue.getNavigationMgr().isFromListe()) {
+				// Traitements particuliers
+			}
+			defaultVue.getTableMgr().updateDataModel();
+			FacesUtil.addInfoMessage("", v$msgDetails);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			// Aucune navigation possible
+			v$navigation = null;
+			getLogger().error(e.getMessage(), e);
+		} finally {
+			// Retour à la page adéquate
+			return v$navigation;
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public String gotoRelatedEntity() {
+
+		// Determine vers quelle page ou Formulaire l'on doit se diriger
+		String v$navigation = super.gotoRelatedEntity();
+		/*
+		 * Recuperation du controleur 
+		 * NB: 
+		 * 	1-Cette méthode suppose que le controleur est bel et bien dans le Scope Session
+		 * 	2-Par ailleurs il devrait normalement déja existé du fait du passage de paramètres dans la page web
+		 */
+		SysGehoCtrl<BaseEntity, BaseEntity> v$controleur  =  (SysGehoCtrl<BaseEntity, BaseEntity>) FacesUtil.getSessionMapValue(SysGehoToolBox.getManagedBeanName(v$navigation));
+
+		// Si la navigation s'effectue vers les rendez vous
+		if (v$navigation.equals(RefTrt.NAVIGUER_VERS_FAC_CONV
+				.naviguerVersFormulaireListe())) {
+			
+			TabFacConv facConv = new TabFacConv();
+			facConv.initData();
+			facConv.setTabSoc(defaultVue.getEntiteCourante());
+
+			try {
+				v$navigation = v$controleur.naviguerVersDetailsOuListe(facConv);
+			} catch (Exception e) { 
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return v$navigation;
 	}
 
 }
