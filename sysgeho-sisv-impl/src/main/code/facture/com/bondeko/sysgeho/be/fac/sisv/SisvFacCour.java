@@ -15,8 +15,11 @@ import com.bondeko.sysgeho.be.core.exception.BaseException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoPersistenceException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.BaseSisv;
+import com.bondeko.sysgeho.be.core.util.locator.ResourceLocator;
 import com.bondeko.sysgeho.be.fac.dao.IDaoFacCour;
 import com.bondeko.sysgeho.be.fac.entity.TabFacCour;
+import com.bondeko.sysgeho.be.fac.serialize.SrlFacCour;
+import com.bondeko.sysgeho.be.fac.serialize.SrlFacCourElt;
 import com.bondeko.sysgeho.be.imp.dao.IDaoConsul;
 import com.bondeko.sysgeho.be.imp.dao.IDaoExam;
 import com.bondeko.sysgeho.be.imp.dao.IDaoHospi;
@@ -24,7 +27,14 @@ import com.bondeko.sysgeho.be.imp.dao.IDaoSoin;
 import com.bondeko.sysgeho.be.imp.entity.TabConsul;
 import com.bondeko.sysgeho.be.imp.entity.TabExam;
 import com.bondeko.sysgeho.be.imp.entity.TabHospi;
+import com.bondeko.sysgeho.be.imp.entity.TabPat;
 import com.bondeko.sysgeho.be.imp.entity.TabSoin;
+import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatFichePat;
+import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatFichePatElt;
+import com.bondeko.sysgeho.be.util.EntFichier;
+import com.bondeko.sysgeho.be.util.ReportNames;
+import com.bondeko.sysgeho.be.util.SysGehoOutput;
+import com.bondeko.sysgeho.be.util.SysGehoPrinterExportEnum;
 
 @Stateless
 public class SisvFacCour extends BaseSisv<TabFacCour, String> implements ISisvFacCour{
@@ -217,6 +227,79 @@ public class SisvFacCour extends BaseSisv<TabFacCour, String> implements ISisvFa
 			SysGehoSystemException sbr = new SysGehoSystemException(e);
 			throw sbr;
 		}
+	}
+	
+	@Override
+	public EntFichier genererFacCour(TabFacCour facCour) throws SysGehoSystemException{
+		
+		try{
+			SrlFacCour srlFacCour = getFacCour(facCour);
+			getLogger().debug("SisvFacCour.genererFacCour Serialisation ...");
+			SysGehoOutput result = fillAndExport(srlFacCour,
+					ResourceLocator.getReportModel(ReportNames.ETAT_FAC_COUR),
+					SysGehoPrinterExportEnum.PDF, null, null, null);
+			
+			// Construction du nom par défaut du fichier
+			String str = (ReportNames.ETAT_FAC_COUR).getDefaulFileName() + "."
+					+ result.getFileExtention();
+			
+			// Création de l'entité fichier
+			getLogger().debug("SisvFacCour.genererFacCour Creation de l'entite fichier ..."+result.getUri());
+			EntFichier v$fichier = new EntFichier(result.getUri(), str,
+					result.getFileStream());
+			
+			logger.debug("Fichier généré " + str + " >> avec "
+					+ v$fichier.getLength() + "Ko.");
+			return v$fichier;
+			
+		}catch(Exception e){
+			throw new SysGehoSystemException(e.getMessage());
+		}
+		
+	}
+	
+	private SrlFacCour getFacCour(TabFacCour facCour) throws SysGehoSystemException {
+		SrlFacCour srlFacCour = new SrlFacCour();
+		try {
+			List<TabConsul> listConsul = daoConsul.findByRefFac(facCour.getRefFacCour());
+			if(listConsul !=null && listConsul.size() > 0){
+				for(TabConsul consul : listConsul){
+					srlFacCour.addElement(new SrlFacCourElt(facCour.getTabPat(), facCour, "CONSUL", "Consultations", 
+							consul.getCodConsul(), consul.getDatConsul(), consul.getValMntTtc()));
+				}
+			}
+			//Hospitalisation
+			List<TabHospi> listHospi = daoHospi.findByRefFac(facCour.getRefFacCour());
+			if(listHospi !=null && listHospi.size() > 0){
+				for(TabHospi hospi : listHospi){
+					srlFacCour.addElement(new SrlFacCourElt(facCour.getTabPat(), facCour, "HOSPI", "Hospitalisations", 
+							hospi.getCodHospi(), hospi.getDatAdmi(), hospi.getValMnt()));
+				}
+			}
+			//Examen
+			List<TabExam> listExam = daoExam.findByRefFac(facCour.getRefFacCour());
+			if(listExam !=null && listExam.size() > 0){
+				for(TabExam exam : listExam){
+					srlFacCour.addElement(new SrlFacCourElt(facCour.getTabPat(), facCour, "EXAM", "Examens", 
+							exam.getCodExam(), exam.getDatExam(), exam.getValMntTtc()));
+				}
+			}
+			//Soin
+			List<TabSoin> listSoin = daosoin.findByRefFac(facCour.getRefFacCour());
+			if(listSoin !=null && listSoin.size() > 0){
+				for(TabSoin soin : listSoin){
+					srlFacCour.addElement(new SrlFacCourElt(facCour.getTabPat(), facCour, "SOIN", "Soins", 
+							soin.getCodSoin(), soin.getDatSoin(), soin.getValMntTtc()));
+				}
+			}
+		} catch (SysGehoPersistenceException e) {
+			logger.debug("Erreur de generation du fichier de serialisation");
+			e.printStackTrace();
+			SysGehoSystemException sbr = new SysGehoSystemException(e);
+			throw sbr;
+		}
+		
+		return srlFacCour;
 	}
 	
 }
