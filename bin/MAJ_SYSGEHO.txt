@@ -34,20 +34,20 @@ VM_EMB(code, motif, patient, date, société )
 
 -------------------------------------------25/09/2014----------------------------------------
 ====Facture/Facture Conventionnelle
-1-Ajouter l'entité facture conventionnelle.
+1-Ajouter l'entité facture conventionnelle. (OK)
 	- Champ : code, reference, objet, société, effectif du personnel de la sté, tarification_fixe mensuelle pr la sté, prix unitaire par employé, montant_total de la facture, mois facturé, 
 date édition
-2-Ajouter le menu Facture/Facture conventionnelle pr gérer les facture conventionelles générées à partir de l'action spécifique sur l'entité "Société"
+2-Ajouter le menu Facture/Facture conventionnelle pr gérer les facture conventionelles générées à partir de l'action spécifique sur l'entité "Société" (OK)
 
 ====Ref/Catégorie examens
 1-Dans le formulaire de création, les spécialité chargé dans le champ select doivent provenir de la table spécialité en BD (OK)
 
 ====Ref/Société
-1-Ajouter le champ Tarification Fixe qui est contient le montant fixe annuel à verser par la société 
-2-Dans le formulaire de création, Cacher les champs "prix unitaire" et "tarification fixe" par défaut et les afficher lorsque le champs "Est affilié" est coché
-3-Ajouter l'action spécifique: Génerer la facture conventionelle
-	- Cette action a pour paramètre : mois-AAAA de la facture
-	- Cette action génère entité Facture conventionelle visible dans le formulaire liste de facture courante
+1-Ajouter le champ Tarification Fixe qui est contient le montant fixe annuel à verser par la société (OK)
+2-Dans le formulaire de création, Cacher les champs "prix unitaire" et "tarification fixe" par défaut et les afficher lorsque le champs "Est affilié" est coché (OK)
+3-Ajouter l'action spécifique: Génerer la facture conventionelle (OK)
+	- Cette action a pour paramètre : mois-AAAA de la facture (OK)
+	- Cette action génère entité Facture conventionelle visible dans le formulaire liste de facture courante (OK)
 	NB: faire toutes les vérification avant la génération : la société est elle afffiliée, la facture a t-elle déja été généré pour le mois indiqué, 
 
 ====Ref/Fichier examen
@@ -79,29 +79,31 @@ Commentaire :  c'est ce qui est fais depuis, il faut juste savoir manipuler le c
 ---------------------------------------------------14/10/2014----------------------------------
 
 =====Referentiel/Lit
-1-Les actions de base ne sont pas visile (pas de déroulement au passage de la souris)
+1-Les actions de base ne sont pas visile (pas de déroulement au passage de la souris) (OK chez moi)
+Commentaire : Je n'ai pas pu reproduire chez moi. C'est pas une confusion avec les actions spécifiques ? l'entité Lit n'a aucune action spécifique
+-----------
 =====Menu général
-1-Creer le nouveau menu principal rendez-vous avec deux sous-menu :
+1-Creer le nouveau menu principal rendez-vous avec deux sous-menu : (OK)
 	* Rendez-vous
 	* Type Rendez-vous
-2-Supprimer le sous menu visite médical de menu dossier patient
-3-Creer le nouveau menu principal Visite médicale avec deux sous-menu :
+2-Supprimer le sous menu visite médical de menu dossier patient (OK)
+3-Creer le nouveau menu principal Visite médicale avec deux sous-menu : (OK)
 	* Visite Médical périodique
 	* Visite médical embauche
-=======Traitement valider sur toutes les entité
+=======Traitement valider sur toutes les entité (OK)
 1-Implementer le controle pendant l'exécution du traitement valider pour empecher de valider une entité déja à l'état validé
-========Dossier Patient/Examen et Consultation
+========Dossier Patient/Examen et Consultation (OK)
 1-Erreur de création d'un compte rendu examen, d'un compte rendu de consultation
 	MSG: org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before merging: com.bondeko.sysgeho.be.imp.entity.TabVisMedPerio
 2-Erreur de la validation d'une consultation, dun examen
 	MSG:  org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before merging: com.bondeko.sysgeho.be.imp.entity.TabVisMedEmb
-========Dossier patient
-1-Inmposible de sortir d'une hospitalisation
+========Dossier patient (OK)
+1-Inmposible de sortir d'une hospitalisation 
 	MSG: Caused by: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): com.bondeko.sysgeho.be.ref.entity.TabLit
-========Facture Courante
-1-Impossible de créer une facture courante
+========Facture Courante (OK)
+1-Impossible de créer une facture courante 
 	MSG: org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before merging: com.bondeko.sysgeho.be.imp.entity.TabVisMedPerio
-========Visite Médical
+========Visite Médical (OK)
 1-Ajouter la navigation vers les consultation, examen, soins lié a la visite médical périodique et faire de meme pour la visite médical d'embauche
-========Facture courante
+========Facture courante (OK Chez moi) : je n'arrive pas à reproduire cela tout s'affcihe proprement
 1-Visualistion d'une facture n'affiche pas les consultations, examens, soins, hospi ... associés
