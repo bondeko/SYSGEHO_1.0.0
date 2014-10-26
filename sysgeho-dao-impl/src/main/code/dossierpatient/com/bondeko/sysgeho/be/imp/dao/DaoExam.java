@@ -84,6 +84,16 @@ public class DaoExam extends BaseDao<TabExam, String> implements IDaoExam{
 				&& !currentExam.getTabTypExam().getLibTypExam().equals("")){
 			clauseWhere = clauseWhere + "AND upper(o.tabTypExam.libTypExam) like '%"+currentExam.getTabTypExam().getLibTypExam()+"%'";
 		}
+		if(currentExam != null && currentExam.getTabVisMedEmb() != null 
+				&& currentExam.getTabVisMedEmb().getCodVisMedEmb() != null
+				&& !currentExam.getTabVisMedEmb().getCodVisMedEmb().equals("")){
+			clauseWhere = clauseWhere + "AND upper(o.tabVisMedEmb.codVisMedEmb) like '%"+currentExam.getTabVisMedEmb().getCodVisMedEmb()+"%'";
+		}
+		if(currentExam != null && currentExam.getTabVisMedPerio() != null 
+				&& currentExam.getTabVisMedPerio().getCodVisMedPerio() != null
+				&& !currentExam.getTabVisMedPerio().getCodVisMedPerio().equals("")){
+			clauseWhere = clauseWhere + "AND upper(o.tabVisMedPerio.codVisMedPerio) like '%"+currentExam.getTabVisMedPerio().getCodVisMedPerio()+"%'";
+		}
 		try{
 			String query = "SELECT o FROM " + entity.getClass().getSimpleName() + " o where " + clauseWhere +
 			" ORDER BY o.codExam ";

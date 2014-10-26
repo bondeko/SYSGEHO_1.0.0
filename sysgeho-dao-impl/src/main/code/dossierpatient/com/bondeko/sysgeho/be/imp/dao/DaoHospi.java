@@ -95,6 +95,16 @@ public class DaoHospi extends BaseDao<TabHospi, String> implements IDaoHospi{
 				&& !currentHospi.getTabSvc().getLibSvc().equals("")){
 			clauseWhere = clauseWhere + "AND upper(o.tabSvc.libSvc) like '%"+currentHospi.getTabSvc().getLibSvc()+"%'";
 		}
+		if(currentHospi != null && currentHospi.getTabVisMedEmb() != null 
+				&& currentHospi.getTabVisMedEmb().getCodVisMedEmb() != null
+				&& !currentHospi.getTabVisMedEmb().getCodVisMedEmb().equals("")){
+			clauseWhere = clauseWhere + "AND upper(o.tabVisMedEmb.codVisMedEmb) like '%"+currentHospi.getTabVisMedEmb().getCodVisMedEmb()+"%'";
+		}
+		if(currentHospi != null && currentHospi.getTabVisMedPerio() != null 
+				&& currentHospi.getTabVisMedPerio().getCodVisMedPerio() != null
+				&& !currentHospi.getTabVisMedPerio().getCodVisMedPerio().equals("")){
+			clauseWhere = clauseWhere + "AND upper(o.tabVisMedPerio.codVisMedPerio) like '%"+currentHospi.getTabVisMedPerio().getCodVisMedPerio()+"%'";
+		}
 		try{
 			String query = "SELECT o FROM " + entity.getClass().getSimpleName() + " o where " + clauseWhere +
 			" ORDER BY o.codHospi ";

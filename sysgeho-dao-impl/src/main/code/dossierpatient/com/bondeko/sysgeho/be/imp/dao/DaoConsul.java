@@ -84,6 +84,16 @@ public class DaoConsul extends BaseDao<TabConsul, String> implements IDaoConsul{
 				&& !currentConsul.getTabUsr().getLibNom().equals("")){
 			clauseWhere = clauseWhere + "AND upper(o.tabUsr.libNom) like '%"+currentConsul.getTabUsr().getLibNom()+"%'";
 		}
+		if(currentConsul != null && currentConsul.getTabVisMedEmb() != null 
+				&& currentConsul.getTabVisMedEmb().getCodVisMedEmb() != null
+				&& !currentConsul.getTabVisMedEmb().getCodVisMedEmb().equals("")){
+			clauseWhere = clauseWhere + "AND upper(o.tabVisMedEmb.codVisMedEmb) like '%"+currentConsul.getTabVisMedEmb().getCodVisMedEmb()+"%'";
+		}
+		if(currentConsul != null && currentConsul.getTabVisMedPerio() != null 
+				&& currentConsul.getTabVisMedPerio().getCodVisMedPerio() != null
+				&& !currentConsul.getTabVisMedPerio().getCodVisMedPerio().equals("")){
+			clauseWhere = clauseWhere + "AND upper(o.tabVisMedPerio.codVisMedPerio) like '%"+currentConsul.getTabVisMedPerio().getCodVisMedPerio()+"%'";
+		}
 		try{
 			String query = "SELECT o FROM " + entity.getClass().getSimpleName() + " o where " + clauseWhere +
 			" ORDER BY o.codConsul ";

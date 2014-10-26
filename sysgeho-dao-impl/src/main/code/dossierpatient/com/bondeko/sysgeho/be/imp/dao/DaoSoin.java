@@ -84,6 +84,16 @@ public class DaoSoin extends BaseDao<TabSoin, String> implements IDaoSoin{
 				&& !currentSoin.getTabTypSoin().getLibTypSoin().equals("")){
 			clauseWhere = clauseWhere + "AND upper(o.tabTypSoin.libTypSoin) like '%"+currentSoin.getTabTypSoin().getLibTypSoin()+"%'";
 		}
+		if(currentSoin != null && currentSoin.getTabVisMedEmb() != null 
+				&& currentSoin.getTabVisMedEmb().getCodVisMedEmb() != null
+				&& !currentSoin.getTabVisMedEmb().getCodVisMedEmb().equals("")){
+			clauseWhere = clauseWhere + "AND upper(o.tabVisMedEmb.codVisMedEmb) like '%"+currentSoin.getTabVisMedEmb().getCodVisMedEmb()+"%'";
+		}
+		if(currentSoin != null && currentSoin.getTabVisMedPerio() != null 
+				&& currentSoin.getTabVisMedPerio().getCodVisMedPerio() != null
+				&& !currentSoin.getTabVisMedPerio().getCodVisMedPerio().equals("")){
+			clauseWhere = clauseWhere + "AND upper(o.tabVisMedPerio.codVisMedPerio) like '%"+currentSoin.getTabVisMedPerio().getCodVisMedPerio()+"%'";
+		}
 		try{
 			String query = "SELECT o FROM " + entity.getClass().getSimpleName() + " o where " + clauseWhere +
 			" ORDER BY o.codSoin ";

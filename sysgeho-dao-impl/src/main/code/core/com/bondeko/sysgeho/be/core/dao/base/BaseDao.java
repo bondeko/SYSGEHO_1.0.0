@@ -67,6 +67,7 @@ public abstract class BaseDao <T extends BaseEntity, ID extends Serializable>
 			//Fixe l'utilisateur qui modifi
 			((SysGehoBaseEntity) entity).setCodUsrMod(entity.getInfoUser().getUser().getCodUsr());
 			getLogger().debug("Mise à jour de l'entité en BDD ...");
+			entity.validateData();
 			final X saved = this.getManager().merge(entity);
 			return saved;
 		}catch (SysGehoPersistenceException e){
@@ -77,6 +78,7 @@ public abstract class BaseDao <T extends BaseEntity, ID extends Serializable>
 	public <X extends BaseEntity> boolean delete(X entity) throws SysGehoPersistenceException {
 		try{
 			getLogger().debug("Suppression de l'entité en BDD ...");
+			entity.validateData();
 			this.getManager().merge(entity);
 			return true;
 		}catch (SysGehoPersistenceException e){
@@ -87,6 +89,7 @@ public abstract class BaseDao <T extends BaseEntity, ID extends Serializable>
 	public <X extends BaseEntity> void remove(X entity) throws SysGehoPersistenceException {
 		try{
 			getLogger().debug("remove de l'entité en BDD ...");
+			entity.validateData();
 			this.getManager().remove(this.getManager().merge(entity));
 		}catch (SysGehoPersistenceException e){
 			throw e;
