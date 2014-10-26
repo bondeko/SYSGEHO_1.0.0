@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="ISO-8859-1"  ?>
+<main>
+	<FacCour>
+		<FacCourElt>
+			<nomPatient>NANFACK FEUDJIO BEAUCLAIR PAPIX</nomPatient>
+			<refFac>FAC/IN/FMB/124578UIUS/2014</refFac>
+			<objFac>Facture de soins, hospitalisation, consultation de Mr Nanfack du 04/12 au 05/12/2014</objFac>
+			<datFac>06/12/2014</datFac>
+			<codPres>CONSUL</codPres>
+			<libPres>Consultation</libPres>
+			<codPresDtl>con0001</codPresDtl>
+			<datPresDtl>06/12/2014</datPresDtl>
+			<mntPresDtl>15000</mntPresDtl>
+			<mntTotal>15000</mntTotal>
+			<mntTotalLettre>QUINZE MILLZ</mntTotalLettre>
+		</FacCourElt>
+		<FacCourElt>
+			<nomPatient>NANFACK FEUDJIO BEAUCLAIR PAPIX</nomPatient>
+			<refFac>FAC/IN/FMB/124578UIUS/2014</refFac>
+			<objFac>Facture de soins, hospitalisation, consultation de Mr Nanfack du 04/12 au 05/12/2014</objFac>
+			<datFac>06/12/2014</datFac>
+			<codPres>CONSUL</codPres>
+			<libPres>Consultation</libPres>	
+			<codPresDtl>con0002</codPresDtl>
+			<datPresDtl>06/12/2014</datPresDtl>
+			<mntPresDtl>5000</mntPresDtl>
+			<mntTotal>20000</mntTotal>
+			<mntTotalLettre>VINGT MILLE</mntTotalLettre>
+		</FacCourElt>
+		<FacCourElt>
+			<nomPatient>NANFACK FEUDJIO BEAUCLAIR PAPIX</nomPatient>
+			<refFac>FAC/IN/FMB/124578UIUS/2014</refFac>
+			<objFac>Facture de soins, hospitalisation, consultation de Mr Nanfack du 04/12 au 05/12/2014</objFac>
+			<datFac>06/12/2014</datFac>
+			<codPres>HOSPI</codPres>
+			<libPres>Hospitalisation</libPres>	
+			<codPresDtl>hospi0001</codPresDtl>
+			<datPresDtl>06/12/2014</datPresDtl>
+			<mntPresDtl>58000</mntPresDtl>
+			<mntTotal>78000</mntTotal>
+			<mntTotalLettre>SOIXANTE DIX HUIT MILLE</mntTotalLettre>
+		</FacCourElt>
+		<FacCourElt>
+			<nomPatient>NANFACK FEUDJIO BEAUCLAIR PAPIX</nomPatient>
+			<refFac>FAC/IN/FMB/124578UIUS/2014</refFac>
+			<objFac>Facture de soins, hospitalisation, consultation de Mr Nanfack du 04/12 au 05/12/2014</objFac>
+			<datFac>06/12/2014</datFac>
+			<codPres>SOIN</codPres>
+			<libPres>Soins</libPres>	
+			<codPresDtl>soins0001</codPresDtl>
+			<datPresDtl>06/12/2014</datPresDtl>
+			<mntPresDtl>2000</mntPresDtl>
+			<mntTotal>80000</mntTotal>
+			<mntTotalLettre>15000</mntTotalLettre>
+		</FacCourElt>
+		<FacCourElt>
+			<nomPatient>NANFACK FEUDJIO BEAUCLAIR PAPIX</nomPatient>
+			<refFac>FAC/IN/FMB/124578UIUS/2014</refFac>
+			<objFac>Facture de soins, hospitalisation, consultation de Mr Nanfack du 04/12 au 05/12/2014</objFac>
+			<datFac>06/12/2014</datFac>
+			<codPres>SOIN</codPres>
+			<libPres>Soins</libPres>	
+			<codPresDtl>soins0001</codPresDtl>
+			<datPresDtl>06/12/2014</datPresDtl>
+			<mntPresDtl>2000</mntPresDtl>
+			<mntTotal>80000</mntTotal>
+			<mntTotalLettre>QUATRE VINGT MILLE</mntTotalLettre>
+		</FacCourElt>
+		<FacCourElt>
+			<nomPatient>NANFACK FEUDJIO BEAUCLAIR PAPIX</nomPatient>
+			<refFac>FAC/IN/FMB/124578UIUS/2014</refFac>
+			<objFac>Facture de soins, hospitalisation, consultation de Mr Nanfack du 04/12 au 05/12/2014</objFac>
+			<datFac>06/12/2014</datFac>
+			<codPres>EXAM</codPres>
+			<libPres>Examens</libPres>	
+			<codPresDtl>exam0001</codPresDtl>
+			<datPresDtl>06/12/2014</datPresDtl>
+			<mntPresDtl>17500</mntPresDtl>
+			<mntTotal>97500</mntTotal>
+			<mntTotalLettre>QUTRE VINGT DIX SEPT MILLE CIND CENT</mntTotalLettre>
+		</FacCourElt>
+		<FacCourElt>
+			<nomPatient>NANFACK FEUDJIO BEAUCLAIR PAPIX</nomPatient>
+			<refFac>FAC/IN/FMB/124578UIUS/2014</refFac>
+			<objFac>Facture de soins, hospitalisation, consultation de Mr Nanfack du 04/12 au 05/12/2014</objFac>
+			<datFac>06/12/2014</datFac>
+			<codPres>EXAM</codPres>
+			<libPres>Examens</libPres>	
+			<codPresDtl>exam0002</codPresDtl>
+			<datPresDtl>06/12/2014</datPresDtl>
+			<mntPresDtl>5000</mntPresDtl>
+			<mntTotal>100000</mntTotal>
+			<mntTotalLettre>CENT MILLE</mntTotalLettre>
+		</FacCourElt>
+		<FacCourElt>
+			<nomPatient>NANFACK FEUDJIO BEAUCLAIR PAPIX</nomPatient>
+			<refFac>FAC/IN/FMB/124578UIUS/2014</refFac>
+			<objFac>Facture de soins, hospitalisation, consultation de Mr Nanfack du 04/12 au 05/12/2014</objFac>
+			<datFac>06/12/2014</datFac>
+			<codPres>EXAM</codPres>
+			<libPres>Examens</libPres>	
+			<codPresDtl>exam0003</codPresDtl>
+			<datPresDtl>06/12/2014</datPresDtl>
+			<mntPresDtl>8900</mntPresDtl>
+			<mntTotal>108900</mntTotal>
+			<mntTotalLettre>CENT HUIT MILLE NEUF CENT</mntTotalLettre>
+		</FacCourElt>
+		
+	</FacCour>
+</main>

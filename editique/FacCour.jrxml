@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="FacCour" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="1"/>
+	<queryString language="xPath">
+		<![CDATA[*/*/*]]>
+	</queryString>
+	<field name="nomPatient" class="java.lang.String">
+		<fieldDescription><![CDATA[nomPatient]]></fieldDescription>
+	</field>
+	<field name="refFac" class="java.lang.String">
+		<fieldDescription><![CDATA[refFac]]></fieldDescription>
+	</field>
+	<field name="objFac" class="java.lang.String">
+		<fieldDescription><![CDATA[objFac]]></fieldDescription>
+	</field>
+	<field name="datFac" class="java.lang.String">
+		<fieldDescription><![CDATA[datFac]]></fieldDescription>
+	</field>
+	<field name="codPres" class="java.lang.String">
+		<fieldDescription><![CDATA[codPres]]></fieldDescription>
+	</field>
+	<field name="libPres" class="java.lang.String">
+		<fieldDescription><![CDATA[libPres]]></fieldDescription>
+	</field>
+	<field name="codPresDtl" class="java.lang.String">
+		<fieldDescription><![CDATA[codPresDtl]]></fieldDescription>
+	</field>
+	<field name="datPresDtl" class="java.lang.String">
+		<fieldDescription><![CDATA[datPresDtl]]></fieldDescription>
+	</field>
+	<field name="mntPresDtl" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[mntPresDtl]]></fieldDescription>
+	</field>
+	<field name="mntTotal" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[mntTotal]]></fieldDescription>
+	</field>
+	<field name="mntTotalLettre" class="java.lang.String">
+		<fieldDescription><![CDATA[mntTotalLettre]]></fieldDescription>
+	</field>
+	<group name="Groupe Prestation">
+		<groupExpression><![CDATA[$F{codPres}]]></groupExpression>
+		<groupHeader>
+			<band height="18">
+				<textField isBlankWhenNull="true">
+					<reportElement x="2" y="0" width="553" height="17"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Times New Roman" size="12" isBold="true"/>
+					</textElement>
+				</textField>
+				<textField>
+					<reportElement x="10" y="0" width="218" height="17"/>
+					<textElement/>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{libPres}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="17" width="555" height="1"/>
+					<graphicElement>
+						<pen lineStyle="Dotted"/>
+					</graphicElement>
+				</line>
+				<line>
+					<reportElement x="0" y="0" width="1" height="18"/>
+					<graphicElement>
+						<pen lineStyle="Dotted"/>
+					</graphicElement>
+				</line>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="176" splitType="Stretch">
+			<image>
+				<reportElement x="7" y="3" width="142" height="44"/>
+				<imageExpression class="java.lang.String"><![CDATA["EnteteBondeko1.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="7" y="97" width="42" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Objet :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="382" y="49" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{datFac}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="325" y="47" width="57" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Douala le ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="151" width="338" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[et lui adresse l'usage la présente facture s'élévant à la somme de]]></text>
+			</staticText>
+			<image>
+				<reportElement x="156" y="3" width="396" height="44"/>
+				<imageExpression class="java.lang.String"><![CDATA["EnteteBondeko2.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="7" y="131" width="338" height="14"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<text><![CDATA[La fondation Bondeko présente ses compliments à Mr/Mme 		]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="7" y="67" width="42" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[REF : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="49" y="97" width="445" height="34"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{objFac}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="68" width="100" height="20"/>
+				<textElement>
+					<font isUnderline="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{refFac}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="337" y="131" width="234" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{nomPatient}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="151" width="226" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{mntTotalLettre}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="460" y="0" width="94" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Montant ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="0" width="90" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Date]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="252" y="0" width="117" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Numéro prestation]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="252" y="0" width="105" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{codPresDtl}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="369" y="0" width="71" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{datPresDtl}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="460" y="0" width="92" height="20"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{mntPresDtl}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="440" y="10" width="74" height="10"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Page "+$V{PAGE_NUMBER}+"/"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="514" y="10" width="40" height="10"/>
+				<textElement>
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="10" y="10" width="39" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[Edité le]]></text>
+			</staticText>
+			<textField pattern="EEEEE, dd MMMMM yyyy à HH:mm:ss">
+				<reportElement x="49" y="10" width="150" height="10"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.util.Date"><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="228" y="10" width="141" height="10"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="8"/>
+				</textElement>
+				<text><![CDATA[Rapport généré par Sysgeho]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="76" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="3" width="524" height="20" backcolor="#CCCCCC"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="9" y="3" width="100" height="21"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Montant total]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="426" y="3" width="92" height="20"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression class="java.math.BigDecimal"><![CDATA[$F{mntTotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="524" y="7" width="47" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FCFA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="414" y="37" width="100" height="20"/>
+				<textElement>
+					<font fontName="Times New Roman" size="12" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Le Médecin]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
