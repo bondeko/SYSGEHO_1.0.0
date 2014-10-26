@@ -1,6 +1,8 @@
 package com.bondeko.sysgeho.be.ref.svco;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,10 +14,14 @@ import javax.ejb.TransactionManagementType;
 
 import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
+import com.bondeko.sysgeho.be.core.base.DateTools;
+import com.bondeko.sysgeho.be.core.exception.BaseException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.IBaseSisv;
 import com.bondeko.sysgeho.be.core.svco.base.BaseSvco;
+import com.bondeko.sysgeho.be.fac.entity.TabFacConv;
+import com.bondeko.sysgeho.be.fac.sisv.ISisvFacConv;
 import com.bondeko.sysgeho.be.ref.entity.TabSoc;
 import com.bondeko.sysgeho.be.ref.sisv.ISisvSoc;
 
@@ -25,6 +31,9 @@ public class SvcoSoc extends BaseSvco<TabSoc> implements IRemoteSoc, ILocalSoc{
 	
 	@EJB
 	ISisvSoc sisvSoc;
+	
+	@EJB
+	ISisvFacConv sisvFacConv;
 	
 	@Resource
 	SessionContext session;
@@ -73,6 +82,45 @@ public class SvcoSoc extends BaseSvco<TabSoc> implements IRemoteSoc, ILocalSoc{
 			SysGehoAppException sdr = new SysGehoAppException(e);
 			throw sdr;
 		}
+	}
+	
+	@Override
+	public TabSoc genererFacConv(TabSoc tabSoc) throws SysGehoAppException {
+		try {
+			//On fabrique l'objet tabFacConv à creer
+			TabFacConv facConv = new TabFacConv(tabSoc.getInfoUser());
+			facConv.setRefFacConv(tabSoc.getRefFacConv());
+			facConv.setTabSoc(tabSoc);
+			facConv.setValEff(tabSoc.getValEff());
+			facConv.setValTrfFixMsuel(tabSoc.getValTarifFixMen());
+			facConv.setValPrixUni(tabSoc.getValPriUni());
+			//On calcule le montant total de la facture
+			BigDecimal valMntTotal = null; 
+			BigDecimal valMntMulty;
+			if(tabSoc.getValPriUni()!=null && tabSoc.getValEff()!= null){
+				valMntMulty = tabSoc.getValPriUni().multiply(tabSoc.getValEff());
+				if(tabSoc.getValTarifFixMen() != null) valMntTotal = valMntMulty.add(tabSoc.getValTarifFixMen());
+			}else{
+				if(tabSoc.getValTarifFixMen() != null) valMntTotal = tabSoc.getValTarifFixMen();
+			}
+			facConv.setValMntTotal(valMntTotal);
+			facConv.setDatFac(DateTools.formatDate(new Date()));
+			facConv.setEnuMoisFac(tabSoc.getEnuMoisFac());
+			facConv.setBooVal(BigDecimal.ZERO);
+			facConv.setBooPaie(BigDecimal.ZERO);
+			facConv.setLibObj(tabSoc.getLibObj());
+			facConv.setLibInfCompl(tabSoc.getLibInfCompl());
+			
+			sisvFacConv.creer(facConv);
+			
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sbr = new SysGehoAppException(e);
+			throw sbr;
+		} catch (BaseException e) { 
+			e.printStackTrace();
+		}
+		return tabSoc;
 	}
 
 }

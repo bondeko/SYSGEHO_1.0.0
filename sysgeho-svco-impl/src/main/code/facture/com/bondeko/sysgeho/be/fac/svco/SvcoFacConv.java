@@ -16,25 +16,24 @@ import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.IBaseSisv;
 import com.bondeko.sysgeho.be.core.svco.base.BaseSvco;
-import com.bondeko.sysgeho.be.fac.entity.TabFacCour;
-import com.bondeko.sysgeho.be.fac.sisv.ISisvFacCour;
-import com.bondeko.sysgeho.be.util.EntFichier;
+import com.bondeko.sysgeho.be.fac.entity.TabFacConv;
+import com.bondeko.sysgeho.be.fac.sisv.ISisvFacConv;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class SvcoFacCour extends BaseSvco<TabFacCour> implements IRemoteFacCour, ILocalFacCour{
+public class SvcoFacConv extends BaseSvco<TabFacConv> implements IRemoteFacConv, ILocalFacConv{
 	
 	@EJB
-	ISisvFacCour sisvFacCour;
+	ISisvFacConv sisvFacConv;
 	
 	@Resource
 	SessionContext session;
 
-	private static BaseLogger logger = BaseLogger.getLogger(SvcoFacCour.class);
+	private static BaseLogger logger = BaseLogger.getLogger(SvcoFacConv.class);
 	
 	@Override
-	protected IBaseSisv<TabFacCour, String> getBaseSisv() {
-		return sisvFacCour;
+	protected IBaseSisv<TabFacConv, String> getBaseSisv() {
+		return sisvFacConv;
 	}
 
 	@Override
@@ -45,7 +44,7 @@ public class SvcoFacCour extends BaseSvco<TabFacCour> implements IRemoteFacCour,
 	public <X extends BaseEntity> X rechercher(X entity, Serializable id)
 			throws SysGehoAppException {
 		try {
-			return sisvFacCour.rechercher(entity,id);
+			return sisvFacConv.rechercher(entity,id);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -56,7 +55,7 @@ public class SvcoFacCour extends BaseSvco<TabFacCour> implements IRemoteFacCour,
 	public <X extends BaseEntity> List<X> rechercherTout(X entity)
 			throws SysGehoAppException {
 		try {
-			return sisvFacCour.rechercherTout(entity);
+			return sisvFacConv.rechercherTout(entity);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -68,7 +67,7 @@ public class SvcoFacCour extends BaseSvco<TabFacCour> implements IRemoteFacCour,
 	public <X extends BaseEntity> List<X> rechercherParCritere(X entity)
 			throws SysGehoAppException {
 		try {
-			return sisvFacCour.rechercherParCritere(entity);
+			return sisvFacConv.rechercherParCritere(entity);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -77,9 +76,9 @@ public class SvcoFacCour extends BaseSvco<TabFacCour> implements IRemoteFacCour,
 	}
 	
 	@Override
-	public TabFacCour valider(TabFacCour $pFacCour) throws SysGehoAppException {
+	public TabFacConv valider(TabFacConv $pFacConv) throws SysGehoAppException {
 		try {
-			return sisvFacCour.valider($pFacCour);
+			return sisvFacConv.valider($pFacConv);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -88,9 +87,9 @@ public class SvcoFacCour extends BaseSvco<TabFacCour> implements IRemoteFacCour,
 	}
 	
 	@Override
-	public TabFacCour payer(TabFacCour $pFacCour) throws SysGehoAppException {
+	public TabFacConv payer(TabFacConv $pFacConv) throws SysGehoAppException {
 		try {
-			return sisvFacCour.payer($pFacCour);
+			return sisvFacConv.payer($pFacConv);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -99,16 +98,14 @@ public class SvcoFacCour extends BaseSvco<TabFacCour> implements IRemoteFacCour,
 	}
 	
 	@Override
-	public EntFichier  genererFacCour(TabFacCour facCour)
-	throws SysGehoAppException {
+	public List<TabFacConv> rechercherConsulNonPaieParPatient(String codSoc, String mois, String annee) throws SysGehoAppException {
 		try {
-			return sisvFacCour.genererFacCour(facCour);
+			return sisvFacConv.rechercherFacConvParSocMoisAnnee(codSoc, mois, annee);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
 			throw sdr;
 		}
 	}
-
 
 }
