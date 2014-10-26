@@ -9,9 +9,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.bondeko.sysgeho.be.core.base.DateTools;
 import com.bondeko.sysgeho.be.core.base.SysGehoBaseEntity;
+import com.bondeko.sysgeho.be.core.enums.EnuMois;
 import com.bondeko.sysgeho.be.util.InfoUser;
 
 @Entity
@@ -74,6 +76,9 @@ public class TabSoc extends SysGehoBaseEntity implements Serializable{
 	@Column(name = "VAL_PRI_UNI")
 	private BigDecimal valPriUni;
 	
+	@Column(name = "VAL_TARIF_FIX_MEN")
+	private BigDecimal valTarifFixMen;
+	
 	@Column(name = "DAT_CRE")
 	private String datCre;
 	
@@ -84,6 +89,15 @@ public class TabSoc extends SysGehoBaseEntity implements Serializable{
 	//Fax
 	@Column(name = "LIB_FAX")
 	private String libFax;
+	
+	@Transient
+	String enuMoisFac;
+	@Transient
+	String refFacConv;
+	@Transient
+	String libObj;
+	@Transient
+	String libInfCompl;
 
 	public String getCodSoc() {
 		return codSoc;
@@ -275,6 +289,61 @@ public class TabSoc extends SysGehoBaseEntity implements Serializable{
 			this.datCre = null;
 		else
 			this.datCre = DateTools.formatDate(date);
+	}
+
+
+	public void setValTarifFixMen(BigDecimal valTarifFixMen) {
+		this.valTarifFixMen = valTarifFixMen;
+	}
+
+
+	public BigDecimal getValTarifFixMen() {
+		return valTarifFixMen;
+	}
+	
+	public String getLEnuMoisFac() {
+		EnuMois v$enum = EnuMois.getByValue(this.enuMoisFac); 
+		return (v$enum == null)? null: v$enum.getLibelle();
+	}
+
+
+	public String getEnuMoisFac() {
+		return enuMoisFac;
+	}
+
+
+	public void setEnuMoisFac(String enuMoisFac) {
+		this.enuMoisFac = enuMoisFac;
+	}
+
+
+	public String getRefFacConv() {
+		return refFacConv;
+	}
+
+
+	public void setRefFacConv(String refFacConv) {
+		this.refFacConv = refFacConv;
+	}
+
+
+	public String getLibObj() {
+		return libObj;
+	}
+
+
+	public void setLibObj(String libObj) {
+		this.libObj = libObj;
+	}
+
+
+	public String getLibInfCompl() {
+		return libInfCompl;
+	}
+
+
+	public void setLibInfCompl(String libInfCompl) {
+		this.libInfCompl = libInfCompl;
 	}
 	
 	

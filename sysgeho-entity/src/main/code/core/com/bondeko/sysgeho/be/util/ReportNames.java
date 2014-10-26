@@ -17,6 +17,10 @@ public enum ReportNames {
 	
 	ETAT_CPTE_RENDU_EXAM("ETAT_CPTE_RENDU_EXAM", "ETAT_CPTE_RENDU_EXAM", "ETAT_CPTE_RENDU_EXAM",
 			"COMPTE RENDU EXAMEN",
+			" AND (1=1)", " AND (1=1)"),
+		
+	ETAT_FAC_COUR("FacCour", "FacCour", "FacCour",
+			"FACTURE COURANTE",
 			" AND (1=1)", " AND (1=1)");
 	
 	private final String reportName;
