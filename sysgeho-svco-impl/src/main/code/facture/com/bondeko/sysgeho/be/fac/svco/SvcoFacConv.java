@@ -17,7 +17,9 @@ import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.IBaseSisv;
 import com.bondeko.sysgeho.be.core.svco.base.BaseSvco;
 import com.bondeko.sysgeho.be.fac.entity.TabFacConv;
+import com.bondeko.sysgeho.be.fac.entity.TabFacCour;
 import com.bondeko.sysgeho.be.fac.sisv.ISisvFacConv;
+import com.bondeko.sysgeho.be.util.EntFichier;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -101,6 +103,18 @@ public class SvcoFacConv extends BaseSvco<TabFacConv> implements IRemoteFacConv,
 	public List<TabFacConv> rechercherConsulNonPaieParPatient(String codSoc, String mois, String annee) throws SysGehoAppException {
 		try {
 			return sisvFacConv.rechercherFacConvParSocMoisAnnee(codSoc, mois, annee);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
+	
+	@Override
+	public EntFichier  genererFacConv(TabFacConv facConv)
+	throws SysGehoAppException {
+		try {
+			return sisvFacConv.genererFacConv(facConv);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
