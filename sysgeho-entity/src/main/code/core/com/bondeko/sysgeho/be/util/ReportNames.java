@@ -21,7 +21,10 @@ public enum ReportNames {
 		
 	ETAT_FAC_COUR("FacCour", "FacCour", "FacCour",
 			"FACTURE COURANTE",
-			" AND (1=1)", " AND (1=1)");
+			" AND (1=1)", " AND (1=1)"),
+	ETAT_FAC_CONV("ETAT_FACT_CONV", "ETAT_FACT_CONV", "ETAT_FACT_CONV",
+					"FACTURE CONVENTIONNELLE",
+					" AND (1=1)", " AND (1=1)");
 	
 	private final String reportName;
 	private final String defaulFileName;
