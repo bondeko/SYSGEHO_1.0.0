@@ -14,8 +14,16 @@ import com.bondeko.sysgeho.be.core.enums.EnuEtat;
 import com.bondeko.sysgeho.be.core.exception.SysGehoPersistenceException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.BaseSisv;
+import com.bondeko.sysgeho.be.core.util.locator.ResourceLocator;
 import com.bondeko.sysgeho.be.fac.dao.IDaoFacConv;
 import com.bondeko.sysgeho.be.fac.entity.TabFacConv;
+import com.bondeko.sysgeho.be.fac.serialize.SrlFacConvElt;
+import com.bondeko.sysgeho.be.fac.serialize.SrlFacCour;
+import com.bondeko.sysgeho.be.fac.serialize.SrlFactConv;
+import com.bondeko.sysgeho.be.util.EntFichier;
+import com.bondeko.sysgeho.be.util.ReportNames;
+import com.bondeko.sysgeho.be.util.SysGehoOutput;
+import com.bondeko.sysgeho.be.util.SysGehoPrinterExportEnum;
 
 @Stateless
 public class SisvFacConv extends BaseSisv<TabFacConv, String> implements ISisvFacConv{
@@ -125,5 +133,54 @@ public class SisvFacConv extends BaseSisv<TabFacConv, String> implements ISisvFa
 		}
 		facConv.setValMntTotal(valMntTotal);
 		return getBaseDao().update(p$entite);
+	}
+	
+	@Override
+	public EntFichier genererFacConv(TabFacConv facConv) throws SysGehoSystemException{
+		
+		try{
+			SrlFactConv srlFacConv = getFacConv(facConv);
+			getLogger().debug("SisvFacConv.genererFacConv Serialisation ...");
+			SysGehoOutput result = fillAndExport(srlFacConv,
+					ResourceLocator.getReportModel(ReportNames.ETAT_FAC_CONV),
+					SysGehoPrinterExportEnum.PDF, null, null, null);
+			
+			// Construction du nom par défaut du fichier
+			String str = (ReportNames.ETAT_FAC_CONV).getDefaulFileName() + "."
+					+ result.getFileExtention();
+			
+			// Création de l'entité fichier
+			getLogger().debug("SisvFacConv.genererFacConv Creation de l'entite fichier ..."+result.getUri());
+			EntFichier v$fichier = new EntFichier(result.getUri(), str,
+					result.getFileStream());
+			
+			logger.debug("Fichier généré " + str + " >> avec "
+					+ v$fichier.getLength() + "Ko.");
+			return v$fichier;
+			
+		}catch(Exception e){
+			throw new SysGehoSystemException(e.getMessage());
+		}
+		
+	}
+	
+	private SrlFactConv getFacConv(TabFacConv facConv) throws SysGehoSystemException {
+		SrlFactConv srlFacConv = new SrlFactConv();
+		try {
+			List<TabFacConv> listFact = daoFacConv.findByExample(facConv);
+			if(listFact !=null && listFact.size() > 0){
+				for(TabFacConv fact : listFact){
+					srlFacConv.addElement(new SrlFacConvElt(fact));
+				}
+			}
+			
+		} catch (SysGehoPersistenceException e) {
+			logger.debug("Erreur de generation du fichier de serialisation");
+			e.printStackTrace();
+			SysGehoSystemException sbr = new SysGehoSystemException(e);
+			throw sbr;
+		}
+		
+		return srlFacConv;
 	}
 }
