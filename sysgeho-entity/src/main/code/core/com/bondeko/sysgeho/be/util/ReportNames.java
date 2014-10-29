@@ -24,7 +24,10 @@ public enum ReportNames {
 			" AND (1=1)", " AND (1=1)"),
 	ETAT_FAC_CONV("ETAT_FACT_CONV", "ETAT_FACT_CONV", "ETAT_FACT_CONV",
 					"FACTURE CONVENTIONNELLE",
-					" AND (1=1)", " AND (1=1)");
+					" AND (1=1)", " AND (1=1)"),
+	ETAT_LIST_SOC("ETAT_LIST_SOC", "ETAT_LIST_SOC", "ETAT_LIST_SOC",
+							"LISTE DES SOCIETES",
+							" AND (1=1)", " AND (1=1)");
 	
 	private final String reportName;
 	private final String defaulFileName;
