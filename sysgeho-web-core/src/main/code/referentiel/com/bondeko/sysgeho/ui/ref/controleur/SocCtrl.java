@@ -9,9 +9,9 @@ import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
 import com.bondeko.sysgeho.be.fac.entity.TabFacConv;
-import com.bondeko.sysgeho.be.imp.entity.TabHospi;
-import com.bondeko.sysgeho.be.imp.entity.TabRdv;
 import com.bondeko.sysgeho.be.ref.entity.TabSoc;
+import com.bondeko.sysgeho.be.util.EntFichier;
+import com.bondeko.sysgeho.be.util.OutputType;
 import com.bondeko.sysgeho.ui.core.base.DataValidationException;
 import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
@@ -19,7 +19,6 @@ import com.bondeko.sysgeho.ui.core.base.SysGehoCtrl;
 import com.bondeko.sysgeho.ui.core.base.SysGehoToolBox;
 import com.bondeko.sysgeho.ui.core.base.Traitement;
 import com.bondeko.sysgeho.ui.fac.util.FactureSvcoDeleguate;
-import com.bondeko.sysgeho.ui.imp.util.DossierPatientTrt;
 import com.bondeko.sysgeho.ui.ref.util.RefSvcoDeleguate;
 import com.bondeko.sysgeho.ui.ref.util.RefTrt;
 import com.bondeko.sysgeho.ui.ref.vue.SocVue;
@@ -79,6 +78,8 @@ public class SocCtrl extends SysGehoCtrl<TabSoc, TabSoc>{
 				RefTrt.NAVIGUER_VERS_FAC_CONV.naviguerVersFormulaireListe(),
 				RefTrt.NAVIGUER_VERS_FAC_CONV);
 		v$mapTrt.put(v$traitement2.getKey(), v$traitement2);
+		
+		v$mapTrt.put(RefTrt.GEN_LIST_SOC.getKey(), new Traitement(RefTrt.GEN_LIST_SOC));
 		
 		listeTraitements = Traitement.getOrderedTrt(v$mapTrt);
 		return listeTraitements;
@@ -227,6 +228,79 @@ public class SocCtrl extends SysGehoCtrl<TabSoc, TabSoc>{
 			}
 		}
 		return v$navigation;
+	}
+	
+	/**
+	 * @return un message  sur l'état de l'opération
+	 */
+	@SuppressWarnings("finally")
+	public String genererListSoc() {
+	// Determine vers quelle page ou Formulaire l'on doit se diriger
+		String v$navigation = null;
+
+		// Message d'information
+		String v$msgDetails = "GENERATION_SUCCES";
+
+		try {
+			SocVue v$vue = (SocVue) defaultVue;
+
+			// Mise à jour de l'entité courante selon le contexte du Formulaire
+			defaultVue.setEntiteCouranteOfPageContext();
+
+			// Sauvegarde de l'entité avant traitement specifique
+			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+
+			// Spécification du type de génération du fichier
+			OutputType outputType = OutputType.PDF;
+
+			// Consommation du service distant
+			TabSoc facConv = defaultVue.getEntiteCourante();
+			
+			
+			EntFichier v$fichier = RefSvcoDeleguate.getSvcoSoc().genererListSoc(facConv);
+
+			// création de dossier et fichiers temporaires et affichage de
+			// l'état généré
+			v$navigation = preview(v$fichier, outputType.getExtension());
+			
+			// L'on remplace l'ancienne entité de la liste par la nouvelle issue
+			// du résultat du traitement spécifiques
+			 defaultVue.getTableMgr().replace(defaultVue.getEntiteTemporaire(),
+					 defaultVue.getEntiteCourante());
+
+			// Si nous sommes en Consultation ==> sur le formulaire Details
+			if (defaultVue.getNavigationMgr().isFromDetails()) {
+				// Traitements particuliers
+			}
+
+			// Par contre si nous sommes sur le formulaire Liste
+			else if (defaultVue.getNavigationMgr().isFromListe()) {
+				// Traitements particuliers
+			}
+			FacesUtil.addInfoMessage("GENERATION_SUCCES", v$msgDetails);
+
+		} catch (SysGehoAppException e) {
+			// Aucune navigation possible
+			v$navigation = null;
+
+			// Message utilisateur
+			FacesUtil
+					.addWarnMessage("TRAITEMENT_ALL_ECHEC", e.getMessage());
+			getLogger().error(e.getMessage(), e);
+		} catch (Exception e) {
+			// Aucune navigation possible
+			e.printStackTrace();
+			v$navigation = null;
+			// Message utilisateur
+			FacesUtil
+					.addWarnMessage(
+							"TRAITEMENT_ALL_ECHEC","TRAITEMENT_ALL_ECHEC_INCONNU");
+			getLogger().error(e.getMessage(), e);
+		} finally {
+			// Retour à la page adéquate
+			return v$navigation;
+		}
+
 	}
 
 }
