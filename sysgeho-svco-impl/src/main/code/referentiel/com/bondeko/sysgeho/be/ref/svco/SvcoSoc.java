@@ -24,6 +24,7 @@ import com.bondeko.sysgeho.be.fac.entity.TabFacConv;
 import com.bondeko.sysgeho.be.fac.sisv.ISisvFacConv;
 import com.bondeko.sysgeho.be.ref.entity.TabSoc;
 import com.bondeko.sysgeho.be.ref.sisv.ISisvSoc;
+import com.bondeko.sysgeho.be.util.EntFichier;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -121,6 +122,18 @@ public class SvcoSoc extends BaseSvco<TabSoc> implements IRemoteSoc, ILocalSoc{
 			e.printStackTrace();
 		}
 		return tabSoc;
+	}
+	
+	@Override
+	public EntFichier  genererListSoc(TabSoc soc)
+	throws SysGehoAppException {
+		try {
+			return sisvSoc.genererListSoc(soc);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
 	}
 
 }
