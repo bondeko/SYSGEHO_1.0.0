@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<main>
+	<srlEtatListSoc>
+		<body>
+		  <codSoc>OT001</codSoc>
+		  <libSoc>CAMAIR-CO</libSoc>
+		  <libNumCont>CO2222331</libNumCont>
+		  <libTel>999996665</libTel>
+		  <booAffi>OUI</booAffi>
+		  <datAffi>19/12/2013</datAffi>
+		  <valEffectif>12</valEffectif>
+		  <valPrixUnit>12000</valPrixUnit>
+		  <valMntFixeMens>30000</valMntFixeMens>
+		  <libAdresse>19/12/2013</libAdresse>
+		</body>
+		<body>
+		  <codSoc>OT002</codSoc>
+		  <libSoc>GROUPE TEGUO</libSoc>
+		  <libNumCont>CO2222331</libNumCont>
+		  <libTel>999996665</libTel>
+		  <booAffi>OUI</booAffi>
+		  <datAffi>19/12/2013</datAffi>
+		  <valEffectif>12</valEffectif>
+		  <valPrixUnit>12000</valPrixUnit>
+		  <valMntFixeMens>30000</valMntFixeMens>
+		  <libAdresse>19/12/2013</libAdresse>
+		</body>
+	</srlEtatListSoc>
+</main>
