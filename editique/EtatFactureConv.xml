@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<main>
+	<srlFactConv>
+		<body>
+		  <codFact>T001</codFact>
+		  <datFact>21/09/2014</datFact>
+		  <libRefFact>NHT No 050/MMS/FMB/2014</libRefFact>
+		  <libObjet>Note d'honoraire de Médecine de travail Janvier 2014</libObjet>
+		  <libMois>Mois</libMois>
+		  <valEffectif>37</valEffectif>
+		  <valPrixUnitaire>1000</valPrixUnitaire>
+		  <valFixeMens>30000</valFixeMens>
+		  <libSoc>CAMAIR-CO</libSoc>
+		  <valTotal>67000</valTotal>
+		  <libMed>CAMAIR-CO</libMed>
+		  <libMntLettre>SOIXANTE SEPT MILLE</libMntLettre>
+		</body>		
+	</srlFactConv>
+</main>
