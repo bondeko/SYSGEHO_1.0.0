@@ -156,5 +156,9 @@ Commentaire : Je n'ai pas pu reproduire chez moi. C'est pas une confusion avec l
 14-Etat des hospitalisations
 15-Génerer un rapport de visite médical
 
+========Infos Utilisateur
+1-Intégrer la page de modification du mot de passe pour un utilisateur connecté
+2-Ajouter le menu "Modifier son mot de passe" à intégrer au dessus du menu "Deconnexion" et en dessous du nom utilisateur
+
 =====Gestion des stocks & Pharmacie (A analyser et à implémenter)
 
