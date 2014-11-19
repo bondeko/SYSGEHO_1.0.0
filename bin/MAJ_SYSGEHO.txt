@@ -111,10 +111,10 @@ Commentaire : Je n'ai pas pu reproduire chez moi. C'est pas une confusion avec l
 -------------------------------------------28/102014-----------------------------------------------------------
 
 =======Menu général
-2-Ajouter le menu "Pilotage" avec les sous menus:
+2-Ajouter le menu "Pilotage" avec les sous menus: (OK)
 	* Etat statistique
 
-3-Ajouter les menu "A propos de SYSGEHO" avec les sous menus:
+3-Ajouter les menu "A propos de SYSGEHO" avec les sous menus: (OK)
 	- Présentation
 	- Aide
 4- Implementé l'entité "Etat statistique" pour le module pilotage
@@ -122,14 +122,18 @@ Commentaire : Je n'ai pas pu reproduire chez moi. C'est pas une confusion avec l
 6-Rédaction du guide utilisateur
 7- Implementé la page "Présentation SYSGEHO" (contenu=plaquette du produit)
 8- Implémenté la page "Aide/Guide utilisateur" (Contenu=guide utilisateur)
+9-  menu "Modifier son mot de passe" à intégrer au dessus du menu "Deconnexion" (OK)
 
 =======Visite Médical
-1-Ajouter le sous menu rapport de vite médical embauche
-2-Ajouter le sous menu rapport de visite médical périodique
-3-Implémenter l'entité Rapport de visite médical périodique (NB: pr une visite médical périodique, on peut avoir plusieurs rapport de visite correspondant au nombre de personel visité)
+0-Erreurs remarquées: - Erreur lors de la navigation d'une visite médical vers les prestations liées Caused by: javax.faces.FacesException:
+#{visMedEmbCtrl.gotoRelatedEntity}: java.lang.NullPointerException (OK)
+1-Ajouter le sous menu rapport de vite médical embauche (OK)
+2-Ajouter le sous menu rapport de visite médical périodique (OK)
+3-Implémenter l'entité Rapport de visite médical périodique (NB: pr une visite médical périodique, on peut avoir plusieurs rapport de visite correspondant au nombre de personel visité)(OK)
 	* TAB_RAP_VISIT_MED_PERIO(Code, entité TAB_VM_PERIO, entité Patient, objet, rapport examen clinique(texte), rapport examen normaux(texte), rapport examen anormaux(texte), conclusion(texte), recommandation particulière(texte), médécin, date edition)
-3-Implémenter l'entité Rapport de visite médical d'embauche (NB: pr une visite médical d'embauche, on peut avoir un seul rapport de visite correspondant au nombre de personel à )
+3-Implémenter l'entité Rapport de visite médical d'embauche (NB: pr une visite médical d'embauche, on peut avoir un seul rapport de visite correspondant au nombre de personel à ) (OK)
 	* TAB_RAP_VISIT_MED_EMB(Code, entité TAB_VM_EMB, objet, rapport examen clinique(texte), rapport examen normaux(texte), rapport examen anormaux(texte), conclusion(texte), recommandation particulière(texte), médécin, date edition)
+	
 ========Facture des visites médical
 1-Implémenter l'entité facture visite médicale périoique du personnel avec pièce jointe: la facture détaillé en .doc /.pdf/.jpg...
 	TAB_FAC_VM_PERIO( code, reference, objet, entité Visite médical périodique, montant_total de la facture, date édition, Médécin, Pièce jointe)
@@ -157,8 +161,8 @@ Commentaire : Je n'ai pas pu reproduire chez moi. C'est pas une confusion avec l
 15-Génerer un rapport de visite médical
 
 ========Infos Utilisateur
-1-Intégrer la page de modification du mot de passe pour un utilisateur connecté
-2-Ajouter le menu "Modifier son mot de passe" à intégrer au dessus du menu "Deconnexion" et en dessous du nom utilisateur
+1-Intégrer la page de modification du mot de passe pour un utilisateur connecté (OK)
+2-Ajouter le menu "Modifier son mot de passe" à intégrer au dessus du menu "Deconnexion" et en dessous du nom utilisateur (OK)
 
 =====Gestion des stocks & Pharmacie (A analyser et à implémenter)
 
