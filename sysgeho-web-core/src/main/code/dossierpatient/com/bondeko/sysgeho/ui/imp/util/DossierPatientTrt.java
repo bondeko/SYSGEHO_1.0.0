@@ -326,4 +326,62 @@ public class DossierPatientTrt extends SysGehoTrt{
 			/* Raccourci clavier */ "", /* index */ "15");
 	}
 	
+	/***
+	 * VALIDER_RAP_VIS_MED_EMB
+	 */
+	public static Traitement VALIDER_RAP_VIS_MED_EMB;	
+	static{
+		
+		VALIDER_RAP_VIS_MED_EMB = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "Val_Rap_Vis_Med_Emb" , /* Libellé */ "Valider" , /* Commentaire */ "" , /* Méthode */ "valider",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Valider le rapport ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "Shift+F2", /* index */ "12", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
+	
+	/***
+	 * VALIDER_RAP_VIS_MED_PERIO
+	 */
+	public static Traitement VALIDER_RAP_VIS_MED_PERIO;	
+	static{
+		
+		VALIDER_RAP_VIS_MED_PERIO = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "Val_Rap_Vis_Med_Perio" , /* Libellé */ "Valider" , /* Commentaire */ "" , /* Méthode */ "valider",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Valider le rapport ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "Shift+F2", /* index */ "12", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
+	
+	public static Traitement ENREG_RAP_VIS_MED_EMB;	
+	static{
+		
+		ENREG_RAP_VIS_MED_EMB = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "Enreg_RapVisMedEmb" , /* Libellé */ "Enregistrer le rapport" , /* Commentaire */ "" , /* Méthode */ "enregistrerRapport",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "000",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer Enregistrement ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "Shift+F4", /* index */ "11", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
+	
+	public static Traitement NAVIGUER_VERS_RAP_VIS_MED_EMB;
+	static{	
+		NAVIGUER_VERS_RAP_VIS_MED_EMB = new Traitement  (/* Type */Traitement.NAVIGATION , /* Code */ "RapVisMedEmb" , /* Libellé */ "Naviguer vers le rapport de la visite" , /* Commentaire */ "" , /* Méthode */ Traitement.METHODE_NAVIGATION,
+			/* Config IHM */ new boolean[]{true,true,true,false} , 
+			/* Controleur de la destination */ "rapVisMedEmbCtrl", /* Type de progress bar */ Traitement.PROGRESS_NO, 
+			/* Raccourci clavier */ "", /* index */ "12");
+	}	
+	
+	public static Traitement ENREG_RAP_VIS_MED_PERIO;	
+	static{
+		
+		ENREG_RAP_VIS_MED_PERIO = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "Enreg_RapVisMedPerio" , /* Libellé */ "Enregistrer le rapport" , /* Commentaire */ "" , /* Méthode */ "enregistrerRapport",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "000",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer Enregistrement ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "Shift+F4", /* index */ "11", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
+	
+	public static Traitement NAVIGUER_VERS_RAP_VIS_MED_PERIO;
+	static{	
+		NAVIGUER_VERS_RAP_VIS_MED_PERIO = new Traitement  (/* Type */Traitement.NAVIGATION , /* Code */ "RapVisMedPerio" , /* Libellé */ "Naviguer vers le rapport de la visite" + SEPERATEUR_2 + "Naviguer vers le rapport de la visite" , /* Commentaire */ "" , /* Méthode */ Traitement.METHODE_NAVIGATION,
+			/* Config IHM */ new boolean[]{true,true,true,false} , 
+			/* Controleur de la destination */ "rapVisMedPerioCtrl", /* Type de progress bar */ Traitement.PROGRESS_NO, 
+			/* Raccourci clavier */ "", /* index */ "12");
+	}	
+	
 }

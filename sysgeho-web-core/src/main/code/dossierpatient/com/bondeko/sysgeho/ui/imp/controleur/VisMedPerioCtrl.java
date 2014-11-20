@@ -12,7 +12,10 @@ import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
 import com.bondeko.sysgeho.be.imp.entity.TabConsul;
 import com.bondeko.sysgeho.be.imp.entity.TabExam;
 import com.bondeko.sysgeho.be.imp.entity.TabHospi;
+import com.bondeko.sysgeho.be.imp.entity.TabRapVisMedEmb;
+import com.bondeko.sysgeho.be.imp.entity.TabRapVisMedPerio;
 import com.bondeko.sysgeho.be.imp.entity.TabSoin;
+import com.bondeko.sysgeho.be.imp.entity.TabVisMedEmb;
 import com.bondeko.sysgeho.be.imp.entity.TabVisMedPerio;
 import com.bondeko.sysgeho.be.ref.entity.TabSoc;
 import com.bondeko.sysgeho.ui.core.base.FacesUtil;
@@ -75,6 +78,8 @@ public class VisMedPerioCtrl extends SysGehoCtrl<TabVisMedPerio, TabVisMedPerio>
 		
 		v$mapTrt.put(DossierPatientTrt.VALIDER_VIS_MED_PERIO.getKey(), new Traitement(DossierPatientTrt.VALIDER_VIS_MED_PERIO));
 		
+		v$mapTrt.put(DossierPatientTrt.ENREG_RAP_VIS_MED_PERIO.getKey(), new Traitement(DossierPatientTrt.ENREG_RAP_VIS_MED_PERIO));
+		
 		Traitement v$traitement2 = new Traitement(
 				DossierPatientTrt.NAVIGUER_DE_VM_VERS_CONSULTATION.naviguerVersFormulaireListe(),
 				DossierPatientTrt.NAVIGUER_DE_VM_VERS_CONSULTATION);
@@ -94,6 +99,11 @@ public class VisMedPerioCtrl extends SysGehoCtrl<TabVisMedPerio, TabVisMedPerio>
 				DossierPatientTrt.NAVIGUER_DE_VM_VERS_SOIN.naviguerVersFormulaireListe(),
 				DossierPatientTrt.NAVIGUER_DE_VM_VERS_SOIN);
 		v$mapTrt.put(v$traitement5.getKey(), v$traitement5);
+		
+		Traitement v$traitement = new Traitement(
+				DossierPatientTrt.NAVIGUER_VERS_RAP_VIS_MED_PERIO.naviguerVersFormulaireListe(),
+				DossierPatientTrt.NAVIGUER_VERS_RAP_VIS_MED_PERIO);
+		v$mapTrt.put(v$traitement.getKey(), v$traitement);
 		
 		listeTraitements = Traitement.getOrderedTrt(v$mapTrt);
 		return listeTraitements;
@@ -150,9 +160,7 @@ public class VisMedPerioCtrl extends SysGehoCtrl<TabVisMedPerio, TabVisMedPerio>
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		
-		if (v$navigation.equals(DossierPatientTrt.NAVIGUER_DE_VM_VERS_HOSPI
+		} else if (v$navigation.equals(DossierPatientTrt.NAVIGUER_DE_VM_VERS_HOSPI
 				.naviguerVersFormulaireListe())) {
 			
 			TabHospi hospi = new TabHospi();
@@ -165,8 +173,7 @@ public class VisMedPerioCtrl extends SysGehoCtrl<TabVisMedPerio, TabVisMedPerio>
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		if (v$navigation.equals(DossierPatientTrt.NAVIGUER_DE_VM_VERS_EXAMEN
+		} else if (v$navigation.equals(DossierPatientTrt.NAVIGUER_DE_VM_VERS_EXAMEN
 				.naviguerVersFormulaireListe())) {
 			
 			TabExam exam = new TabExam();
@@ -179,8 +186,7 @@ public class VisMedPerioCtrl extends SysGehoCtrl<TabVisMedPerio, TabVisMedPerio>
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		if (v$navigation.equals(DossierPatientTrt.NAVIGUER_DE_VM_VERS_SOIN
+		} else if (v$navigation.equals(DossierPatientTrt.NAVIGUER_DE_VM_VERS_SOIN
 				.naviguerVersFormulaireListe())) {
 			
 			TabSoin soin = new TabSoin();
@@ -193,8 +199,20 @@ public class VisMedPerioCtrl extends SysGehoCtrl<TabVisMedPerio, TabVisMedPerio>
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else if (v$navigation.equals(DossierPatientTrt.NAVIGUER_VERS_RAP_VIS_MED_PERIO
+				.naviguerVersFormulaireListe())) {
+			
+			TabRapVisMedPerio rapVisMed = new TabRapVisMedPerio();
+			rapVisMed.initData();
+			rapVisMed.setTabVisMedPerio(defaultVue.getEntiteCourante());
+
+			try {
+				v$navigation = v$controleur.naviguerVersDetailsOuListe(rapVisMed);
+			} catch (Exception e) { 
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
 		return v$navigation;
 	}
 	
@@ -272,6 +290,52 @@ public class VisMedPerioCtrl extends SysGehoCtrl<TabVisMedPerio, TabVisMedPerio>
 			// Retour à la page adéquate
 			return v$navigation;
 		}
+	}
+	
+	@SuppressWarnings({ "finally", "unchecked" })
+	public String enregistrerRapport() {
+		
+		String v$navigation = null;
+		
+		try {
+			// Mise à jour de l'entité courante selon le contexte du Formulaire
+			if (defaultVue.getNavigationMgr().isFromListe())
+				defaultVue.setEntiteCourante(defaultVue.getTableMgr()
+						.getEntiteSelectionne());
+
+			// Sauvegarde de l'entité avant traitement specifique
+			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+			
+			if(defaultVue.getEntiteCourante().getBooEstVal().equals(BigDecimal.ZERO)){
+				FacesUtil.addWarnMessage("", "Impossible d'enregistrer le rapport de cette visite médicale, Bien vouloir valider cette visite ");
+				return null;
+			}
+			
+			RapVisMedPerioCtrl rapVisMedPerioCtrl = (RapVisMedPerioCtrl) FacesUtil
+			.getSessionMapValue(new RapVisMedPerioCtrl().getNomManagedBean2());
+
+			if (rapVisMedPerioCtrl == null) {
+				rapVisMedPerioCtrl = new RapVisMedPerioCtrl();
+				
+				FacesUtil.setSessionMapValue(rapVisMedPerioCtrl.getNomManagedBean2(), rapVisMedPerioCtrl);
+			}
+			
+			TabVisMedPerio visMedPerio = getDefaultVue().getEntiteCourante();
+			
+			TabRapVisMedPerio rapVisMedPerio = new TabRapVisMedPerio(visMedPerio.getInfoUser());
+			rapVisMedPerio.setTabVisMedPerio(visMedPerio);		
+			rapVisMedPerioCtrl.getDefaultVue().setEntiteCourante(rapVisMedPerio);
+			rapVisMedPerioCtrl.getDefaultVue().getNavigationMgr().setEnModification(false);
+			
+		} catch (Exception e) {
+			v$navigation = null;
+			e.printStackTrace();
+		}
+		return "RapVisMedPerioEdition";
+//		finally {
+//			// Retour à la page adéquate
+//			return v$navigation;
+//		}
 	}
 	
 }

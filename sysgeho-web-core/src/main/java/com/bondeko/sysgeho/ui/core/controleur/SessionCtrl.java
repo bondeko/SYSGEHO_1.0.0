@@ -6,9 +6,11 @@ import javax.faces.event.ActionEvent;
 import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr;
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
+import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.ui.admin.util.AdminSvcoDeleguate;
 import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
+import com.bondeko.sysgeho.ui.core.base.SysGehoToolBox;
 import com.bondeko.sysgeho.ui.core.vue.SessionVue;
 
 public class SessionCtrl {
@@ -238,23 +240,33 @@ public class SessionCtrl {
 	 * 
 	 * @return
 	 */
-	public String modifyPassword() {
+	public String modifyPassword(ActionEvent evt) {
 
 		String v$navigation = null;
 
 		String v$oldPwd = getDefaultVue().getOldPassword();
 		String v$newPwd = getDefaultVue().getNewPassword();
 		String v$confirmPwd = getDefaultVue().getConfirmNewPassword();
-
+		
+		if(v$newPwd == null || v$newPwd.isEmpty()){
+			FacesUtil.addInfoMessage("", "Nouveau mot de passe vide");
+			return null;
+		}
+		if(v$newPwd.length()>30){
+			FacesUtil.addInfoMessage("", "Taille du nouveau mot de passe trés longue, moins de 30 caractéres");
+			return null;
+		}
+		if(v$oldPwd.equals(v$newPwd)){
+			FacesUtil.addInfoMessage("", "Ancien mot de passe identique au nouveau");
+			return null;
+		}
+		
 		if (v$newPwd.equals(v$confirmPwd)) {
 			try {
 
-				AdminSvcoDeleguate.getSvcoUsr().modifierPwd(getDefaultVue().getLogin(), v$oldPwd, v$newPwd);
+				AdminSvcoDeleguate.getSvcoUsr().modifierPwd(getDefaultVue().getLogin(), v$oldPwd, v$newPwd, SysGehoToolBox.getInfoUser());
 
 				 getDefaultVue().setModified(true);
-
-
-
 				 FacesUtil.addInfoMessage("", "Modification de mot de passe réussie");
 			}
 
@@ -265,7 +277,7 @@ public class SessionCtrl {
 			}
 
 		} else {
-			FacesUtil.addWarnMessage("", "echec");
+			FacesUtil.addWarnMessage("", "Confirmation différente du nouveau mot de passe");
 		}
 
 		return v$navigation;
@@ -278,7 +290,7 @@ public class SessionCtrl {
 	 * @param evt
 	 */
 	public void annulerModifPassword(ActionEvent evt) {
-
+		getDefaultVue().setModified(false);
 		defaultVue.setOldPassword(null);
 		defaultVue.setNewPassword(null);
 		defaultVue.setConfirmNewPassword(null);
@@ -311,6 +323,10 @@ public class SessionCtrl {
 			FacesUtil.setSessionMapValue(getNomManagedBean(), v$instance);
 		}
 		return v$instance;
+	}
+	
+	public String modifierMotPasse(){
+		return null;
 	}
 	
 }
