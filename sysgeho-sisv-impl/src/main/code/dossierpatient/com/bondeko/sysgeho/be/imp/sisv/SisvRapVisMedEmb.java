@@ -18,18 +18,23 @@ import com.bondeko.sysgeho.be.core.exception.BaseException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoPersistenceException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.BaseSisv;
+import com.bondeko.sysgeho.be.imp.dao.IDaoRapVisMedEmb;
 import com.bondeko.sysgeho.be.imp.dao.IDaoVisMedEmb;
+import com.bondeko.sysgeho.be.imp.entity.TabRapVisMedEmb;
 import com.bondeko.sysgeho.be.imp.entity.TabVisMedEmb;
 
 @Stateless
-public class SisvVisMedEmb extends BaseSisv<TabVisMedEmb, String> implements ISisvVisMedEmb{
+public class SisvRapVisMedEmb extends BaseSisv<TabRapVisMedEmb, String> implements ISisvRapVisMedEmb{
 	
-	private static BaseLogger logger = BaseLogger.getLogger(SisvVisMedEmb.class);
+	private static BaseLogger logger = BaseLogger.getLogger(SisvRapVisMedEmb.class);
 
 	@Override
 	public BaseLogger getLogger() {
 		return logger;
 	} 
+	@EJB
+	IDaoRapVisMedEmb daoRapVisMedEmb; 
+	
 	@EJB
 	IDaoVisMedEmb daoVisMedEmb; 
 	
@@ -38,13 +43,13 @@ public class SisvVisMedEmb extends BaseSisv<TabVisMedEmb, String> implements ISi
 
 
 	@Override
-	public IBaseDao<TabVisMedEmb, String> getBaseDao() {
-		return daoVisMedEmb;
+	public IBaseDao<TabRapVisMedEmb, String> getBaseDao() {
+		return daoRapVisMedEmb;
 	}
 
 	public <X extends BaseEntity> X rechercher(X entity, Serializable id) throws SysGehoSystemException {
 		try {
-			return daoVisMedEmb.findById(entity, id);
+			return daoRapVisMedEmb.findById(entity, id);
 		} catch (SysGehoPersistenceException e) {
 			e.printStackTrace();
 			SysGehoSystemException sbr = new SysGehoSystemException(e);
@@ -55,7 +60,7 @@ public class SisvVisMedEmb extends BaseSisv<TabVisMedEmb, String> implements ISi
 	public <X extends BaseEntity> List<X> rechercherTout(X entity) throws SysGehoSystemException {
 			
 		try {
-			return daoVisMedEmb.findAll(entity);
+			return daoRapVisMedEmb.findAll(entity);
 		} catch (SysGehoPersistenceException e) {
 			e.printStackTrace();
 			SysGehoSystemException sbr = new SysGehoSystemException(e);
@@ -67,7 +72,7 @@ public class SisvVisMedEmb extends BaseSisv<TabVisMedEmb, String> implements ISi
 	public <X extends BaseEntity> List<X> rechercherParCritere(X entity)
 			throws SysGehoSystemException {
 		try {
-			return daoVisMedEmb.findByExample(entity);
+			return daoRapVisMedEmb.findByExample(entity);
 		} catch (SysGehoPersistenceException e) {
 			e.printStackTrace();
 			SysGehoSystemException sbr = new SysGehoSystemException(e);
@@ -76,22 +81,30 @@ public class SisvVisMedEmb extends BaseSisv<TabVisMedEmb, String> implements ISi
 	}
 	
 	public <X extends BaseEntity> X creer(X p$entite) throws BaseException  {
-		TabVisMedEmb conCree = (TabVisMedEmb) p$entite; 
-		conCree = initialiserDonnees(conCree);
-		conCree.setCodVisMedEmb(genererCodeVisMedEmb(conCree));
+		TabRapVisMedEmb rapVisMedCree = (TabRapVisMedEmb) p$entite; 
+		//Teste si la consultation n'a pas deja un compte rendu
+		if(rapVisMedCree.getTabVisMedEmb().getBooRapVisMed().equals(BigDecimal.ONE))
+			throw new BaseException("Erreur : Il existe déjà un rapport pour la visite médicale d'embauche "+ rapVisMedCree.getTabVisMedEmb().getCodVisMedEmb());
+		rapVisMedCree = initialiserDonnees(rapVisMedCree);
+		//genere le code du compte rendu
+		((TabRapVisMedEmb)p$entite).setCodRapVisMedEmb(genererCodeRapVisMed(rapVisMedCree));
 		//fais un teste si l'entité existe déjà
-		X entRech = getBaseDao().findById(p$entite, conCree.getId());
+		X entRech = getBaseDao().findById(p$entite, p$entite.getId());
 		if(entRech != null){
 			throw new BaseException("Erreur : Cette entité existe déjà");
 		}
-		conCree.validateData();
-		return (X) getBaseDao().save(conCree);
+		p$entite.validateData();
+		//Met à jour la consultation Boo_Cpte_Rendu = 1
+		TabVisMedEmb visMedEmb = rapVisMedCree.getTabVisMedEmb();
+		visMedEmb.setBooRapVisMed(BigDecimal.ONE);
+		daoVisMedEmb.update(visMedEmb);
+		return getBaseDao().save(p$entite);
 	}
 	
-	private String genererCodeVisMedEmb(TabVisMedEmb tabVisMedEmb) throws SysGehoSystemException{
+	private String genererCodeRapVisMed(TabRapVisMedEmb tabRapVisMedEmb) throws SysGehoSystemException{
 		BigDecimal v$inc;
 		try {
-			v$inc = daoIncCod.findNextIncCod(tabVisMedEmb).getValIncCod();
+			v$inc = daoIncCod.findNextIncCod(tabRapVisMedEmb).getValIncCod();
 		} catch (SysGehoPersistenceException e) {
 			e.printStackTrace();
 			throw new SysGehoSystemException(e.getMessage(), e);
@@ -102,20 +115,19 @@ public class SisvVisMedEmb extends BaseSisv<TabVisMedEmb, String> implements ISi
 		return numero;
 	}
 	
-	private TabVisMedEmb initialiserDonnees(TabVisMedEmb visMedEmb){
-		visMedEmb.setBooEstVal(BigDecimal.ZERO);
-		visMedEmb.setBooRapVisMed(BigDecimal.ZERO);
-		return visMedEmb;
+	private TabRapVisMedEmb initialiserDonnees(TabRapVisMedEmb visMed){
+		visMed.setBooVal(BigDecimal.ZERO);
+		return visMed;
 	}
 	
 	@Override
-	public TabVisMedEmb valider(TabVisMedEmb $pVisMedEmb) throws SysGehoSystemException  {
+	public TabRapVisMedEmb valider(TabRapVisMedEmb $pCpteRduConsul) throws SysGehoSystemException  {
 		try {
-			$pVisMedEmb.setBooEstVal(BigDecimal.ONE);
-			$pVisMedEmb.setEtatEnt(EnuEtat.VALIDE.getValue());
-			return getBaseDao().update($pVisMedEmb);
+			$pCpteRduConsul.setBooVal(BigDecimal.ONE);
+			$pCpteRduConsul.setEtatEnt(EnuEtat.VALIDE.getValue());
+			return getBaseDao().update($pCpteRduConsul);
 		} catch (SysGehoPersistenceException e) {
-			logger.debug("Erreur de validation de la visite médicale");
+			logger.debug("Erreur de validation de la consultation");
 			e.printStackTrace();
 			SysGehoSystemException sbr = new SysGehoSystemException(e);
 			throw sbr;

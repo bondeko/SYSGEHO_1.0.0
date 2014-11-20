@@ -14,6 +14,7 @@ import com.bondeko.sysgeho.be.core.dao.base.IBaseDao;
 import com.bondeko.sysgeho.be.core.exception.SysGehoPersistenceException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.BaseSisv;
+import com.bondeko.sysgeho.be.util.InfoUser;
 
 @Stateless
 public class SisvUsr extends BaseSisv<TabUsr, String> implements ISisvUsr {
@@ -39,7 +40,7 @@ public class SisvUsr extends BaseSisv<TabUsr, String> implements ISisvUsr {
 		}
 	}
 
-	public TabUsr modifierPwd(String p$login, String p$oldPwd, String p$newPwd)
+	public TabUsr modifierPwd(String p$login, String p$oldPwd, String p$newPwd, InfoUser infoUser)
 			throws SysGehoSystemException {
 		try {
 			if(p$newPwd == null || p$newPwd.isEmpty()){
@@ -61,6 +62,7 @@ public class SisvUsr extends BaseSisv<TabUsr, String> implements ISisvUsr {
 			 TabUsr oldUsr = daoUsr.findById(new TabUsr(), p$login);
 			 if(null != oldUsr){
 				 oldUsr.setCodPwd(p$newPwd);
+				 oldUsr.setInfoUser(infoUser);
 				 return daoUsr.update(oldUsr);
 			 }
 		} catch (SysGehoPersistenceException e) {
