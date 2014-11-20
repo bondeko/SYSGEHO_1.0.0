@@ -60,6 +60,9 @@ public class TabVisMedEmb extends SysGehoBaseEntity implements Serializable{
 	@Column(name = "BOO_EST_VAL")
 	private BigDecimal booEstVal;
 	
+	@Column(name = "BOO_RAP_VIS_MED")
+	private BigDecimal booRapVisMed;
+	
 	@Column(name = "VAL_MNT_TTC")
 	private BigDecimal valMntTtc;
 	
@@ -176,6 +179,14 @@ public class TabVisMedEmb extends SysGehoBaseEntity implements Serializable{
 
 	public BigDecimal getValMntTtc() {
 		return valMntTtc;
+	}
+
+	public void setBooRapVisMed(BigDecimal booRapVisMed) {
+		this.booRapVisMed = booRapVisMed;
+	}
+
+	public BigDecimal getBooRapVisMed() {
+		return booRapVisMed;
 	}
 	
 }
