@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+     
+  	<ui:composition template="/shared/templates/templateFormulaireListe.xhtml">
+		
+		<ui:param name="managedBean" value="#{sessionScope[rapVisMedEmbCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" des rapports de #{locale.visitemedicalemb} " />
+		
+		<!-- Criteres standards de recherche -->
+		<ui:define name="standardFilter"  >
+		
+			<h:panelGrid columns="2" width="100%"   columnClasses="pngdColMiddle" rowClasses="pngdRow" >
+			
+				<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				
+					<h:outputText value="Code du rapport" />          				
+         			<h:inputText  value="#{rapVisMedEmbCtrl.defaultVue.entiteRecherche.codRapVisMedEmb}" style="width: 30%" /> 
+         			
+         			<h:outputText value="Code de la visite" />          				
+         			<h:inputText  value="#{rapVisMedEmbCtrl.defaultVue.entiteRecherche.tabVisMedEmb.codVisMedEmb}" style="width: 30%" /> 
+         			
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2" width="100%" border="0" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				
+					<h:outputText value="Nom Patient" />          				
+         			<h:inputText  value="#{rapVisMedEmbCtrl.defaultVue.entiteRecherche.tabVisMedEmb.tabPat.libNom}" style="width: 60%" />  
+         			
+         			<h:outputText value="#{locale.medecinayantrealise}" />          				
+         			<h:inputText  value="#{rapVisMedEmbCtrl.defaultVue.entiteRecherche.tabVisMedEmb.tabUsr.libNom}" style="width: 60%" />  
+         			
+				</h:panelGrid>
+														
+																																																	
+			</h:panelGrid>	
+						
+		</ui:define>
+		
+		<!-- Colonnes specifiques e l entite -->
+		<ui:define name="specificColumns"  >
+		
+			<rich:column label="Code " sortBy="#{entity.codRapVisMedEmb}" filterBy="#{entity.codRapVisMedEmb}" >
+				<f:facet name="header">
+					<h:outputText value="Code "  />
+				</f:facet>
+				<h:outputText value="#{entity.codRapVisMedEmb}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.visitemed}" sortBy="#{entity.tabVisMedEmb.codVisMedEmb}" filterBy="#{entity.tabVisMedEmb.codVisMedEmb}" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.visitemed}"  />
+				</f:facet>
+				<h:outputText value="#{entity.tabVisMedEmb.codVisMedEmb}" />				
+			</rich:column>
+			
+			<rich:column label="Patient" sortBy="#{entity.tabVisMedEmb.tabPat.libNom}" filterBy="#{entity.tabVisMedEmb.tabPat.libNom}"  >
+				<f:facet name="header">
+					<h:outputText value="Patient"  />
+				</f:facet>
+				<h:outputText value="#{entity.tabVisMedEmb.tabPat.libNom}" />				
+			</rich:column>
+			
+			<rich:column label="Objet " sortBy="#{entity.libObj}" filterBy="#{entity.libObj}" >
+				<f:facet name="header">
+					<h:outputText value="Objet"  />
+				</f:facet>
+				<h:outputText value="#{entity.libObj}" />				
+			</rich:column>
+			
+			<rich:column label="Conclusion " sortBy="#{entity.libConcl}" filterBy="#{entity.libConcl}" >
+				<f:facet name="header">
+					<h:outputText value="Conclusion"  />
+				</f:facet>
+				<h:outputText value="#{entity.libConcl}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.dedition}" sortBy="#{entity.dateEdi}" filterBy="#{entity.dateEdi}"  >
+				<f:facet name="header">
+					<h:outputText value="#{locale.dedition}" />
+				</f:facet>
+				<h:outputText value="#{entity.dateEdi}" >	
+					<f:convertDateTime type="date" dateStyle="full" consultern="dd/MM/yyyy" timeZone="GMT+1" />
+				</h:outputText>			
+			</rich:column>
+			
+			<rich:column label="#{locale.medecinayantrealise}" sortBy="#{entity.tabVisMedEmb.tabUsr.libNom}" filterBy="#{entity.tabVisMedEmb.tabUsr.libNom}" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.medecinayantrealise}"  />
+				</f:facet>
+				<h:outputText value="#{entity.tabVisMedEmb.tabUsr.libNom}" />				
+			</rich:column>
+			
+		</ui:define>
+													
+	</ui:composition>
+	
+</html>

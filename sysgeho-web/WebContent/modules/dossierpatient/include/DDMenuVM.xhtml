@@ -18,19 +18,35 @@
 						</h:panelGrid>
 					</f:facet>
 					
-					<rich:menuItem submitMode="ajax" rendered="true" 
+					<rich:menuGroup value="Embauche" rendered="true">
+	                     <rich:menuItem submitMode="ajax" rendered="true" 
 			                 action="#{visMedEmbCtrl.openHomePage}" 
-		                 ajaxSingle="true" >
-		                 <h:outputText value="#{locale.visitemedicalemb}" />
-		             </rich:menuItem>	
-		             
-		             <rich:menuSeparator />
-		             
-		             <rich:menuItem submitMode="ajax" rendered="true" 
-		                 action="#{visMedPerioCtrl.openHomePage}" 
-		                 ajaxSingle="true" >
-		                 <h:outputText value="#{locale.visitemedicalperio}" />
-		             </rich:menuItem>
+			                 ajaxSingle="true" >
+			                 <h:outputText value="#{locale.visitemedicalemb}" />
+			             </rich:menuItem>	
+			             
+			             <rich:menuItem submitMode="ajax" rendered="true" 
+			                 action="#{rapVisMedEmbCtrl.openHomePage}" 
+			                 ajaxSingle="true" >
+			                 <h:outputText value="Rapport #{locale.visitemedicalemb}" />
+			             </rich:menuItem>
+	                </rich:menuGroup>
+	                
+					<rich:menuSeparator />
+					
+					<rich:menuGroup value="#{locale.periodique}" rendered="true">
+	                     <rich:menuItem submitMode="ajax" rendered="true" 
+			                 action="#{visMedPerioCtrl.openHomePage}" 
+			                 ajaxSingle="true" >
+			                 <h:outputText value="#{locale.visitemedicalperio}" />
+			             </rich:menuItem>	
+			             
+			             <rich:menuItem submitMode="ajax" rendered="true" 
+			                 action="#{rapVisMedPerioCtrl.openHomePage}" 
+			                 ajaxSingle="true" >
+			                 <h:outputText value="Rapport #{locale.visitemedicalperio}" />
+			             </rich:menuItem>
+	                </rich:menuGroup>
 					
 				</rich:dropDownMenu>	
 				

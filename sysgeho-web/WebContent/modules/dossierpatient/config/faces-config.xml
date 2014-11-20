@@ -52,6 +52,16 @@
   <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.VisMedPerioCtrl</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>rapVisMedPerioCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.RapVisMedPerioCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>rapVisMedEmbCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.RapVisMedEmbCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
  <navigation-rule>
   <from-view-id>*</from-view-id>
   <navigation-case>
@@ -200,6 +210,36 @@
   <navigation-case>
    <from-outcome>VisMedPerioListe</from-outcome>
    <to-view-id>/modules/dossierpatient/pages/VisMedPerioListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>RapVisMedEmbDetails</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/RapVisMedEmbDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>RapVisMedEmbEdition</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/RapVisMedEmbEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>RapVisMedEmbListe</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/RapVisMedEmbListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>RapVisMedPerioDetails</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/RapVisMedPerioDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>RapVisMedPerioEdition</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/RapVisMedPerioEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>RapVisMedPerioListe</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/RapVisMedPerioListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
   

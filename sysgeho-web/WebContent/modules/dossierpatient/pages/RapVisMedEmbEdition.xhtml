@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+ 	<ui:composition template="/shared/templates/templateFormulaireEdition.xhtml">
+   			
+		<ui:param name="managedBean" value="#{sessionScope[rapVisMedEmbCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" d'un rapport de #{locale.dunevisitemedicaleemb}" />
+		
+	<!-- Definition du contenu de l'ecran principal  -->
+		<ui:define name="ecranPrincipalContenu">
+		
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="#{locale.visitemed}" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:panelGroup>
+								<h:outputText value="#{locale.visitemed}" />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
+							<h:panelGroup>
+							<h:inputText id="inpt_codVm" value="#{rapVisMedEmbCtrl.defaultVue.entiteCourante.tabVisMedEmb.codVisMedEmb}" style="width: 20%" 
+								required="true" requiredMessage="Valeur obligatoire"
+								readonly="true" title="Code" disabled="false">
+								<a4j:support event="onchange" ajaxSingle="true" 
+									reRender="ten_1,ten_2,pou_1,pou_2,tail_1,tail_2,usr_1,usr_2"/>
+							</h:inputText>	
+							<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
+							<h:panelGroup>
+								<a4j:commandButton   value="..." action="#{rapVisMedEmbCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" >   	
+		           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
+		         						<f:setPropertyActionListener value="RapVisMedEmbEdition" target="#{visMedEmbCtrl.defaultVue.navigationMgr.selectionSource}" />
+		         						<!-- MAJ de la destination en mode Selection   --> 
+		           						<f:setPropertyActionListener value="true" target="#{visMedEmbCtrl.defaultVue.navigationMgr.enSelection}" />  
+		           						<!-- Nom du Controlleur de l'entite source  --> 
+		          						<f:setPropertyActionListener value="rapVisMedEmbCtrl" target="#{visMedEmbCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
+		          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
+		          						<f:setPropertyActionListener value="VisMedEmbListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
+		          						<!-- Nom de la propriete a selectionner -->							         						             						
+		          						<f:setPropertyActionListener value="tabVisMedEmb" target="#{defaultVue.navigationMgr.selectionPropertyName}" />            						             						          						             				            					      						
+				             	</a4j:commandButton>
+				             	<rich:message for="inpt_codVm" errorClass="msg_error" />
+							</h:panelGroup>
+						</h:panelGroup>
+							
+							<h:panelGroup id="ten_1">
+								<h:outputText value="Patient" rendered="#{! empty rapVisMedEmbCtrl.defaultVue.entiteCourante.tabVisMedEmb.codVisMedEmb}"/>	
+							</h:panelGroup>		
+							<h:panelGroup id="ten_2">								
+								<h:inputText  value="#{rapVisMedEmbCtrl.defaultVue.entiteCourante.tabVisMedEmb.tabPat.libNom}  #{rapVisMedEmbCtrl.defaultVue.entiteCourante.tabVisMedEmb.tabPat.libPre}" 
+								style="width: 60%" readonly="true"  title="Patient" rendered="#{! empty rapVisMedEmbCtrl.defaultVue.entiteCourante.tabVisMedEmb.codVisMedEmb}"/>
+							</h:panelGroup>
+							
+							<h:panelGroup id="tail_1">
+								<h:outputText value="Motif de la visite" rendered="#{! empty rapVisMedEmbCtrl.defaultVue.entiteCourante.tabVisMedEmb.codVisMedEmb}"/>	
+							</h:panelGroup>		
+							<h:panelGroup id="tail_2">								
+								<h:inputText  value="#{rapVisMedEmbCtrl.defaultVue.entiteCourante.tabVisMedEmb.libMotif}" style="width: 60%" readonly="true"  title="Motif de la visite" rendered="#{! empty rapVisMedEmbCtrl.defaultVue.entiteCourante.tabVisMedEmb.codVisMedEmb}"/>
+							</h:panelGroup>
+							
+							<h:panelGroup id="pou_1">
+								<h:outputText value="Date de la visite" rendered="#{! empty rapVisMedEmbCtrl.defaultVue.entiteCourante.tabVisMedEmb.codVisMedEmb}"/>
+							</h:panelGroup>
+							<h:panelGroup id="pou_2">
+								<h:inputText value="#{rapVisMedEmbCtrl.defaultVue.entiteCourante.tabVisMedEmb.dateVisMed}" readonly="true" style="width: 30%" title="Date de la visite"  rendered="#{! empty rapVisMedEmbCtrl.defaultVue.entiteCourante.tabVisMedEmb.codVisMedEmb}">
+									<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+								</h:inputText>
+							</h:panelGroup>
+							
+							<h:panelGroup id="usr_1">
+								<h:outputText value="#{locale.medecinayantrealise}" rendered="#{! empty rapVisMedEmbCtrl.defaultVue.entiteCourante.tabVisMedEmb.codVisMedEmb}"/>	
+							</h:panelGroup>		
+							<h:panelGroup id="usr_2">								
+								<h:inputText  value="#{rapVisMedEmbCtrl.defaultVue.entiteCourante.tabVisMedEmb.tabUsr.libNom}" style="width: 60%" readonly="true"  title="#{locale.medecinayantrealise}" rendered="#{! empty rapVisMedEmbCtrl.defaultVue.entiteCourante.tabVisMedEmb.codVisMedEmb}"/>
+							</h:panelGroup>
+							
+						</h:panelGrid>
+							
+						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdLColRightDynamic" cellspacing="10" >
+							
+						</h:panelGrid>
+						
+					</h:panelGrid>
+         	
+				</fieldset>								
+			</h:panelGroup>
+
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Informations du rapport" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         					<h:outputText value="Objet"/>
+							<h:inputText id="inpt_mot" value="#{rapVisMedEmbCtrl.defaultVue.entiteCourante.libObj}"  
+								 required="false" style="width: 60%" title="Objet" >
+							</h:inputText>
+							
+							<h:outputText value="Rapport Examens Cliniques"/>
+							<h:inputTextarea id="inpt_examcli" value="#{rapVisMedEmbCtrl.defaultVue.entiteCourante.libRapExamCli}"  
+								 required="false" style="width: 60%" title="Rapport Examen clinique" >
+							</h:inputTextarea>
+							
+							<h:outputText value="Rapport Examens Normaux"/>
+							<h:inputTextarea  value="#{rapVisMedEmbCtrl.defaultVue.entiteCourante.libRapExamNor}"  
+								 required="false" style="width: 60%" title="Rapport Examens Normaux" >
+							</h:inputTextarea>
+							
+							<h:outputText value="Rapport Examens Anormaux"/>
+							<h:inputTextarea  value="#{rapVisMedEmbCtrl.defaultVue.entiteCourante.libRapExamAnor}"  
+								 required="false" style="width: 60%" title="Examen Biologique" >
+							</h:inputTextarea>
+							
+							<h:outputText value="Conclusion"/>
+							<h:inputTextarea  value="#{rapVisMedEmbCtrl.defaultVue.entiteCourante.libConcl}"  
+								 required="false" style="width: 60%" title="Conclusion" >
+							</h:inputTextarea>
+							
+							<h:outputText value="#{locale.recomparticuliere}"/>
+							<h:inputTextarea  value="#{rapVisMedEmbCtrl.defaultVue.entiteCourante.libRecomPart}"  
+								 required="false" style="width: 60%" title="#{locale.recomparticuliere}" >
+							</h:inputTextarea>
+							
+							<h:outputText value="Date d'Edition" />
+							<h:panelGroup >					
+								<rich:calendar value="#{rapVisMedEmbCtrl.defaultVue.entiteCourante.dateEdi}" inputStyle="width: 30%"  title="Date d'Edition" 
+										styleClass="selectDate"  datePattern="dd/MM/yyyy" >
+									<a4j:support event="onchanged" ajaxSingle="true" />
+								</rich:calendar>
+							</h:panelGroup>
+							
+							
+         			</h:panelGrid>  
+         				
+         			<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         			</h:panelGrid> 
+         				         		         		
+         		</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+		</ui:define>
+													
+	</ui:composition>
+	
+</html>

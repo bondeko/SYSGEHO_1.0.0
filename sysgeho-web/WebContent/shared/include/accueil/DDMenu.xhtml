@@ -21,6 +21,12 @@
 					</h:panelGrid>
 				</f:facet>
 				
+				<rich:menuItem submitMode="ajax" rendered="true" 
+                        action="#{sessionCtrl.modifierMotPasse}" 
+                        value="Modifier mot de passe" 
+						immediate="true" 
+                        onclick="#{rich:component('mpnl_password')}.show();return true;" />
+                        
 				<rich:menuItem submitMode="ajax"
                         action="#{sessionCtrl.deconnexion}" 
                         value="#{locale.deconnexion}" 

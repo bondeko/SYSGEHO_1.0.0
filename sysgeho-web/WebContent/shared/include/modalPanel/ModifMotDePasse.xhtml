@@ -35,7 +35,7 @@
 		   				</h:panelGroup>   				
 		   				<h:panelGroup> 				
 		 					<h:inputSecret id="inpt_oldPwd"  value="#{sessionCtrl.defaultVue.oldPassword}" maxlength="30"  style="width: 90%" 
-		 						required="true" requiredMessage="#{locale.valeurobligatoire}" readonly="#{sessionCtrl.defaultVue.modified}" />
+		 						required="true" requiredMessage="Valeur obligatoire" readonly="#{sessionCtrl.defaultVue.modified}" />
 		   					<rich:message for="inpt_oldPwd" errorClass="msg_error" />					 				
 		   				</h:panelGroup>
 						
@@ -46,7 +46,7 @@
 		   				</h:panelGroup>
 		   				<h:panelGroup> 				
 		 					<h:inputSecret id="inpt_newPwd"  value="#{sessionCtrl.defaultVue.newPassword}" maxlength="30"  style="width: 90%" 
-		 						required="true" requiredMessage="#{locale.valeurobligatoire}"  readonly="#{sessionCtrl.defaultVue.modified}"/>
+		 						required="true" requiredMessage="Valeur obligatoire"  readonly="#{sessionCtrl.defaultVue.modified}"/>
 		   					<rich:message for="inpt_newPwd" errorClass="msg_error" />					 				
 		   				</h:panelGroup>
 		   				
@@ -69,9 +69,9 @@
 					
 						<h:panelGroup>						
 																								
-								<a4j:commandButton value="#{locale.valider}"	actionListener="#{sessionCtrl.modifyPassword}"  status="stus_actions"  rendered="#{! sessionCtrl.defaultVue.modified}" reRender="pnel_pwd" />
+								<a4j:commandButton value="Valider"	actionListener="#{sessionCtrl.modifyPassword}"  status="stus_actions"  rendered="#{! sessionCtrl.defaultVue.modified}" reRender="pnel_pwd" />
 																																							
-								<a4j:commandButton value="#{locale.fermer}" 	actionListener="#{sessionCtrl.annulerModifPassword}" ajaxSingle="true" immediate="true" oncomplete="#{rich:component('mpnl_password')}.hide();return false;"  />
+								<a4j:commandButton value="Fermer" 	actionListener="#{sessionCtrl.annulerModifPassword}" ajaxSingle="true" immediate="true" oncomplete="#{rich:component('mpnl_password')}.hide();return false;"  />
 																												
 						</h:panelGroup>					
 					</h:panelGrid>									
