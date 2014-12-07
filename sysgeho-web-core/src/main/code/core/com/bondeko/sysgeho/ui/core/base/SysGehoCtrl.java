@@ -15,6 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.richfaces.component.html.ContextMenu;
@@ -24,10 +25,12 @@ import org.richfaces.json.JSONObject;
 
 import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
+import com.bondeko.sysgeho.be.core.base.IEntityPceJte;
 import com.bondeko.sysgeho.be.core.exception.BaseException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
 import com.bondeko.sysgeho.be.util.EntFichier;
+import com.bondeko.sysgeho.be.util.TabPceJte;
 
 public abstract class SysGehoCtrl <H extends BaseEntity, T extends H>{
 	
@@ -1503,6 +1506,85 @@ public abstract class SysGehoCtrl <H extends BaseEntity, T extends H>{
 			FacesUtil.addWarnMessage("",  "MSG_TRT_ALL_ECHEC_INCONNU");
 			getLogger().error(e.getMessage(), e);	
 		}		
+		
+		return null;
+	}
+	
+	public boolean isDocEntity(){		
+
+		boolean v$bol = false;
+		
+		try{
+			// L'on utilise l'entité de recherche pour la comparaison parce que :
+			// 1. ça évite de creer une nouvelle entité à chaque fois 
+			//2. Nous savons que l'entité de recherche ne sera jamais null			
+			
+			v$bol = defaultVue.getEntiteRecherche() instanceof IEntityPceJte;
+
+		}
+		catch(Exception e){ }
+		
+		return v$bol;
+	}
+	
+	public boolean isRequiredDocEntity(){		
+
+		boolean v$bol = false;
+		return v$bol;
+	}
+	
+	/**
+	 *  Téléchargement d'une pièce jointe
+	 * 	TODO Délocaliser cette méthode; Elle n'est pas à sa place dans cette classe
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public String downloadPiece(){
+		
+		// Pièce jointe à download
+		TabPceJte v$piece = (TabPceJte) ((SysGehoVue)defaultVue).getPieceMgr().getSelectedEntity();
+		
+		if(v$piece != null){
+			
+			try {
+				// Récupération du fichier 	s'il n'existe pas déja
+				if(v$piece.getFichier() == null || v$piece.getFichier().getData() == null){					
+					v$piece = SysGehoSvcoDeleguate.getSvcoPceJte().rechercher(v$piece, v$piece.getId());					
+				}
+				// Download du Fichier Joint
+				if(v$piece.getFichier() != null && v$piece.getFichier().getData() != null ){
+					
+		    	   	FacesContext context = FacesContext.getCurrentInstance();
+		        	HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+		        				        	
+		        	response.addHeader("Content-disposition","attachment;filename="+v$piece.getFichier().getName());	        	      	
+		        	response.setContentLength(v$piece.getFichier().getData().length);
+		        						
+					response.getOutputStream().write(v$piece.getFichier().getData());
+		        	response.setContentType(v$piece.getFichier().getMime().getMimeValue());
+		        	context.responseComplete();
+					
+				}
+				else {
+					FacesUtil.addWarnMessage("", "Impossible de récupérer le fichier associé à cette pièce");
+				}
+	        			
+			} 
+			catch (BaseException e) {
+				FacesUtil.addWarnMessage("MSG_TRT_ALL_ECHEC", e.getMessage());
+				e.printStackTrace();
+			} 
+			catch (Exception e) {
+				FacesUtil.addWarnMessage("MSG_TRT_ALL_ECHEC", "MSG_TRT_ALL_ECHEC_INCONNU");
+				e.printStackTrace();
+				getLogger().error(e.getMessage(), e);
+			}
+			
+		}
+		else{
+			// Il est normalememnt impossible d'arriver ici à partir de l'interface
+		}
 		
 		return null;
 	}

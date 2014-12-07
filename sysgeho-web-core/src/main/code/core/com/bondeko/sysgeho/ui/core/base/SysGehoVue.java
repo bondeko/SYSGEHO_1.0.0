@@ -5,8 +5,24 @@ import java.util.List;
 
 import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.util.InfoUser;
+import com.bondeko.sysgeho.be.util.TabPceJte;
 
 public abstract class SysGehoVue <T extends BaseEntity> {
+	
+	
+	/**
+	 * Encapsule toutes les propriétés et méthodes  utile pour gérer les tables dans les formulaires 
+	 * 
+	 * TODO Supprimer ceci de cette vue et créer une vue spéciale pour de telles entités
+	 */
+	protected TableManager<TabPceJte> pieceMgr;
+	
+	/**
+	 * Piece jointe uploadé 
+	 * 
+	 * TODO A Enlever de la vue pour la mettre dans une vue spéciale pour de tel entité	
+	 */
+	protected TabPceJte piece;
 	
 	/**
 	 * Encapsule toutes les propriétés et méthodes  utile pour gérer les tables dans les formulaires
@@ -258,4 +274,21 @@ public abstract class SysGehoVue <T extends BaseEntity> {
 		return SysGehoToolBox.getInfoUser();
 	}	
 	
+	public TableManager<TabPceJte> getPieceMgr() {
+		return pieceMgr;
+	}
+
+
+	public void setPieceMgr(TableManager<TabPceJte> pieceMgr) {
+		this.pieceMgr = pieceMgr;
+	}
+
+	
+	public TabPceJte getPiece() {
+		return piece;
+	}
+
+	public void setPiece(TabPceJte piece) {
+		this.piece = piece;
+	}
 }

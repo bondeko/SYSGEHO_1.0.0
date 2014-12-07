@@ -3,6 +3,8 @@ package com.bondeko.sysgeho.ui.fac.util;
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
 import com.bondeko.sysgeho.be.fac.svco.IRemoteFacConv;
 import com.bondeko.sysgeho.be.fac.svco.IRemoteFacCour;
+import com.bondeko.sysgeho.be.fac.svco.IRemoteFacVisMedEmb;
+import com.bondeko.sysgeho.be.fac.svco.IRemoteFacVisMedPerio;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
 import com.bondeko.sysgeho.ui.core.base.SysGehoSvcoDeleguate;
 
@@ -28,6 +30,14 @@ public class FactureSvcoDeleguate {
 	
 	public static IRemoteFacConv getSvcoFacConv() throws ServiceLocatorException{
         return (IRemoteFacConv) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoFacConv", IRemoteFacConv.class));
+    }
+	
+	public static IRemoteFacVisMedPerio getSvcoFacVisMedPerio() throws ServiceLocatorException{
+        return (IRemoteFacVisMedPerio) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoFacVisMedPerio", IRemoteFacVisMedPerio.class));
+    }
+	
+	public static IRemoteFacVisMedEmb getSvcoFacVisMedEmb() throws ServiceLocatorException{
+        return (IRemoteFacVisMedEmb) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoFacVisMedEmb", IRemoteFacVisMedEmb.class));
     }
 	
 	public BaseLogger getLogger() {

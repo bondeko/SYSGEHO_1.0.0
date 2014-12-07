@@ -1,5 +1,6 @@
 package com.bondeko.sysgeho.ui.core.base;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Locale;
@@ -141,6 +142,55 @@ public class SysGehoToolBox {
 	public static InfoUser getInfoUser(){
 		return (InfoUser) FacesUtil.getSessionMapValue(CoreConstants.INFO_USER);
 	}
+	
+	/****
+	 * Recherche une méthode dans une classe et toute la hiérarchie de ses
+	 * classes parentes
+	 * 
+	 * @param p$baseClass
+	 *            : Classe à partir de laquelle rechercher la méthode
+	 * @param p$methodName
+	 *            : Nom de la méthode à rechercher
+	 * @param classeParams
+	 *            : Paramètres que supportent la méthode recherchée
+	 * @return Retourne une Classe "Method" si la méthode recherchée est
+	 *         trouvée, et null sinon
+	 */
+	public  static Method findMethod(Class<?> p$baseClass, String p$methodName, Class<?>... classeParams) {
+		
+		Method m = null;
+		try {
+			// Si la classe est nulle ou égale à la classe "Object", On retourne
+			// le null
+			if (p$baseClass == null || p$baseClass == Object.class)
+				return m;
+
+			// On parcours toutes les méthodes de la classe la classe
+			for (Method v$m : p$baseClass.getDeclaredMethods()) {
+				// On compare le nom de la méthode courant d'avec le nom de la
+				// méthode recherché
+				if (v$m.getName().equals(p$methodName)) {
+					try {
+						// On vérifie que la méthode trouvée accepte la liste de
+						// paramètres voulues
+						m = p$baseClass.getDeclaredMethod(p$methodName,
+								classeParams);
+						// Si la méthode trouvée accepte les paramètres, alors
+						// on la retourne, sinon on continue la recherche
+						return m;
+					} catch (Exception e) {
+					}
+				}
+			}
+			// Si on arrive ici, c'est que la classe courante ne possède pas la
+			// méthode recherchée
+			// Alors on relance la recherche dans la classe parente
+			m = findMethod(p$baseClass.getSuperclass(), p$methodName,
+					classeParams);
+		} catch (Exception e) {
+		}
+		return m;
+	}	
 
 	
 }

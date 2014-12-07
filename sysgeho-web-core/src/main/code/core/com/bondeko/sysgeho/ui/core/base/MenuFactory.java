@@ -28,10 +28,6 @@ import org.richfaces.component.html.HtmlToolBarGroup;
  * 
  * Générateur de Menus :  Implémation assez basique
  * 
- * TODO A Optimiser 
- * 
- * @author lkamhoua
- *
  */
 @SuppressWarnings("deprecation")
 public class MenuFactory {

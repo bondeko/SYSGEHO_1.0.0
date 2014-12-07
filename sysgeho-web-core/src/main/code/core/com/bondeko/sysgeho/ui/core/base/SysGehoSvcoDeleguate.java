@@ -1,5 +1,6 @@
 package com.bondeko.sysgeho.ui.core.base;
 
+import com.bondeko.sysgeho.be.admin.svco.utilisateur.IRemotePceJte;
 import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
 
@@ -36,7 +37,10 @@ public class SysGehoSvcoDeleguate {
 		
 	
 	/*================================== Services composés Génériques =================================*/
-		
+	
+	public static IRemotePceJte getSvcoPceJte() throws ServiceLocatorException{
+        return (IRemotePceJte) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoPceJte", IRemotePceJte.class));
+    }
 	/**
 	 * Methode générique retournant l' interface générique de CRUD en fonction du nom de l'entité (p$beanName)
 	 * 
