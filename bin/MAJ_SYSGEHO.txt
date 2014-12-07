@@ -135,7 +135,7 @@ Commentaire : Je n'ai pas pu reproduire chez moi. C'est pas une confusion avec l
 	* TAB_RAP_VISIT_MED_EMB(Code, entité TAB_VM_EMB, objet, rapport examen clinique(texte), rapport examen normaux(texte), rapport examen anormaux(texte), conclusion(texte), recommandation particulière(texte), médécin, date edition)
 	
 ========Facture des visites médical
-1-Implémenter l'entité facture visite médicale périoique du personnel avec pièce jointe: la facture détaillé en .doc /.pdf/.jpg...
+1-Implémenter l'entité facture visite médicale périoique du personnel avec pièce jointe: la facture détaillé en .doc /.pdf/.jpg... (OK)
 	TAB_FAC_VM_PERIO( code, reference, objet, entité Visite médical périodique, montant_total de la facture, date édition, Médécin, Pièce jointe)
 2-Implémenter l'entité facture visite médicale dembauche avec pièce jointe : la facture détaillé en .doc /.pdf/.jpg...
 	TAB_FAC_VM_EMB( code, reference, objet, entité Visite médical embauche, montant_total de la facture, date édition, Médécin, Pièce jointe)
