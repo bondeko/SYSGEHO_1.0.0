@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+ 	<ui:composition template="/shared/templates/templateFormulaireDetails.xhtml">
+   			
+		<ui:param name="managedBean" value="#{sessionScope[facVisMedPerioCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" d'une facture de #{locale.dunevisitemedicaleperio}" />
+		
+	<!-- Definition du contenu de l'ecran principal  -->
+		<ui:define name="ecranPrincipalContenu">
+		
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Informations #{locale.dunevisitemedicaleperio}" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+								<h:outputText value="#{locale.dunevisitemedicaleperio}" />
+							<h:panelGroup>
+								<h:inputText id="inpt_codVisMedPerio" value="#{facVisMedPerioCtrl.defaultVue.entiteCourante.tabVisMedPerio.codVisMedPerio}" style="width: 20%" 
+									readonly="true" title="Code" disabled="false">
+									<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>	
+								<h:inputText id="inpt_libVisMedPerio" value="#{facVisMedPerioCtrl.defaultVue.entiteCourante.tabVisMedPerio.libVisMedPerio}" style="width: 40%" 
+										readonly="true"  title="#{locale.libelle}" disabled="false"> 
+										<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+							</h:panelGroup>
+							
+								<h:outputText value="Nom #{locale.societe}"  />
+								<h:inputText  value="#{facVisMedPerioCtrl.defaultVue.entiteCourante.tabVisMedPerio.tabSoc.libSoc}" style="width: 60%" readonly="true"  title="Nom #{locale.societe}" />
+							
+								<h:outputText value="Motif"  />
+								<h:inputText  value="#{facVisMedPerioCtrl.defaultVue.entiteCourante.tabVisMedPerio.libMotif}" style="width: 60%" readonly="true"  title="Motif" />
+							
+								<h:outputText value="Montant TTC"  />
+								<h:inputText  value="#{facVisMedPerioCtrl.defaultVue.entiteCourante.tabVisMedPerio.valMntTtc}" style="width: 40%" readonly="true"  title="Montant TTC" />
+							
+						</h:panelGrid>
+							
+						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdLColRightDynamic" cellspacing="10" >
+							
+						</h:panelGrid>
+					</h:panelGrid>
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="#{locale.infocompl}" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         					
+							<h:outputText value="#{locale.reffac}" />	
+							<h:inputText id="inpt_reffea" value="#{facVisMedPerioCtrl.defaultVue.entiteCourante.refFacVisMedPerio}" style="width: 60%" readonly="true" title="#{locale.reffac}">
+								<a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>	
+         					
+							<h:outputText value="Montant Total :"  />											
+							<h:inputText  value="#{facVisMedPerioCtrl.defaultVue.entiteCourante.valMntTotal}" style="width: 60%" styleClass="money"  title="Montant total de la facture" 
+										 readonly="true" >
+								<f:convertNumber currencySymbol="F CFA"  type="currency" pattern="#,###"  />
+							</h:inputText>	
+							
+							<h:outputText value="Date Facturation" />
+         					<h:inputText value="#{facVisMedPerioCtrl.defaultVue.entiteCourante.dateFac}" readonly="true" style="width: 30%" title="Date Facturation"  >
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+							</h:inputText>
+							
+							<h:outputText value="Objet" />
+							<h:inputTextarea id="inpt_objet"  value="#{facVisMedPerioCtrl.defaultVue.entiteCourante.libObj}"   readonly="true" style="width: 60%" >
+								<a4j:support event="onchange" ajaxSingle="true"/>
+							</h:inputTextarea>
+							
+							<h:outputText value="Infos Compl." />
+							<h:panelGroup>
+								<h:inputTextarea id="inpt_infoCmpl"  value="#{facVisMedPerioCtrl.defaultVue.entiteCourante.libInfCompl}"  readonly="true" style="width: 60%"  >
+									<a4j:support event="onchange" ajaxSingle="true"/>
+								</h:inputTextarea>
+							</h:panelGroup>	
+							
+         				</h:panelGrid>  
+         				
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         				</h:panelGrid> 
+         				         		         		
+         			</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+		</ui:define>
+		
+		<ui:define name="modalPanel">
+			<ui:include src="/shared/include/modalPanel/PiecesJointes.xhtml" />
+		</ui:define>	
+	
+	</ui:composition>
+	
+</html>

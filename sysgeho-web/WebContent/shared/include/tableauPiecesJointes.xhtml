@@ -34,25 +34,25 @@
 									<h:outputText value="#{piece.LRefPce}" rendered="#{empty piece.LRefFch}" />																															
 								</rich:column>
 															
-								<rich:column label="#{locale.types}" sortBy="#{piece.tblTypPce.LTypPce}" filterBy="#{piece.tblTypPce.LTypPce}" width="20%" >
+								<rich:column label="Types" sortBy="#{piece.CTypPce}" filterBy="#{piece.CTypPce}" width="20%" >
 									<f:facet name="header">
-										<h:outputText value="#{locale.types} " />
+										<h:outputText value="Types " />
 									</f:facet>
-									<h:outputText value="#{piece.tblTypPce.LTypPce}"  />
+									<h:outputText value="#{piece.CTypPce}"  />
 								</rich:column>
 								
-								<rich:column label="#{locale.dates}"   width="15%" >
+								<rich:column label="Dates"   width="15%" >
 									<f:facet name="header">
-										<h:outputText value="#{locale.dates}" />
+										<h:outputText value="Dates" />
 									</f:facet>
 									<h:outputText value="#{piece.datePce}"  >
 										<f:convertDateTime type="date" dateStyle="full" pattern="EEEE, d MMM yyyy"  timeZone="GMT+1"/>
 									</h:outputText>
 								</rich:column>
 									
-								<rich:column label="#{locale.descriptions}"  width="35%" >
+								<rich:column label="Descriptions"  width="35%" >
 									<f:facet name="header">
-										<h:outputText value="#{locale.descriptions}" />
+										<h:outputText value="Descriptions" />
 									</f:facet>
 									<h:outputText value="#{piece.LInfPce}"  />
 								</rich:column>

@@ -10,8 +10,8 @@
           
 	<ui:composition template="/shared/templates/templatePourFormulaire.xhtml">
 	
-
-		<ui:param name="ecranPrincipal" value="#{ (! empty ecranSup1) or (! empty ecranSup2) }" />
+		<ui:param name="ecranPiece" value="#{managedBean.docEntity}" />
+		<ui:param name="ecranPrincipal" value="#{ (ecranPiece eq true) or(! empty ecranSup1) or (! empty ecranSup2) }" />
 		<ui:param name="defaultVue" value="#{managedBean.defaultVue}" />
 		<ui:param name="entiteCourante" value="#{managedBean.defaultVue.entiteCourante}" />
 		<ui:param name="entiteRecherche" value="#{managedBean.defaultVue.entiteRecherche}" />
@@ -59,23 +59,17 @@
 			            	&#xa0;
 			            </h:panelGroup>		            
 		            </ui:insert>
+		            
+		            <h:panelGroup rendered="#{ecranPiece}">
+		            	&#xa0;
+		            	<rich:toggleControl for="toggle" value="#{locale.pcejte}" switchToState="ecranPiece"  />
+		            	&#xa0;
+		            </h:panelGroup>	
 		            		                        	        
 
 		            	            		            	            
 				</h:panelGroup>	
 				
-<!--				<h:panelGroup style="width:100%">-->
-<!--					<h:outputText value="#{managedBean.defaultVue.entiteCourante.tblSwsEta.LEta}" rendered="#{managedBean.tecTrtEntity}" -->
-<!--									style="FONT-WEIGHT: bold; align: right" title="#{managedBean.defaultVue.entiteCourante.tblSwsEta.LEta}"/>-->
-<!--				</h:panelGroup>	-->
-<!--				-->
-<!--				<h:panelGroup style="width:100%" rendered="false">-->
-<!--					<marquee>-->
-<!--						<h:outputText value="#{managedBean.defaultVue.entiteCourante.tblSwsEta.LEta}" rendered="#{managedBean.tecTrtEntity}" -->
-<!--									style="FONT-WEIGHT: bold;" title="#{managedBean.defaultVue.entiteCourante.tblSwsEta.LEta}"/>-->
-<!--					</marquee>-->
-<!--				</h:panelGroup>	-->
-																			
 			</h:panelGrid>
 			
 			<h:panelGroup rendered="#{ecranPrincipal}" >
@@ -84,7 +78,7 @@
 
 			<h:panelGrid columns="1" width="100%" style="border:2px solid #{richSkin.panelBorderColor};" border="0" cellpadding="0" cellspacing="0"   >
 
-				<rich:togglePanel id="toggle"  switchType="client" stateOrder="ecranPrincipal,ecranSup1,ecranSup2"  >
+				<rich:togglePanel id="toggle"  switchType="client" stateOrder="ecranPrincipal,ecranSup1,ecranSup2,ecranPiece"  >
 	    		
 	     			<f:facet name="ecranPrincipal">
 	     			
@@ -113,6 +107,21 @@
 						
 	     					<ui:insert name="ecranSup2Contenu" > #{locale.ecranadditionnel2} </ui:insert>
 	     					
+	     				</h:panelGrid>
+	     				
+					</f:facet>
+					
+					<f:facet name="ecranPiece">
+	     			
+						<h:panelGrid id="pngd_ecranPiece" columns="1" width="100%" columnClasses="pngdCol" rowClasses="pngdRow" border="0" cellpadding="0" cellspacing="0"   >
+						
+							<ui:insert name="ecranPieceContenu" > 
+								<!-- Contenu standard des Pièces jointes dans le formulaire d'Edition -->
+								<h:panelGrid  columns="1" width="100%" columnClasses="pngdCol" rowClasses="pngdRow"  border="0" cellpadding="0" cellspacing="0" rendered="#{managedBean.docEntity}" >																		 
+									<ui:include src="/shared/include/tableauPiecesJointes.xhtml"  />
+								</h:panelGrid>
+							</ui:insert>
+	     			
 	     				</h:panelGrid>
 	     				
 					</f:facet>

@@ -31,6 +31,23 @@
 	                    ajaxSingle="true" >
 	                    <h:outputText value="Facture conventionnelle" />
 	                </rich:menuItem>
+	                
+	                <rich:menuSeparator />
+	                
+	                <rich:menuGroup value="Facture #{locale.visitemed}" rendered="true">
+	                    <rich:menuItem submitMode="ajax" rendered="true" 
+		                    action="#{facVisMedPerioCtrl.openHomePage}" 
+		                    ajaxSingle="true" >
+		                    <h:outputText value="Facture #{locale.dunevisitemedicaleperio}" />
+		                </rich:menuItem>
+		                <rich:menuSeparator />
+		                <rich:menuItem submitMode="ajax" rendered="true" 
+		                    action="#{facVisMedEmbCtrl.openHomePage}" 
+		                    ajaxSingle="true" >
+		                    <h:outputText value="Facture #{locale.dunevisitemedicaleemb}" />
+		                </rich:menuItem>
+		                
+	                </rich:menuGroup>
 				</rich:dropDownMenu>	
 				
    			</ui:composition>

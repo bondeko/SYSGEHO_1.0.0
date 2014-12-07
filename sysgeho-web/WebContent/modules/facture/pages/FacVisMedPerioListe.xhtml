@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+     
+  	<ui:composition template="/shared/templates/templateFormulaireListe.xhtml">
+		
+		<ui:param name="managedBean" value="#{sessionScope[facVisMedPerioCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" des factures de #{locale.dunevisitemedicaleperio}" />
+		
+		<!-- Criteres standards de recherche -->
+		<ui:define name="standardFilter"  >
+		
+			<h:panelGrid columns="2" width="100%"   columnClasses="pngdColMiddle" rowClasses="pngdRow" >
+			
+				<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+					<h:outputText value="#{locale.reffac}" />          				
+         			<h:inputText  value="#{facVisMedPerioCtrl.defaultVue.entiteRecherche.refFacVisMedPerio}" style="width: 30%" /> 
+         			
+					<h:outputText value="Nom #{locale.societe}" />          				
+         			<h:inputText  value="#{facVisMedPerioCtrl.defaultVue.entiteRecherche.tabVisMedPerio.tabSoc.libSoc}" style="width: 30%" />  
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2" width="100%" border="0" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				</h:panelGrid>
+																																																	
+			</h:panelGrid>	
+						
+		</ui:define>
+		
+		<!-- Colonnes specifiques e l entite -->
+		<ui:define name="specificColumns"  >
+		
+			<rich:column label="#{locale.reffac}" sortBy="#{entity.refFacVisMedPerio}" filterBy="#{entity.refFacVisMedPerio}" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.reffac} "  />
+				</f:facet>
+				<h:outputText value="#{entity.refFacVisMedPerio}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.societe}" sortBy="#{entity.tabVisMedPerio.tabSoc.libSoc}" filterBy="#{entity.tabVisMedPerio.tabSoc.libSoc}"  >
+				<f:facet name="header">
+					<h:outputText value="#{locale.societe}"  />
+				</f:facet>
+				<h:outputText value="#{entity.tabVisMedPerio.tabSoc.libSoc}" />				
+			</rich:column>
+			
+			<rich:column label="Montant Total"  sortBy="#{entity.valMntTotal}" filterBy="#{entity.valMntTotal}"  >
+				<f:facet name="header">
+					<h:outputText value="Montant Total" />
+				</f:facet>	
+				<h:panelGrid width="100%" styleClass="money" >
+					<h:outputText  value="#{entity.valMntTotal}"   >
+						<f:convertNumber pattern="#,###" />
+					</h:outputText>	
+				</h:panelGrid>
+			</rich:column>
+			
+			<rich:column label="Date Facture" sortBy="#{entity.dateFac}" filterBy="#{entity.dateFac}"  >
+				<f:facet name="header">
+					<h:outputText value="Date Facture" />
+				</f:facet>
+				<h:outputText value="#{entity.dateFac}" >	
+					<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+				</h:outputText>			
+			</rich:column>
+			
+			<rich:column label="Objet" sortBy="#{entity.libObj}" filterBy="#{entity.libObj}" >
+				<f:facet name="header">
+					<h:outputText value="Objet "  />
+				</f:facet>
+				<h:outputText value="#{entity.libObj}" />				
+			</rich:column>
+			
+		</ui:define>
+		
+		<ui:define name="modalPanel">
+			<ui:include src="/shared/include/modalPanel/PiecesJointes.xhtml" />
+		</ui:define>	
+													
+	</ui:composition>
+	
+</html>

@@ -2,19 +2,26 @@
 <faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
  xmlns:xi="http://www.w3.org/2001/XInclude"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
- 
  <managed-bean>
   <managed-bean-name>facCourCtrl</managed-bean-name>
   <managed-bean-class>com.bondeko.sysgeho.ui.fac.controleur.FacCourCtrl</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
- 
  <managed-bean>
   <managed-bean-name>facConvCtrl</managed-bean-name>
   <managed-bean-class>com.bondeko.sysgeho.ui.fac.controleur.FacConvCtrl</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
- 
+ <managed-bean>
+  <managed-bean-name>facVisMedPerioCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.fac.controleur.FacVisMedPerioCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>facVisMedEmbCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.fac.controleur.FacVisMedEmbCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
  <navigation-rule>
   <from-view-id>*</from-view-id>
   <navigation-case>
@@ -31,7 +38,6 @@
    <to-view-id>/modules/facture/pages/FacCourListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-  
   <navigation-case>
    <from-outcome>FacConvDetails</from-outcome>
    <to-view-id>/modules/facture/pages/FacConvDetails.xhtml</to-view-id>
@@ -46,6 +52,34 @@
    <to-view-id>/modules/facture/pages/FacConvListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
+  <navigation-case>
+   <from-outcome>FacVisMedPerioDetails</from-outcome>
+   <to-view-id>/modules/facture/pages/FacVisMedPerioDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>FacVisMedPerioEdition</from-outcome>
+   <to-view-id>/modules/facture/pages/FacVisMedPerioEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>FacVisMedPerioListe</from-outcome>
+   <to-view-id>/modules/facture/pages/FacVisMedPerioListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
   
+  <navigation-case>
+   <from-outcome>FacVisMedEmbDetails</from-outcome>
+   <to-view-id>/modules/facture/pages/FacVisMedEmbDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>FacVisMedEmbEdition</from-outcome>
+   <to-view-id>/modules/facture/pages/FacVisMedEmbEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>FacVisMedEmbListe</from-outcome>
+   <to-view-id>/modules/facture/pages/FacVisMedEmbListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
  </navigation-rule>
 </faces-config>

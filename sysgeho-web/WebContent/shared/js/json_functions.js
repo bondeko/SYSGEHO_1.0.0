@@ -3,9 +3,7 @@
  * Repose sur quelques fonctions utilitaires déja écrites et contenues dans les fichiers (util.js, menu_functions.js)
  * 
  * 
- * version : 1.0.1
- * Crée le 25/05/2011
- * @author lkamhoua
+ *
  */
 
 

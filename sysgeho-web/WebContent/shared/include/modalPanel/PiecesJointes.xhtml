@@ -27,13 +27,7 @@
 
 							<h:panelGrid columns="2">
 
-								<h:outputText value="Type : " />
-								<h:selectOneMenu value="#{modalCtrl.type}"
-									style=" width : 200px;">
-									<f:selectItems value="#{modalCtrl.typesFichier}" />
-								</h:selectOneMenu>
-
-								<h:outputText value="#{locale.reference2}" />
+								<h:outputText value="#{locale.reference}" />
 								<h:panelGroup>
 									<h:inputText id="inpt_ref" value="#{modalCtrl.reference}"
 										style=" width : 200px;" required="true"
@@ -42,7 +36,7 @@
 									</h:inputText>
 								</h:panelGroup>
 
-								<h:outputText value="#{locale.date3}" />
+								<h:outputText value="Date" />
 								<h:panelGroup>
 									<rich:calendar id="cald_date" value="#{modalCtrl.date}"
 										inputStyle=" width : 200px;" required="true"
@@ -69,13 +63,13 @@
 							listWidth="100%"
 							maxFilesQuantity="#{modalCtrl.uploadsAvailable}"
 							immediateUpload="#{modalCtrl.autoUpload}"
-							transferErrorLabel="#{locale.erreurtransfertfichier}"
+							transferErrorLabel="Erreur transfert fichier"
 							acceptedTypes="#{modalCtrl.acceptedTypes}" allowFlash="#{modalCtrl.useFlash}"
 							fileUploadListener="#{modalCtrl.listener}"
-							addControlLabel="#{locale.ajouter}" cancelEntryControlLabel="#{locale.annuler}"
-							clearAllControlLabel="#{locale.supprimettt}" stopControlLabel="#{locale.stop}"
-							stopEntryControlLabel="#{locale.stop}" uploadControlLabel="#{locale.telecharger}"
-							doneLabel="#{locale.fichiertelecharge}" clearControlLabel="#{locale.nettoyer}"
+							addControlLabel="Ajouter" cancelEntryControlLabel="Annuler"
+							clearAllControlLabel="Suprimer tout" stopControlLabel="Stop"
+							stopEntryControlLabel="Stop" uploadControlLabel="#{locale.telecharger}"
+							doneLabel="#{locale.fichiertelecharge}" clearControlLabel="Nettoyer"
 							progressLabel="#{locale.telechargementencours}" sizeErrorLabel="#{locale.taillefichierinval}"  >
 
 							<a4j:support event="onuploadcomplete" ajaxSingle="true" reRender="pngd_actions" />
@@ -87,12 +81,12 @@
 						<h:panelGrid id="pngd_actions" columns="" width="100%"
 							style="text-align:right;">
 							<h:panelGroup>
-								<a4j:commandButton value="#{locale.valider}"
+								<a4j:commandButton value="Valider"
 									action="#{modalCtrl.valider}"
 									oncomplete="#{rich:component('mpnl_file')}.hide();return true;"
 									disabled="#{ ( (empty modalCtrl.reference) or  (empty modalCtrl.date)  or ( (modalCtrl.pieceRequise)? (modalCtrl.size eq 0):false) )}"
 									reRender="#{modalCtrl.reRender}" status="stus_actions" />
-								<a4j:commandButton value="#{locale.annuler}"
+								<a4j:commandButton value="Annuler"
 									action="#{modalCtrl.annuler}" ajaxSingle="true"	immediate="true"
 									oncomplete="#{rich:component('mpnl_file')}.hide();return false;" />
 							</h:panelGroup>
