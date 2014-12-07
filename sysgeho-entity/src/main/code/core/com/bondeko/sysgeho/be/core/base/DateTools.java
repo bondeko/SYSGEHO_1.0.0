@@ -1,6 +1,7 @@
 package com.bondeko.sysgeho.be.core.base;
 
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -173,5 +174,9 @@ public class DateTools {
 			padded.insert(0, p$padChar);
 		}
 		return padded.toString();
+	}
+	
+	public static BigDecimal getBigDecimalValue(int value){
+		return new BigDecimal(value);
 	}
 }

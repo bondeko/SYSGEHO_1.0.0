@@ -97,4 +97,7 @@ public abstract class SysGehoBaseEntity extends BaseEntity{
 		return datMod;
 	}
 	
+	protected String formatString(String strToFormat){
+		return (strToFormat==null || strToFormat.trim().isEmpty()) ? null : strToFormat;
+	}
 }

@@ -7,8 +7,6 @@ import java.math.BigDecimal;
 
 import com.bondeko.sysgeho.be.core.base.DateTools;
 import com.bondeko.sysgeho.be.fac.entity.TabFacConv;
-import com.bondeko.sysgeho.be.fac.entity.TabFacCour;
-import com.bondeko.sysgeho.be.imp.entity.TabPat;
 import com.sidere.convert.ConvertNumberToWords;
 
 /**

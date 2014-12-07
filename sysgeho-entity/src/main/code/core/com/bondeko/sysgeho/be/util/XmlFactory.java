@@ -4,10 +4,6 @@ package com.bondeko.sysgeho.be.util;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-/**
- * @author btoko
- * 
- */
 public class XmlFactory {
 	
 	private static XStream serializer = null;
