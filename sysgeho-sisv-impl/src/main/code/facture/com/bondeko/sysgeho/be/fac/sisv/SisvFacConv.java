@@ -11,14 +11,15 @@ import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
 import com.bondeko.sysgeho.be.core.dao.base.IBaseDao;
 import com.bondeko.sysgeho.be.core.enums.EnuEtat;
+import com.bondeko.sysgeho.be.core.exception.BaseException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoPersistenceException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.BaseSisv;
 import com.bondeko.sysgeho.be.core.util.locator.ResourceLocator;
 import com.bondeko.sysgeho.be.fac.dao.IDaoFacConv;
 import com.bondeko.sysgeho.be.fac.entity.TabFacConv;
+import com.bondeko.sysgeho.be.fac.entity.TabFacCour;
 import com.bondeko.sysgeho.be.fac.serialize.SrlFacConvElt;
-import com.bondeko.sysgeho.be.fac.serialize.SrlFacCour;
 import com.bondeko.sysgeho.be.fac.serialize.SrlFactConv;
 import com.bondeko.sysgeho.be.util.EntFichier;
 import com.bondeko.sysgeho.be.util.ReportNames;
@@ -40,6 +41,18 @@ public class SisvFacConv extends BaseSisv<TabFacConv, String> implements ISisvFa
 	@Override
 	public IBaseDao<TabFacConv, String> getBaseDao() {
 		return daoFacConv;
+	}
+	
+	public <X extends BaseEntity> X creer(X p$entite) throws BaseException  {
+		
+		//fais un teste si l'entité existe déjà
+		X entRech = getBaseDao().findById(p$entite, p$entite.getId());
+		if(entRech != null){
+			throw new BaseException("Erreur : Cette entité existe déjà");
+		}
+		initialiserDonnees((TabFacConv)p$entite);
+		p$entite.validateData();
+		return getBaseDao().save(p$entite);
 	}
 
 	public <X extends BaseEntity> X rechercher(X entity, Serializable id) throws SysGehoSystemException {

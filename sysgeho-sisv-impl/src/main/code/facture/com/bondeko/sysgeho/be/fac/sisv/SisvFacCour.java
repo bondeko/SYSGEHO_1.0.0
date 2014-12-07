@@ -27,10 +27,7 @@ import com.bondeko.sysgeho.be.imp.dao.IDaoSoin;
 import com.bondeko.sysgeho.be.imp.entity.TabConsul;
 import com.bondeko.sysgeho.be.imp.entity.TabExam;
 import com.bondeko.sysgeho.be.imp.entity.TabHospi;
-import com.bondeko.sysgeho.be.imp.entity.TabPat;
 import com.bondeko.sysgeho.be.imp.entity.TabSoin;
-import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatFichePat;
-import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatFichePatElt;
 import com.bondeko.sysgeho.be.util.EntFichier;
 import com.bondeko.sysgeho.be.util.ReportNames;
 import com.bondeko.sysgeho.be.util.SysGehoOutput;
@@ -64,7 +61,7 @@ public class SisvFacCour extends BaseSisv<TabFacCour, String> implements ISisvFa
 	public IBaseDao<TabFacCour, String> getBaseDao() {
 		return daoFacCour;
 	}
-
+	
 	public <X extends BaseEntity> X rechercher(X entity, Serializable id) throws SysGehoSystemException {
 		try {
 			return daoFacCour.findById(entity, id);
