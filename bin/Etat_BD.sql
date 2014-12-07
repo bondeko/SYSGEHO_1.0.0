@@ -374,6 +374,76 @@ INSERT INTO `tab_fac_cour` (`REF_FAC_COUR`,`COD_PAT`,`VAL_MNT_TOTAL`,`DAT_FAC`,`
 
 
 --
+-- Definition of table `tab_fac_vis_med_emb`
+--
+
+DROP TABLE IF EXISTS `tab_fac_vis_med_emb`;
+CREATE TABLE `tab_fac_vis_med_emb` (
+  `REF_FAC_VIS_MED_EMB` varchar(32) NOT NULL DEFAULT '',
+  `COD_VIS_MED_EMB` varchar(32) DEFAULT NULL,
+  `C_LOT_DOC` varchar(32) DEFAULT NULL,
+  `VAL_MNT_TOTAL` decimal(20,2) DEFAULT NULL,
+  `DAT_FAC` varchar(32) DEFAULT NULL,
+  `BOO_VAL` decimal(1,0) DEFAULT '0',
+  `BOO_PAIE` decimal(1,0) DEFAULT '0',
+  `LIB_OBJ` varchar(1024) DEFAULT NULL,
+  `LIB_INF_COMPL` varchar(1024) DEFAULT NULL,
+  `ETAT_ENT` varchar(30) DEFAULT NULL,
+  `COD_EXE_FIS` varchar(30) DEFAULT NULL,
+  `BOO_ACT` decimal(1,0) DEFAULT '0',
+  `COD_USR_CRT` varchar(30) DEFAULT NULL,
+  `COD_USR_MOD` varchar(30) DEFAULT NULL,
+  `DAT_CRT` varchar(30) DEFAULT NULL,
+  `DAT_MOD` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`REF_FAC_VIS_MED_EMB`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tab_fac_vis_med_emb`
+--
+
+/*!40000 ALTER TABLE `tab_fac_vis_med_emb` DISABLE KEYS */;
+INSERT INTO `tab_fac_vis_med_emb` (`REF_FAC_VIS_MED_EMB`,`COD_VIS_MED_EMB`,`C_LOT_DOC`,`VAL_MNT_TOTAL`,`DAT_FAC`,`BOO_VAL`,`BOO_PAIE`,`LIB_OBJ`,`LIB_INF_COMPL`,`ETAT_ENT`,`COD_EXE_FIS`,`BOO_ACT`,`COD_USR_CRT`,`COD_USR_MOD`,`DAT_CRT`,`DAT_MOD`) VALUES 
+ ('FAC0012458/VMEMB/2014','2014000001','2014L00000003',NULL,'20141207000000000000','1','1','RAS','RAS','2011','2014','1','admin','admin','20141207142310000215','20141207142532000662');
+/*!40000 ALTER TABLE `tab_fac_vis_med_emb` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tab_fac_vis_med_perio`
+--
+
+DROP TABLE IF EXISTS `tab_fac_vis_med_perio`;
+CREATE TABLE `tab_fac_vis_med_perio` (
+  `REF_FAC_VIS_MED_PERIO` varchar(32) NOT NULL DEFAULT '',
+  `COD_VIS_MED_PERIO` varchar(32) DEFAULT NULL,
+  `C_LOT_DOC` varchar(32) DEFAULT NULL,
+  `VAL_MNT_TOTAL` decimal(20,2) DEFAULT NULL,
+  `DAT_FAC` varchar(32) DEFAULT NULL,
+  `BOO_VAL` decimal(1,0) DEFAULT '0',
+  `BOO_PAIE` decimal(1,0) DEFAULT '0',
+  `LIB_OBJ` varchar(1024) DEFAULT NULL,
+  `LIB_INF_COMPL` varchar(1024) DEFAULT NULL,
+  `ETAT_ENT` varchar(30) DEFAULT NULL,
+  `COD_EXE_FIS` varchar(30) DEFAULT NULL,
+  `BOO_ACT` decimal(1,0) DEFAULT '0',
+  `COD_USR_CRT` varchar(30) DEFAULT NULL,
+  `COD_USR_MOD` varchar(30) DEFAULT NULL,
+  `DAT_CRT` varchar(30) DEFAULT NULL,
+  `DAT_MOD` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`REF_FAC_VIS_MED_PERIO`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tab_fac_vis_med_perio`
+--
+
+/*!40000 ALTER TABLE `tab_fac_vis_med_perio` DISABLE KEYS */;
+INSERT INTO `tab_fac_vis_med_perio` (`REF_FAC_VIS_MED_PERIO`,`COD_VIS_MED_PERIO`,`C_LOT_DOC`,`VAL_MNT_TOTAL`,`DAT_FAC`,`BOO_VAL`,`BOO_PAIE`,`LIB_OBJ`,`LIB_INF_COMPL`,`ETAT_ENT`,`COD_EXE_FIS`,`BOO_ACT`,`COD_USR_CRT`,`COD_USR_MOD`,`DAT_CRT`,`DAT_MOD`) VALUES 
+ ('FAC0012458/VMPERIO/2014','2014000001','2014L00000002',NULL,'20141204000000000000','0','0','RAS','RAS','2000','2014','1','admin','admin','20141204183037000866','20141204183125000086');
+/*!40000 ALTER TABLE `tab_fac_vis_med_perio` ENABLE KEYS */;
+
+
+--
 -- Definition of table `tab_hospi`
 --
 
@@ -455,6 +525,7 @@ INSERT INTO `tab_inc_cod` (`COD_INC_COD`,`LIB_DESC`,`VAL_INC_COD`,`ETAT_ENT`,`CO
  ('2014TabCpteRenduExam','compteur compte rendu exam','3',NULL,NULL,'0','admin','admin',NULL,'20141026114603000473'),
  ('2014TabExam','compteur exam','4',NULL,NULL,'0','admin','admin','20140809150354000617','20141005140938000549'),
  ('2014TabHospi','compteur hospitalisation','15',NULL,NULL,'0','admin','admin','20140809150354000617','20141026120350000387'),
+ ('2014TabLotDoc','compteur lot documentaire','3',NULL,NULL,'0',NULL,'admin',NULL,'20141207142532000368'),
  ('2014TabPat','compteur patient','5',NULL,NULL,'0','admin','admin','20140809150354000617','20140906100209000997'),
  ('2014TabRapVisMedEmb','compteur rapport visite medicale embauche','2',NULL,NULL,'0',NULL,'admin',NULL,'20141119200857000314'),
  ('2014TabRapVisMedPerio','compteur rapport visite medicale periodique','1',NULL,NULL,'0',NULL,'admin',NULL,'20141116214121000852'),
@@ -498,6 +569,37 @@ INSERT INTO `tab_lit` (`COD_LIT`,`NUM_LIT`,`LIB_LIT`,`NUM_CHR_HOSPI`,`ETAT_ENT`,
  ('CH2/L1','L1','Lit bao','CH2','2013',NULL,NULL,NULL,'admin',NULL,'20141015194815000495','0'),
  ('CH2/L2','L2','Lit Archi','CH2','2012',NULL,NULL,NULL,'admin',NULL,'20140921192225000752','1');
 /*!40000 ALTER TABLE `tab_lit` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tab_lot_doc`
+--
+
+DROP TABLE IF EXISTS `tab_lot_doc`;
+CREATE TABLE `tab_lot_doc` (
+  `C_LOT_DOC` varchar(255) NOT NULL DEFAULT '',
+  `Z_PCE` decimal(20,2) DEFAULT '0.00',
+  `L_INF_LOT` varchar(255) DEFAULT NULL,
+  `L_LOT_DOC` varchar(255) DEFAULT NULL,
+  `ETAT_ENT` varchar(30) DEFAULT NULL,
+  `COD_EXE_FIS` varchar(30) DEFAULT NULL,
+  `BOO_ACT` decimal(1,0) DEFAULT '0',
+  `COD_USR_CRT` varchar(30) DEFAULT NULL,
+  `COD_USR_MOD` varchar(30) DEFAULT NULL,
+  `DAT_CRT` varchar(30) DEFAULT NULL,
+  `DAT_MOD` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`C_LOT_DOC`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tab_lot_doc`
+--
+
+/*!40000 ALTER TABLE `tab_lot_doc` DISABLE KEYS */;
+INSERT INTO `tab_lot_doc` (`C_LOT_DOC`,`Z_PCE`,`L_INF_LOT`,`L_LOT_DOC`,`ETAT_ENT`,`COD_EXE_FIS`,`BOO_ACT`,`COD_USR_CRT`,`COD_USR_MOD`,`DAT_CRT`,`DAT_MOD`) VALUES 
+ ('2014L00000002','1.00',NULL,'Lot documentaire de la facture FAC0012458/VMPERIO/2014','2000','2014','1','admin','admin','20141204183124000907','20141204183125000084'),
+ ('2014L00000003','1.00',NULL,'Lot documentaire de la facture FAC0012458/VMEMB/2014','2000','2014','1','admin','admin','20141207142532000379','20141207142532000661');
+/*!40000 ALTER TABLE `tab_lot_doc` ENABLE KEYS */;
 
 
 --
@@ -553,6 +655,41 @@ INSERT INTO `tab_pat` (`COD_PAT`,`LIB_MAT`,`LIB_TIT`,`LIB_NOM`,`LIB_PRE`,`ENU_ST
  ('2014000004','05Q436','2004','TIMOTE','Atouba pascaline','2003','19860908000000000000','M','RAS','72568925','ING','Support','CITECH','0','1','Mr Arnaud','258965548',NULL,'20140828000000000000',NULL,'Dr','2000','2014','1','admin','admin','20140828203247000391','20141020200150000076',NULL,'Communication and Information Technology','0145785632',''),
  ('2014000005','2015/FP/8578965','2002','Azebaze nguinfack','Tatiana pulcherie','2003','19670913000000000000','F','Dla-Bepanda bonabo','78965412','Dentiste','Assistante dantiste','E-PRINT','1','0','Mr Azebaze tchinda christophe','89562374','ACTIVA','20140906000000000000',NULL,'Dr Ondoua albert CHU YDE','2000','2014','1','admin','admin','20140906100210000018','20140906100800000660',NULL,NULL,'012478965',NULL);
 /*!40000 ALTER TABLE `tab_pat` ENABLE KEYS */;
+
+
+--
+-- Definition of table `tab_pce_jte`
+--
+
+DROP TABLE IF EXISTS `tab_pce_jte`;
+CREATE TABLE `tab_pce_jte` (
+  `C_PCE` varchar(255) NOT NULL DEFAULT '',
+  `D_PCE` varchar(32) DEFAULT NULL,
+  `L_INF_PCE` varchar(255) DEFAULT NULL,
+  `L_REF_FCH` varchar(255) DEFAULT NULL,
+  `L_REF_PCE` varchar(255) DEFAULT NULL,
+  `V_VAL_PCE` decimal(20,2) DEFAULT '0.00',
+  `C_LOT_DOC` varchar(255) DEFAULT NULL,
+  `C_TYP_PCE` varchar(255) DEFAULT NULL,
+  `ETAT_ENT` varchar(30) DEFAULT NULL,
+  `COD_EXE_FIS` varchar(30) DEFAULT NULL,
+  `BOO_ACT` decimal(1,0) DEFAULT '0',
+  `COD_USR_CRT` varchar(30) DEFAULT NULL,
+  `COD_USR_MOD` varchar(30) DEFAULT NULL,
+  `DAT_CRT` varchar(30) DEFAULT NULL,
+  `DAT_MOD` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`C_PCE`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tab_pce_jte`
+--
+
+/*!40000 ALTER TABLE `tab_pce_jte` DISABLE KEYS */;
+INSERT INTO `tab_pce_jte` (`C_PCE`,`D_PCE`,`L_INF_PCE`,`L_REF_FCH`,`L_REF_PCE`,`V_VAL_PCE`,`C_LOT_DOC`,`C_TYP_PCE`,`ETAT_ENT`,`COD_EXE_FIS`,`BOO_ACT`,`COD_USR_CRT`,`COD_USR_MOD`,`DAT_CRT`,`DAT_MOD`) VALUES 
+ ('2014L00000002_10801_Fac000001_1103','20141204000000000000','RAS','architecturees_soa_distribuees.pdf','FacVMPerio',NULL,'2014L00000002','AUTRES',NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+ ('2014L00000003_10801_Fac000001_1103','20141207000000000000','RAS','DPR02 - Ingénieur Etudes et developpement.pdf','RAS',NULL,'2014L00000003','AUTRES',NULL,NULL,NULL,NULL,NULL,NULL,NULL);
+/*!40000 ALTER TABLE `tab_pce_jte` ENABLE KEYS */;
 
 
 --
