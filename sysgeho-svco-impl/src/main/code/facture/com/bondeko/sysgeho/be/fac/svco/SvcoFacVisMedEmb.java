@@ -12,29 +12,29 @@ import javax.ejb.TransactionManagementType;
 
 import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
+import com.bondeko.sysgeho.be.core.exception.BaseException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.IBaseSisv;
 import com.bondeko.sysgeho.be.core.svco.base.BaseSvco;
-import com.bondeko.sysgeho.be.fac.entity.TabFacConv;
-import com.bondeko.sysgeho.be.fac.sisv.ISisvFacConv;
-import com.bondeko.sysgeho.be.util.EntFichier;
+import com.bondeko.sysgeho.be.fac.entity.TabFacVisMedEmb;
+import com.bondeko.sysgeho.be.fac.sisv.ISisvFacVisMedEmb;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
-public class SvcoFacConv extends BaseSvco<TabFacConv> implements IRemoteFacConv, ILocalFacConv{
+public class SvcoFacVisMedEmb extends BaseSvco<TabFacVisMedEmb> implements IRemoteFacVisMedEmb, ILocalFacVisMedEmb{
 	
 	@EJB
-	ISisvFacConv sisvFacConv;
+	ISisvFacVisMedEmb sisvFacVisMedEmb;
 	
 	@Resource
 	SessionContext session;
 
-	private static BaseLogger logger = BaseLogger.getLogger(SvcoFacConv.class);
+	private static BaseLogger logger = BaseLogger.getLogger(SvcoFacVisMedEmb.class);
 	
 	@Override
-	protected IBaseSisv<TabFacConv, String> getBaseSisv() {
-		return sisvFacConv;
+	protected IBaseSisv<TabFacVisMedEmb, String> getBaseSisv() {
+		return sisvFacVisMedEmb;
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class SvcoFacConv extends BaseSvco<TabFacConv> implements IRemoteFacConv,
 	public <X extends BaseEntity> X rechercher(X entity, Serializable id)
 			throws SysGehoAppException {
 		try {
-			return sisvFacConv.rechercher(entity,id);
+			return sisvFacVisMedEmb.rechercher(entity,id);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -56,7 +56,7 @@ public class SvcoFacConv extends BaseSvco<TabFacConv> implements IRemoteFacConv,
 	public <X extends BaseEntity> List<X> rechercherTout(X entity)
 			throws SysGehoAppException {
 		try {
-			return sisvFacConv.rechercherTout(entity);
+			return sisvFacVisMedEmb.rechercherTout(entity);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -68,7 +68,7 @@ public class SvcoFacConv extends BaseSvco<TabFacConv> implements IRemoteFacConv,
 	public <X extends BaseEntity> List<X> rechercherParCritere(X entity)
 			throws SysGehoAppException {
 		try {
-			return sisvFacConv.rechercherParCritere(entity);
+			return sisvFacVisMedEmb.rechercherParCritere(entity);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -77,9 +77,9 @@ public class SvcoFacConv extends BaseSvco<TabFacConv> implements IRemoteFacConv,
 	}
 	
 	@Override
-	public TabFacConv valider(TabFacConv $pFacConv) throws SysGehoAppException {
+	public TabFacVisMedEmb valider(TabFacVisMedEmb $pFacConv) throws SysGehoAppException {
 		try {
-			return sisvFacConv.valider($pFacConv);
+			return sisvFacVisMedEmb.valider($pFacConv);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -88,9 +88,9 @@ public class SvcoFacConv extends BaseSvco<TabFacConv> implements IRemoteFacConv,
 	}
 	
 	@Override
-	public TabFacConv payer(TabFacConv $pFacConv) throws SysGehoAppException {
+	public TabFacVisMedEmb payer(TabFacVisMedEmb $pFacConv) throws SysGehoAppException {
 		try {
-			return sisvFacConv.payer($pFacConv);
+			return sisvFacVisMedEmb.payer($pFacConv);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
@@ -99,26 +99,17 @@ public class SvcoFacConv extends BaseSvco<TabFacConv> implements IRemoteFacConv,
 	}
 	
 	@Override
-	public List<TabFacConv> rechercherConsulNonPaieParPatient(String codSoc, String mois, String annee) throws SysGehoAppException {
+	public TabFacVisMedEmb ajouterPieceJte(TabFacVisMedEmb p$entite) throws BaseException {
 		try {
-			return sisvFacConv.rechercherFacConvParSocMoisAnnee(codSoc, mois, annee);
-		} catch (SysGehoSystemException e) {
-			e.printStackTrace();
-			SysGehoAppException sdr = new SysGehoAppException(e);
+			return sisvFacVisMedEmb.ajouterPieceJte(p$entite);
+		} catch (BaseException sdr) {
+			session.setRollbackOnly();
 			throw sdr;
+		} catch (Exception e) {
+			session.setRollbackOnly();
+			throw new SysGehoSystemException("Erreur d'ajout de la pièce!", e);
 		}
-	}
-	
-	@Override
-	public EntFichier  genererFacConv(TabFacConv facConv)
-	throws SysGehoAppException {
-		try {
-			return sisvFacConv.genererFacConv(facConv);
-		} catch (SysGehoSystemException e) {
-			e.printStackTrace();
-			SysGehoAppException sdr = new SysGehoAppException(e);
-			throw sdr;
-		}
-	}
 
+	}
+	
 }
