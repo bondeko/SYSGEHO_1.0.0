@@ -118,8 +118,8 @@ Commentaire : Je n'ai pas pu reproduire chez moi. C'est pas une confusion avec l
 	- Présentation
 	- Aide
 4- Implementé l'entité "Etat statistique" pour le module pilotage
-5-Rédaction de la plaquette produit
-6-Rédaction du guide utilisateur
+5-Rédaction de la plaquette produit (OK)
+6-Rédaction du guide utilisateur - OK (Volume 1)
 7- Implementé la page "Présentation SYSGEHO" (contenu=plaquette du produit)
 8- Implémenté la page "Aide/Guide utilisateur" (Contenu=guide utilisateur)
 9-  menu "Modifier son mot de passe" à intégrer au dessus du menu "Deconnexion" (OK)
@@ -145,7 +145,7 @@ Commentaire : Je n'ai pas pu reproduire chez moi. C'est pas une confusion avec l
 ======Etat Générique et statistique
 1-Génerer le dossier complet d'un patient : Etat contenant toutes les prestations + résultats réalisée pour un patient donné
 	* 5 sections: 1-identité du patient, 2-liste des consultation, 3-liste des examen, 4-liste des soins, 5-liste des hospitalisations
-2-Génerer la liste des sociétés
+2-Génerer la liste des sociétés - OK
 3-Génerer le fichier des examens
 4-Génerer le fichier des soins
 5-Génerer la facture conventionnelle -OK
@@ -165,4 +165,18 @@ Commentaire : Je n'ai pas pu reproduire chez moi. C'est pas une confusion avec l
 2-Ajouter le menu "Modifier son mot de passe" à intégrer au dessus du menu "Deconnexion" et en dessous du nom utilisateur (OK)
 
 =====Gestion des stocks & Pharmacie (A analyser et à implémenter)
+
+
+-----------------------------------------------------12/12/2014-----------------------------------------------------------------
+
+======Pilotage (urgent)
+1-Implementation de l'entité état statistique pour l'intégration  des états pilotage
+on peut se limiter au attribut code, libellé
+
+======Rapport de visite médical d'embauche
+1-Erreur lors de la création sur l'instruction:  if(rapVisMedCree.getTabVisMedEmb().getBooRapVisMed().equals(BigDecimal.ONE))
+10:20:14,465 ERROR [STDERR] Caused by: java.lang.NullPointerException
+10:20:14,465 ERROR [STDERR] 	at com.bondeko.sysgeho.be.imp.sisv.SisvRapVisMedEmb.creer(SisvRapVisMedEmb.java:86)
+
+
 
