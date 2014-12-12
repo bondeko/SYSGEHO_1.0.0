@@ -178,5 +178,7 @@ on peut se limiter au attribut code, libellé
 10:20:14,465 ERROR [STDERR] Caused by: java.lang.NullPointerException
 10:20:14,465 ERROR [STDERR] 	at com.bondeko.sysgeho.be.imp.sisv.SisvRapVisMedEmb.creer(SisvRapVisMedEmb.java:86)
 
-
+====Facture Visite Médical périodique et embauche
+1- Dans le formulaire de créaton il n'ya pas de champs pr ajouté la pièce jointe
+2- Après l'ajout avec succès d'une piece jointe sur une facture crée, la PJ n'est pas visible dans l'onglet "Pieces jointes"
 

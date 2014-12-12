@@ -513,7 +513,6 @@ CREATE TABLE TAB_VIS_MED_EMB (
   DAT_MOD	VARCHAR(30), 
   PRIMARY KEY (COD_VIS_MED_EMB)
   
-  ALTER TABLE `sysgeho`.`tab_vis_med_emb` ADD COLUMN `BOO_RAP_VIS_MED` DECIMAL(1,0) AFTER `DAT_MOD`;
 ); 
 
 CREATE TABLE TAB_FAC_CONV (
@@ -672,5 +671,6 @@ CREATE TABLE TAB_FAC_VIS_MED_EMB (
   PRIMARY KEY (REF_FAC_VIS_MED_EMB)
 ); 
 
+ALTER TABLE `sysgeho`.`tab_vis_med_emb` ADD COLUMN `BOO_RAP_VIS_MED` DECIMAL(1,0) AFTER `DAT_MOD`;
+INSERT INTO `sysgeho`.`tab_inc_cod` (`COD_INC_COD`, `LIB_DESC`, `VAL_INC_COD`, `ETAT_ENT`, `COD_EXE_FIS`, `BOO_ACT`, `COD_USR_CRT`, `COD_USR_MOD`, `DAT_CRT`, `DAT_MOD`) VALUES ('2014TabRapVisMedPerio', 'compteur compte rendu VM Perio', '1', NULL, NULL, '0', 'admin', 'admin', NULL, NULL), ('2014TabRapVisMedEmb', 'compteur compte rendu VM Emb', '1', NULL, NULL, '0', NULL, 'admin', 'admin', NULL);
 
->>>>>>> .r177
