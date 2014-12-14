@@ -83,7 +83,8 @@ public class SisvRapVisMedEmb extends BaseSisv<TabRapVisMedEmb, String> implemen
 	public <X extends BaseEntity> X creer(X p$entite) throws BaseException  {
 		TabRapVisMedEmb rapVisMedCree = (TabRapVisMedEmb) p$entite; 
 		//Teste si la consultation n'a pas deja un compte rendu
-		if(rapVisMedCree.getTabVisMedEmb().getBooRapVisMed().equals(BigDecimal.ONE))
+		if(null != rapVisMedCree.getTabVisMedEmb().getBooRapVisMed() && 
+				rapVisMedCree.getTabVisMedEmb().getBooRapVisMed().equals(BigDecimal.ONE))
 			throw new BaseException("Erreur : Il existe déjà un rapport pour la visite médicale d'embauche "+ rapVisMedCree.getTabVisMedEmb().getCodVisMedEmb());
 		rapVisMedCree = initialiserDonnees(rapVisMedCree);
 		//genere le code du compte rendu
