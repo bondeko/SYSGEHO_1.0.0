@@ -1,0 +1,184 @@
+Liste de MAJ à intéger
+
+=====Général
+1-Ajouter sur toutes les prestations les champs booléen B_FACT et B_PAYE pour indiquer si la prestation est facturée et payée (OK)
+Commentaire : des champs REF_FAC et BOO_PAIE existe déjà dans toutes prestations
+------------
+
+2-Ajouter sur toutes les prestations le champs E_MOD_PCHG(mode de prise en charge) à renseigner à la création. E_MOD_PCHG=Personnelle, Entreprise, Assurance (OK)
+
+3- Ajouter le champ navigable et non obligatoire visite médical sur toute les prestations(soins, examen, consultation, ) pour déterminer identifier les prestations d'une visite médical 
+donnée (OK)
+
+======Visite médical ( périodique / embauche)
+1- A implementer (OK)
+
+Commentaire : 
+------------
+Description: Une visite médicale consiste à un ensemble de prestations médicales(consultation, examens, soins) réalisé sur les employés d'une entreprise bien précise 
+             vue de determiner l'aptitude des employés a 
+
+VM_PERSO(code, libellé, motif, date, société)
+VM_EMB(code, motif, patient, date, société )
+
+
+
+======Referentiel
+1- Ajouter et implementer la gestion des salles d'hospitalisations (code, libellé, service, nb de lit, responsable) (OK)
+2- Remplacer dans le menu "Type Examen" par "Fichier des examens" (OK)
+3- Remplacer dans le menu "Type Soin" par "Fichier des soins" (OK)
+
+====Patient
+1-Ajouter le champs No CNPS (OK)
+
+
+-------------------------------------------25/09/2014----------------------------------------
+====Facture/Facture Conventionnelle
+1-Ajouter l'entité facture conventionnelle. (OK)
+	- Champ : code, reference, objet, société, effectif du personnel de la sté, tarification_fixe mensuelle pr la sté, prix unitaire par employé, montant_total de la facture, mois facturé, 
+date édition
+2-Ajouter le menu Facture/Facture conventionnelle pr gérer les facture conventionelles générées à partir de l'action spécifique sur l'entité "Société" (OK)
+
+====Ref/Catégorie examens
+1-Dans le formulaire de création, les spécialité chargé dans le champ select doivent provenir de la table spécialité en BD (OK)
+
+====Ref/Société
+1-Ajouter le champ Tarification Fixe qui est contient le montant fixe annuel à verser par la société (OK)
+2-Dans le formulaire de création, Cacher les champs "prix unitaire" et "tarification fixe" par défaut et les afficher lorsque le champs "Est affilié" est coché (OK)
+3-Ajouter l'action spécifique: Génerer la facture conventionelle (OK)
+	- Cette action a pour paramètre : mois-AAAA de la facture (OK)
+	- Cette action génère entité Facture conventionelle visible dans le formulaire liste de facture courante (OK)
+	NB: faire toutes les vérification avant la génération : la société est elle afffiliée, la facture a t-elle déja été généré pour le mois indiqué, 
+
+====Ref/Fichier examen
+1-Ajouter le champ "coût" (cout tarifaire de l'examen) sur l'entité Type examen (OK)
+2-Lors de l'enrégistrement d'un examen remplir automatiquement le champ montant avec le cout tarifaire de du type examen selectionné et le laisser le champ modifiable (OK)
+
+====Ref/Fichier soins
+1-Ajouter le champ "coût" (cout tarifaire du soin) sur l'entité Type soin(OK)
+2-Lors de l'enregistrement d'un soin remplir automatiquement le champ montant avec le cout tarifaire de du type soin selectionné et le laisser le champ modifiable (OK)
+
+====Dossier Patient/Compte Rendu Consultation
+1-Ajouter le champ texte Antécédent professionnel pour saisir les antécedents du patients(CF Curriculum Labori) (OK)
+2-Ajouter le champ texte Antécédent personnel (OK)
+3-Ajouter le champ texte Antécédent familial (OK)
+4-Ajouter le champ texte "Examen Physique" (OK)
+5-Cacher le champ diagnostic secondaire sur lee formulaire (OK)
+6-Renomer sur le formulaire "Diagnotic secondaire" par "Diagnostic" (OK)
+Commentaire :  pour le 6- je suppose qu'il s'agit de "Diagnotic primaire"
+-----------
+
+====Dossier Patient/Rendez-vous
+1-Ajouter le champ Heure du rendez-vous (OK)
+Commentaire :  c'est ce qui est fais depuis, il faut juste savoir manipuler le composant
+-----------
+2-Ajouter le champs select spécialité du rdv correspondant aux spécialité en BD (OK)
+====Dossier Patient/Examen
+1-Ajouter le champs utilisateur indiquant l'user du systeme ayant réalisé et enrégistré l'examen dans le système (OK)
+
+---------------------------------------------------14/10/2014----------------------------------
+
+=====Referentiel/Lit
+1-Les actions de base ne sont pas visile (pas de déroulement au passage de la souris) (OK chez moi)
+Commentaire : Je n'ai pas pu reproduire chez moi. C'est pas une confusion avec les actions spécifiques ? l'entité Lit n'a aucune action spécifique
+-----------
+=====Menu général
+1-Creer le nouveau menu principal rendez-vous avec deux sous-menu : (OK)
+	* Rendez-vous
+	* Type Rendez-vous
+2-Supprimer le -sous menu visite médical de menu dossier patient (OK)
+3-Creer le nouveau menu principal Visite médicale avec deux sous-menu : (OK)
+	* Visite Médical périodique
+	* Visite médical embauche
+=======Traitement valider sur toutes les entité (OK)
+1-Implementer le controle pendant l'exécution du traitement valider pour empecher de valider une entité déja à l'état validé
+========Dossier Patient/Examen et Consultation (OK)
+1-Erreur de création d'un compte rendu examen, d'un compte rendu de consultation
+	MSG: org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before merging: com.bondeko.sysgeho.be.imp.entity.TabVisMedPerio
+2-Erreur de la validation d'une consultation, dun examen
+	MSG:  org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before merging: com.bondeko.sysgeho.be.imp.entity.TabVisMedEmb
+========Dossier patient (OK)
+1-Inmposible de sortir d'une hospitalisation 
+	MSG: Caused by: org.hibernate.id.IdentifierGenerationException: ids for this class must be manually assigned before calling save(): com.bondeko.sysgeho.be.ref.entity.TabLit
+========Facture Courante (OK)
+1-Impossible de créer une facture courante 
+	MSG: org.hibernate.TransientObjectException: object references an unsaved transient instance - save the transient instance before merging: com.bondeko.sysgeho.be.imp.entity.TabVisMedPerio
+========Visite Médical (OK)
+1-Ajouter la navigation vers les consultation, examen, soins lié a la visite médical périodique et faire de meme pour la visite médical d'embauche
+========Facture courante (OK Chez moi) : je n'arrive pas à reproduire cela tout s'affcihe proprement
+1-Visualistion d'une facture n'affiche pas les consultations, examens, soins, hospi ... associés
+
+-------------------------------------------28/102014-----------------------------------------------------------
+
+=======Menu général
+2-Ajouter le menu "Pilotage" avec les sous menus: (OK)
+	* Etat statistique
+
+3-Ajouter les menu "A propos de SYSGEHO" avec les sous menus: (OK)
+	- Présentation
+	- Aide
+4- Implementé l'entité "Etat statistique" pour le module pilotage
+5-Rédaction de la plaquette produit (OK)
+6-Rédaction du guide utilisateur - OK (Volume 1)
+7- Implementé la page "Présentation SYSGEHO" (contenu=plaquette du produit)
+8- Implémenté la page "Aide/Guide utilisateur" (Contenu=guide utilisateur)
+9-  menu "Modifier son mot de passe" à intégrer au dessus du menu "Deconnexion" (OK)
+
+=======Visite Médical
+0-Erreurs remarquées: - Erreur lors de la navigation d'une visite médical vers les prestations liées Caused by: javax.faces.FacesException:
+#{visMedEmbCtrl.gotoRelatedEntity}: java.lang.NullPointerException (OK)
+1-Ajouter le sous menu rapport de vite médical embauche (OK)
+2-Ajouter le sous menu rapport de visite médical périodique (OK)
+3-Implémenter l'entité Rapport de visite médical périodique (NB: pr une visite médical périodique, on peut avoir plusieurs rapport de visite correspondant au nombre de personel visité)(OK)
+	* TAB_RAP_VISIT_MED_PERIO(Code, entité TAB_VM_PERIO, entité Patient, objet, rapport examen clinique(texte), rapport examen normaux(texte), rapport examen anormaux(texte), conclusion(texte), recommandation particulière(texte), médécin, date edition)
+3-Implémenter l'entité Rapport de visite médical d'embauche (NB: pr une visite médical d'embauche, on peut avoir un seul rapport de visite correspondant au nombre de personel à ) (OK)
+	* TAB_RAP_VISIT_MED_EMB(Code, entité TAB_VM_EMB, objet, rapport examen clinique(texte), rapport examen normaux(texte), rapport examen anormaux(texte), conclusion(texte), recommandation particulière(texte), médécin, date edition)
+	
+========Facture des visites médical
+1-Implémenter l'entité facture visite médicale périoique du personnel avec pièce jointe: la facture détaillé en .doc /.pdf/.jpg... (OK)
+	TAB_FAC_VM_PERIO( code, reference, objet, entité Visite médical périodique, montant_total de la facture, date édition, Médécin, Pièce jointe)
+2-Implémenter l'entité facture visite médicale dembauche avec pièce jointe : la facture détaillé en .doc /.pdf/.jpg... (OK)
+	TAB_FAC_VM_EMB( code, reference, objet, entité Visite médical embauche, montant_total de la facture, date édition, Médécin, Pièce jointe)
+3-Implémenter l'action payé sur les entités TAB_FAC_VM_PERSO et TAB_FAC_VM_EMB ( mettre à l'état payé toutes les prestations liées à la visite lors de l'exécution de cette action)
+
+
+======Etat Générique et statistique
+1-Génerer le dossier complet d'un patient : Etat contenant toutes les prestations + résultats réalisée pour un patient donné
+	* 5 sections: 1-identité du patient, 2-liste des consultation, 3-liste des examen, 4-liste des soins, 5-liste des hospitalisations
+2-Génerer la liste des sociétés - OK
+3-Génerer le fichier des examens
+4-Génerer le fichier des soins
+5-Génerer la facture conventionnelle -OK
+6-Génerer la facture viste médical périodique du personnel
+7-Génerer la facture viste médical d'embauche
+8-Génerer la liste des factures conventionnelles
+9-Génerer la liste des factures courantes
+10-Génerer la liste des factures de visites médicales
+11-Etat des examens réalisés
+12-Etat des consultattions
+13-Etat des soins
+14-Etat des hospitalisations
+15-Génerer un rapport de visite médical
+
+========Infos Utilisateur
+1-Intégrer la page de modification du mot de passe pour un utilisateur connecté (OK)
+2-Ajouter le menu "Modifier son mot de passe" à intégrer au dessus du menu "Deconnexion" et en dessous du nom utilisateur (OK)
+
+=====Gestion des stocks & Pharmacie (A analyser et à implémenter)
+
+
+-----------------------------------------------------12/12/2014-----------------------------------------------------------------
+
+======Pilotage (urgent)
+1-Implementation de l'entité état statistique pour l'intégration  des états pilotage
+on peut se limiter au attribut code, libellé
+
+======Rapport de visite médical d'embauche
+1-Erreur lors de la création sur l'instruction:  if(rapVisMedCree.getTabVisMedEmb().getBooRapVisMed().equals(BigDecimal.ONE))
+10:20:14,465 ERROR [STDERR] Caused by: java.lang.NullPointerException
+10:20:14,465 ERROR [STDERR] 	at com.bondeko.sysgeho.be.imp.sisv.SisvRapVisMedEmb.creer(SisvRapVisMedEmb.java:86)
+
+====Facture Visite Médical périodique et embauche
+1- Dans le formulaire de créaton il n'ya pas de champs pr ajouté la pièce jointe
+2- Après l'ajout avec succès d'une piece jointe sur une facture crée, la PJ n'est pas visible dans l'onglet "Pieces jointes"
+
