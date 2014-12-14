@@ -62,6 +62,11 @@
   <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.RapVisMedEmbCtrl</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>etaStatCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.EtaStatCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
  <navigation-rule>
   <from-view-id>*</from-view-id>
   <navigation-case>
@@ -240,6 +245,21 @@
   <navigation-case>
    <from-outcome>RapVisMedPerioListe</from-outcome>
    <to-view-id>/modules/dossierpatient/pages/RapVisMedPerioListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>EtaStatDetails</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/EtaStatDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>EtaStatEdition</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/EtaStatEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>EtaStatListe</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/EtaStatListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
   

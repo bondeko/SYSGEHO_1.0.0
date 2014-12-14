@@ -4,6 +4,7 @@ import com.bondeko.sysgeho.be.core.base.BaseLogger;
 import com.bondeko.sysgeho.be.imp.svco.IRemoteConsul;
 import com.bondeko.sysgeho.be.imp.svco.IRemoteCpteRenduConsul;
 import com.bondeko.sysgeho.be.imp.svco.IRemoteCpteRenduExam;
+import com.bondeko.sysgeho.be.imp.svco.IRemoteEtaStat;
 import com.bondeko.sysgeho.be.imp.svco.IRemoteExam;
 import com.bondeko.sysgeho.be.imp.svco.IRemoteHospi;
 import com.bondeko.sysgeho.be.imp.svco.IRemotePat;
@@ -78,6 +79,10 @@ public class DossierPatientSvcoDeleguate {
 	
 	public static IRemoteRapVisMedEmb getSvcoRapVisMedEmb() throws ServiceLocatorException{
         return (IRemoteRapVisMedEmb) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoRapVisMedEmb", IRemoteRapVisMedEmb.class));
+    }
+	
+	public static IRemoteEtaStat getSvcoEtaStat() throws ServiceLocatorException{
+        return (IRemoteEtaStat) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoEtaStat", IRemoteEtaStat.class));
     }
 
 	public BaseLogger getLogger() {
