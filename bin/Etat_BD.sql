@@ -250,6 +250,35 @@ INSERT INTO `tab_cpte_rendu_exam` (`COD_CPTE_RENDU_EXAM`,`COD_EXAM`,`LIB_RESUL`,
 
 
 --
+-- Definition of table `tab_eta_stat`
+--
+
+DROP TABLE IF EXISTS `tab_eta_stat`;
+CREATE TABLE `tab_eta_stat` (
+  `COD_ETA_STAT` varchar(32) NOT NULL DEFAULT '',
+  `LIB_ETA_STAT` varchar(255) DEFAULT NULL,
+  `LIB_DESC` varchar(255) DEFAULT NULL,
+  `ETAT_ENT` varchar(30) DEFAULT NULL,
+  `COD_EXE_FIS` varchar(30) DEFAULT NULL,
+  `BOO_ACT` decimal(1,0) DEFAULT '0',
+  `COD_USR_CRT` varchar(30) DEFAULT NULL,
+  `COD_USR_MOD` varchar(30) DEFAULT NULL,
+  `DAT_CRT` varchar(30) DEFAULT NULL,
+  `DAT_MOD` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`COD_ETA_STAT`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tab_eta_stat`
+--
+
+/*!40000 ALTER TABLE `tab_eta_stat` DISABLE KEYS */;
+INSERT INTO `tab_eta_stat` (`COD_ETA_STAT`,`LIB_ETA_STAT`,`LIB_DESC`,`ETAT_ENT`,`COD_EXE_FIS`,`BOO_ACT`,`COD_USR_CRT`,`COD_USR_MOD`,`DAT_CRT`,`DAT_MOD`) VALUES 
+ ('ETAT_LISTE_CONSUL','Etat qui liste les consultations en BD par client, par société','RAS','2000','2014','1','admin','admin','20141214173629000688','20141214173704000543');
+/*!40000 ALTER TABLE `tab_eta_stat` ENABLE KEYS */;
+
+
+--
 -- Definition of table `tab_exam`
 --
 

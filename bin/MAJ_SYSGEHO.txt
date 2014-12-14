@@ -169,16 +169,16 @@ Commentaire : Je n'ai pas pu reproduire chez moi. C'est pas une confusion avec l
 
 -----------------------------------------------------12/12/2014-----------------------------------------------------------------
 
-======Pilotage (urgent)
+======Pilotage (urgent) (OK)
 1-Implementation de l'entité état statistique pour l'intégration  des états pilotage
 on peut se limiter au attribut code, libellé
 
-======Rapport de visite médical d'embauche
+======Rapport de visite médical d'embauche (OK)
 1-Erreur lors de la création sur l'instruction:  if(rapVisMedCree.getTabVisMedEmb().getBooRapVisMed().equals(BigDecimal.ONE))
 10:20:14,465 ERROR [STDERR] Caused by: java.lang.NullPointerException
 10:20:14,465 ERROR [STDERR] 	at com.bondeko.sysgeho.be.imp.sisv.SisvRapVisMedEmb.creer(SisvRapVisMedEmb.java:86)
 
 ====Facture Visite Médical périodique et embauche
-1- Dans le formulaire de créaton il n'ya pas de champs pr ajouté la pièce jointe
-2- Après l'ajout avec succès d'une piece jointe sur une facture crée, la PJ n'est pas visible dans l'onglet "Pieces jointes"
+1- Dans le formulaire de créaton il n'ya pas de champs pr ajouté la pièce jointe (Pour le moment l'ajout se fais par traitement spécifique)
+2- Après l'ajout avec succès d'une piece jointe sur une facture crée, la PJ n'est pas visible dans l'onglet "Pieces jointes" (sa marche, assure toi que le config.propertie est bien confuguré)
 
