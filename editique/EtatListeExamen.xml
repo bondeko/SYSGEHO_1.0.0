@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<main>
+	<srlEtatListSoc>
+		<body>
+		  <compteur>1</compteur>
+		  <codTypExam>201400001</codTypExam>
+		  <libTypExam>UREE / CREATININE</libTypExam>
+		  <valCout>5000</valCout>
+		  <libCatExam>Biologie</libCatExam>
+		</body>
+		<body>
+		  <compteur>2</compteur>
+		  <codTypExam>201400002</codTypExam>
+		  <libTypExam>GLYCEMIE</libTypExam>
+		  <valCout>3000</valCout>
+		  <libCatExam>Biologie</libCatExam>
+		</body>
+	</srlEtatListSoc>
+</main>

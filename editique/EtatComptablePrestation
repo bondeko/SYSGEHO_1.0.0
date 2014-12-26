@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPat>
+  <SrlEtatDosPat>
+    <com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
+      <codPrestation>2014000003</codPrestation>
+      <catPrestation>Consultation</catPrestation>
+      <libPrestation>Consultation en null</libPrestation>
+      <datPrestation>29/09/2014</datPrestation>
+      <libDiagnostic>Ajouter le champ texte Antécédent professionnel pour saisir les antécedents du patients(CF Curriculum Labori)</libDiagnostic>
+      <libResultat>Ajouter le champ texte Antécédent professionnel pour saisir les antécedents du patients(CF Curriculum Labori)</libResultat>
+      <libConcl>Ajouter le champ texte Antécédent professionnel pour saisir les antécedents du patients(CF Curriculum Labori)</libConcl>
+      <libSoc>Groupe TEGUO</libSoc>
+      <libMat>2231</libMat>
+      <libNom>ENF. TAGUEMKOUO Franck Arsene</libNom>
+      <datNais>08/09/1993</datNais>
+      <libProf>Elève</libProf>
+      <libNumTel>88556655</libNumTel>
+    </com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
+    <com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
+      <codPrestation>2014000004</codPrestation>
+      <catPrestation>Examen</catPrestation>
+      <libPrestation>GLYCEMIE A JEUN</libPrestation>
+      <libDiagnostic> </libDiagnostic>
+      <libResultat>103 mg/dl
+VN : (70-110mg/dl)
+   : (0,70-1,1g/l)</libResultat>
+      <libConcl>Taux de glycémie élevé</libConcl>
+      <libSoc>Groupe TEGUO</libSoc>
+      <libMat>2231</libMat>
+      <libNom>ENF. TAGUEMKOUO Franck Arsene</libNom>
+      <datNais>08/09/1993</datNais>
+      <libProf>Elève</libProf>
+      <libNumTel>88556655</libNumTel>
+    </com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
+    <com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
+      <codPrestation>2014000007</codPrestation>
+      <catPrestation>Soin</catPrestation>
+      <libPrestation>Pensement après circoncision</libPrestation>
+      <datPrestation>25/09/2014</datPrestation>
+      <libDiagnostic>Circoncision</libDiagnostic>
+      <libResultat></libResultat>
+      <libConcl> </libConcl>
+      <libSoc>Groupe TEGUO</libSoc>
+      <libMat>2231</libMat>
+      <libNom>2000. TAGUEMKOUO Franck Arsene</libNom>
+      <datNais>08/09/1993</datNais>
+      <libProf>Elève</libProf>
+      <libNumTel>88556655</libNumTel>
+    </com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
+    <com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
+      <codPrestation>2014000009</codPrestation>
+      <catPrestation>Soin</catPrestation>
+      <libPrestation>Pensement de la main</libPrestation>
+      <datPrestation>14/10/2014</datPrestation>
+      <libDiagnostic></libDiagnostic>
+      <libResultat></libResultat>
+      <libConcl> </libConcl>
+      <libSoc>Groupe TEGUO</libSoc>
+      <libMat>2231</libMat>
+      <libNom>2000. TAGUEMKOUO Franck Arsene</libNom>
+      <datNais>08/09/1993</datNais>
+      <libProf>Elève</libProf>
+      <libNumTel>88556655</libNumTel>
+    </com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
+    <com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
+      <codPrestation>2014000008</codPrestation>
+      <catPrestation>Hospitalisation</catPrestation>
+      <libPrestation>AVC</libPrestation>
+      <datPrestation>De 14/10/2014 à Wed Oct 15 12:00:00 WAT 2014</datPrestation>
+      <libDiagnostic>RAS</libDiagnostic>
+      <libResultat></libResultat>
+      <libConcl> </libConcl>
+      <libSoc>Groupe TEGUO</libSoc>
+      <libMat>2231</libMat>
+      <libNom>2000. TAGUEMKOUO Franck Arsene</libNom>
+      <datNais>08/09/1993</datNais>
+      <libProf>Elève</libProf>
+      <libNumTel>88556655</libNumTel>
+    </com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
+  </SrlEtatDosPat>
+</com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPat>

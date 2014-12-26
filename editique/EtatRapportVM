@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<main>
+	<srlCRConsult>
+		<body>
+		  <codCpteRenduConsul>T001</codCpteRenduConsul>
+		  <datCpteRenduConsul>21/09/2014</datCpteRenduConsul>
+		  <codConsul>10001</codConsul>
+		  <codPat>10001</codPat>
+		  <libTit>Mr</libTit>
+		  <libMat>05q437</libMat>
+		  <libNom>TEGUO ROMARIC Cyrille</libNom>
+		  <datNais>19/12/2013</datNais>
+		  <libSoc>CAMAIR-CO</libSoc>
+		  <libNumTel>989898985</libNumTel>
+		  <libProf>Techicien de Maintenance</libProf>
+		  <libMedTrait>Dr TEGUO Romaric Cyrille</libMedTrait>
+		  <libMedConsul>Dr SINI</libMedConsul>
+		  <libMotifConsul>Mal de tete</libMotifConsul>
+		  <libHisMal>Poste de travail  description de l'activité </libHisMal>
+		  <libAntProf>Poste de travail  description de l'activité </libAntProf>
+		  <libAntPers>Poste de travail  description de l'activité </libAntPers>
+		  <libAntFami>Poste de travail  description de l'activité </libAntFami>
+		  <libDiagPrin>Poste de travail  description de l'activité </libDiagPrin>
+		  <libDiagSenc>Poste de travail  description de l'activité </libDiagSenc>
+		  <libExamPhy>Poste de travail  description de l'activité </libExamPhy>
+		  <libExamBio>Poste de travail  description de l'activité </libExamBio>
+		  <libExploFonc>Poste de travail  description de l'activité </libExploFonc>
+		  <libExamImag>Poste de travail  description de l'activité </libExamImag>
+		  <libTraitPres>Poste de travail  description de l'activité </libTraitPres>
+		  <libConcl>Dans son souci de proposer une solution logicielle complète pour la gestion des entreprises, Citech élève sa gamme de produits Orane et vous propose
+Orane Immo : le logiciel de gestion des immobilisations </libConcl>
+		</body>		
+	</srlCRConsult>
+</main>

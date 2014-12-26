@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<main>
+	<srlRapVM>
+		<body>
+		  <codRapVisMed>T001</codRapVisMed>
+		  <codVisMed>T001</codVisMed>
+		  <datVisMed>21/09/2014</datVisMed>
+		  <datEdi>21/09/2014</datEdi>
+		  <libVisMedPerio>Visite médicale du personnel du Groupe TEGUO</libVisMedPerio>
+		  <libSoc>Builder Company</libSoc>
+		  <libTit>Mr</libTit>
+		  <libMat>05q437</libMat>
+		  <libNom>TEGUO ROMARIC Cyrille</libNom>
+		  <datNais>19/12/2013</datNais>
+		  <libNumTel>696106626</libNumTel>
+		  <libProf>Techicien de Maintenance</libProf>
+		  <libObj>Rapport de visite médical périodique du personel de Builder Company</libObj>
+		  <libRapExamCli>Entorse à la cheville</libRapExamCli>
+		  <libRapExamNor>-EEG
+		  - ECG
+		  -BCBG
+		  </libRapExamNor>
+		  <libRapExamAnor>-EEG
+		  - ECG
+		  -BCBG
+		  </libRapExamAnor>
+		  <libConcl>Poste de travail  description de l'activité </libConcl>
+		  <libRecomPart>- Repos 
+		  - Mise en indisponibilité
+		  - Regime alimentaire
+		  </libRecomPart>
+		</body>		
+	</srlRapVM>
+</main>

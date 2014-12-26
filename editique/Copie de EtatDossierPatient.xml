@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<main>
+	<srlDosPat>
+		<body>
+		  <codPrestation>001</codPrestation>
+		  <catPrestation>Consultation</catPrestation>
+		  <libPrestation>Mal de tete</libPrestation>
+		  <datPrestation>21/09/2014</datPrestation>
+		  <libDiagnostic>Visite médicale du personnel du Groupe TEGUO</libDiagnostic>
+		  <libResultat>Resultat examen/ soin / consultation</libResultat>
+		  <libConcl>Poste de travail  description de l'activité </libConcl>
+		  <libSoc>Builder Company</libSoc>
+		  <libMat>05q437</libMat>
+		  <libNom>TEGUO ROMARIC Cyrille</libNom>
+		  <datNais>19/12/2013</datNais>
+		  <libNumTel>696106626</libNumTel>
+		  <libProf>Techicien de Maintenance</libProf>
+		</body>	
+		<body>
+		  <codPrestation>002</codPrestation>
+		  <catPrestation>Consultation</catPrestation>
+		  <libPrestation>Mal de tete</libPrestation>
+		  <datPrestation>21/09/2014</datPrestation>
+		  <libDiagnostic>Visite médicale du personnel du Groupe TEGUO</libDiagnostic>
+		  <libResultat>Resultat examen/ soin / consultation</libResultat>
+		  <libConcl>Poste de travail  description de l'activité </libConcl>
+		  <libSoc>Builder Company</libSoc>
+		  <libMat>05q437</libMat>
+		  <libNom>TEGUO ROMARIC Cyrille</libNom>
+		  <datNais>19/12/2013</datNais>
+		  <libNumTel>696106626</libNumTel>
+		  <libProf>Techicien de Maintenance</libProf>
+		</body>	
+		<body>
+		  <codPrestation>003</codPrestation>
+		  <catPrestation>Examen</catPrestation>
+		  <libPrestation>Mal de tete</libPrestation>
+		  <datPrestation>21/09/2014</datPrestation>
+		  <libDiagnostic>Visite médicale du personnel du Groupe TEGUO</libDiagnostic>
+		  <libResultat>Resultat examen/ soin / consultation</libResultat>
+		  <libConcl>Poste de travail  description de l'activité </libConcl>
+		  <libSoc>Builder Company</libSoc>
+		  <libMat>05q437</libMat>
+		  <libNom>TEGUO ROMARIC Cyrille</libNom>
+		  <datNais>19/12/2013</datNais>
+		  <libNumTel>696106626</libNumTel>
+		  <libProf>Techicien de Maintenance</libProf>
+		</body>	
+		<body>
+		  <codPrestation>004</codPrestation>
+		  <catPrestation>Examen</catPrestation>
+		  <libPrestation>Mal de tete</libPrestation>
+		  <datPrestation>21/09/2014</datPrestation>
+		  <libDiagnostic>Visite médicale du personnel du Groupe TEGUO</libDiagnostic>
+		  <libResultat>Resultat examen/ soin / consultation</libResultat>
+		  <libConcl>Poste de travail  description de l'activité </libConcl>
+		  <libSoc>Builder Company</libSoc>
+		  <libMat>05q437</libMat>
+		  <libNom>TEGUO ROMARIC Cyrille</libNom>
+		  <datNais>19/12/2013</datNais>
+		  <libNumTel>696106626</libNumTel>
+		  <libProf>Techicien de Maintenance</libProf>
+		</body>	
+		<body>
+		  <codPrestation>005</codPrestation>
+		  <catPrestation>Soin</catPrestation>
+		  <libPrestation>Mal de tete</libPrestation>
+		  <datPrestation>21/09/2014</datPrestation>
+		  <libDiagnostic>Visite médicale du personnel du Groupe TEGUO</libDiagnostic>
+		  <libResultat>Resultat examen/ soin / consultation</libResultat>
+		  <libConcl>Poste de travail  description de l'activité </libConcl>
+		  <libSoc>Builder Company</libSoc>
+		  <libMat>05q437</libMat>
+		  <libNom>TEGUO ROMARIC Cyrille</libNom>
+		  <datNais>19/12/2013</datNais>
+		  <libNumTel>696106626</libNumTel>
+		  <libProf>Techicien de Maintenance</libProf>
+		</body>	
+		<body>
+		  <codPrestation>006</codPrestation>
+		  <catPrestation>Hospitalisation</catPrestation>
+		  <libPrestation>Mal de tete</libPrestation>
+		  <datPrestation>21/09/2014</datPrestation>
+		  <libDiagnostic>Visite médicale du personnel du Groupe TEGUO</libDiagnostic>
+		  <libResultat>Resultat examen/ soin / consultation</libResultat>
+		  <libConcl>Poste de travail  description de l'activité </libConcl>
+		  <libSoc>Builder Company</libSoc>
+		  <libMat>05q437</libMat>
+		  <libNom>TEGUO ROMARIC Cyrille</libNom>
+		  <datNais>19/12/2013</datNais>
+		  <libNumTel>696106626</libNumTel>
+		  <libProf>Techicien de Maintenance</libProf>
+		</body>	
+	</srlDosPat>
+</main>
