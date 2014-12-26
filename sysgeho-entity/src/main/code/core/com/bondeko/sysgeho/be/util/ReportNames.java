@@ -27,7 +27,21 @@ public enum ReportNames {
 					" AND (1=1)", " AND (1=1)"),
 	ETAT_LIST_SOC("ETAT_LIST_SOC", "ETAT_LIST_SOC", "ETAT_LIST_SOC",
 							"LISTE DES SOCIETES",
-							" AND (1=1)", " AND (1=1)");
+							" AND (1=1)", " AND (1=1)"),
+	ETAT_RAP_VM("ETAT_RAP_VM", "ETAT_RAP_VM", "ETAT_RAP_VM",
+			"RAPPORT DE VISITE MEDICAL",
+			" AND (1=1)", " AND (1=1)"),
+			ETAT_DOSSIER_PAT("ETAT_DOSSIER_PAT", "ETAT_DOSSIER_PAT", "ETAT_DOSSIER_PAT",
+					"DOSSIER PATIENT",
+					" AND (1=1)", " AND (1=1)"),
+					ETAT_CMPT_PREST("ETAT_CMPT_PREST", "ETAT_CMPT_PREST", "ETAT_CMPT_PREST",
+							"ETAT COMPTABLE PRESTATION",
+							" AND (1=1)", " AND (1=1)"),
+							ETAT_LIST_EXAM("ETAT_LIST_EXAM", "ETAT_LIST_EXAM", "ETAT_LIST_EXAM",
+									"ETAT FICHIER DES EXAMENS",
+									" AND (1=1)", " AND (1=1)")
+					
+	;
 	
 	private final String reportName;
 	private final String defaulFileName;

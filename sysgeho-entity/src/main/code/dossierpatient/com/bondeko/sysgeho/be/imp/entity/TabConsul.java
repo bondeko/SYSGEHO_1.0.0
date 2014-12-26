@@ -17,6 +17,7 @@ import com.bondeko.sysgeho.be.admin.entity.utilisateur.TabUsr;
 import com.bondeko.sysgeho.be.core.base.DateTools;
 import com.bondeko.sysgeho.be.core.base.SysGehoBaseEntity;
 import com.bondeko.sysgeho.be.core.enums.EnuModPchg;
+import com.bondeko.sysgeho.be.ref.entity.TabSpec;
 import com.bondeko.sysgeho.be.util.InfoUser;
 
 @Entity
@@ -50,8 +51,12 @@ private static final long serialVersionUID = 1L;
 	@JoinColumn(name = "COD_PAT")
 	private TabPat tabPat;
 	
-	@Column(name = "COD_SPEC")
-	private String codSpec;
+	@ManyToOne
+	@JoinColumn(name = "COD_SPEC")
+	private TabSpec tabSpec;
+	
+	/*@Column(name = "COD_SPEC")
+	private String codSpec;*/
 	
 	@Column(name = "VAL_POIDS")
 	private String valPoids;
@@ -143,6 +148,7 @@ private static final long serialVersionUID = 1L;
 		this.valTaille = valTaille;
 	}
 
+	/*
 	public String getCodSpec() {
 		return codSpec;
 	}
@@ -150,7 +156,7 @@ private static final long serialVersionUID = 1L;
 	public void setCodSpec(String codSpec) {
 		this.codSpec = codSpec;
 	}
-
+*/
 	public String getDatConsul() {
 		return datConsul;
 	}
@@ -227,6 +233,7 @@ private static final long serialVersionUID = 1L;
 		tabUsr = (tabUsr == null ? new TabUsr() : tabUsr);
 		tabVisMedEmb = (tabVisMedEmb == null ? new TabVisMedEmb() : tabVisMedEmb);
 		tabVisMedPerio = (tabVisMedPerio == null ? new TabVisMedPerio() : tabVisMedPerio);
+		tabSpec = (tabSpec == null ? new TabSpec() : tabSpec);
 
 	}
 	
@@ -247,6 +254,10 @@ private static final long serialVersionUID = 1L;
 		tabVisMedPerio = (tabVisMedPerio != null && 
 				(tabVisMedPerio.getCodVisMedPerio() == null || tabVisMedPerio.getCodVisMedPerio().trim().isEmpty())
 				? null : tabVisMedPerio);
+		
+		tabSpec = (tabSpec != null && 
+				(tabSpec.getCodSpec() == null || tabSpec.getCodSpec().trim().isEmpty())
+				? null : tabSpec);
 	}
 
 	public void setBooVal(BigDecimal booVal) {
@@ -324,6 +335,20 @@ private static final long serialVersionUID = 1L;
 
 	public TabVisMedPerio getTabVisMedPerio() {
 		return tabVisMedPerio;
+	}
+
+	/**
+	 * @param tabSpec the tabSpec to set
+	 */
+	public void setTabSpec(TabSpec tabSpec) {
+		this.tabSpec = tabSpec;
+	}
+
+	/**
+	 * @return the tabSpec
+	 */
+	public TabSpec getTabSpec() {
+		return tabSpec;
 	}
 
 }
