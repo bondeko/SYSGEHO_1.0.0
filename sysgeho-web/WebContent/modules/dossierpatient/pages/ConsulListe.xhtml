@@ -49,6 +49,13 @@
 				<h:outputText value="#{entity.codConsul}" />				
 			</rich:column>
 			
+			<rich:column label="Specialite" sortBy="#{entity.tabSpec.libSpec}" filterBy="#{entity.tabSpec.libSpec}" >
+				<f:facet name="header">
+					<h:outputText value="Specialite"  />
+				</f:facet>
+				<h:outputText value="#{entity.tabSpec.libSpec}" />				
+			</rich:column>
+			
 			<rich:column label="Patient" sortBy="#{entity.tabPat.libNom}" filterBy="#{entity.tabPat.libNom}"  >
 				<f:facet name="header">
 					<h:outputText value="Patient"  />

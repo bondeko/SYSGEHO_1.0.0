@@ -216,15 +216,34 @@
         							         		
          				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
          				
+						
 							<h:outputText value="#{locale.specialite}"	 />
-							<h:panelGroup>	
-								<h:selectOneMenu id="somn_spec" value="#{consulCtrl.defaultVue.entiteCourante.codSpec}" style="width: 60%"  title="#{locale.specialite}" >
-									<f:selectItem itemLabel="" itemValue="#{null}"/>
-									<f:selectItems  value="#{consulCtrl.defaultVue.listeSpec}"/> 
-									<a4j:support event="onchange" ajaxSingle="true" />						
-								</h:selectOneMenu>	
-								<rich:message for="somn_spec" errorClass="msg_error" />
-							</h:panelGroup> 
+							<h:panelGroup>
+								<h:inputText id="inpt_codSpec" value="#{consulCtrl.defaultVue.entiteCourante.tabSpec.codSpec}" style="width: 20%" 
+									readonly="true" title="Code" disabled="false">
+									<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>	
+								<h:inputText id="inpt_libSpec" value="#{consulCtrl.defaultVue.entiteCourante.tabSpec.libSpec}" style="width: 40%" 
+										readonly="true"  title="#{locale.libelle}" disabled="false"> 
+										<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+								<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
+								<h:panelGroup>
+									<a4j:commandButton   value="..." action="#{consulCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" >   	
+			           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
+			         						<f:setPropertyActionListener value="ConsulEdition" target="#{specCtrl.defaultVue.navigationMgr.selectionSource}" />
+			         						<!-- MAJ de la destination en mode Selection   --> 
+			           						<f:setPropertyActionListener value="true" target="#{specCtrl.defaultVue.navigationMgr.enSelection}" />  
+			           						<!-- Nom du Controlleur de l'entite source  --> 
+			          						<f:setPropertyActionListener value="consulCtrl" target="#{specCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
+			          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
+			          						<f:setPropertyActionListener value="SpecListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
+			          						<!-- Nom de la propriete a selectionner -->							         						             						
+			          						<f:setPropertyActionListener value="tabSpec" target="#{defaultVue.navigationMgr.selectionPropertyName}" />            						             						          						             				            					      						
+					             	</a4j:commandButton>
+					             	<rich:message for="inpt_codSoc" errorClass="msg_error" />
+								</h:panelGroup>
+							</h:panelGroup>
 							
 							<h:outputText value="Poids"/>
 							<h:inputText id="inpt_poi" value="#{consulCtrl.defaultVue.entiteCourante.valPoids}"  
