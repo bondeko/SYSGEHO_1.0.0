@@ -9,6 +9,8 @@ public interface ISvcoPat extends IBaseSvco<TabPat>{
 	
 	EntFichier genererEtatListPat(TabPat pat) throws SysGehoAppException;
 
-	EntFichier genererEtatFichePatient(TabPat pat) throws SysGehoAppException; 
+	EntFichier genererEtatFichePatient(TabPat pat) throws SysGehoAppException;
+
+	EntFichier genererDossierPatient(TabPat pat) throws SysGehoAppException; 
 
 }
