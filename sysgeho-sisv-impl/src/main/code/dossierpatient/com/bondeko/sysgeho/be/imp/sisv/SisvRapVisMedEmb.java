@@ -18,10 +18,17 @@ import com.bondeko.sysgeho.be.core.exception.BaseException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoPersistenceException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.BaseSisv;
+import com.bondeko.sysgeho.be.core.util.locator.ResourceLocator;
 import com.bondeko.sysgeho.be.imp.dao.IDaoRapVisMedEmb;
 import com.bondeko.sysgeho.be.imp.dao.IDaoVisMedEmb;
 import com.bondeko.sysgeho.be.imp.entity.TabRapVisMedEmb;
 import com.bondeko.sysgeho.be.imp.entity.TabVisMedEmb;
+import com.bondeko.sysgeho.be.imp.serialiaze.SrlRapVisMedEmb;
+import com.bondeko.sysgeho.be.imp.serialiaze.SrlRapVisMedEmbElt;
+import com.bondeko.sysgeho.be.util.EntFichier;
+import com.bondeko.sysgeho.be.util.ReportNames;
+import com.bondeko.sysgeho.be.util.SysGehoOutput;
+import com.bondeko.sysgeho.be.util.SysGehoPrinterExportEnum;
 
 @Stateless
 public class SisvRapVisMedEmb extends BaseSisv<TabRapVisMedEmb, String> implements ISisvRapVisMedEmb{
@@ -133,6 +140,63 @@ public class SisvRapVisMedEmb extends BaseSisv<TabRapVisMedEmb, String> implemen
 			SysGehoSystemException sbr = new SysGehoSystemException(e);
 			throw sbr;
 		}
+	}
+	
+	/**
+	 * Rechercher les informaton sur le rapport
+	 */
+
+	private SrlRapVisMedEmb getVisteMedical(TabRapVisMedEmb cpterendu) throws SysGehoSystemException {
+		SrlRapVisMedEmb srlRapVisMedEmb = new SrlRapVisMedEmb();
+		try {
+			//Recherche tous les mouvements de ce conteneurs
+			List<TabRapVisMedEmb> listcpterendu = daoRapVisMedEmb.findByExample(cpterendu);
+			if(listcpterendu != null && listcpterendu.size() > 0){
+				//On parcour la liste des mouvement obtenus et on construit la sérialization  
+				for(TabRapVisMedEmb pat : listcpterendu){
+					srlRapVisMedEmb.addElement(new SrlRapVisMedEmbElt(pat));
+				}
+			}
+//			else{
+//				srlMouvCon.addElement(new SrlMouvConElt(conCour, null));
+//			}
+		} catch (SysGehoPersistenceException e) {
+			e.printStackTrace();
+			throw new SysGehoSystemException(e.getMessage());
+		}
+		return srlRapVisMedEmb;
+	}
+	
+	/**
+	 * Generer le rapport de visite médical
+	 */
+	@Override
+	public EntFichier genererRapportVM(TabRapVisMedEmb rapport) throws SysGehoSystemException{
+		
+		try{
+			SrlRapVisMedEmb etatRapportVM = getVisteMedical(rapport);
+			getLogger().debug("SisvPat.genererEtatListPatient Serialisation ...");
+			SysGehoOutput result = fillAndExport(etatRapportVM,
+					ResourceLocator.getReportModel(ReportNames.ETAT_RAP_VM),
+					SysGehoPrinterExportEnum.PDF, null, null, null);
+			
+			// Construction du nom par défaut du fichier
+			String str = (ReportNames.ETAT_RAP_VM).getDefaulFileName() + "."
+					+ result.getFileExtention();
+			
+			// Création de l'entité fichier
+			getLogger().debug("SisvCon.genererEtatMouvCon Creation de l'entite fichier ..."+result.getUri());
+			EntFichier v$fichier = new EntFichier(result.getUri(), str,
+					result.getFileStream());
+			
+			logger.debug("Fichier généré " + str + " >> avec "
+					+ v$fichier.getLength() + "Ko.");
+			return v$fichier;
+			
+		}catch(Exception e){
+			throw new SysGehoSystemException(e.getMessage());
+		}
+		
 	}
 	
 }

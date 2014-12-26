@@ -18,8 +18,22 @@ import com.bondeko.sysgeho.be.core.exception.SysGehoPersistenceException;
 import com.bondeko.sysgeho.be.core.exception.SysGehoSystemException;
 import com.bondeko.sysgeho.be.core.sisv.base.BaseSisv;
 import com.bondeko.sysgeho.be.core.util.locator.ResourceLocator;
+import com.bondeko.sysgeho.be.imp.dao.IDaoConsul;
+import com.bondeko.sysgeho.be.imp.dao.IDaoCpteRenduConsul;
+import com.bondeko.sysgeho.be.imp.dao.IDaoCpteRenduExam;
+import com.bondeko.sysgeho.be.imp.dao.IDaoExam;
+import com.bondeko.sysgeho.be.imp.dao.IDaoHospi;
 import com.bondeko.sysgeho.be.imp.dao.IDaoPat;
+import com.bondeko.sysgeho.be.imp.dao.IDaoSoin;
+import com.bondeko.sysgeho.be.imp.entity.TabConsul;
+import com.bondeko.sysgeho.be.imp.entity.TabCpteRenduConsul;
+import com.bondeko.sysgeho.be.imp.entity.TabCpteRenduExam;
+import com.bondeko.sysgeho.be.imp.entity.TabExam;
+import com.bondeko.sysgeho.be.imp.entity.TabHospi;
 import com.bondeko.sysgeho.be.imp.entity.TabPat;
+import com.bondeko.sysgeho.be.imp.entity.TabSoin;
+import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPat;
+import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt;
 import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatFichePat;
 import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatFichePatElt;
 import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatListPat;
@@ -43,6 +57,24 @@ public class SisvPat extends BaseSisv<TabPat, String> implements ISisvPat{
 	
 	@EJB
 	IDaoIncCod daoIncCod;
+	
+	@EJB
+	IDaoConsul daoConsul; 
+	
+	@EJB
+	IDaoExam daoExam; 
+	
+	@EJB
+	IDaoSoin daoSoin; 
+	
+	@EJB
+	IDaoHospi daoHospi; 
+	
+	@EJB
+	IDaoCpteRenduConsul daoCpteRenduConsul; 
+	
+	@EJB
+	IDaoCpteRenduExam daoCpteRenduExam; 
 
 
 	@Override
@@ -187,6 +219,97 @@ public class SisvPat extends BaseSisv<TabPat, String> implements ISisvPat{
 		SrlEtatFichePat srlEtatFichePat = new SrlEtatFichePat();
 		srlEtatFichePat.addElement(new SrlEtatFichePatElt(patient));
 		return srlEtatFichePat;
+	}
+	
+	private SrlEtatDosPat getDossierPatient(TabPat patient) throws SysGehoSystemException {
+		SrlEtatDosPat srlEtatDosPat = new SrlEtatDosPat();
+		try {
+			//Chargement de toutes les consultations
+			TabConsul consult = new TabConsul();
+			consult.setTabPat(patient);
+			List<TabConsul> listConsul = daoConsul.findByExample(consult);
+			if(listConsul != null && listConsul.size() > 0){
+				for(TabConsul con : listConsul){
+					TabCpteRenduConsul crconsult = new TabCpteRenduConsul();
+					crconsult.setTabConsul(con);
+					List<TabCpteRenduConsul> listCRConsul = daoCpteRenduConsul.findByExample(crconsult);
+					if(listCRConsul != null && listCRConsul.size() == 1)
+						srlEtatDosPat.addElement(new SrlEtatDosPatElt(patient, con, listCRConsul.get(0)));
+						//srlEtatDosPat.addElement(new SrlEtatDosPatElt(patient, con, listCRConsul.get(0), null, null, null, null));
+					//srlEtatDosPat.addElement(new SrlEtatDosPatElt(patient, con, null, null, null, null, null));
+				}
+			}
+			
+			
+			//Chargement de toutes les examens
+			TabExam exam = new TabExam();
+			exam.setTabPat(patient);
+			List<TabExam> listExam = daoExam.findByExample(exam);
+			if(listExam != null && listExam.size() > 0){
+				for(TabExam ex : listExam){
+					TabCpteRenduExam crexam = new TabCpteRenduExam();
+					crexam.setTabExam(ex);
+					List<TabCpteRenduExam> listCRExam = daoCpteRenduExam.findByExample(crexam);
+					if(listCRExam != null && listCRExam.size() == 1)
+						srlEtatDosPat.addElement(new SrlEtatDosPatElt(patient, ex, listCRExam.get(0)));
+					//srlEtatDosPat.addElement(new SrlEtatDosPatElt(patient, null, null, ex, null, null, null));
+				}
+			}
+			
+			//Chargement de toutes les soins
+			TabSoin soin = new TabSoin();
+			soin.setTabPat(patient);
+			List<TabSoin> listSoin = daoSoin.findByExample(soin);
+			if(listExam != null && listExam.size() > 0){
+				for(TabSoin soins : listSoin){
+					srlEtatDosPat.addElement(new SrlEtatDosPatElt(patient, soins));
+				}
+			}
+			
+			//Chargement de toutes les hospitalisations
+			TabHospi hospi = new TabHospi();
+			hospi.setTabPat(patient);
+			List<TabHospi> listHospi = daoHospi.findByExample(hospi);
+			if(listHospi != null && listHospi.size() > 0){
+				for(TabHospi hos : listHospi){
+					srlEtatDosPat.addElement(new SrlEtatDosPatElt(patient, hos));
+				}
+			}
+			
+		} catch (SysGehoPersistenceException e) {
+			e.printStackTrace();
+			throw new SysGehoSystemException(e.getMessage());
+		}
+		return srlEtatDosPat;
+	}
+	
+	@Override
+	public EntFichier genererDossierPatient(TabPat patient) throws SysGehoSystemException{
+		
+		try{
+			SrlEtatDosPat etatDosPat = getDossierPatient(patient);
+			getLogger().debug("SisvPat.genererEtatDPatient Serialisation ...");
+			SysGehoOutput result = fillAndExport(etatDosPat,
+					ResourceLocator.getReportModel(ReportNames.ETAT_DOSSIER_PAT),
+					SysGehoPrinterExportEnum.PDF, null, null, null);
+			
+			// Construction du nom par défaut du fichier
+			String str = (ReportNames.ETAT_DOSSIER_PAT).getDefaulFileName() + "."
+					+ result.getFileExtention();
+			
+			// Création de l'entité fichier
+			getLogger().debug("SisvCon.genererEtatMouvCon Creation de l'entite fichier ..."+result.getUri());
+			EntFichier v$fichier = new EntFichier(result.getUri(), str,
+					result.getFileStream());
+			
+			logger.debug("Fichier généré " + str + " >> avec "
+					+ v$fichier.getLength() + "Ko.");
+			return v$fichier;
+			
+		}catch(Exception e){
+			throw new SysGehoSystemException(e.getMessage());
+		}
+		
 	}
 
 }
