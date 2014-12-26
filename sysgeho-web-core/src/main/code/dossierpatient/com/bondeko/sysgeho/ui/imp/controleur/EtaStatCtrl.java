@@ -7,11 +7,17 @@ import java.util.TreeMap;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
 import com.bondeko.sysgeho.be.imp.entity.TabEtaStat;
+import com.bondeko.sysgeho.be.imp.entity.TabPat;
+import com.bondeko.sysgeho.be.util.EntFichier;
+import com.bondeko.sysgeho.be.util.OutputType;
+import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
 import com.bondeko.sysgeho.ui.core.base.SysGehoCtrl;
 import com.bondeko.sysgeho.ui.core.base.Traitement;
 import com.bondeko.sysgeho.ui.imp.util.DossierPatientSvcoDeleguate;
+import com.bondeko.sysgeho.ui.imp.util.DossierPatientTrt;
 import com.bondeko.sysgeho.ui.imp.vue.EtaStatVue;
+import com.bondeko.sysgeho.ui.imp.vue.PatVue;
 import com.bondeko.sysgeho.ui.ref.util.RefSvcoDeleguate;
 import com.bondeko.sysgeho.ui.ref.util.RefTrt;
 
@@ -62,6 +68,9 @@ public class EtaStatCtrl extends SysGehoCtrl<TabEtaStat, TabEtaStat>{
 		Map<String, Traitement> v$mapTrt = new TreeMap<String, Traitement>(
 				RefTrt.getTrtStandards(v$codeEntite));
 		
+		v$mapTrt.put(DossierPatientTrt.ETAT_CMPT_PREST.getKey(), new Traitement(DossierPatientTrt.ETAT_CMPT_PREST));
+
+		
 		listeTraitements = Traitement.getOrderedTrt(v$mapTrt);
 		return listeTraitements;
 	}
@@ -89,5 +98,77 @@ public class EtaStatCtrl extends SysGehoCtrl<TabEtaStat, TabEtaStat>{
 		return null;
 	}
 	
+	/**
+	 * @return un message  sur l'état de l'opération
+	 */
+	@SuppressWarnings("finally")
+	public String genererCmptPres() {
+	// Determine vers quelle page ou Formulaire l'on doit se diriger
+		String v$navigation = null;
+
+		// Message d'information
+		String v$msgDetails = "GENERATION_SUCCES";
+
+		try {
+			EtaStatVue v$vue = (EtaStatVue) defaultVue;
+
+			// Mise à jour de l'entité courante selon le contexte du Formulaire
+			defaultVue.setEntiteCouranteOfPageContext();
+
+			// Sauvegarde de l'entité avant traitement specifique
+			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+
+			// Spécification du type de génération du fichier
+			OutputType outputType = OutputType.PDF;
+
+			// Consommation du service distant
+			TabEtaStat etatstat = defaultVue.getEntiteCourante();
+			
+			
+			EntFichier v$fichier = DossierPatientSvcoDeleguate.getSvcoEtaStat().genererCmptPres(etatstat);
+
+			// création de dossier et fichiers temporaires et affichage de
+			// l'état généré
+			v$navigation = preview(v$fichier, outputType.getExtension());
+			
+			// L'on remplace l'ancienne entité de la liste par la nouvelle issue
+			// du résultat du traitement spécifiques
+			 defaultVue.getTableMgr().replace(defaultVue.getEntiteTemporaire(),
+					 defaultVue.getEntiteCourante());
+
+			// Si nous sommes en Consultation ==> sur le formulaire Details
+			if (defaultVue.getNavigationMgr().isFromDetails()) {
+				// Traitements particuliers
+			}
+
+			// Par contre si nous sommes sur le formulaire Liste
+			else if (defaultVue.getNavigationMgr().isFromListe()) {
+				// Traitements particuliers
+			}
+			FacesUtil.addInfoMessage("GENERATION_SUCCES", v$msgDetails);
+
+		} catch (SysGehoAppException e) {
+			// Aucune navigation possible
+			v$navigation = null;
+
+			// Message utilisateur
+			FacesUtil
+					.addWarnMessage("TRAITEMENT_ALL_ECHEC", e.getMessage());
+			getLogger().error(e.getMessage(), e);
+		} catch (Exception e) {
+			// Aucune navigation possible
+			e.printStackTrace();
+			v$navigation = null;
+			// Message utilisateur
+			FacesUtil
+					.addWarnMessage(
+							"TRAITEMENT_ALL_ECHEC","TRAITEMENT_ALL_ECHEC_INCONNU");
+			getLogger().error(e.getMessage(), e);
+		} finally {
+			// Retour à la page adéquate
+			return v$navigation;
+		}
+
+	}
 
 }

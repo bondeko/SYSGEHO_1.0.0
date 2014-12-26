@@ -339,6 +339,18 @@ public class DossierPatientTrt extends SysGehoTrt{
 	}
 	
 	/***
+	 * GENERER_RAP_VIS_MED_EMB
+	 */
+	public static Traitement GENERER_RAP_VIS_MED_EMB;	
+	static{
+		
+		GENERER_RAP_VIS_MED_EMB = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "Gen_Rap_Vis_Med_Emb" , /* Libellé */ "Generer le rapport" , /* Commentaire */ "" , /* Méthode */ "genererRapportVM",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Voulez vous génerez le rapport ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "Shift+F3", /* index */ "13", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
+	
+	/***
 	 * VALIDER_RAP_VIS_MED_PERIO
 	 */
 	public static Traitement VALIDER_RAP_VIS_MED_PERIO;	
@@ -383,5 +395,42 @@ public class DossierPatientTrt extends SysGehoTrt{
 			/* Controleur de la destination */ "rapVisMedPerioCtrl", /* Type de progress bar */ Traitement.PROGRESS_NO, 
 			/* Raccourci clavier */ "", /* index */ "12");
 	}	
+	
+	/***
+	 * GENERER_RAP_VIS_MED_PERIO
+	 */
+	public static Traitement GENERER_RAP_VIS_MED_PERIO;	
+	static{
+		
+		GENERER_RAP_VIS_MED_PERIO = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "gEN_Rap_Vis_Med_Perio" , /* Libellé */ "Generer le rapport" , /* Commentaire */ "" , /* Méthode */ "genererRapportVM",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Voulez vous génerez le rapport ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "Shift+F5", /* index */ "12", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
+	
+	/***
+	 * ETA_DOS_PAT
+	 */
+	public static Traitement ETA_DOS_PAT;	
+	static{
+		
+		ETA_DOS_PAT = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "Dossier_Pat" , /* Libellé */ "Générer le dossier du patient" , /* Commentaire */ "" , /* Méthode */ "genDossierPat",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer la génération ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "", /* index */ "18", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
+	
+	/***
+	 * ETAT_CMPT_PREST
+	 */
+	public static Traitement ETAT_CMPT_PREST;	
+	static{
+		
+		ETAT_CMPT_PREST = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "CMP_Prest" , /* Libellé */ "Etat comptable des prestations" , /* Commentaire */ "" , /* Méthode */ "genererCmptPres",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer la génération ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "", /* index */ "18", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
+	
 	
 }

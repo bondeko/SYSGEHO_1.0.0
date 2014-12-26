@@ -8,9 +8,12 @@ import java.util.TreeMap;
 import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.exception.SysGehoAppException;
 import com.bondeko.sysgeho.be.core.svco.base.IBaseSvco;
+import com.bondeko.sysgeho.be.imp.entity.TabCpteRenduConsul;
 import com.bondeko.sysgeho.be.imp.entity.TabPat;
 import com.bondeko.sysgeho.be.imp.entity.TabRapVisMedPerio;
 import com.bondeko.sysgeho.be.imp.entity.TabVisMedPerio;
+import com.bondeko.sysgeho.be.util.EntFichier;
+import com.bondeko.sysgeho.be.util.OutputType;
 import com.bondeko.sysgeho.ui.core.base.FacesUtil;
 import com.bondeko.sysgeho.ui.core.base.ServiceLocatorException;
 import com.bondeko.sysgeho.ui.core.base.SysGehoCtrl;
@@ -18,6 +21,7 @@ import com.bondeko.sysgeho.ui.core.base.SysGehoToolBox;
 import com.bondeko.sysgeho.ui.core.base.Traitement;
 import com.bondeko.sysgeho.ui.imp.util.DossierPatientSvcoDeleguate;
 import com.bondeko.sysgeho.ui.imp.util.DossierPatientTrt;
+import com.bondeko.sysgeho.ui.imp.vue.CpteRenduConsulVue;
 import com.bondeko.sysgeho.ui.imp.vue.RapVisMedPerioVue;
 
 public class RapVisMedPerioCtrl extends SysGehoCtrl<TabRapVisMedPerio, TabRapVisMedPerio>{
@@ -70,6 +74,8 @@ public class RapVisMedPerioCtrl extends SysGehoCtrl<TabRapVisMedPerio, TabRapVis
 				DossierPatientTrt.getTrtStandards(v$codeEntite));
 		
 		v$mapTrt.put(DossierPatientTrt.VALIDER_RAP_VIS_MED_PERIO.getKey(), new Traitement(DossierPatientTrt.VALIDER_RAP_VIS_MED_PERIO));
+		
+		v$mapTrt.put(DossierPatientTrt.GENERER_RAP_VIS_MED_PERIO.getKey(), new Traitement(DossierPatientTrt.GENERER_RAP_VIS_MED_PERIO));
 		
 		listeTraitements = Traitement.getOrderedTrt(v$mapTrt);
 		return listeTraitements;
@@ -186,6 +192,81 @@ public class RapVisMedPerioCtrl extends SysGehoCtrl<TabRapVisMedPerio, TabRapVis
 			// Retour à la page adéquate
 			return v$navigation;
 		}
+	}
+	
+	/**
+	 * Génére un rapport de VM
+	 * 
+	 * @return un message  sur l'état de l'opération
+	 */
+	@SuppressWarnings("finally")
+	public String genererRapportVM() {
+	// Determine vers quelle page ou Formulaire l'on doit se diriger
+		String v$navigation = null;
+
+		// Message d'information
+		String v$msgDetails = "GENERATION_SUCCES";
+
+		try {
+			RapVisMedPerioVue v$vue = (RapVisMedPerioVue) defaultVue;
+
+			// Mise à jour de l'entité courante selon le contexte du Formulaire
+			defaultVue.setEntiteCouranteOfPageContext();
+
+			// Sauvegarde de l'entité avant traitement specifique
+			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+
+			// Spécification du type de génération du fichier
+			OutputType outputType = OutputType.PDF;
+
+			// Consommation du service distant
+			TabRapVisMedPerio rapport = defaultVue.getEntiteCourante();
+			
+			
+			EntFichier v$fichier = DossierPatientSvcoDeleguate.getSvcoRapVisMedPerio().genererRapportVM(rapport);
+
+			// création de dossier et fichiers temporaires et affichage de
+			// l'état généré
+			v$navigation = preview(v$fichier, outputType.getExtension());
+			
+			// L'on remplace l'ancienne entité de la liste par la nouvelle issue
+			// du résultat du traitement spécifiques
+			 defaultVue.getTableMgr().replace(defaultVue.getEntiteTemporaire(),
+					 defaultVue.getEntiteCourante());
+
+			// Si nous sommes en Consultation ==> sur le formulaire Details
+			if (defaultVue.getNavigationMgr().isFromDetails()) {
+				// Traitements particuliers
+			}
+
+			// Par contre si nous sommes sur le formulaire Liste
+			else if (defaultVue.getNavigationMgr().isFromListe()) {
+				// Traitements particuliers
+			}
+			FacesUtil.addInfoMessage("GENERATION_SUCCES", v$msgDetails);
+
+		} catch (SysGehoAppException e) {
+			// Aucune navigation possible
+			v$navigation = null;
+
+			// Message utilisateur
+			FacesUtil
+					.addWarnMessage("TRAITEMENT_ALL_ECHEC", e.getMessage());
+			getLogger().error(e.getMessage(), e);
+		} catch (Exception e) {
+			// Aucune navigation possible
+			e.printStackTrace();
+			v$navigation = null;
+			// Message utilisateur
+			FacesUtil
+					.addWarnMessage(
+							"TRAITEMENT_ALL_ECHEC","TRAITEMENT_ALL_ECHEC_INCONNU");
+			getLogger().error(e.getMessage(), e);
+		} finally {
+			// Retour à la page adéquate
+			return v$navigation;
+		}
+
 	}
 	
 }

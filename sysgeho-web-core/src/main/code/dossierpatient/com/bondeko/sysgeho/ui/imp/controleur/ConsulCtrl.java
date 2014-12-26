@@ -171,6 +171,11 @@ public class ConsulCtrl extends SysGehoCtrl<TabConsul, TabConsul>{
 			TabVisMedPerio v$entite = (TabVisMedPerio) p$entite;
 			defaultVue.getEntiteCourante().setTabVisMedPerio(v$entite);
 		}
+		
+		if (v$propriete.equals("tabSpec")) {
+			TabSpec v$entite = (TabSpec) p$entite;
+			defaultVue.getEntiteCourante().setTabSpec(v$entite);
+		}
 
 	}
 	
@@ -293,8 +298,8 @@ public class ConsulCtrl extends SysGehoCtrl<TabConsul, TabConsul>{
 		
 		try {
 				TabConsul consul= defaultVue.getEntiteCourante();
-				if(consul != null && consul.getCodSpec()!=null){
-					TabSpec spec = RefSvcoDeleguate.getSvcoSpec().rechercher(new TabSpec(), consul.getCodSpec());
+				if(consul != null && consul.getTabSpec()!=null){
+					TabSpec spec = RefSvcoDeleguate.getSvcoSpec().rechercher(new TabSpec(), consul.getTabSpec().getCodSpec());
 				}
 			} catch (SysGehoAppException e) {
 				e.printStackTrace();

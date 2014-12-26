@@ -32,6 +32,18 @@ public class RefTrt extends SysGehoTrt{
 			/* Config IHM */ new boolean[]{true,true,true,false} , 
 			/* Controleur de la destination */ "facConvCtrl", /* Type de progress bar */ Traitement.PROGRESS_NO, 
 			/* Raccourci clavier */ "", /* index */ "12");
-	}	
+	}
+	
+	/***
+	 * GEN_LIST_EXAM
+	 */
+	public static Traitement GEN_LIST_EXAM;	
+	static{
+		
+		GEN_LIST_EXAM = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "FichExam" , /* Libellé */ "Générer le fichier des examens" , /* Commentaire */ "" , /* Méthode */ "genererFichierExamen",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer la génération ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "", /* index */ "11", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
 	
 }
