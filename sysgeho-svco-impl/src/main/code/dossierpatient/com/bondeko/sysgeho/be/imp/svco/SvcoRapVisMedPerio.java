@@ -18,6 +18,7 @@ import com.bondeko.sysgeho.be.core.sisv.base.IBaseSisv;
 import com.bondeko.sysgeho.be.core.svco.base.BaseSvco;
 import com.bondeko.sysgeho.be.imp.entity.TabRapVisMedPerio;
 import com.bondeko.sysgeho.be.imp.sisv.ISisvRapVisMedPerio;
+import com.bondeko.sysgeho.be.util.EntFichier;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -79,6 +80,20 @@ public class SvcoRapVisMedPerio extends BaseSvco<TabRapVisMedPerio> implements I
 	public TabRapVisMedPerio valider(TabRapVisMedPerio $pCpteRduConsul) throws SysGehoAppException {
 		try {
 			return sisvRapVisMedPerio.valider($pCpteRduConsul);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
+	/**
+	 * Generer le rapport de visite
+	 */
+	@Override
+	public EntFichier  genererRapportVM(TabRapVisMedPerio rapport)
+	throws SysGehoAppException {
+		try {
+			return sisvRapVisMedPerio.genererRapportVM(rapport);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);

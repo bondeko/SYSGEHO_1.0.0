@@ -18,6 +18,7 @@ import com.bondeko.sysgeho.be.core.sisv.base.IBaseSisv;
 import com.bondeko.sysgeho.be.core.svco.base.BaseSvco;
 import com.bondeko.sysgeho.be.imp.entity.TabEtaStat;
 import com.bondeko.sysgeho.be.imp.sisv.ISisvEtaStat;
+import com.bondeko.sysgeho.be.util.EntFichier;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -68,6 +69,18 @@ public class SvcoEtaStat extends BaseSvco<TabEtaStat> implements IRemoteEtaStat,
 			throws SysGehoAppException {
 		try {
 			return sisvEtaStat.rechercherParCritere(entity);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
+	
+	@Override
+	public EntFichier  genererCmptPres(TabEtaStat etatstat)
+	throws SysGehoAppException {
+		try {
+			return sisvEtaStat.genererCmptPres(etatstat);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);

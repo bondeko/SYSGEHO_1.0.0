@@ -18,6 +18,7 @@ import com.bondeko.sysgeho.be.core.sisv.base.IBaseSisv;
 import com.bondeko.sysgeho.be.core.svco.base.BaseSvco;
 import com.bondeko.sysgeho.be.ref.entity.TabTypExam;
 import com.bondeko.sysgeho.be.ref.sisv.ISisvTypExam;
+import com.bondeko.sysgeho.be.util.EntFichier;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -68,6 +69,18 @@ public class SvcoTypExam extends BaseSvco<TabTypExam> implements IRemoteTypExam,
 			throws SysGehoAppException {
 		try {
 			return sisvTypExam.rechercherParCritere(entity);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
+	
+	@Override
+	public EntFichier  genererFichierExamen(TabTypExam typeexam)
+	throws SysGehoAppException {
+		try {
+			return sisvTypExam.genererFichierExamen(typeexam);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);

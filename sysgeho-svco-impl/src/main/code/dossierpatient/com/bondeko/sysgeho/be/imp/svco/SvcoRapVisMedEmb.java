@@ -18,6 +18,7 @@ import com.bondeko.sysgeho.be.core.sisv.base.IBaseSisv;
 import com.bondeko.sysgeho.be.core.svco.base.BaseSvco;
 import com.bondeko.sysgeho.be.imp.entity.TabRapVisMedEmb;
 import com.bondeko.sysgeho.be.imp.sisv.ISisvRapVisMedEmb;
+import com.bondeko.sysgeho.be.util.EntFichier;
 
 @Stateless
 @TransactionManagement(TransactionManagementType.CONTAINER)
@@ -79,6 +80,21 @@ public class SvcoRapVisMedEmb extends BaseSvco<TabRapVisMedEmb> implements IRemo
 	public TabRapVisMedEmb valider(TabRapVisMedEmb $pCpteRduConsul) throws SysGehoAppException {
 		try {
 			return sisvRapVisMedEmb.valider($pCpteRduConsul);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
+	
+	/**
+	 * Generer le rapport de visite
+	 */
+	@Override
+	public EntFichier  genererRapportVM(TabRapVisMedEmb rapport)
+	throws SysGehoAppException {
+		try {
+			return sisvRapVisMedEmb.genererRapportVM(rapport);
 		} catch (SysGehoSystemException e) {
 			e.printStackTrace();
 			SysGehoAppException sdr = new SysGehoAppException(e);
