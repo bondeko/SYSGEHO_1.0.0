@@ -11,4 +11,5 @@ public interface ISisvVisMedPerio extends IBaseSisv<TabVisMedPerio, String>{
 
 	TabVisMedPerio valider(TabVisMedPerio $pVisMedPerio) throws SysGehoSystemException;
 
+
 }
