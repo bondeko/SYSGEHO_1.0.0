@@ -330,7 +330,7 @@
 			</staticText>
 			<image>
 				<reportElement x="333" y="-1" width="29" height="41"/>
-				<imageExpression class="java.lang.String"><![CDATA["E:\\PROJETS\\SYSGEHO_1.0.0\\2-config\\src\\SYSGEHO_1.0.0\\trunk\\editique\\logo-SYSGEHO.jpg"]]></imageExpression>
+				<imageExpression class="java.lang.String"><![CDATA["logo-SYSGEHO.jpg"]]></imageExpression>
 			</image>
 		</band>
 	</pageFooter>
