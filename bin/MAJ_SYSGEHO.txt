@@ -202,4 +202,4 @@ on peut se limiter au attribut code, libellé
 8- Ajouter le champs suivants pour un l'enregistrement d'un soin : 
 	- Materiel de soins utilisé
 	- Médicaments utilisés
-
+9- Dans le filtre de recherche de gestion des patients, ajouter le champs : prenom, société, titre du patient(Mr, Mme,...), Est Affilié, profession...
