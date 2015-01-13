@@ -182,3 +182,17 @@ on peut se limiter au attribut code, libellé
 1- Dans le formulaire de créaton il n'ya pas de champs pr ajouté la pièce jointe (Pour le moment l'ajout se fais par traitement spécifique)
 2- Après l'ajout avec succès d'une piece jointe sur une facture crée, la PJ n'est pas visible dans l'onglet "Pieces jointes" (sa marche, assure toi que le config.propertie est bien confuguré)
 
+
+-----------------------------------------------------13/01/2015 : Quelques remarques du client Bondeko aprés la présentation du 03/01/2015-----------------------------------------------------------------
+1- Les paramétres de consultations sont imcomplets : En attente des autres paramétres du client
+2- Lors de la création d'un consultation, premettre étant sur la meme page de programmer un autre rendez vous du patient 
+3- Ordonnée les champs lors de la création d'un compte rendu de consultation. L'ordre reste attendu du client
+4- Pouvoir informer un medecin ou alors la sécrétaire des RDV du jour ( Un système de notification )
+5- Aprés avoir creer une hospitalisation, donner la possibilité de renseigne étant sur la meme pages les : 
+	- Soins effectués sur le patient
+	- Les examens faits
+	- Les médicaments utilisés
+	- Les commentaires et appreciations de l'infirmiéres de garde
+6- Dissocié, les aspects montants des prestations , des prestations en question car les prix ne sont pas fixé par le medecin encore moins l'infirmiéres
+7- Paramétrer l'Etat comptable par patient, prestation, périodique
+
