@@ -203,3 +203,15 @@ on peut se limiter au attribut code, libellé
 	- Materiel de soins utilisé
 	- Médicaments utilisés
 9- Dans le filtre de recherche de gestion des patients, ajouter le champs : prenom, société, titre du patient(Mr, Mme,...), Est Affilié, profession...
+10- Pendant la création d'un nouveau patient, controler l'unicité du matricule et renvoyer un message d'erreur si le matricule existe déja.
+11- Ajoute
+12- Problème avec la génération des code de la tab_inc_cod
+Requete <SELECT o FROM  TabIncCod o WHERE (o.codIncCod = '2015TabConsul')>
+09:40:00,815 INFO  [STDOUT] 25/01/2015 09:40:00.815 DEBUG com.bondeko.sysgeho.be.core.dao.base.DaoIncCod ==> Nombre d'éléments trouvés : 0
+09:40:00,815 INFO  [STDOUT] 25/01/2015 09:40:00.815 DEBUG com.bondeko.sysgeho.be.core.dao.base.DaoIncCod ==> [findInc] Aucun compteur trouvé. création d'un nouveau compteur  : 2015TabConsul
+09:40:00,816 INFO  [STDOUT] 25/01/2015 09:40:00.815 DEBUG com.bondeko.sysgeho.be.core.dao.base.DaoIncCod ==> [findInc] Initialisation du compteur avant insertion en BDD
+09:40:00,816 INFO  [STDOUT] 25/01/2015 09:40:00.816 DEBUG com.bondeko.sysgeho.be.core.dao.base.DaoIncCod ==> [findInc] Création effective du nouveau compteur
+09:40:00,821 ERROR [STDERR] com.bondeko.sysgeho.be.core.exception.SysGehoPersistenceException: 
+
+-----------------------------20/02/2015 : Remarque du Dr MVENG de Bondeko ----------------------------------------------------------------------------
+1- Réorganiser 
