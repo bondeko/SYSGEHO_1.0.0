@@ -2,18 +2,15 @@
 <com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPat>
   <SrlEtatDosPat>
     <com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
-      <codRef>REF2014000003</codRef>
-      <libSoc>Groupe TEGUO</libSoc>
-      <liMois>Janvier 2015</liMois>
-	  <datFact>02/05/2015</datFact>
-      <booPaie>OUI</booPaie>
+      <codPrestation>2014000003</codPrestation>
+      <catPrestation>Consultation</catPrestation>
+      <libPrestation>Consultation en Ophtamologie</libPrestation>
+      <datPrestation>29/09/2014</datPrestation>
       <libNom>TAGUEMKOUO Franck Arsene</libNom>
       <enuModPchg>Personnelle</enuModPchg>
       <isFacture>OUI</isFacture>
       <isPaye>NON</isPaye>
 	  <vMtnPres>5000</vMtnPres>
-	  <vSousTotal>5000</vSousTotal>
-	  <vMntTotal>5000</vMntTotal>
     </com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
     <com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
       <codPrestation>2014000004</codPrestation>
@@ -25,12 +22,10 @@
       <isFacture>OUI</isFacture>
       <isPaye>NON</isPaye>
 	  <vMtnPres>15000</vMtnPres>
-	  <vSousTotal>15000</vSousTotal>
-	  <vMntTotal>15000</vMntTotal>
     </com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
 	<com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
       <codPrestation>2014000003</codPrestation>
-      <catPrestation>Examen</catPrestation>
+      <catPrestation>Consultation</catPrestation>
       <libPrestation>Consultation en Ophtamologie</libPrestation>
       <datPrestation>29/09/2014</datPrestation>
       <libNom>TAGUEMKOUO Franck Arsene</libNom>
@@ -38,8 +33,6 @@
       <isFacture>OUI</isFacture>
       <isPaye>NON</isPaye>
 	  <vMtnPres>7000</vMtnPres>
-	  <vSousTotal>5000</vSousTotal>
-	  <vMntTotal>5000</vMntTotal>
     </com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
   </SrlEtatDosPat>
 </com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPat>

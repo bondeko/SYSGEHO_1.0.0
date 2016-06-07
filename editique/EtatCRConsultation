@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<main>
+	<srlEtatListPat>
+		<body>
+		  <codPat>OT001</codPat>
+		  <libTit>Mr</libTit>
+		  <libNom>TEGUO ROMARIC Cyrille</libNom>
+		  <datNais>19/12/2013</datNais>
+		  <libSex>Enft.</libSex>
+		  <libSoc>CAMAIR-CO</libSoc>
+		  <libNumTel>989898985</libNumTel>
+		  <datEnreg>19/12/2013</datEnreg>
+		  <booEstAff>OUI</booEstAff>
+		</body>
+		<body>
+		  <codPat>OT002</codPat>
+		  <libTit>Mr</libTit>
+		  <libNom>NANFACK Beauclair</libNom>
+		  <datNais>19/12/2013</datNais>
+		  <libSex>M</libSex>
+		  <libSoc>CAMAIR-CO</libSoc>
+		  <libNumTel>989898985</libNumTel>
+		  <datEnreg>19/12/2013</datEnreg>
+		  <booEstAff>OUI</booEstAff>
+		</body>
+		<body>
+		  <codPat>OT003</codPat>
+		  <libTit>Mme</libTit>
+		  <libNom>ATANGANA JEANNE</libNom>
+		  <datNais>19/12/2013</datNais>
+		  <libSex>M</libSex>
+		  <libSoc>PROMETAL</libSoc>
+		  <libNumTel>989898985</libNumTel>
+		  <datEnreg>19/12/2013</datEnreg>
+		  <booEstAff>OUI</booEstAff>
+		</body>
+	</srlEtatListPat>
+</main>

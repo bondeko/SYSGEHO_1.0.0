@@ -4,7 +4,7 @@
 	<property name="ireport.encoding" value="UTF-8"/>
 	<property name="ireport.zoom" value="1.2100000000000002"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="577"/>
+	<property name="ireport.y" value="0"/>
 	<import value="net.sf.jasperreports.engine.*"/>
 	<import value="java.util.*"/>
 	<import value="net.sf.jasperreports.engine.data.*"/>
@@ -102,11 +102,11 @@
 				<text><![CDATA[COMPTE RENDU CONSULTATION]]></text>
 			</staticText>
 			<image>
-				<reportElement x="3" y="11" width="149" height="44"/>
+				<reportElement x="17" y="0" width="225" height="55"/>
 				<imageExpression class="java.lang.String"><![CDATA["EnteteBondeko1.png"]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="152" y="11" width="403" height="44"/>
+				<reportElement x="242" y="31" width="303" height="24"/>
 				<imageExpression class="java.lang.String"><![CDATA["EnteteBondeko2.png"]]></imageExpression>
 			</image>
 			<rectangle>

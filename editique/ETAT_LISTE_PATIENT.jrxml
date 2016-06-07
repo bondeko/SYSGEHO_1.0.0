@@ -51,12 +51,12 @@
 				<text><![CDATA[LISTE DES PATIENTS]]></text>
 			</staticText>
 			<image>
-				<reportElement x="17" y="18" width="262" height="70"/>
-				<imageExpression class="java.lang.String"><![CDATA["E:\\PROJETS\\SYSGEHO_1.0.0\\2-config\\src\\SYSGEHO_1.0.0\\trunk\\editique\\EnteteBondeko1.png"]]></imageExpression>
+				<reportElement x="56" y="13" width="301" height="88"/>
+				<imageExpression class="java.lang.String"><![CDATA["EnteteBondeko1.png"]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="282" y="45" width="508" height="43"/>
-				<imageExpression class="java.lang.String"><![CDATA["E:\\PROJETS\\SYSGEHO_1.0.0\\2-config\\src\\SYSGEHO_1.0.0\\trunk\\editique\\EnteteBondeko2.png"]]></imageExpression>
+				<reportElement x="360" y="54" width="430" height="34"/>
+				<imageExpression class="java.lang.String"><![CDATA["EnteteBondeko2.png"]]></imageExpression>
 			</image>
 		</band>
 	</title>

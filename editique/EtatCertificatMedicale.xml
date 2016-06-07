@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<main>
+	<srlCertMed>
+		<body>
+		  <refCertMed>15 099/JSK/2016</refCertMed>
+		  <libNomMed>Dr KAPTUE Sylvere Joseph</libNomMed>
+		  <libSpec>CNOM N°3615 spécialiste Diplômé de santé et sécurité au travail et hygiène industrielle</libSpec>
+		  <libNomPat>DEFFEU KENMOGNE Joel Bertrand</libNomPat>
+		  <valAge>37</valAge>
+		  <libSoc>Candidat à l'emploi à la Société SOREPCO SA</libSoc>
+		  <libVisMed>Visite médicale d'embauche</libVisMed>
+		  <datVisMed>22/12/2015</datVisMed>
+		  <datCertMed>22/12/2015</datCertMed>
+		</body>		
+	</srlCertMed>
+</main>

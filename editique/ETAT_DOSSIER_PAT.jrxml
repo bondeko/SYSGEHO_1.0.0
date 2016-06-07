@@ -80,11 +80,11 @@
 	<title>
 		<band height="74" splitType="Stretch">
 			<image>
-				<reportElement x="13" y="2" width="262" height="70"/>
+				<reportElement x="111" y="2" width="262" height="70"/>
 				<imageExpression class="java.lang.String"><![CDATA["EnteteBondeko1.png"]]></imageExpression>
 			</image>
 			<image>
-				<reportElement x="282" y="15" width="508" height="43"/>
+				<reportElement x="376" y="38" width="402" height="27"/>
 				<imageExpression class="java.lang.String"><![CDATA["EnteteBondeko2.png"]]></imageExpression>
 			</image>
 		</band>
@@ -92,7 +92,7 @@
 	<pageHeader>
 		<band height="90" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="802" height="33"/>
+				<reportElement x="0" y="10" width="802" height="33"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="24" isBold="true"/>
 				</textElement>

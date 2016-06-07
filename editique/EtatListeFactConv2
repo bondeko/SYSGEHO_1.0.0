@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPat>
+  <SrlEtatDosPat>
+    <com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
+     <codRef>REF2014000003</codRef>
+      <libSoc>Groupe TEGUO</libSoc>
+      <libMois>Janvier 2015</libMois>
+	  <datFact>02/05/2015</datFact>
+      <booPaie>OUI</booPaie>
+      <valFact>60000</valFact>
+    </com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
+    <com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
+     <codRef>REF2014000003</codRef>
+      <libSoc>Groupe TEGUO</libSoc>
+      <libMois>Janvier 2015</libMois>
+	  <datFact>02/05/2015</datFact>
+      <booPaie>OUI</booPaie>
+      <valFact>60000</valFact>
+    </com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
+	<com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
+      <codRef>REF2014000003</codRef>
+      <libSoc>Groupe TEGUO</libSoc>
+      <libMois>Janvier 2015</libMois>
+	  <datFact>02/05/2015</datFact>
+      <booPaie>OUI</booPaie>
+      <valFact>60000</valFact>
+    </com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt>
+  </SrlEtatDosPat>
+</com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPat>
