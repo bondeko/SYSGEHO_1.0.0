@@ -16,6 +16,9 @@ public interface ISvcoFacConv extends IBaseSvco<TabFacConv>{
 	List<TabFacConv> rechercherConsulNonPaieParPatient(String codSoc,
 			String mois, String annee) throws SysGehoAppException;
 
-	EntFichier genererFacConv(TabFacConv facConv) throws SysGehoAppException; 
+	EntFichier genererFacConv(TabFacConv facConv) throws SysGehoAppException;
+
+	EntFichier genererListFacConv(TabFacConv facConv)
+			throws SysGehoAppException; 
 
 }

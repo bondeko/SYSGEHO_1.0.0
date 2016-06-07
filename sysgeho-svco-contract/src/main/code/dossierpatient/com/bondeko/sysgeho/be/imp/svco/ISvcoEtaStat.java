@@ -9,4 +9,13 @@ public interface ISvcoEtaStat extends IBaseSvco<TabEtaStat>{
 
 	EntFichier genererCmptPres(TabEtaStat etatstat) throws SysGehoAppException;
 
+	EntFichier genererCmptConsul(TabEtaStat etatstat)
+			throws SysGehoAppException;
+
+	EntFichier genererCmptExam(TabEtaStat etatstat) throws SysGehoAppException;
+
+	EntFichier genererCmptSoin(TabEtaStat etatstat) throws SysGehoAppException;
+
+	EntFichier genererCmptHospi(TabEtaStat etatstat) throws SysGehoAppException;
+
 }
