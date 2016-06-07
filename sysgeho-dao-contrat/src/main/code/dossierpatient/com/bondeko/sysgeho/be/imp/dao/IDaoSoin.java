@@ -17,4 +17,6 @@ public interface IDaoSoin extends IBaseDao<TabSoin, String>{
 	List<TabSoin> findSoinNonPaieByPatient(String codPat)
 			throws SysGehoPersistenceException;
 
+	public List<TabSoin> findByDate(String dateDeb, String dateFin)
+	throws SysGehoPersistenceException;
 }

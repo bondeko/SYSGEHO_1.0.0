@@ -18,5 +18,8 @@ public interface IDaoHospi extends IBaseDao<TabHospi, String>{
 
 	List<TabHospi> findHospiNonPaieByPatient(String codPat)
 			throws SysGehoPersistenceException;
+	
+	public List<TabHospi> findByDate(String dateDeb, String dateFin)
+	throws SysGehoPersistenceException;
 
 }

@@ -16,5 +16,8 @@ public interface IDaoExam extends IBaseDao<TabExam, String>{
 
 	List<TabExam> findExamNonPaieByPatient(String codPat)
 			throws SysGehoPersistenceException;
+	
+	public List<TabExam> findByDate(String dateDeb, String dateFin)
+	throws SysGehoPersistenceException;
 
 }
