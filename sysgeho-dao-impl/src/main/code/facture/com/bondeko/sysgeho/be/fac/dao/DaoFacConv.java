@@ -46,7 +46,7 @@ public class DaoFacConv extends BaseDao<TabFacConv, String> implements IDaoFacCo
 			throws SysGehoPersistenceException {
 		try{
 			String query = "SELECT o FROM " + entity.getClass().getSimpleName() + " o " + 
-			" ORDER BY o.refFacConv ";
+			" ORDER BY o.tabSoc, o.datFac, o.refFacConv ";
 			
 			logger.debug("Requete <" + query + ">");
 			
@@ -79,7 +79,7 @@ public class DaoFacConv extends BaseDao<TabFacConv, String> implements IDaoFacCo
 		}
 		try{
 			String query = "SELECT o FROM " + entity.getClass().getSimpleName() + " o where " + clauseWhere +
-			" ORDER BY o.refFacConv ";
+			" ORDER BY o.tabSoc, o.datFac, o.refFacConv ";
 
 			logger.debug("Requete <" + query + ">");
 
@@ -99,7 +99,7 @@ public class DaoFacConv extends BaseDao<TabFacConv, String> implements IDaoFacCo
 	public List<TabFacConv> findBySocMonthYear(String codSoc, String month, String year)
 			throws SysGehoPersistenceException {
 		try{
-			String query = "SELECT o FROM TabFacConv o where o.tabSoc.codSoc='" + codSoc + "' AND o.enuMoisFac='" + month +"' AND o.codExeFis='"+year+"'";
+			String query = "SELECT o FROM TabFacConv o where o.tabSoc.codSoc='" + codSoc + "' AND o.enuMoisFac='" + month +"' AND o.codExeFis='"+year+"' ORDER BY o.enuMoisFac, o.datFac";
 
 			logger.debug("Requete <" + query + ">");
 

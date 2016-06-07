@@ -153,5 +153,35 @@ public class DaoExam extends BaseDao<TabExam, String> implements IDaoExam{
 			throw sdr;
 		}
 	}
+	
+	public List<TabExam> findByDate(String dateDeb, String dateFin)
+	throws SysGehoPersistenceException {
+try {
+	String query = "";
+	if (dateDeb != null || dateFin != null) {
+		query = "SELECT o FROM  TabExam o "
+				+ " WHERE o.datExam >= " + "'"+dateDeb+"'"
+				+ " AND o.datExam <= " + "'"+dateFin+"'"
+				+ " ORDER BY o.datExam ";
+	} else {
+		query = "SELECT o FROM  o TabExam ORDER BY o.datExam ";
+	}
+
+	logger.debug("Requete <" + query + ">");
+
+	List<TabExam> v$list = getManager().createQuery(query)
+			.getResultList();
+
+	getLogger().debug(
+			"Nombre d'éléments trouvés : "
+					+ (v$list == null ? "0" : v$list.size()));
+	if ((v$list == null) || (v$list.size() <= 0)) {
+		return new ArrayList<TabExam>();
+	}
+	return v$list;
+} catch (SysGehoPersistenceException sdr) {
+	throw sdr;
+}
+}
 
 }

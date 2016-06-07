@@ -40,7 +40,7 @@ public abstract class BaseDao <T extends BaseEntity, ID extends Serializable>
 	}
 	
 	public <X extends BaseEntity> X save(X entity) throws BaseException {
-		try{
+		try{			
 			//Fixe l'état de l'entité à créer
 			((SysGehoBaseEntity) entity).setEtatEnt(EnuEtat.CREE.getValue());
 			//On précise que l'entité est actif

@@ -10,12 +10,12 @@ import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
 import com.bondeko.sysgeho.be.core.dao.base.BaseDao;
 import com.bondeko.sysgeho.be.core.exception.SysGehoPersistenceException;
-import com.bondeko.sysgeho.be.imp.entity.TabSoin;
+import com.bondeko.sysgeho.be.imp.entity.TabCertMed;
 
 @Stateless
-public class DaoSoin extends BaseDao<TabSoin, String> implements IDaoSoin {
+public class DaoCertMed extends BaseDao<TabCertMed, String> implements IDaoCertMed {
 
-	private static BaseLogger logger = BaseLogger.getLogger(DaoSoin.class);
+	private static BaseLogger logger = BaseLogger.getLogger(DaoCertMed.class);
 
 	@Override
 	public BaseLogger getLogger() {
@@ -27,7 +27,7 @@ public class DaoSoin extends BaseDao<TabSoin, String> implements IDaoSoin {
 			throws SysGehoPersistenceException {
 		try {
 			String query = "SELECT o FROM " + entity.getClass().getSimpleName()
-					+ " o " + " WHERE o.codSoin='" + id + "' ";
+					+ " o " + " WHERE o.codCertMed='" + id + "' ";
 
 			logger.debug("Requete <" + query + ">");
 
@@ -49,7 +49,7 @@ public class DaoSoin extends BaseDao<TabSoin, String> implements IDaoSoin {
 			throws SysGehoPersistenceException {
 		try {
 			String query = "SELECT o FROM " + entity.getClass().getSimpleName()
-					+ " o " + " ORDER BY o.codSoin ";
+					+ " o " + " ORDER BY o.datCert ";
 
 			logger.debug("Requete <" + query + ">");
 
@@ -71,45 +71,46 @@ public class DaoSoin extends BaseDao<TabSoin, String> implements IDaoSoin {
 	public <X extends BaseEntity> List<X> findByExample(X entity)
 			throws SysGehoPersistenceException {
 		String clauseWhere = "1=1 AND o.etatEnt != '2001'";
-		TabSoin currentSoin = (TabSoin) entity;
-		if (currentSoin != null && currentSoin.getCodSoin() != null
-				&& !currentSoin.getCodSoin().equals("")) {
-			clauseWhere = clauseWhere + "AND upper(o.codSoin) like '%"
-					+ currentSoin.getCodSoin() + "%'";
+		TabCertMed currentCert = (TabCertMed) entity;
+		if (currentCert != null && currentCert.getRefCertMed() != null
+				&& !currentCert.getRefCertMed().equals("")) {
+			clauseWhere = clauseWhere + "AND upper(o.codCertMed) like '%"
+					+ currentCert.getRefCertMed() + "%'";
 		}
-		if (currentSoin != null && currentSoin.getTabPat() != null
-				&& currentSoin.getTabPat().getLibNom() != null
-				&& !currentSoin.getTabPat().getLibNom().equals("")) {
+		if (currentCert != null && currentCert.getTabPat() != null
+				&& currentCert.getTabPat().getLibNom() != null
+				&& !currentCert.getTabPat().getLibNom().equals("")) {
 			clauseWhere = clauseWhere + "AND upper(o.tabPat.libNom) like '%"
-					+ currentSoin.getTabPat().getLibNom() + "%'";
+					+ currentCert.getTabPat().getLibNom() + "%'";
 		}
-		if (currentSoin != null && currentSoin.getTabTypSoin() != null
-				&& currentSoin.getTabTypSoin().getCodTypSoin() != null
-				&& !currentSoin.getTabTypSoin().getLibTypSoin().equals("")) {
-			clauseWhere = clauseWhere
-					+ "AND upper(o.tabTypSoin.libTypSoin) like '%"
-					+ currentSoin.getTabTypSoin().getLibTypSoin() + "%'";
-		}
-		if (currentSoin != null && currentSoin.getTabVisMedEmb() != null
-				&& currentSoin.getTabVisMedEmb().getCodVisMedEmb() != null
-				&& !currentSoin.getTabVisMedEmb().getCodVisMedEmb().equals("")) {
-			clauseWhere = clauseWhere
-					+ "AND upper(o.tabVisMedEmb.codVisMedEmb) like '%"
-					+ currentSoin.getTabVisMedEmb().getCodVisMedEmb() + "%'";
-		}
-		if (currentSoin != null
-				&& currentSoin.getTabVisMedPerio() != null
-				&& currentSoin.getTabVisMedPerio().getCodVisMedPerio() != null
-				&& !currentSoin.getTabVisMedPerio().getCodVisMedPerio()
-						.equals("")) {
-			clauseWhere = clauseWhere
-					+ "AND upper(o.tabVisMedPerio.codVisMedPerio) like '%"
-					+ currentSoin.getTabVisMedPerio().getCodVisMedPerio()
-					+ "%'";
-		}
+//		if (currentCert != null && currentCert.getTabUsr() != null
+//				&& currentCert.getTabUsr().getLibNom() != null
+//				&& !currentCert.getTabUsr().getLibNom().equals("")) {
+//			clauseWhere = clauseWhere + "AND upper(o.tabUsr.libNom) like '%"
+//					+ currentCert.getTabUsr().getLibNom() + "%'";
+//		}
+//		if (currentCert != null
+//				&& currentCert.getTabVisMedEmb() != null
+//				&& currentCert.getTabVisMedEmb().getCodVisMedEmb() != null
+//				&& !currentCert.getTabVisMedEmb().getCodVisMedEmb()
+//						.equals("")) {
+//			clauseWhere = clauseWhere
+//					+ "AND upper(o.tabVisMedEmb.codVisMedEmb) like '%"
+//					+ currentCert.getTabVisMedEmb().getCodVisMedEmb() + "%'";
+//		}
+//		if (currentCert != null
+//				&& currentCert.getTabVisMedPerio() != null
+//				&& currentCert.getTabVisMedPerio().getCodVisMedPerio() != null
+//				&& !currentCert.getTabVisMedPerio().getCodVisMedPerio()
+//						.equals("")) {
+//			clauseWhere = clauseWhere
+//					+ "AND upper(o.tabVisMedPerio.codVisMedPerio) like '%"
+//					+ currentCert.getTabVisMedPerio().getCodVisMedPerio()
+//					+ "%'";
+//		}
 		try {
 			String query = "SELECT o FROM " + entity.getClass().getSimpleName()
-					+ " o where " + clauseWhere + " ORDER BY o.codSoin ";
+					+ " o where " + clauseWhere + " ORDER BY o.datCert ";
 
 			logger.debug("Requete <" + query + ">");
 
@@ -128,22 +129,22 @@ public class DaoSoin extends BaseDao<TabSoin, String> implements IDaoSoin {
 	}
 
 	@Override
-	public List<TabSoin> findByRefFac(String refFac)
+	public List<TabCertMed> findByRefFac(String refFac)
 			throws SysGehoPersistenceException {
 		try {
-			String query = "SELECT o FROM TabSoin o where o.refFac='" + refFac
-					+ "' ORDER BY o.codSoin ";
+			String query = "SELECT o FROM TabCertMed o where o.codCertMed='"
+					+ refFac + "' ORDER BY o.datCert ";
 
 			logger.debug("Requete <" + query + ">");
 
-			List<TabSoin> v$list = getManager().createQuery(query)
+			List<TabCertMed> v$list = getManager().createQuery(query)
 					.getResultList();
 
 			getLogger().debug(
 					"Nombre d'éléments trouvés : "
 							+ (v$list == null ? "0" : v$list.size()));
 			if ((v$list == null) || (v$list.size() <= 0)) {
-				return new ArrayList<TabSoin>();
+				return new ArrayList<TabCertMed>();
 			}
 			return v$list;
 		} catch (SysGehoPersistenceException sdr) {
@@ -151,53 +152,30 @@ public class DaoSoin extends BaseDao<TabSoin, String> implements IDaoSoin {
 		}
 	}
 
-	@Override
-	public List<TabSoin> findSoinNonPaieByPatient(String codPat)
-			throws SysGehoPersistenceException {
-		try {
-			String query = "SELECT o FROM TabSoin o where o.booPaie='0' AND o.tabPat.codPat='"
-					+ codPat + "' ORDER BY o.codSoin ";
-
-			logger.debug("Requete <" + query + ">");
-
-			List<TabSoin> v$list = getManager().createQuery(query)
-					.getResultList();
-
-			getLogger().debug(
-					"Nombre d'éléments trouvés : "
-							+ (v$list == null ? "0" : v$list.size()));
-			if ((v$list == null) || (v$list.size() <= 0)) {
-				return new ArrayList<TabSoin>();
-			}
-			return v$list;
-		} catch (SysGehoPersistenceException sdr) {
-			throw sdr;
-		}
-	}
-
-	public List<TabSoin> findByDate(String dateDeb, String dateFin)
+	
+	public List<TabCertMed> findByDate(String dateDeb, String dateFin)
 			throws SysGehoPersistenceException {
 		try {
 			String query = "";
 			if (dateDeb != null || dateFin != null) {
-				query = "SELECT o FROM  TabSoin o "
-						+ " WHERE o.datSoin >= " + "'" + dateDeb + "'"
-						+ " AND o.datSoin <= " + "'" + dateFin + "'"
-						+ " ORDER BY o.datSoin ";
+				query = "SELECT o FROM  TabCertMed o "
+						+ " WHERE o.datCert >= " + "'"+dateDeb+"'"
+						+ " AND o.datCert <= " + "'"+dateFin+"'"
+						+ " ORDER BY o.datCert ";
 			} else {
-				query = "SELECT o FROM  o TabSoin ORDER BY o.datSoin ";
+				query = "SELECT o FROM  o TabCertMed ORDER BY o.datCert ";
 			}
 
 			logger.debug("Requete <" + query + ">");
 
-			List<TabSoin> v$list = getManager().createQuery(query)
+			List<TabCertMed> v$list = getManager().createQuery(query)
 					.getResultList();
 
 			getLogger().debug(
 					"Nombre d'éléments trouvés : "
 							+ (v$list == null ? "0" : v$list.size()));
 			if ((v$list == null) || (v$list.size() <= 0)) {
-				return new ArrayList<TabSoin>();
+				return new ArrayList<TabCertMed>();
 			}
 			return v$list;
 		} catch (SysGehoPersistenceException sdr) {

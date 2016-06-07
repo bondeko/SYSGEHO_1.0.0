@@ -48,7 +48,7 @@ public class DaoPat extends BaseDao<TabPat, String> implements IDaoPat{
 			throws SysGehoPersistenceException {
 		try{
 			String query = "SELECT o FROM " + entity.getClass().getSimpleName() + " o " + 
-			" ORDER BY o.codPat ";
+			" ORDER BY o.tabSoc, o.libNom, o.codPat ";
 			
 			logger.debug("Requete <" + query + ">");
 			

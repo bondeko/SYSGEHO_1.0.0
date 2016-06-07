@@ -48,7 +48,7 @@ public class DaoTypExam extends BaseDao<TabTypExam, String> implements IDaoTypEx
 			throws SysGehoPersistenceException {
 		try{
 			String query = "SELECT o FROM " + entity.getClass().getSimpleName() + " o " + 
-			" ORDER BY o.codTypExam ";
+			" ORDER BY o.tabCatExam, o.libTypExam ";
 			
 			logger.debug("Requete <" + query + ">");
 			
