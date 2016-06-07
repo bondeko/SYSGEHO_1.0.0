@@ -137,6 +137,17 @@ public class FactureTrt extends SysGehoTrt{
 				/* Raccourci clavier */ "Shift+F3", /* index */ "13", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
 	}
 	
+	/***
+	 * GEN_LIST_FAC_CONV
+	 */
+	public static Traitement GEN_LIST_FAC_CONV;	
+	static{
+		
+		GEN_LIST_FAC_CONV = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "ListFacConv" , /* Libellé */ "Générer la liste dess Factures de MT" , /* Commentaire */ "" , /* Méthode */ "genererListFacConv",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer la génération ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "", /* index */ "19", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
 	
 	
 	

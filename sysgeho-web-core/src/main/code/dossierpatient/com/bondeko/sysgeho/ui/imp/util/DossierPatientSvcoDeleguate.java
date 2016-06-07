@@ -1,6 +1,7 @@
 package com.bondeko.sysgeho.ui.imp.util;
 
 import com.bondeko.sysgeho.be.core.base.BaseLogger;
+import com.bondeko.sysgeho.be.imp.svco.IRemoteCertMed;
 import com.bondeko.sysgeho.be.imp.svco.IRemoteConsul;
 import com.bondeko.sysgeho.be.imp.svco.IRemoteCpteRenduConsul;
 import com.bondeko.sysgeho.be.imp.svco.IRemoteCpteRenduExam;
@@ -83,6 +84,10 @@ public class DossierPatientSvcoDeleguate {
 	
 	public static IRemoteEtaStat getSvcoEtaStat() throws ServiceLocatorException{
         return (IRemoteEtaStat) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoEtaStat", IRemoteEtaStat.class));
+    }
+	
+	public static IRemoteCertMed getSvcoCertMed() throws ServiceLocatorException{
+        return (IRemoteCertMed) SysGehoSvcoDeleguate.getCachingServiceLocator().lookup(getSvcoBeanName("SvcoCertMed", IRemoteCertMed.class));
     }
 
 	public BaseLogger getLogger() {

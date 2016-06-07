@@ -426,11 +426,71 @@ public class DossierPatientTrt extends SysGehoTrt{
 	public static Traitement ETAT_CMPT_PREST;	
 	static{
 		
-		ETAT_CMPT_PREST = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "CMP_Prest" , /* Libellé */ "Etat comptable des prestations" , /* Commentaire */ "" , /* Méthode */ "genererCmptPres",
+		ETAT_CMPT_PREST = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "CMP_Prest" , /* Libellé */ "Etat comptable de toutes les prestations" , /* Commentaire */ "" , /* Méthode */ "selectionCriterePreModal",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SPECIAL, /* Message du modal panel */ "Confirmer la génération ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "", /* index */ "18", /* reRender */ "mpnl_critere_selection", /* image */ "" );
+	}
+	
+	
+	/***
+	 * ETAT_CMPT_CONSUL
+	 */
+	public static Traitement ETAT_CMPT_CONSUL;	
+	static{
+		
+		ETAT_CMPT_CONSUL = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "CMP_Consul" , /* Libellé */ "Etat comptable des consultations" , /* Commentaire */ "" , /* Méthode */ "genererCmptConsul",
 				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
 				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer la génération ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
 				/* Raccourci clavier */ "", /* index */ "18", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
 	}
 	
+	/***
+	 * ETAT_CMPT_EXAM
+	 */
+	public static Traitement ETAT_CMPT_EXAM;	
+	static{
+		
+		ETAT_CMPT_EXAM = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "CMP_Exam" , /* Libellé */ "Etat comptable des examens" , /* Commentaire */ "" , /* Méthode */ "genererCmptExam",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer la génération ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "", /* index */ "18", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
+	
+	/***
+	 * ETAT_CMPT_SOIN
+	 */
+	public static Traitement ETAT_CMPT_SOIN;	
+	static{
+		
+		ETAT_CMPT_SOIN = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "CMP_Soin" , /* Libellé */ "Etat comptable des soins" , /* Commentaire */ "" , /* Méthode */ "genererCmptSoin",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer la génération ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "", /* index */ "18", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
+	
+	/***
+	 * ETAT_CMPT_HOSPI
+	 */
+	public static Traitement ETAT_CMPT_HOSPI;	
+	static{
+		
+		ETAT_CMPT_HOSPI = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "CMP_Hospi" , /* Libellé */ "Etat comptable des hospitalisation" , /* Commentaire */ "" , /* Méthode */ "genererCmptHospi",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Confirmer la génération ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "", /* index */ "18", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
+	
+	/***
+	 * GENERER_CERT_MED
+	 */
+	public static Traitement GENERER_CERT_MED;	
+	static{
+		
+		GENERER_CERT_MED = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "Gen_Cert_Med" , /* Libellé */ "Generer le Certificat Medical" , /* Commentaire */ "" , /* Méthode */ "genererCertMed",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SIMPLE, /* Message du modal panel */ "Voulez vous génerez le certificat ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "Shift+F3", /* index */ "13", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
+	}
 	
 }
