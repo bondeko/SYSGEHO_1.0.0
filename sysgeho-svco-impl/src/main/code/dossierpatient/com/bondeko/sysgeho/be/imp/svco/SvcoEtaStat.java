@@ -87,5 +87,52 @@ public class SvcoEtaStat extends BaseSvco<TabEtaStat> implements IRemoteEtaStat,
 			throw sdr;
 		}
 	}
+	
+	@Override
+	public EntFichier  genererCmptConsul(TabEtaStat etatstat)
+	throws SysGehoAppException {
+		try {
+			return sisvEtaStat.genererCmptConsul(etatstat);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
+	
+	@Override
+	public EntFichier  genererCmptExam(TabEtaStat etatstat)
+	throws SysGehoAppException {
+		try {
+			return sisvEtaStat.genererCmptExam(etatstat);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
+	
+	@Override
+	public EntFichier  genererCmptSoin(TabEtaStat etatstat)
+	throws SysGehoAppException {
+		try {
+			return sisvEtaStat.genererCmptSoin(etatstat);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
+	@Override
+	public EntFichier  genererCmptHospi(TabEtaStat etatstat)
+	throws SysGehoAppException {
+		try {
+			return sisvEtaStat.genererCmptHospi(etatstat);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
 
 }
