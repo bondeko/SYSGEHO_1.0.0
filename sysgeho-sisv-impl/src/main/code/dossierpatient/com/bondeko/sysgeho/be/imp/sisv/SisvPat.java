@@ -135,7 +135,7 @@ public class SisvPat extends BaseSisv<TabPat, String> implements ISisvPat{
 			e.printStackTrace();
 			throw new SysGehoSystemException(e.getMessage(), e);
 		}
-		String numero = DateTools.padRigth(String.valueOf(v$inc), 6, '0');
+		String numero = DateTools.padRigth(String.valueOf(v$inc), 4, '0');
 		
 		 numero = DateTools.getYear(DateTools.formatDate(new Date()))+ numero;
 		return numero;

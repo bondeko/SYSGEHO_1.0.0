@@ -18,9 +18,10 @@ import com.bondeko.sysgeho.be.core.sisv.base.BaseSisv;
 import com.bondeko.sysgeho.be.core.util.locator.ResourceLocator;
 import com.bondeko.sysgeho.be.fac.dao.IDaoFacConv;
 import com.bondeko.sysgeho.be.fac.entity.TabFacConv;
-import com.bondeko.sysgeho.be.fac.entity.TabFacCour;
 import com.bondeko.sysgeho.be.fac.serialize.SrlFacConvElt;
 import com.bondeko.sysgeho.be.fac.serialize.SrlFactConv;
+import com.bondeko.sysgeho.be.fac.serialize.SrlListFacConvElt;
+import com.bondeko.sysgeho.be.fac.serialize.SrlListFactConv;
 import com.bondeko.sysgeho.be.util.EntFichier;
 import com.bondeko.sysgeho.be.util.ReportNames;
 import com.bondeko.sysgeho.be.util.SysGehoOutput;
@@ -196,4 +197,55 @@ public class SisvFacConv extends BaseSisv<TabFacConv, String> implements ISisvFa
 		
 		return srlFacConv;
 	}
+	
+	private SrlListFactConv getListFacConv(TabFacConv facConv) throws SysGehoSystemException {
+		SrlListFactConv srlFacConv = new SrlListFactConv();
+		try {
+			List<TabFacConv> listFact = daoFacConv.findAll(facConv);
+			if(listFact !=null && listFact.size() > 0){
+				for(TabFacConv fact : listFact){
+					srlFacConv.addElement(new SrlListFacConvElt(fact));
+				}
+			}
+			
+		} catch (SysGehoPersistenceException e) {
+			logger.debug("Erreur de generation du fichier de serialisation");
+			e.printStackTrace();
+			SysGehoSystemException sbr = new SysGehoSystemException(e);
+			throw sbr;
+		}
+		
+		return srlFacConv;
+	}
+	
+	@Override
+	public EntFichier genererListFacConv(TabFacConv facConv) throws SysGehoSystemException{
+		
+		try{
+			SrlListFactConv srlFacConv = getListFacConv(facConv);
+			getLogger().debug("SisvFacConv.genererFacConv Serialisation ...");
+			SysGehoOutput result = fillAndExport(srlFacConv,
+					ResourceLocator.getReportModel(ReportNames.ETAT_LIST_FAC_CONV2),
+					SysGehoPrinterExportEnum.PDF, null, null, null);
+			
+			// Construction du nom par défaut du fichier
+			String str = (ReportNames.ETAT_LIST_FAC_CONV2).getDefaulFileName() + "."
+					+ result.getFileExtention();
+			
+			// Création de l'entité fichier
+			getLogger().debug("SisvFacConv.genererFacConv Creation de l'entite fichier ..."+result.getUri());
+			EntFichier v$fichier = new EntFichier(result.getUri(), str,
+					result.getFileStream());
+			
+			logger.debug("Fichier généré " + str + " >> avec "
+					+ v$fichier.getLength() + "Ko.");
+			return v$fichier;
+			
+		}catch(Exception e){
+			throw new SysGehoSystemException(e.getMessage());
+		}
+		
+	}
+	
+	
 }
