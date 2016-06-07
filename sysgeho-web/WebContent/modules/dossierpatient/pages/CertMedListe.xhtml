@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+     
+  	<ui:composition template="/shared/templates/templateFormulaireListe.xhtml">
+		
+		<ui:param name="managedBean" value="#{sessionScope[certMedCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" des Certificats Medicaux" />
+		
+		<!-- Criteres standards de recherche -->
+		<ui:define name="standardFilter"  >
+		
+			<h:panelGrid columns="2" width="100%"   columnClasses="pngdColMiddle" rowClasses="pngdRow" >
+			
+				<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				
+					<h:outputText value="Reference " />          				
+         			<h:inputText  value="#{certMedCtrl.defaultVue.entiteRecherche.refCertMed}" style="width: 30%" /> 
+         			
+					<h:outputText value="Nom Patient" />          				
+         			<h:inputText  value="#{certMedCtrl.defaultVue.entiteRecherche.tabPat.libNom}" style="width: 30%" />  
+         			      			
+         			<h:outputText value="#{locale.societe}" />          				
+         			<h:inputText  value="#{certMedCtrl.defaultVue.entiteRecherche.libSoc}" style="width: 30%" />           					           					           					   					            				            				            			
+
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2" width="100%" border="0" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				</h:panelGrid>
+														
+																																																	
+			</h:panelGrid>	
+						
+		</ui:define>
+		
+		<!-- Colonnes specifiques e l entite -->
+		<ui:define name="specificColumns"  >
+		
+			<rich:column label="Code " sortBy="#{entity.codCertMed}" filterBy="#{entity.codCertMed}" >
+				<f:facet name="header">
+					<h:outputText value="Code "  />
+				</f:facet>
+				<h:outputText value="#{entity.codCertMed}" />				
+			</rich:column>
+			
+			<rich:column label="Reference" sortBy="#{entity.refCertMed}" filterBy="#{entity.refCertMed}" >
+				<f:facet name="header">
+					<h:outputText value="Reference"  />
+				</f:facet>
+				<h:outputText value="#{entity.refCertMed}" />				
+			</rich:column>
+			
+			<rich:column label="Nom Patient" sortBy="#{entity.tabPat.libNom}" filterBy="#{entity.tabPat.libNom}"  >
+				<f:facet name="header">
+					<h:outputText value="Nom Patient"  />
+				</f:facet>
+				<h:outputText value="#{entity.tabPat.libNom}" />				
+			</rich:column>
+			
+			<rich:column label="Prenom Patient" sortBy="#{entity.tabPat.libPre}" filterBy="#{entity.tabPat.libPre}"  >
+				<f:facet name="header">
+					<h:outputText value="Prenom Patient"  />
+				</f:facet>
+				<h:outputText value="#{entity.tabPat.libPre}" />				
+			</rich:column>
+			
+			<rich:column label="Date Certificat" sortBy="#{entity.dateCertMed}" filterBy="#{entity.dateCertMed}"  >
+				<f:facet name="header">
+					<h:outputText value="Date Certificat" />
+				</f:facet>
+				<h:outputText value="#{entity.dateCertMed}" >	
+					<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+				</h:outputText>			
+			</rich:column>
+			
+			<rich:column label="#{locale.medecin}" sortBy="#{entity.tabUsr.libNom}" filterBy="#{entity.tabUsr.libNom}" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.medecin}"  />
+				</f:facet>
+				<h:outputText value="#{entity.tabUsr.libNom}" />				
+			</rich:column>
+			
+			<rich:column label="Age"  sortBy="#{entity.valAge}" filterBy="#{entity.valAge}"  >
+				<f:facet name="header">
+					<h:outputText value="Age" />
+				</f:facet>	
+				<h:outputText value="#{entity.valAge}" />		
+			</rich:column>
+			
+			<rich:column label="Visite Med Periodique" sortBy="#{entity.tabVisMedPerio.libVisMedPerio}" filterBy="#{entity.tabVisMedPerio.libVisMedPerio}" >
+				<f:facet name="header">
+					<h:outputText value="Visite Med Periodique"  />
+				</f:facet>
+				<h:outputText value="#{entity.tabVisMedPerio.libVisMedPerio}" />				
+			</rich:column>
+			<rich:column label="Visite Med Embauche" sortBy="#{entiteCourante.tabVisMedEmb.libMotif}" filterBy="#{entiteCourante.tabVisMedEmb.libMotif}" >
+				<f:facet name="header">
+					<h:outputText value="Visite Med Embauche"/>
+				</f:facet>
+				<h:outputText value="#{entiteCourante.tabVisMedEmb.libMotif}" />				
+			</rich:column>
+			
+		</ui:define>
+													
+	</ui:composition>
+	
+</html>

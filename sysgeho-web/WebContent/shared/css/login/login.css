@@ -47,13 +47,14 @@ html {
 }
 
 #login {
-	background: #FFFFFF url(../../images/login/Loginarea_Background.png) repeat top left;
-	border: 1px solid #C1D828;
-	padding: 7px 9px 10px;
-	float: right;
-	width: 350px;
-	margin-right: 52px;
-	margin-top: 60px;
+    background: none repeat scroll 0 0 #d7ebf9;
+    border: 1px solid #26478c;
+    float: right;
+    font-weight: bold;
+    margin-right: 52px;
+    margin-top: 60px;
+    padding: 7px 9px 10px;
+    width: 425px;
 }
 
 #title {

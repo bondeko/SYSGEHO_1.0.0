@@ -26,14 +26,12 @@
 
 							<h:panelGroup>
 								<h:outputText value="Matricule" />
-								<ui:include src="/shared/include/required.xhtml" />
+								
 							</h:panelGroup> 												
 							<h:panelGroup>
-								<h:inputText id="inpt_mat"  value="#{entiteCourante.libMat}" style="width: 20%" 
-								 	required="true"  requiredMessage="Valeur obligatoire" >							 	
+								<h:inputText id="inpt_mat"  value="#{entiteCourante.libMat}" style="width: 20%" >							 	
 									<a4j:support event="onchange"  ajaxSingle="true" />											
 								</h:inputText>	
-								<rich:message for="inpt_mat" errorClass="msg_error" />						
 							</h:panelGroup>	
 							
 							<h:outputText value="Titre" />
@@ -51,7 +49,7 @@
 							</h:panelGroup> 												
 							<h:panelGroup>
 								<h:inputText id="inpt_nom"  value="#{entiteCourante.libNom}" style="width: 60%" 
-								 	required="true"  requiredMessage="Validation obligatoire" >							 	
+								 	required="true"  requiredMessage="Valeur obligatoire" >							 	
 									<a4j:support event="onchange"  ajaxSingle="true" />											
 								</h:inputText>	
 								<rich:message for="inpt_nom" errorClass="msg_error" />						

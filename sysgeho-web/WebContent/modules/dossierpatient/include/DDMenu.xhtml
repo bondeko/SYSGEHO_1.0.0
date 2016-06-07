@@ -24,7 +24,11 @@
 		                    ajaxSingle="true" >
 		                    <h:outputText value="Patients" />
 		                </rich:menuItem>
-		                
+		                <rich:menuItem submitMode="ajax" rendered="true" 
+		                    action="#{certMedCtrl.openHomePage}" 
+		                    ajaxSingle="true" >
+		                    <h:outputText value="Certificat Medical" />
+		                </rich:menuItem>
 	                </rich:menuGroup>
 	                
 	                <rich:menuSeparator />

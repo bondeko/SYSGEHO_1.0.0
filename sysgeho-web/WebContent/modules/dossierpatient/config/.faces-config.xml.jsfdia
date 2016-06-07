@@ -138,6 +138,114 @@
     NAME="output23" PATH="/modules/dossierpatient/pages/SoinListe.xhtml"
     TARGET="rules:#modules#dossierpatient#pages#SoinListe.xhtml"
     TITLE="SoinListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="VisMedEmbDetails::#modules#dossierpatient#pages#VisMedEmbDetails.xhtml"
+    NAME="output24"
+    PATH="/modules/dossierpatient/pages/VisMedEmbDetails.xhtml"
+    TARGET="rules:#modules#dossierpatient#pages#VisMedEmbDetails.xhtml"
+    TITLE="VisMedEmbDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="VisMedEmbEdition::#modules#dossierpatient#pages#VisMedEmbEdition.xhtml"
+    NAME="output25"
+    PATH="/modules/dossierpatient/pages/VisMedEmbEdition.xhtml"
+    TARGET="rules:#modules#dossierpatient#pages#VisMedEmbEdition.xhtml"
+    TITLE="VisMedEmbEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="VisMedEmbListe::#modules#dossierpatient#pages#VisMedEmbListe.xhtml"
+    NAME="output26"
+    PATH="/modules/dossierpatient/pages/VisMedEmbListe.xhtml"
+    TARGET="rules:#modules#dossierpatient#pages#VisMedEmbListe.xhtml"
+    TITLE="VisMedEmbListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="VisMedPerioDetails::#modules#dossierpatient#pages#VisMedPerioDetails.xhtml"
+    NAME="output27"
+    PATH="/modules/dossierpatient/pages/VisMedPerioDetails.xhtml"
+    TARGET="rules:#modules#dossierpatient#pages#VisMedPerioDetails.xhtml"
+    TITLE="VisMedPerioDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="VisMedPerioEdition::#modules#dossierpatient#pages#VisMedPerioEdition.xhtml"
+    NAME="output28"
+    PATH="/modules/dossierpatient/pages/VisMedPerioEdition.xhtml"
+    TARGET="rules:#modules#dossierpatient#pages#VisMedPerioEdition.xhtml"
+    TITLE="VisMedPerioEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="VisMedPerioListe::#modules#dossierpatient#pages#VisMedPerioListe.xhtml"
+    NAME="output29"
+    PATH="/modules/dossierpatient/pages/VisMedPerioListe.xhtml"
+    TARGET="rules:#modules#dossierpatient#pages#VisMedPerioListe.xhtml"
+    TITLE="VisMedPerioListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="RapVisMedEmbDetails::#modules#dossierpatient#pages#RapVisMedEmbDetails.xhtml"
+    NAME="output30"
+    PATH="/modules/dossierpatient/pages/RapVisMedEmbDetails.xhtml"
+    TARGET="rules:#modules#dossierpatient#pages#RapVisMedEmbDetails.xhtml"
+    TITLE="RapVisMedEmbDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="RapVisMedEmbEdition::#modules#dossierpatient#pages#RapVisMedEmbEdition.xhtml"
+    NAME="output31"
+    PATH="/modules/dossierpatient/pages/RapVisMedEmbEdition.xhtml"
+    TARGET="rules:#modules#dossierpatient#pages#RapVisMedEmbEdition.xhtml"
+    TITLE="RapVisMedEmbEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="RapVisMedEmbListe::#modules#dossierpatient#pages#RapVisMedEmbListe.xhtml"
+    NAME="output32"
+    PATH="/modules/dossierpatient/pages/RapVisMedEmbListe.xhtml"
+    TARGET="rules:#modules#dossierpatient#pages#RapVisMedEmbListe.xhtml"
+    TITLE="RapVisMedEmbListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="RapVisMedPerioDetails::#modules#dossierpatient#pages#RapVisMedPerioDetails.xhtml"
+    NAME="output33"
+    PATH="/modules/dossierpatient/pages/RapVisMedPerioDetails.xhtml"
+    TARGET="rules:#modules#dossierpatient#pages#RapVisMedPerioDetails.xhtml"
+    TITLE="RapVisMedPerioDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="RapVisMedPerioEdition::#modules#dossierpatient#pages#RapVisMedPerioEdition.xhtml"
+    NAME="output34"
+    PATH="/modules/dossierpatient/pages/RapVisMedPerioEdition.xhtml"
+    TARGET="rules:#modules#dossierpatient#pages#RapVisMedPerioEdition.xhtml"
+    TITLE="RapVisMedPerioEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="RapVisMedPerioListe::#modules#dossierpatient#pages#RapVisMedPerioListe.xhtml"
+    NAME="output35"
+    PATH="/modules/dossierpatient/pages/RapVisMedPerioListe.xhtml"
+    TARGET="rules:#modules#dossierpatient#pages#RapVisMedPerioListe.xhtml"
+    TITLE="RapVisMedPerioListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="EtaStatDetails::#modules#dossierpatient#pages#EtaStatDetails.xhtml"
+    NAME="output36"
+    PATH="/modules/dossierpatient/pages/EtaStatDetails.xhtml"
+    TARGET="rules:#modules#dossierpatient#pages#EtaStatDetails.xhtml"
+    TITLE="EtaStatDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="EtaStatEdition::#modules#dossierpatient#pages#EtaStatEdition.xhtml"
+    NAME="output37"
+    PATH="/modules/dossierpatient/pages/EtaStatEdition.xhtml"
+    TARGET="rules:#modules#dossierpatient#pages#EtaStatEdition.xhtml"
+    TITLE="EtaStatEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="EtaStatListe::#modules#dossierpatient#pages#EtaStatListe.xhtml"
+    NAME="output38"
+    PATH="/modules/dossierpatient/pages/EtaStatListe.xhtml"
+    TARGET="rules:#modules#dossierpatient#pages#EtaStatListe.xhtml"
+    TITLE="EtaStatListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="CertMedDetails::#modules#dossierpatient#pages#CertMedDetails.xhtml"
+    NAME="output39"
+    PATH="/modules/dossierpatient/pages/CertMedDetails.xhtml"
+    TARGET="rules:#modules#dossierpatient#pages#CertMedDetails.xhtml"
+    TITLE="CertMedDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="CertMedEdition::#modules#dossierpatient#pages#CertMedEdition.xhtml"
+    NAME="output40"
+    PATH="/modules/dossierpatient/pages/CertMedEdition.xhtml"
+    TARGET="rules:#modules#dossierpatient#pages#CertMedEdition.xhtml"
+    TITLE="CertMedEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="CertMedListe::#modules#dossierpatient#pages#CertMedListe.xhtml"
+    NAME="output41"
+    PATH="/modules/dossierpatient/pages/CertMedListe.xhtml"
+    TARGET="rules:#modules#dossierpatient#pages#CertMedListe.xhtml"
+    TITLE="CertMedListe" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#modules#dossierpatient#pages#PatListe.xhtml"
@@ -234,4 +342,76 @@
   NAME="rules:#modules#dossierpatient#pages#SoinDetails.xhtml"
   PATH="/modules/dossierpatient/pages/SoinDetails.xhtml"
   SHAPE="304,1105,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#dossierpatient#pages#VisMedPerioEdition.xhtml"
+  PATH="/modules/dossierpatient/pages/VisMedPerioEdition.xhtml"
+  SHAPE="304,2753,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#dossierpatient#pages#VisMedEmbListe.xhtml"
+  PATH="/modules/dossierpatient/pages/VisMedEmbListe.xhtml"
+  SHAPE="304,2417,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#dossierpatient#pages#VisMedEmbDetails.xhtml"
+  PATH="/modules/dossierpatient/pages/VisMedEmbDetails.xhtml"
+  SHAPE="304,1297,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#dossierpatient#pages#VisMedEmbEdition.xhtml"
+  PATH="/modules/dossierpatient/pages/VisMedEmbEdition.xhtml"
+  SHAPE="304,1857,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#dossierpatient#pages#VisMedPerioDetails.xhtml"
+  PATH="/modules/dossierpatient/pages/VisMedPerioDetails.xhtml"
+  SHAPE="304,2641,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#dossierpatient#pages#VisMedPerioListe.xhtml"
+  PATH="/modules/dossierpatient/pages/VisMedPerioListe.xhtml"
+  SHAPE="304,2865,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#dossierpatient#pages#RapVisMedEmbEdition.xhtml"
+  PATH="/modules/dossierpatient/pages/RapVisMedEmbEdition.xhtml"
+  SHAPE="304,2145,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#dossierpatient#pages#RapVisMedPerioListe.xhtml"
+  PATH="/modules/dossierpatient/pages/RapVisMedPerioListe.xhtml"
+  SHAPE="304,3265,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#dossierpatient#pages#RapVisMedPerioEdition.xhtml"
+  PATH="/modules/dossierpatient/pages/RapVisMedPerioEdition.xhtml"
+  SHAPE="304,3153,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#dossierpatient#pages#EtaStatListe.xhtml"
+  PATH="/modules/dossierpatient/pages/EtaStatListe.xhtml"
+  SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#dossierpatient#pages#RapVisMedPerioDetails.xhtml"
+  PATH="/modules/dossierpatient/pages/RapVisMedPerioDetails.xhtml"
+  SHAPE="304,2929,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#dossierpatient#pages#EtaStatEdition.xhtml"
+  PATH="/modules/dossierpatient/pages/EtaStatEdition.xhtml"
+  SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#dossierpatient#pages#RapVisMedEmbDetails.xhtml"
+  PATH="/modules/dossierpatient/pages/RapVisMedEmbDetails.xhtml"
+  SHAPE="304,1585,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#dossierpatient#pages#EtaStatDetails.xhtml"
+  PATH="/modules/dossierpatient/pages/EtaStatDetails.xhtml"
+  SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#dossierpatient#pages#RapVisMedEmbListe.xhtml"
+  PATH="/modules/dossierpatient/pages/RapVisMedEmbListe.xhtml"
+  SHAPE="304,2705,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#dossierpatient#pages#CertMedDetails.xhtml"
+  PATH="/modules/dossierpatient/pages/CertMedDetails.xhtml"
+  SHAPE="304,1617,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#dossierpatient#pages#CertMedEdition.xhtml"
+  PATH="/modules/dossierpatient/pages/CertMedEdition.xhtml"
+  SHAPE="304,1649,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#dossierpatient#pages#CertMedListe.xhtml"
+  PATH="/modules/dossierpatient/pages/CertMedListe.xhtml"
+  SHAPE="304,1681,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

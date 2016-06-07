@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:0" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="FacCourDetails::#modules#facture#pages#FacCourDetails.xhtml"
+    NAME="output" PATH="/modules/facture/pages/FacCourDetails.xhtml"
+    TARGET="rules:#modules#facture#pages#FacCourDetails.xhtml"
+    TITLE="FacCourDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="FacCourEdition::#modules#facture#pages#FacCourEdition.xhtml"
+    NAME="output1" PATH="/modules/facture/pages/FacCourEdition.xhtml"
+    TARGET="rules:#modules#facture#pages#FacCourEdition.xhtml"
+    TITLE="FacCourEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="FacCourListe::#modules#facture#pages#FacCourListe.xhtml"
+    NAME="output2" PATH="/modules/facture/pages/FacCourListe.xhtml"
+    TARGET="rules:#modules#facture#pages#FacCourListe.xhtml"
+    TITLE="FacCourListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="FacConvDetails::#modules#facture#pages#FacConvDetails.xhtml"
+    NAME="output3" PATH="/modules/facture/pages/FacConvDetails.xhtml"
+    TARGET="rules:#modules#facture#pages#FacConvDetails.xhtml"
+    TITLE="FacConvDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="FacConvEdition::#modules#facture#pages#FacConvEdition.xhtml"
+    NAME="output4" PATH="/modules/facture/pages/FacConvEdition.xhtml"
+    TARGET="rules:#modules#facture#pages#FacConvEdition.xhtml"
+    TITLE="FacConvEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="FacConvListe::#modules#facture#pages#FacConvListe.xhtml"
+    NAME="output5" PATH="/modules/facture/pages/FacConvListe.xhtml"
+    TARGET="rules:#modules#facture#pages#FacConvListe.xhtml"
+    TITLE="FacConvListe" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#modules#facture#pages#FacCourDetails.xhtml"
+  PATH="/modules/facture/pages/FacCourDetails.xhtml" SHAPE="272,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#facture#pages#FacCourListe.xhtml"
+  PATH="/modules/facture/pages/FacCourListe.xhtml" SHAPE="272,321,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#facture#pages#FacCourEdition.xhtml"
+  PATH="/modules/facture/pages/FacCourEdition.xhtml" SHAPE="272,209,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#facture#pages#FacConvEdition.xhtml"
+  PATH="/modules/facture/pages/FacConvEdition.xhtml" SHAPE="304,641,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#facture#pages#FacConvListe.xhtml"
+  PATH="/modules/facture/pages/FacConvListe.xhtml" SHAPE="304,753,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#facture#pages#FacConvDetails.xhtml"
+  PATH="/modules/facture/pages/FacConvDetails.xhtml" SHAPE="304,529,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

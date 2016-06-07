@@ -142,6 +142,39 @@
     NAME="output20" PATH="/modules/referentiel/pages/TypRdvListe.xhtml"
     TARGET="rules:#modules#referentiel#pages#TypRdvListe.xhtml"
     TITLE="TypRdvListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="ChrHospiDetails::#modules#referentiel#pages#ChrHospiDetails.xhtml"
+    NAME="output21"
+    PATH="/modules/referentiel/pages/ChrHospiDetails.xhtml"
+    TARGET="rules:#modules#referentiel#pages#ChrHospiDetails.xhtml"
+    TITLE="ChrHospiDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="ChrHospiEdition::#modules#referentiel#pages#ChrHospiEdition.xhtml"
+    NAME="output22"
+    PATH="/modules/referentiel/pages/ChrHospiEdition.xhtml"
+    TARGET="rules:#modules#referentiel#pages#ChrHospiEdition.xhtml"
+    TITLE="ChrHospiEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="ChrHospiListe::#modules#referentiel#pages#ChrHospiListe.xhtml"
+    NAME="output23"
+    PATH="/modules/referentiel/pages/ChrHospiListe.xhtml"
+    TARGET="rules:#modules#referentiel#pages#ChrHospiListe.xhtml"
+    TITLE="ChrHospiListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="LitDetails::#modules#referentiel#pages#LitDetails.xhtml"
+    NAME="output24" PATH="/modules/referentiel/pages/LitDetails.xhtml"
+    TARGET="rules:#modules#referentiel#pages#LitDetails.xhtml"
+    TITLE="LitDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="LitEdition::#modules#referentiel#pages#LitEdition.xhtml"
+    NAME="output25" PATH="/modules/referentiel/pages/LitEdition.xhtml"
+    TARGET="rules:#modules#referentiel#pages#LitEdition.xhtml"
+    TITLE="LitEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="LitListe::#modules#referentiel#pages#LitListe.xhtml"
+    NAME="output26" PATH="/modules/referentiel/pages/LitListe.xhtml"
+    TARGET="rules:#modules#referentiel#pages#LitListe.xhtml"
+    TITLE="LitListe" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#modules#referentiel#pages#AssEdition.xhtml"
@@ -211,4 +244,22 @@
   NAME="rules:#modules#referentiel#pages#TypRdvDetails.xhtml"
   PATH="/modules/referentiel/pages/TypRdvDetails.xhtml"
   SHAPE="304,785,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#referentiel#pages#ChrHospiListe.xhtml"
+  PATH="/modules/referentiel/pages/ChrHospiListe.xhtml"
+  SHAPE="304,2545,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#referentiel#pages#ChrHospiDetails.xhtml"
+  PATH="/modules/referentiel/pages/ChrHospiDetails.xhtml"
+  SHAPE="304,977,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#referentiel#pages#LitListe.xhtml"
+  PATH="/modules/referentiel/pages/LitListe.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#referentiel#pages#LitEdition.xhtml"
+  PATH="/modules/referentiel/pages/LitEdition.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#referentiel#pages#ChrHospiEdition.xhtml"
+  PATH="/modules/referentiel/pages/ChrHospiEdition.xhtml"
+  SHAPE="304,2097,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#referentiel#pages#LitDetails.xhtml"
+  PATH="/modules/referentiel/pages/LitDetails.xhtml" SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

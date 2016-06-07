@@ -67,6 +67,11 @@
   <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.EtaStatCtrl</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
+ <managed-bean>
+  <managed-bean-name>certMedCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.imp.controleur.CertMedCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
  <navigation-rule>
   <from-view-id>*</from-view-id>
   <navigation-case>
@@ -97,7 +102,6 @@
    <to-view-id>/modules/dossierpatient/pages/RdvListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-  
   <navigation-case>
    <from-outcome>ConsulDetails</from-outcome>
    <to-view-id>/modules/dossierpatient/pages/ConsulDetails.xhtml</to-view-id>
@@ -112,7 +116,6 @@
    <to-view-id>/modules/dossierpatient/pages/ConsulListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-  
   <navigation-case>
    <from-outcome>CpteRenduConsulDetails</from-outcome>
    <to-view-id>/modules/dossierpatient/pages/CpteRenduConsulDetails.xhtml</to-view-id>
@@ -127,7 +130,6 @@
    <to-view-id>/modules/dossierpatient/pages/CpteRenduConsulListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-  
   <navigation-case>
    <from-outcome>HospiDetails</from-outcome>
    <to-view-id>/modules/dossierpatient/pages/HospiDetails.xhtml</to-view-id>
@@ -142,7 +144,6 @@
    <to-view-id>/modules/dossierpatient/pages/HospiListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-  
   <navigation-case>
    <from-outcome>ExamDetails</from-outcome>
    <to-view-id>/modules/dossierpatient/pages/ExamDetails.xhtml</to-view-id>
@@ -157,7 +158,6 @@
    <to-view-id>/modules/dossierpatient/pages/ExamListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-  
   <navigation-case>
    <from-outcome>CpteRenduExamDetails</from-outcome>
    <to-view-id>/modules/dossierpatient/pages/CpteRenduExamDetails.xhtml</to-view-id>
@@ -172,7 +172,6 @@
    <to-view-id>/modules/dossierpatient/pages/CpteRenduExamListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-  
   <navigation-case>
    <from-outcome>SoinDetails</from-outcome>
    <to-view-id>/modules/dossierpatient/pages/SoinDetails.xhtml</to-view-id>
@@ -187,7 +186,6 @@
    <to-view-id>/modules/dossierpatient/pages/SoinListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-  
   <navigation-case>
    <from-outcome>VisMedEmbDetails</from-outcome>
    <to-view-id>/modules/dossierpatient/pages/VisMedEmbDetails.xhtml</to-view-id>
@@ -202,7 +200,6 @@
    <to-view-id>/modules/dossierpatient/pages/VisMedEmbListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-  
   <navigation-case>
    <from-outcome>VisMedPerioDetails</from-outcome>
    <to-view-id>/modules/dossierpatient/pages/VisMedPerioDetails.xhtml</to-view-id>
@@ -217,7 +214,6 @@
    <to-view-id>/modules/dossierpatient/pages/VisMedPerioListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-  
   <navigation-case>
    <from-outcome>RapVisMedEmbDetails</from-outcome>
    <to-view-id>/modules/dossierpatient/pages/RapVisMedEmbDetails.xhtml</to-view-id>
@@ -232,7 +228,6 @@
    <to-view-id>/modules/dossierpatient/pages/RapVisMedEmbListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-  
   <navigation-case>
    <from-outcome>RapVisMedPerioDetails</from-outcome>
    <to-view-id>/modules/dossierpatient/pages/RapVisMedPerioDetails.xhtml</to-view-id>
@@ -247,7 +242,6 @@
    <to-view-id>/modules/dossierpatient/pages/RapVisMedPerioListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-  
   <navigation-case>
    <from-outcome>EtaStatDetails</from-outcome>
    <to-view-id>/modules/dossierpatient/pages/EtaStatDetails.xhtml</to-view-id>
@@ -262,6 +256,17 @@
    <to-view-id>/modules/dossierpatient/pages/EtaStatListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-  
+  <navigation-case>
+   <from-outcome>CertMedDetails</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/CertMedDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>CertMedEdition</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/CertMedEdition.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>CertMedListe</from-outcome>
+   <to-view-id>/modules/dossierpatient/pages/CertMedListe.xhtml</to-view-id>
+  </navigation-case>
  </navigation-rule>
 </faces-config>

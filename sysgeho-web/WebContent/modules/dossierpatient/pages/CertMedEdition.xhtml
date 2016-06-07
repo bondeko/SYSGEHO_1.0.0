@@ -10,8 +10,8 @@
       
  	<ui:composition template="/shared/templates/templateFormulaireEdition.xhtml">
    			
-		<ui:param name="managedBean" value="#{sessionScope[consulCtrl.nomManagedBean2]}" />
-		<ui:param name="entetePage" value=" d'une Consultation" />
+		<ui:param name="managedBean" value="#{sessionScope[certMedCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" d'un Certificat Medical" />
 		
 	<!-- Definition du contenu de l'ecran principal  -->
 		<ui:define name="ecranPrincipalContenu">
@@ -29,14 +29,14 @@
 								<ui:include src="/shared/include/required.xhtml" />
 							</h:panelGroup>
 							<h:panelGroup>
-							<h:inputText id="inpt_codPat" value="#{consulCtrl.defaultVue.entiteCourante.tabPat.codPat}" style="width: 20%" 
+							<h:inputText id="inpt_codPat" value="#{certMedCtrl.defaultVue.entiteCourante.tabPat.codPat}" style="width: 20%" 
 								required="true" requiredMessage="Valeur obligatoire"
 								readonly="true" 
 								title="Code" disabled="false">
 								<a4j:support event="onchange" ajaxSingle="true" 
 									reRender="prenom_1,prenom_2,datnais_1,datnais_2,aff_1,aff_2,soc_1,soc_2,med_1,med_2,enreg_1,enreg_2"/>
 							</h:inputText>	
-							<h:inputText id="inpt_libPat" value="#{consulCtrl.defaultVue.entiteCourante.tabPat.libNom}" style="width: 40%" 
+							<h:inputText id="inpt_libPat" value="#{certMedCtrl.defaultVue.entiteCourante.tabPat.libNom}" style="width: 40%" 
 									required="false"
 									readonly="true"  
 									title="#{locale.libelle}" disabled="false"> 
@@ -44,13 +44,13 @@
 							</h:inputText>
 							<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
 							<h:panelGroup>
-								<a4j:commandButton   value="..." action="#{consulCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" >   	
+								<a4j:commandButton   value="..." action="#{certMedCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" >   	
 		           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
-		         						<f:setPropertyActionListener value="ConsulEdition" target="#{patCtrl.defaultVue.navigationMgr.selectionSource}" />
+		         						<f:setPropertyActionListener value="CertMedEdition" target="#{patCtrl.defaultVue.navigationMgr.selectionSource}" />
 		         						<!-- MAJ de la destination en mode Selection   --> 
 		           						<f:setPropertyActionListener value="true" target="#{patCtrl.defaultVue.navigationMgr.enSelection}" />  
 		           						<!-- Nom du Controlleur de l'entite source  --> 
-		          						<f:setPropertyActionListener value="consulCtrl" target="#{patCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
+		          						<f:setPropertyActionListener value="certMedCtrl" target="#{patCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
 		          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
 		          						<f:setPropertyActionListener value="PatListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
 		          						<!-- Nom de la propriete a selectionner -->							         						             						
@@ -61,26 +61,17 @@
 						</h:panelGroup>
 							
 							<h:panelGroup id="prenom_1">
-								<h:outputText value="#{locale.prenom}" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}" />
+								<h:outputText value="#{locale.prenom}" rendered="#{! empty certMedCtrl.defaultVue.entiteCourante.tabPat.codPat}" />
 							</h:panelGroup>
 							<h:panelGroup id="prenom_2">							
-								<h:inputText  value="#{consulCtrl.defaultVue.entiteCourante.tabPat.libPre}" style="width: 40%" readonly="true"  title="#{locale.prenom}" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+								<h:inputText  value="#{certMedCtrl.defaultVue.entiteCourante.tabPat.libPre}" style="width: 40%" readonly="true"  title="#{locale.prenom}" rendered="#{! empty certMedCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
 							</h:panelGroup>
 							
 							<h:panelGroup id="datnais_1">
-								<h:outputText value="Date de naissance" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+								<h:outputText value="Date de naissance" rendered="#{! empty certMedCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
 							</h:panelGroup>	
 							<h:panelGroup id="datnais_2">
-								<h:inputText value="#{consulCtrl.defaultVue.entiteCourante.tabPat.dateNais}" readonly="true" style="width: 30%" title="Date de naissance" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}" >
-									<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
-								</h:inputText>
-							</h:panelGroup>
-							
-							<h:panelGroup id="enreg_1">
-								<h:outputText value="Date enregistrement" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
-							</h:panelGroup>
-							<h:panelGroup id="enreg_2">
-								<h:inputText value="#{consulCtrl.defaultVue.entiteCourante.tabPat.dateEnreg}" readonly="true" style="width: 30%" title="Date enregistrement"  rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}">
+								<h:inputText value="#{certMedCtrl.defaultVue.entiteCourante.tabPat.dateNais}" readonly="true" style="width: 30%" title="Date de naissance" rendered="#{! empty certMedCtrl.defaultVue.entiteCourante.tabPat.codPat}" >
 									<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
 								</h:inputText>
 							</h:panelGroup>
@@ -90,33 +81,33 @@
 						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdLColRightDynamic" cellspacing="10" >
 							
 							<h:panelGroup id="soc_1">
-								<h:outputText value="#{locale.societe}" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+								<h:outputText value="#{locale.societe}" rendered="#{! empty certMedCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
 							</h:panelGroup>
 							<h:panelGroup id="soc_2">
-								<h:inputText id="inpt_codSoc" value="#{consulCtrl.defaultVue.entiteCourante.tabPat.tabSoc.codSoc}" style="width: 20%" 
-									readonly="true" title="Code" disabled="false" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}">
+								<h:inputText id="inpt_codSoc" value="#{certMedCtrl.defaultVue.entiteCourante.tabPat.tabSoc.codSoc}" style="width: 20%" 
+									readonly="true" title="Code" disabled="false" rendered="#{! empty certMedCtrl.defaultVue.entiteCourante.tabPat.codPat}">
 									<a4j:support event="onchange" ajaxSingle="true" />
 								</h:inputText>	
-								<h:inputText id="inpt_libSoc" value="#{consulCtrl.defaultVue.entiteCourante.tabPat.tabSoc.libSoc}" style="width: 40%" 
-										readonly="true"  title="#{locale.libelle}" disabled="false" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"> 
+								<h:inputText id="inpt_libSoc" value="#{certMedCtrl.defaultVue.entiteCourante.tabPat.tabSoc.libSoc}" style="width: 40%" 
+										readonly="true"  title="#{locale.libelle}" disabled="false" rendered="#{! empty certMedCtrl.defaultVue.entiteCourante.tabPat.codPat}"> 
 										<a4j:support event="onchange" ajaxSingle="true" />
 								</h:inputText>
 							</h:panelGroup>
 							
 							<h:panelGroup id="med_1">
-								<h:outputText value="#{locale.medecintraitant}" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+								<h:outputText value="#{locale.medecintraitant}" rendered="#{! empty certMedCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
 							</h:panelGroup>
 							<h:panelGroup id="med_2">
-								<h:inputText  value="#{consulCtrl.defaultVue.entiteCourante.tabPat.libMed}" style="width: 60%" readonly="true" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}">							 	
+								<h:inputText  value="#{certMedCtrl.defaultVue.entiteCourante.tabPat.libMed}" style="width: 60%" readonly="true" rendered="#{! empty certMedCtrl.defaultVue.entiteCourante.tabPat.codPat}">							 	
 									<a4j:support event="onchange"  ajaxSingle="true" />											
 								</h:inputText>
 							</h:panelGroup>
 							
 							<h:panelGroup id="aff_1">
-								<h:outputText value="#{locale.estaffilie} ?" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
+								<h:outputText value="#{locale.estaffilie} ?" rendered="#{! empty certMedCtrl.defaultVue.entiteCourante.tabPat.codPat}"/>
 							</h:panelGroup>
 							<h:panelGroup id="aff_2">
-								<h:selectBooleanCheckbox value="#{consulCtrl.defaultVue.entiteCourante.tabPat.BEstAff}"  disabled="true" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabPat.codPat}">
+								<h:selectBooleanCheckbox value="#{certMedCtrl.defaultVue.entiteCourante.tabPat.BEstAff}"  disabled="true" rendered="#{! empty certMedCtrl.defaultVue.entiteCourante.tabPat.codPat}">
 									<a4j:support ajaxSingle="true"  event="onchange" />
 								</h:selectBooleanCheckbox>
 							</h:panelGroup>
@@ -140,12 +131,12 @@
 								<ui:include src="/shared/include/required.xhtml" />
 							</h:panelGroup>
 							<h:panelGroup>
-							<h:inputText id="inpt_codMed" value="#{consulCtrl.defaultVue.entiteCourante.tabUsr.codUsr}" style="width: 20%" 
+							<h:inputText id="inpt_codMed" value="#{certMedCtrl.defaultVue.entiteCourante.tabUsr.codUsr}" style="width: 20%" 
 								required="true" readonly="true"  requiredMessage="Valeur obligatoire"
 								title="Code Medecin" disabled="false">
 								<a4j:support event="onchange" ajaxSingle="true" reRender="prenomusr_1,prenomusr_2,ser_1,ser_2,rol_1,rol_2,adr1_1,adr_2"/>
 							</h:inputText>	
-							<h:inputText id="inpt_libMed" value="#{consulCtrl.defaultVue.entiteCourante.tabUsr.libNom}" style="width: 40%" 
+							<h:inputText id="inpt_libMed" value="#{certMedCtrl.defaultVue.entiteCourante.tabUsr.libNom}" style="width: 40%" 
 									required="false"
 									readonly="true"  
 									title="#{locale.libelle}" disabled="false"> 
@@ -153,13 +144,13 @@
 							</h:inputText>
 							<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
 							<h:panelGroup>
-								<a4j:commandButton   value="..." action="#{consulCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" >   	
+								<a4j:commandButton   value="..." action="#{certMedCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" >   	
 		           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
-		         							<f:setPropertyActionListener value="ConsulEdition" target="#{usrCtrl.defaultVue.navigationMgr.selectionSource}" />
+		         							<f:setPropertyActionListener value="CertMedEdition" target="#{usrCtrl.defaultVue.navigationMgr.selectionSource}" />
 		         						<!-- MAJ de la destination en mode Selection   --> 
 		           						<f:setPropertyActionListener value="true" target="#{usrCtrl.defaultVue.navigationMgr.enSelection}" />  
 		           						<!-- Nom du Controlleur de l'entite source  --> 
-		          						<f:setPropertyActionListener value="consulCtrl" target="#{usrCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
+		          						<f:setPropertyActionListener value="certMedCtrl" target="#{usrCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
 		          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
 		          						<f:setPropertyActionListener value="UsrListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
 		          						<!-- Nom de la propriete a selectionner -->							         						             						
@@ -169,33 +160,7 @@
 							<rich:message for="inpt_codMed" errorClass="msg_error" />
 						</h:panelGroup>
 						
-						<h:panelGroup id="prenomusr_1">
-							<h:outputText value="#{locale.prenom}" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>	
-						</h:panelGroup>
-						<h:panelGroup id="prenomusr_2">
-							<h:inputText  value="#{consulCtrl.defaultVue.entiteCourante.tabUsr.libPre}" style="width: 40%" readonly="true"  title="#{locale.prenom}" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
-						</h:panelGroup>
-								
-						<h:panelGroup id="ser_1">
-							<h:outputText value="Services" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
-						</h:panelGroup>								
-						<h:panelGroup id="ser_2">
-							<h:inputText  value="#{consulCtrl.defaultVue.entiteCourante.tabUsr.tabSvc.libSvc}" style="width: 60%"  readonly="true" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>	
-						</h:panelGroup>	
-						
-						<h:panelGroup id="rol_1">
-							<h:outputText value="#{locale.role}" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
-						</h:panelGroup>
-						<h:panelGroup id="rol_2">
-							<h:inputText  value="#{consulCtrl.defaultVue.entiteCourante.tabUsr.tabRol.libRol}" style="width: 60%"  readonly="true" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
-						</h:panelGroup>
-         					
-						<h:panelGroup id="adr_1">
-							<h:outputText value="Adresse" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
-						</h:panelGroup>	
-						<h:panelGroup id="adr_2">
-							<h:inputText  value="#{consulCtrl.defaultVue.entiteCourante.tabUsr.libAdr}" style="width: 60%"  readonly="true" rendered="#{! empty consulCtrl.defaultVue.entiteCourante.tabUsr.codUsr}"/>
-						</h:panelGroup>	
+																
 							
          			</h:panelGrid>  
          				
@@ -210,111 +175,34 @@
 			
 			<h:panelGroup>
 				<fieldset>
-					<legend> <h:outputText value="#{locale.paramconsultation}" styleClass="legend" />  </legend>
+					<legend> <h:outputText value="Informations Certificat" styleClass="legend" />  </legend>
 
         			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
         							         		
          				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
          				
-							<h:panelGroup>
-								<h:outputText value="#{locale.specialite}"	 />
-								<ui:include src="/shared/include/required.xhtml" />
-							</h:panelGroup>
-							<h:panelGroup>
-								<h:inputText id="inpt_codSpec" value="#{consulCtrl.defaultVue.entiteCourante.tabSpec.codSpec}" style="width: 20%" 
-									readonly="true" title="Code" disabled="false" 
-									required="true"  requiredMessage="Valeur obligatoire">
-									<a4j:support event="onchange" ajaxSingle="true" />
-								</h:inputText>	
-								<h:inputText id="inpt_libSpec" value="#{consulCtrl.defaultVue.entiteCourante.tabSpec.libSpec}" style="width: 40%" 
-										readonly="true"  title="#{locale.libelle}" disabled="false"> 
-										<a4j:support event="onchange" ajaxSingle="true" />
-								</h:inputText>
-								<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
-								<h:panelGroup>
-									<a4j:commandButton   value="..." action="#{consulCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" >   	
-			           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
-			         						<f:setPropertyActionListener value="ConsulEdition" target="#{specCtrl.defaultVue.navigationMgr.selectionSource}" />
-			         						<!-- MAJ de la destination en mode Selection   --> 
-			           						<f:setPropertyActionListener value="true" target="#{specCtrl.defaultVue.navigationMgr.enSelection}" />  
-			           						<!-- Nom du Controlleur de l'entite source  --> 
-			          						<f:setPropertyActionListener value="consulCtrl" target="#{specCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
-			          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
-			          						<f:setPropertyActionListener value="SpecListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
-			          						<!-- Nom de la propriete a selectionner -->							         						             						
-			          						<f:setPropertyActionListener value="tabSpec" target="#{defaultVue.navigationMgr.selectionPropertyName}" />            						             						          						             				            					      						
-					             	</a4j:commandButton>
-								</h:panelGroup>
-								<rich:message for="inpt_codSpec" errorClass="msg_error" />
-							</h:panelGroup>
-							
-							<h:outputText value="Poids"/>
-							<h:inputText id="inpt_poi" value="#{consulCtrl.defaultVue.entiteCourante.valPoids}"  
-								 required="false" style="width: 20%" title="Poids" >
+							<h:outputText value="Reference"/>
+							<h:inputText id="inpt_ten21" value="#{certMedCtrl.defaultVue.entiteCourante.refCertMed}"  
+								 required="false" style="width: 30%" title="Reference" >
 								 <a4j:support event="onchange" ajaxSingle="true" />
 							</h:inputText>
-							
-							<h:outputText value="Tension"/>
-							<h:inputText id="inpt_ten" value="#{consulCtrl.defaultVue.entiteCourante.valTension}"  
-								 required="false" style="width: 20%" title="Tension" >
+							<h:outputText value="Age"/>
+							<h:inputText id="inpt_ten31" value="#{certMedCtrl.defaultVue.entiteCourante.valAge}"  
+								 required="false" style="width: 30%" title="Age" >
 								 <a4j:support event="onchange" ajaxSingle="true" />
 							</h:inputText>
-							
-							<h:outputText value="Pouls"/>
-							<h:inputText id="inpt_pou" value="#{consulCtrl.defaultVue.entiteCourante.valPou}"  
-								 required="false" style="width: 20%" title="Pou" >
-								 <a4j:support event="onchange" ajaxSingle="true" />
-							</h:inputText>
-							
-							<h:outputText value="Taille (en CM)"/>
-							<h:inputText id="inpt_tail" value="#{consulCtrl.defaultVue.entiteCourante.valTaille}"  
-								 required="false" style="width: 20%" title="Taille" >
-								 <a4j:support event="onchange" ajaxSingle="true" />
-							</h:inputText>
-							
-							<h:outputText value="Temperature"/>
-							<h:inputText id="inpt_tmp" value="#{consulCtrl.defaultVue.entiteCourante.valTmp}"  
-								 required="false" style="width: 20%" title="Temperature" >
-								 <a4j:support event="onchange" ajaxSingle="true" />
-							</h:inputText>
-							
 							
          				</h:panelGrid>  
          				
          				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
          				
-							<h:outputText value="Date Consultation" />
+							<h:outputText value="Date Certificat" />
 							<h:panelGroup >					
-								<rich:calendar value="#{consulCtrl.defaultVue.entiteCourante.dateConsul}" inputStyle="width: 30%"  title="Date " 
+								<rich:calendar value="#{certMedCtrl.defaultVue.entiteCourante.dateCert}" inputStyle="width: 30%"  title="Date " 
 										styleClass="selectDate"  datePattern="dd/MM/yyyy" >
 									<a4j:support event="onchanged" ajaxSingle="true" />
 								</rich:calendar>
 							</h:panelGroup>
-							
-							<h:outputText value="Statut"/>
-							<h:inputTextarea id="inpt_stat" value="#{consulCtrl.defaultVue.entiteCourante.libStatut}"  
-								 required="false" style="width: 60%" title="Statut" >
-								 <a4j:support event="onchange" ajaxSingle="true" />
-							</h:inputTextarea>
-							
-							<h:outputText value="Montant TTC" />
-							<h:inputText id="inpt_mntttc" value="#{consulCtrl.defaultVue.entiteCourante.valMntTtc}"  styleClass="money"
-								 required="false"  style="width: 30%" 
-								 title="Montant TTC"
-								 converterMessage="#{msg['erreur.conversion.entiere']}"   >
-								 <a4j:support event="onchange" ajaxSingle="true" />
-								 <f:convertNumber currencySymbol="F CFA" pattern="#,###"   />
-							</h:inputText>
-							
-							<h:outputText value="Mode de prise en charge" />
-							<h:panelGroup >
-								<h:selectOneMenu id="modpchg" value="#{consulCtrl.defaultVue.entiteCourante.enuModPchg}" style="width: 30%"
-										title="Mode de prise en charge"  immediate="true" >
-									<f:selectItems  value="#{consulCtrl.defaultVue.listeModPchg['map']}"/>
-									<a4j:support event="onchange" ajaxSingle="true" />						
-								</h:selectOneMenu>
-							</h:panelGroup>
-							
          				</h:panelGrid> 
          				         		         		
          			</h:panelGrid>  
@@ -335,32 +223,32 @@
 								<h:selectOneRadio id="sord_typvis" value="#{entiteCourante.typVisMedSrc}" >
 									<f:selectItem itemLabel="#{locale.dunevisitemedicaleemb}" itemValue="VM_EMB"  />
 									<f:selectItem itemLabel="#{locale.dunevisitemedicaleperio}" itemValue="VM_PERIO"/>
-									<a4j:support event="onchange"  ajaxSingle="true" actionListener="#{consulCtrl.defaultVue.updateCodVis}" 
+									<a4j:support event="onchange"  ajaxSingle="true" actionListener="#{certMedCtrl.defaultVue.updateCodVis}" 
 									reRender="vmamb_1,vmamb_2,vmamb_3,vmamb_4,vmamb_5,vmamb_6,datvisemb_1,datvisemb_2,socvis1,socvis2,datvis1,datvis2"/>
 								</h:selectOneRadio> 
 							</h:panelGroup>
 							
 							<h:panelGroup id ="vmamb_1">
-								<h:outputText value="#{locale.dunevisitemedicaleemb}" rendered="#{consulCtrl.defaultVue.visEmb}"/>
+								<h:outputText value="#{locale.dunevisitemedicaleemb}" rendered="#{certMedCtrl.defaultVue.visEmb}"/>
 							</h:panelGroup>
 							<h:panelGroup id ="vmamb_2">
 							<h:inputText id="inpt_codvmemb" value="#{entiteCourante.tabVisMedEmb.codVisMedEmb}" style="width: 20%" 
-								readonly="true" title="Code" disabled="false" rendered="#{consulCtrl.defaultVue.visEmb}">
+								readonly="true" title="Code" disabled="false" rendered="#{certMedCtrl.defaultVue.visEmb}">
 								<a4j:support event="onchange" ajaxSingle="true" reRender="datvisemb_1,datvisemb_2"/>
 							</h:inputText>	
 							<h:inputText id="inpt_libmtfvmemb" value="#{entiteCourante.tabVisMedEmb.libMotif}" style="width: 40%" 
-									readonly="true"  title="Motif de la visite" disabled="false" rendered="#{consulCtrl.defaultVue.visEmb}"> 
+									readonly="true"  title="Motif de la visite" disabled="false" rendered="#{certMedCtrl.defaultVue.visEmb}"> 
 									<a4j:support event="onchange" ajaxSingle="true" />
 							</h:inputText >
 							<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
 							<h:panelGroup id ="vmamb_3">
-								<a4j:commandButton   value="..." action="#{consulCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false"  rendered="#{consulCtrl.defaultVue.visEmb}">   	
+								<a4j:commandButton   value="..." action="#{certMedCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false"  rendered="#{certMedCtrl.defaultVue.visEmb}">   	
 		           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
-		         							<f:setPropertyActionListener value="ConsulEdition" target="#{visMedEmbCtrl.defaultVue.navigationMgr.selectionSource}" />
+		         							<f:setPropertyActionListener value="CertMedEdition" target="#{visMedEmbCtrl.defaultVue.navigationMgr.selectionSource}" />
 		         						<!-- MAJ de la destination en mode Selection   --> 
 		           						<f:setPropertyActionListener value="true" target="#{visMedEmbCtrl.defaultVue.navigationMgr.enSelection}" />  
 		           						<!-- Nom du Controlleur de l'entite source  --> 
-		          						<f:setPropertyActionListener value="consulCtrl" target="#{visMedEmbCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
+		          						<f:setPropertyActionListener value="certMedCtrl" target="#{visMedEmbCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
 		          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
 		          						<f:setPropertyActionListener value="VisMedEmbListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
 		          						<!-- Nom de la propriete a selectionner -->							         						             						
@@ -380,26 +268,26 @@
 						
 						
 						<h:panelGroup id ="vmamb_4">
-							<h:outputText value="#{locale.dunevisitemedicaleperio}" rendered="#{consulCtrl.defaultVue.visPerio}"/>
+							<h:outputText value="#{locale.dunevisitemedicaleperio}" rendered="#{certMedCtrl.defaultVue.visPerio}"/>
 						</h:panelGroup>
 						<h:panelGroup id ="vmamb_5">
 						<h:inputText id="inpt_codvmperio" value="#{entiteCourante.tabVisMedPerio.codVisMedPerio}" style="width: 20%" 
-							readonly="true" title="Code" disabled="false" rendered="#{consulCtrl.defaultVue.visPerio}">
+							readonly="true" title="Code" disabled="false" rendered="#{certMedCtrl.defaultVue.visPerio}">
 							<a4j:support event="onchange" ajaxSingle="true" reRender="socvis1,socvis2,datvis1,datvis2"/>
 						</h:inputText>	
 						<h:inputText id="inpt_libmtfvmperio" value="#{entiteCourante.tabVisMedPerio.libMotif}" style="width: 40%" 
-								readonly="true"  title="Motif de la visite" disabled="false" rendered="#{consulCtrl.defaultVue.visPerio}"> 
+								readonly="true"  title="Motif de la visite" disabled="false" rendered="#{certMedCtrl.defaultVue.visPerio}"> 
 								<a4j:support event="onchange" ajaxSingle="true" />
 						</h:inputText>
 						<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
 						<h:panelGroup id ="vmamb_6">
-							<a4j:commandButton   value="..." action="#{consulCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" rendered="#{consulCtrl.defaultVue.visPerio}">   	
+							<a4j:commandButton   value="..." action="#{certMedCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" rendered="#{certMedCtrl.defaultVue.visPerio}">   	
 	           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
-	         							<f:setPropertyActionListener value="ConsulEdition" target="#{visMedPerioCtrl.defaultVue.navigationMgr.selectionSource}" />
+	         							<f:setPropertyActionListener value="CertMedEdition" target="#{visMedPerioCtrl.defaultVue.navigationMgr.selectionSource}" />
 	         						<!-- MAJ de la destination en mode Selection   --> 
 	           						<f:setPropertyActionListener value="true" target="#{visMedPerioCtrl.defaultVue.navigationMgr.enSelection}" />  
 	           						<!-- Nom du Controlleur de l'entite source  --> 
-	          						<f:setPropertyActionListener value="consulCtrl" target="#{visMedPerioCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
+	          						<f:setPropertyActionListener value="certMedCtrl" target="#{visMedPerioCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
 	          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
 	          						<f:setPropertyActionListener value="VisMedPerioListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
 	          						<!-- Nom de la propriete a selectionner -->							         						             						
