@@ -195,7 +195,7 @@ public class SrlEtatDosPatElt {
 
 		try {
 			if (consul != null)
-				this.libPrestation = "Consultation en " + consul.getTabSpec().getCodSpec();
+				this.libPrestation = "Consultation en " + consul.getTabSpec().getLibSpec();
 		} catch (Exception e) {
 			this.libPrestation = ERROR_VALUE;
 		}

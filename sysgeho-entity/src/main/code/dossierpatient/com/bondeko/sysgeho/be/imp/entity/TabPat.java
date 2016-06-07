@@ -401,5 +401,9 @@ public class TabPat extends SysGehoBaseEntity implements Serializable{
 	public String getLibNumCnps() {
 		return libNumCnps;
 	}
+	
+	public boolean getBEstAffi() {
+		return (booEstAff != null && booEstAff.compareTo(BigDecimal.ONE) == 0);
+	}
 
 }

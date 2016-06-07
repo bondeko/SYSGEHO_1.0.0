@@ -311,5 +311,17 @@ private static final long serialVersionUID = 1L;
 	public TabUsr getTabUsr() {
 		return tabUsr;
 	}
+	
+	public boolean getBEstPaie() {
+		return (booPaie != null && booPaie.compareTo(BigDecimal.ONE) == 0);
+	}
+	
+	public boolean getBEstVal() {
+		return (booVal != null && booVal.compareTo(BigDecimal.ONE) == 0);
+	}
+	
+	public boolean getBEstFact() {
+		return (refFac != null);
+	}
 
 }

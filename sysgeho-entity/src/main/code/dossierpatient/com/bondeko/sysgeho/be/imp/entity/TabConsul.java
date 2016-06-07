@@ -70,6 +70,9 @@ private static final long serialVersionUID = 1L;
 	@Column(name = "VAL_TAILLE")
 	private String valTaille;
 	
+	@Column(name = "VAL_TMP")
+	private String valTmp;
+	
 	@Column(name = "DAT_CONSUL")
 	private String datConsul;
 	
@@ -349,6 +352,32 @@ private static final long serialVersionUID = 1L;
 	 */
 	public TabSpec getTabSpec() {
 		return tabSpec;
+	}
+	
+	public boolean getBEstPaie() {
+		return (booPaie != null && booPaie.compareTo(BigDecimal.ONE) == 0);
+	}
+	
+	public boolean getBEstVal() {
+		return (booVal != null && booVal.compareTo(BigDecimal.ONE) == 0);
+	}
+	
+	public boolean getBEstFact() {
+		return (refFac != null);
+	}
+
+	/**
+	 * @param valTmp the valTmp to set
+	 */
+	public void setValTmp(String valTmp) {
+		this.valTmp = valTmp;
+	}
+
+	/**
+	 * @return the valTmp
+	 */
+	public String getValTmp() {
+		return valTmp;
 	}
 
 }

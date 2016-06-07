@@ -51,7 +51,7 @@ public class SrlEtatCmptPresElt {
 
 		try {
 			if (consul != null)
-				this.catPrestation = "Consultation";
+				this.catPrestation = "Consultations";
 		} catch (Exception e) {
 			this.catPrestation = ERROR_VALUE;
 		}
@@ -65,8 +65,9 @@ public class SrlEtatCmptPresElt {
 
 		try {
 			if (consul != null)
-				this.datPrestation = DateTools.formatDate("dd/MM/yyyy",
-						DateTools.getDateValue(consul.getDatConsul()));
+				this.datPrestation = (consul.getDatConsul() != null ? DateTools.formatDate("dd/MM/yyyy",
+						DateTools.getDateValue(consul.getDatConsul())) : DateTools.formatDate("dd/MM/yyyy",
+								DateTools.getDateValue(consul.getDatCrt())));
 		} catch (Exception e) {
 			this.datPrestation = ERROR_VALUE;
 		}
@@ -77,17 +78,23 @@ public class SrlEtatCmptPresElt {
 			this.enuModPchg = ERROR_VALUE;
 		}
 		try {
-			if (consul != null)
-				this.isFacture = (consul.getRefFac() == null? "NON" : "OUI");
+			if (consul.getBEstFact()){
+				this.isFacture = "OUI";
+			} else
+			this.isFacture = "NON";
 		} catch (Exception e) {
 			this.isFacture = ERROR_VALUE;
 		}
+		
 		try {
-			if (consul != null)
-				this.isPaye = (consul.getBooPaie() == BigDecimal.ONE ? "OUI" : "NON");
+			if (consul.getBEstPaie()){
+				this.isPaye = "OUI";
+			} else
+			this.isPaye = "NON";
 		} catch (Exception e) {
 			this.isPaye = ERROR_VALUE;
 		}
+		
 		try {
 			if (consul != null)
 				this.vMtnPres = consul.getValMntTtc();
@@ -115,7 +122,7 @@ public class SrlEtatCmptPresElt {
 
 		try {
 			if (exam != null)
-				this.catPrestation = "Examen";
+				this.catPrestation = "Examens";
 		} catch (Exception e) {
 			this.catPrestation = ERROR_VALUE;
 		}
@@ -141,14 +148,19 @@ public class SrlEtatCmptPresElt {
 			this.enuModPchg = ERROR_VALUE;
 		}
 		try {
-			if (exam != null)
-				this.isFacture = (exam.getRefFac() == null? "NON" : "OUI");
+			if (exam.getBEstFact()){
+				this.isFacture = "OUI";
+			} else
+			this.isFacture = "NON";
 		} catch (Exception e) {
 			this.isFacture = ERROR_VALUE;
 		}
+		
 		try {
-			if (exam != null)
-				this.isPaye = (exam.getBooPaie() == BigDecimal.ONE ? "OUI" : "NON");
+			if (exam.getBEstPaie()){
+				this.isPaye = "OUI";
+			} else
+			this.isPaye = "NON";
 		} catch (Exception e) {
 			this.isPaye = ERROR_VALUE;
 		}
@@ -179,7 +191,7 @@ public class SrlEtatCmptPresElt {
 
 		try {
 			if (soin != null)
-				this.catPrestation = "Soin";
+				this.catPrestation = "Soins";
 		} catch (Exception e) {
 			this.catPrestation = ERROR_VALUE;
 		}
@@ -205,14 +217,19 @@ public class SrlEtatCmptPresElt {
 			this.enuModPchg = ERROR_VALUE;
 		}
 		try {
-			if (soin != null)
-				this.isFacture = (soin.getRefFac() == null? "NON" : "OUI");
+			if (soin.getBEstFact()){
+				this.isFacture = "OUI";
+			} else
+			this.isFacture = "NON";
 		} catch (Exception e) {
 			this.isFacture = ERROR_VALUE;
 		}
+		
 		try {
-			if (soin != null)
-				this.isPaye = (soin.getBooPaie() == BigDecimal.ONE ? "OUI" : "NON");
+			if (soin.getBEstPaie()){
+				this.isPaye = "OUI";
+			} else
+			this.isPaye = "NON";
 		} catch (Exception e) {
 			this.isPaye = ERROR_VALUE;
 		}
@@ -243,7 +260,7 @@ public class SrlEtatCmptPresElt {
 
 		try {
 			if (hospi != null)
-				this.catPrestation = "Hospitalisation";
+				this.catPrestation = "Hospitalisations";
 		} catch (Exception e) {
 			this.catPrestation = ERROR_VALUE;
 		}
@@ -269,17 +286,23 @@ public class SrlEtatCmptPresElt {
 			this.enuModPchg = ERROR_VALUE;
 		}
 		try {
-			if (hospi != null)
-				this.isFacture = (hospi.getRefFac() == null? "NON" : "OUI");
+			if (hospi.getBEstFact()){
+				this.isFacture = "OUI";
+			} else
+			this.isFacture = "NON";
 		} catch (Exception e) {
 			this.isFacture = ERROR_VALUE;
 		}
+		
 		try {
-			if (hospi != null)
-				this.isPaye = (hospi.getBooPaie() == BigDecimal.ONE ? "OUI" : "NON");
+			if (hospi.getBEstPaie()){
+				this.isPaye = "OUI";
+			} else
+			this.isPaye = "NON";
 		} catch (Exception e) {
 			this.isPaye = ERROR_VALUE;
 		}
+		
 		try {
 			if (hospi != null)
 				this.vMtnPres = hospi.getValMnt();

@@ -84,7 +84,11 @@ public class SrlSocElt {
 		}
 		
 		try {
-			this.booAffi = ((soc.getBooEstAff()== BigDecimal.ONE)? "OUI" : "NON") ;
+			if (soc.getBEstAff()){
+				this.booAffi = "OUI";
+			} else
+			this.booAffi = "NON";
+			
 		}catch (Exception e) {
 			this.valMntFixeMens=ERROR_BIG_DEC ;
 		}
@@ -93,6 +97,17 @@ public class SrlSocElt {
 			this.libAdresse = "BP. " + soc.getLibBP() + "-"+ soc.getLibVil();
 		}catch (Exception e) {
 			this.libAdresse=ERROR_VALUE ;
+		}
+		try {
+			this.libTel = soc.getLibTel();
+		}catch (Exception e) {
+			this.libTel=ERROR_VALUE ;
+		}
+		
+		try {
+			this.libNumCont = soc.getLibNumContrib();
+		}catch (Exception e) {
+			this.libNumCont=ERROR_VALUE ;
 		}
 		
 	}

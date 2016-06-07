@@ -86,7 +86,10 @@ public class SrlEtatListPatElt {
 		  }
 		  
 		  try {
-			  this.booEstAff = (patient.getBooEstAff()==BigDecimal.ONE ? "OUI":"NON");
+			  if(patient.getBEstAffi()){
+				  this.booEstAff = "OUI";  
+			  }
+			  else this.booEstAff ="NON";
 		  }catch (Exception e) {
 			  this.booEstAff=ERROR_VALUE ;
 		  }
