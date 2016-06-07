@@ -13,4 +13,16 @@ public interface ISisvEtaStat extends IBaseSisv<TabEtaStat, String>{
 	EntFichier genererCmptPres(TabEtaStat etatstat)
 			throws SysGehoSystemException;
 
+	EntFichier genererCmptConsul(TabEtaStat etatstat)
+			throws SysGehoSystemException;
+
+	EntFichier genererCmptExam(TabEtaStat etatstat)
+			throws SysGehoSystemException;
+
+	EntFichier genererCmptSoin(TabEtaStat etatstat)
+			throws SysGehoSystemException;
+
+	EntFichier genererCmptHospi(TabEtaStat etatstat)
+			throws SysGehoSystemException;
+
 }

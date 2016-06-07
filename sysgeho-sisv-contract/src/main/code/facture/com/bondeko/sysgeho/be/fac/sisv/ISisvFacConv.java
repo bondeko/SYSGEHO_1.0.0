@@ -19,6 +19,9 @@ public interface ISisvFacConv extends IBaseSisv<TabFacConv, String>{
 	List<TabFacConv> rechercherFacConvParSocMoisAnnee(String codSoc,
 			String mois, String annee) throws SysGehoSystemException;
 
-	EntFichier genererFacConv(TabFacConv facConv) throws SysGehoSystemException;  
+	EntFichier genererFacConv(TabFacConv facConv) throws SysGehoSystemException;
+
+	EntFichier genererListFacConv(TabFacConv facConv)
+			throws SysGehoSystemException;  
 
 }
