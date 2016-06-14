@@ -220,4 +220,8 @@ public class TabFacConv extends SysGehoBaseEntity implements Serializable{
 		return (v$enum == null)? null: v$enum.getLibelle();
 	}
 
+	public boolean getBEstPaie() {
+		return (booPaie != null && booPaie.compareTo(BigDecimal.ONE) == 0);
+	}
+	
 }
