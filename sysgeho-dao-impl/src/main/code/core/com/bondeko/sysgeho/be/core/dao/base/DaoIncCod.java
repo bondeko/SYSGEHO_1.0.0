@@ -84,12 +84,12 @@ public class DaoIncCod extends BaseDao<TabIncCod, String> implements IDaoIncCod{
 			// On arrive ici que s'il n'existe pas ce compteur en base de données
 			// On le créé donc en base et c'est ce dernier qui sera retourné a l'appelant
 			
-			logger.debug("[findInc] Aucun compteur trouvé. création d'un nouveau compteur  : " + compteur.getCodIncCod());
+			logger.debug("[findInc] Aucun compteur trouvé. création d'un nouveau compteur  : ");
 			logger.debug("[findInc] Initialisation du compteur avant insertion en BDD");
 			compteur.setValIncCod(BigDecimal.ZERO);
 			
 			// On crée et retourne le compteur
-			logger.debug("[findInc] Création effective du nouveau compteur");
+			logger.debug("[findInc] Création effective du nouveau compteur " + this);
 			return this.save(compteur);
 
 		} catch (SysGehoPersistenceException sdr) {

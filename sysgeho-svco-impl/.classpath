@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src/main/code/dossierpatient"/>
+	<classpathentry kind="src" path="src/main/code/pharmacie"/>
+	<classpathentry kind="src" path="src/main/code/facture"/>
 	<classpathentry kind="src" path="src/main/code/referentiel"/>
 	<classpathentry kind="src" path="src/main/code/core"/>
 	<classpathentry kind="src" path="src/main/code/admin"/>

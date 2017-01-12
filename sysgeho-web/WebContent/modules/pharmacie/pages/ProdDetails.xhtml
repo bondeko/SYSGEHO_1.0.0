@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+ 	<ui:composition template="/shared/templates/templateFormulaireDetails.xhtml">
+   			
+		<ui:param name="managedBean" value="#{sessionScope[prodCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" d'un Produit " />
+		
+	<!-- Definition du contenu de l'ecran principal  -->
+		<ui:define name="ecranPrincipalContenu">
+		
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Informations Sous Categorie" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:outputText value="Code Sous Categorie" />
+							<h:inputText value="#{prodCtrl.defaultVue.entiteCourante.tabSousCatProd.codSousCatProd}" style="width: 20%" 
+								readonly="true"  title="Code" disabled="false">
+							</h:inputText>
+							
+							<h:outputText value="#{locale.libelle} Sous Categorie" />
+							<h:inputText value="#{prodCtrl.defaultVue.entiteCourante.tabSousCatProd.libSousCatProd}" style="width: 40%" 
+								readonly="true"  title="#{locale.libelle}" > 
+							</h:inputText>
+							
+						</h:panelGrid>
+							
+						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdLColRightDynamic" cellspacing="10" >
+							
+							<h:outputText value="Code Categorie" rendered="#{! empty prodCtrl.defaultVue.entiteCourante.tabSousCatProd.codSousCatProd}" />
+							<h:inputText  value="#{prodCtrl.defaultVue.entiteCourante.tabSousCatProd.tabCatProd.codCatProd}" 
+								style="width: 40%" readonly="true"  title="Code Categorie" 
+								rendered="#{! empty prodCtrl.defaultVue.entiteCourante.tabSousCatProd.codSousCatProd}"/>
+								
+							<h:outputText value="Libelle Categorie" rendered="#{! empty prodCtrl.defaultVue.entiteCourante.tabSousCatProd.codSousCatProd}"/>
+							<h:inputText value="#{prodCtrl.defaultVue.entiteCourante.tabSousCatProd.tabCatProd.libCatProd}" 
+								readonly="true" style="width: 30%" title="Libelle Categorie" rendered="#{! empty prodCtrl.defaultVue.entiteCourante.tabSousCatProd.codSousCatProd}" />
+							
+						</h:panelGrid>
+					
+					</h:panelGrid>
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Informations Fournisseur" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:outputText value="Fournisseur" />
+							<h:inputText value="#{prodCtrl.defaultVue.entiteCourante.tabFour.codFour}" style="width: 20%" 
+								readonly="true"  title="Code" disabled="false">
+							</h:inputText>
+							
+							<h:outputText value="#{locale.libelle} Fournisseur" />
+							<h:inputText value="#{prodCtrl.defaultVue.entiteCourante.tabFour.libFour}" style="width: 40%" 
+								readonly="true"  title="#{locale.libelle}" > 
+							</h:inputText>
+							
+						</h:panelGrid>
+							
+						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdLColRightDynamic" cellspacing="10" >
+							
+						</h:panelGrid>
+					
+					</h:panelGrid>
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+			
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Informations produit" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         					<h:panelGroup>
+         						<h:outputText value="Code produit"	 />
+         					</h:panelGroup>
+         					<h:inputText id="inpt_codProd" value="#{prodCtrl.defaultVue.entiteCourante.codProd}"  
+								 style="width: 60%" title="Code produit" readonly="true">
+							</h:inputText>
+         				
+       						<h:outputText value="#{locale.libelle} produit"	 />
+         					<h:inputText id="inpt_libProd" value="#{prodCtrl.defaultVue.entiteCourante.libProd}"  
+								 readonly="true" style="width: 60%" title="#{locale.libelle} produit" >
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							
+							<h:outputText value="Departement sanitaire"/>
+							<h:inputText  value="#{prodCtrl.defaultVue.entiteCourante.tabDepart.libDepart}"  
+								 readonly="true" style="width: 60%" title="Departement sanitaire" >
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							
+							<h:outputText value="UPC"/>
+							<h:inputText  value="#{prodCtrl.defaultVue.entiteCourante.upcItem}"  
+								 readonly="true" style="width: 60%" title="UPC" >
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							
+							<h:outputText value="Fabricant"/>
+							<h:inputText  value="#{prodCtrl.defaultVue.entiteCourante.libFab}"  
+								 readonly="true" style="width: 60%" title="Fabricant" >
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							
+							<h:outputText value="Date Examen" />
+							<h:inputText value="#{prodCtrl.defaultVue.entiteCourante.datePerem}" readonly="true" style="width: 30%" 
+								title="Date peremption"  >
+								<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+							</h:inputText>
+							
+							<h:outputText value="Description"/>
+							<h:inputTextarea  value="#{prodCtrl.defaultVue.entiteCourante.libDesc}"  
+								 readonly="true" style="width: 60%" title="Description" >
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputTextarea>
+							
+         				</h:panelGrid>  
+         				
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         					<h:outputText value="Composition"	 />
+							<h:inputTextarea  value="#{prodCtrl.defaultVue.entiteCourante.libComp}"  
+								 readonly="true" style="width: 60%" title="Statut" >
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputTextarea>
+         				
+         					<h:outputText value="Mode d'emploi"	 />
+							<h:inputTextarea  value="#{prodCtrl.defaultVue.entiteCourante.libModEmpl}"  
+								 readonly="true" style="width: 60%" title="mode d'emploi" >
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputTextarea>
+							
+							<h:outputText value="Mode de Consommation"	 />
+							<h:inputTextarea  value="#{prodCtrl.defaultVue.entiteCourante.libModeConser}"  
+								 readonly="true" style="width: 60%" title="Others Informstions" >
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputTextarea>
+							
+							<h:outputText value="Warning"	 />
+							<h:inputTextarea  value="#{prodCtrl.defaultVue.entiteCourante.libWarning}"  
+								 readonly="true" style="width: 60%" title="Warning" >
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputTextarea>
+							
+							<h:outputText value="Others Informstions"	 />
+							<h:inputTextarea  value="#{prodCtrl.defaultVue.entiteCourante.libOtherInf}"  
+								 readonly="true" style="width: 60%" title="Others Informstions" >
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputTextarea>
+							
+							<h:outputText value="Quantite"/>
+							<h:inputText  value="#{prodCtrl.defaultVue.entiteCourante.qteProd}"  
+								 readonly="true" style="width: 20%" title="Quantite" >
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							
+         				</h:panelGrid> 
+         				         		         		
+         			</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+		</ui:define>
+													
+	</ui:composition>
+	
+</html>

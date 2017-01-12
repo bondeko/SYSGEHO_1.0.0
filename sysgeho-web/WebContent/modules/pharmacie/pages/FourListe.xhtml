@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+   	
+   	<ui:composition template="/shared/templates/templateFormulaireListe.xhtml">
+	
+		<ui:param name="managedBean" value="#{sessionScope[fourCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value="des Fournisseurs" />
+		
+		<!-- Crit�res standards de recherche -->
+		<ui:define name="standardFilter"  >
+			
+			<h:panelGrid columns="2" width="100%"  columnClasses="pngdColMiddle" rowClasses="pngdRow" >
+				<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+					
+					<h:outputText value="Code : " />					
+					<h:inputText value="#{fourCtrl.defaultVue.entiteRecherche.codFour}" style="width: 40%"   title="Code fournisseur" />
+					
+					<h:outputText value="#{locale.libelle} : " />					
+					<h:inputText value="#{fourCtrl.defaultVue.entiteRecherche.libFour}" style="width: 40%"   title="#{locale.libelle} fournisseur" />
+																																																										
+				</h:panelGrid>	
+				
+				<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+																
+				</h:panelGrid>	
+																																																					
+			</h:panelGrid>	
+			
+		</ui:define>
+			
+		<!-- Colonnes sp�cifiques � l'entit� -->
+		<ui:define name="specificColumns"  >
+						
+			<rich:column label="Code" sortBy="#{entity.codFour}" filterBy="#{entity.codFour}" width="200">
+				<f:facet name="header">
+					<h:outputText value="Code"  title="Code Fournisseur"/>
+				</f:facet>
+				<h:outputText value="#{entity.codFour}" />				
+			</rich:column>
+						
+			<rich:column label="#{locale.libelle}" sortBy="#{entity.libFour}" filterBy="#{entity.libFour}" width="300">
+				<f:facet name="header">
+					<h:outputText value="#{locale.libelle}"  title="#{locale.libelle} Fournisseur"/>
+				</f:facet>
+				<h:outputText value="#{entity.libFour}" />				
+			</rich:column>
+			
+			<rich:column label="Addresse" sortBy="#{entity.libAddr}" filterBy="#{entity.libAddr}" width="300">
+				<f:facet name="header">
+					<h:outputText value="Addresse"  title="Addresse"/>
+				</f:facet>
+				<h:outputText value="#{entity.libAddr}" />				
+			</rich:column>
+			
+			<rich:column label="Contact" sortBy="#{entity.libCont}" filterBy="#{entity.libCont}" width="300">
+				<f:facet name="header">
+					<h:outputText value="Contact"  title="Contact"/>
+				</f:facet>
+				<h:outputText value="#{entity.libCont}" />				
+			</rich:column>
+			
+			<rich:column label="Description" sortBy="#{entity.desc}" filterBy="#{entity.libDesc}" width="300">
+				<f:facet name="header">
+					<h:outputText value="Description"  title="Description"/>
+				</f:facet>
+				<h:outputText value="#{entity.libDesc}" />				
+			</rich:column>
+				
+		</ui:define>	
+												
+	</ui:composition>
+ 		
+</html>

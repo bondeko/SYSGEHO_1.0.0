@@ -33,6 +33,7 @@ public class TabIncCod  extends SysGehoBaseEntity implements Serializable{
 	public TabIncCod(SysGehoBaseEntity object) {	
 		this.codIncCod = DateTools.getYear(DateTools.formatDate(new Date())) + object.getClass().getSimpleName();
 		this.setValIncCod(null);
+		this.setInfoUser(object.getInfoUser());
 	}
 
 	public String getCodIncCod() {

@@ -80,7 +80,7 @@ public class DaoExam extends BaseDao<TabExam, String> implements IDaoExam{
 			clauseWhere = clauseWhere + "AND upper(o.tabPat.libNom) like '%"+currentExam.getTabPat().getLibNom()+"%'";
 		}
 		if(currentExam != null && currentExam.getTabTypExam()!= null 
-				&& currentExam.getTabTypExam().getCodTypExam() != null
+				&& currentExam.getTabTypExam().getLibTypExam() != null
 				&& !currentExam.getTabTypExam().getLibTypExam().equals("")){
 			clauseWhere = clauseWhere + "AND upper(o.tabTypExam.libTypExam) like '%"+currentExam.getTabTypExam().getLibTypExam()+"%'";
 		}

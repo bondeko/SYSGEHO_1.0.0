@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+
+  	<ui:composition template="/shared/templates/templateFormulaireDetails.xhtml">
+  	
+		<ui:param name="managedBean" value="#{sessionScope[departCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" d'un Departement Sanitaire" />
+		
+		<!-- Definition du contenu de l'ecran principal  -->
+		<ui:define name="ecranPrincipalContenu">
+					
+			<h:panelGrid columns="1" width="100%" columnClasses="pngdCol">	
+					
+				<h:panelGroup >
+					<fieldset>
+						<legend> <h:outputText value="Departement Sanitaire" styleClass="legend" />  </legend>
+												
+						<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow">
+						
+							<h:panelGrid columns="2"  width="100%"   columnClasses="pngdColLeftDynamic,pngdColRightDynamic">
+								
+								<h:outputText value="Code " />
+								<h:panelGroup>								
+									<h:inputText id="inpt_codeDepart" value="#{departCtrl.defaultVue.entiteCourante.codDepart}" style="width: 30%" title="Code Departement"
+											readonly="true" >
+										<a4j:support event="onchange" ajaxSingle="true" />
+									</h:inputText>
+									<rich:message for="inpt_codeDepart" errorClass="msg_error" />
+								</h:panelGroup>
+								
+								<h:outputText value="#{locale.libelle} " />
+								<h:panelGroup>								
+									<h:inputText id="inpt_libelleDepart" value="#{departCtrl.defaultVue.entiteCourante.libDepart}" style="width: 60%" title="Libell� Departement"
+										readonly="true"  >
+										<a4j:support event="onchange" ajaxSingle="true" />
+									</h:inputText>
+									<rich:message for="inpt_libelleDepart" errorClass="msg_error" />
+								</h:panelGroup>
+								
+								<h:outputText value="Description " />
+								<h:panelGroup>								
+									<h:inputTextarea id="inpt_desc" value="#{departCtrl.defaultVue.entiteCourante.libDesc}" style="width: 60%" 
+									title="Description" readonly="true">
+										<a4j:support event="onchange" ajaxSingle="true" />
+									</h:inputTextarea>
+									<rich:message for="inpt_desc" errorClass="msg_error" />
+								</h:panelGroup>
+								
+								
+								
+							</h:panelGrid>	
+						
+							<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >	
+								
+							</h:panelGrid>						
+						
+						</h:panelGrid>
+					</fieldset>
+				</h:panelGroup>           				             													
+			</h:panelGrid>
+											
+		</ui:define>	
+		
+	</ui:composition>
+	
+</html>

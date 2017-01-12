@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="1.2" xmlns="http://java.sun.com/xml/ns/javaee"
+ xmlns:xi="http://www.w3.org/2001/XInclude"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_1_2.xsd">
+ <managed-bean>
+  <managed-bean-name>catProdCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.phar.controleur.CatProdCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>sousCatProdCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.phar.controleur.SousCatProdCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>prodCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.phar.controleur.ProdCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>fourCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.phar.controleur.FourCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>departCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.phar.controleur.DepartCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ <managed-bean>
+  <managed-bean-name>mouvStockCtrl</managed-bean-name>
+  <managed-bean-class>com.bondeko.sysgeho.ui.phar.controleur.MouvStockCtrl</managed-bean-class>
+  <managed-bean-scope>session</managed-bean-scope>
+ </managed-bean>
+ 
+ <navigation-rule>
+  <from-view-id>*</from-view-id>
+  <navigation-case>
+   <from-outcome>CatProdDetails</from-outcome>
+   <to-view-id>/modules/pharmacie/pages/CatProdDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>CatProdEdition</from-outcome>
+   <to-view-id>/modules/pharmacie/pages/CatProdEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>CatProdListe</from-outcome>
+   <to-view-id>/modules/pharmacie/pages/CatProdListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>SousCatProdDetails</from-outcome>
+   <to-view-id>/modules/pharmacie/pages/SousCatProdDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>SousCatProdEdition</from-outcome>
+   <to-view-id>/modules/pharmacie/pages/SousCatProdEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>SousCatProdListe</from-outcome>
+   <to-view-id>/modules/pharmacie/pages/SousCatProdListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>ProdDetails</from-outcome>
+   <to-view-id>/modules/pharmacie/pages/ProdDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>ProdEdition</from-outcome>
+   <to-view-id>/modules/pharmacie/pages/ProdEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>ProdListe</from-outcome>
+   <to-view-id>/modules/pharmacie/pages/ProdListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>FourDetails</from-outcome>
+   <to-view-id>/modules/pharmacie/pages/FourDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>FourEdition</from-outcome>
+   <to-view-id>/modules/pharmacie/pages/FourEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>FourListe</from-outcome>
+   <to-view-id>/modules/pharmacie/pages/FourListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>DepartDetails</from-outcome>
+   <to-view-id>/modules/pharmacie/pages/DepartDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>DepartEdition</from-outcome>
+   <to-view-id>/modules/pharmacie/pages/DepartEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>DepartListe</from-outcome>
+   <to-view-id>/modules/pharmacie/pages/DepartListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  
+  <navigation-case>
+   <from-outcome>MouvStockDetails</from-outcome>
+   <to-view-id>/modules/pharmacie/pages/MouvStockDetails.xhtml</to-view-id>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>MouvStockEdition</from-outcome>
+   <to-view-id>/modules/pharmacie/pages/MouvStockEdition.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+  <navigation-case>
+   <from-outcome>MouvStockListe</from-outcome>
+   <to-view-id>/modules/pharmacie/pages/MouvStockListe.xhtml</to-view-id>
+   <redirect/>
+  </navigation-case>
+   
+ 
+ </navigation-rule>
+</faces-config>

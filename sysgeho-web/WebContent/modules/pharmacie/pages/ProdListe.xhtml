@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+     
+  	<ui:composition template="/shared/templates/templateFormulaireListe.xhtml">
+		
+		<ui:param name="managedBean" value="#{sessionScope[prodCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" des Produits" />
+		
+		<!-- Criteres standards de recherche -->
+		<ui:define name="standardFilter"  >
+		
+			<h:panelGrid columns="2" width="100%"   columnClasses="pngdColMiddle" rowClasses="pngdRow" >
+			
+				<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				
+					<h:outputText value="Code " />          				
+         			<h:inputText  value="#{prodCtrl.defaultVue.entiteRecherche.codProd}" style="width: 30%" /> 
+         			
+					<h:outputText value="Nom produit" />          				
+         			<h:inputText  value="#{prodCtrl.defaultVue.entiteRecherche.libProd}" style="width: 30%" />  
+         			
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2" width="100%" border="0" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				
+					<h:outputText value="Sous Categorie Produit" />       
+         			<h:selectOneMenu value="#{prodCtrl.defaultVue.entiteRecherche.tabSousCatProd.codSousCatProd}" style="width: 40%"  title="Sous Categorie Produit" >
+						<f:selectItem itemLabel="" itemValue="#{null}"/>
+						<f:selectItems  value="#{prodCtrl.defaultVue.listeSousCatProd}"/> 
+						<a4j:support event="onchange" ajaxSingle="true"  />						
+					</h:selectOneMenu>
+					
+					<h:outputText value="Categorie Produit" />       
+         			<h:selectOneMenu value="#{prodCtrl.defaultVue.entiteRecherche.tabSousCatProd.tabCatProd.codCatProd}" style="width: 40%"  title="Categorie Produit" >
+						<f:selectItem itemLabel="" itemValue="#{null}"/>
+						<f:selectItems  value="#{prodCtrl.defaultVue.listeCatProd}"/> 
+						<a4j:support event="onchange" ajaxSingle="true"  />						
+					</h:selectOneMenu>	
+					
+					<h:outputText value="Fournisseur" />       
+         			<h:selectOneMenu value="#{prodCtrl.defaultVue.entiteRecherche.tabFour.codFour}" style="width: 40%"  title="Fournisseur" >
+						<f:selectItem itemLabel="" itemValue="#{null}"/>
+						<f:selectItems  value="#{prodCtrl.defaultVue.listeFour}"/> 
+						<a4j:support event="onchange" ajaxSingle="true"  />						
+					</h:selectOneMenu>	  
+				
+				</h:panelGrid>
+														
+																																																	
+			</h:panelGrid>	
+						
+		</ui:define>
+		
+		<!-- Colonnes specifiques e l entite -->
+		<ui:define name="specificColumns"  >
+		
+			<rich:column label="Code " sortBy="#{entity.codExam}" filterBy="#{entity.codProd}" >
+				<f:facet name="header">
+					<h:outputText value="Code "  />
+				</f:facet>
+				<h:outputText value="#{entity.codProd}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.libelle} " sortBy="#{entity.libProd}" filterBy="#{entity.libProd}" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.libelle} "  />
+				</f:facet>
+				<h:outputText value="#{entity.libProd}" />				
+			</rich:column>
+			
+			<rich:column label="Dept Sanitaire" sortBy="#{entity.tabDepart.libDepart}" filterBy="#{entity.tabDepart.libDepart}"  >
+				<f:facet name="header">
+					<h:outputText value="Dept Sanitaire" />
+				</f:facet>
+				<h:outputText value="#{entity.tabDepart.libDepart}" />				
+			</rich:column>
+			
+			<rich:column label="UPC Number" sortBy="#{entity.upcItem}" filterBy="#{entity.upcItem}"  >
+				<f:facet name="header">
+					<h:outputText value="UPC"  />
+				</f:facet>
+				<h:outputText value="#{entity.upcItem}" />				
+			</rich:column>
+			
+			<rich:column label="Fabricant" sortBy="#{entity.libFab}" filterBy="#{entity.libFab}"  >
+				<f:facet name="header">
+					<h:outputText value="Fabricant"  />
+				</f:facet>
+				<h:outputText value="#{entity.libFab}" />				
+			</rich:column>
+			
+			<rich:column label="Dosage" sortBy="#{entity.libDosage}" filterBy="#{entity.libDosage}"  >
+				<f:facet name="header">
+					<h:outputText value="Dosage"  />
+				</f:facet>
+				<h:outputText value="#{entity.libDosage}" />				
+			</rich:column>
+						
+			<rich:column label="Date de Peremption" sortBy="#{entity.datePerem}" filterBy="#{entity.datePerem}"  >
+				<f:facet name="header">
+					<h:outputText value="Date de Peremption" />
+				</f:facet>
+				<h:outputText value="#{entity.datePerem}" >	
+					<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+				</h:outputText>			
+			</rich:column>
+			
+			<rich:column label="Quantite" sortBy="#{entity.qteProd}" filterBy="#{entity.qteProd}"  >
+				<f:facet name="header">
+					<h:outputText value="Quantite"  />
+				</f:facet>
+				<h:outputText value="#{entity.qteProd}" />				
+			</rich:column>
+			
+		</ui:define>
+													
+	</ui:composition>
+	
+</html>

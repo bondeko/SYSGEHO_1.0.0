@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+   	
+   	<ui:composition template="/shared/templates/templateFormulaireListe.xhtml">
+	
+		<ui:param name="managedBean" value="#{sessionScope[catProdCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value="des Categories de produits" />
+		
+		<!-- Crit�res standards de recherche -->
+		<ui:define name="standardFilter"  >
+			
+			<h:panelGrid columns="2" width="100%"  columnClasses="pngdColMiddle" rowClasses="pngdRow" >
+				<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+					
+					<h:outputText value="Code : " />					
+					<h:inputText value="#{catProdCtrl.defaultVue.entiteRecherche.codCatProd}" style="width: 40%"   title="Code de la Categorie" />
+					
+					<h:outputText value="#{locale.libelle} : " />					
+					<h:inputText value="#{catProdCtrl.defaultVue.entiteRecherche.libCatProd}" style="width: 40%"   title="#{locale.libelle} de la Categorie" />
+																																																										
+				</h:panelGrid>	
+				
+				<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+																
+				</h:panelGrid>	
+																																																					
+			</h:panelGrid>	
+			
+		</ui:define>
+			
+		<!-- Colonnes sp�cifiques � l'entit� -->
+		<ui:define name="specificColumns"  >
+						
+			<rich:column label="Code" sortBy="#{entity.codCatProd}" filterBy="#{entity.codCatProd}" width="200">
+				<f:facet name="header">
+					<h:outputText value="Code"  title="Code de la Categorie"/>
+				</f:facet>
+				<h:outputText value="#{entity.codCatProd}" />				
+			</rich:column>
+						
+			<rich:column label="#{locale.libelle}" sortBy="#{entity.libCatProd}" filterBy="#{entity.libCatProd}" width="300">
+				<f:facet name="header">
+					<h:outputText value="#{locale.libelle}"  title="#{locale.libelle} de la Categorie"/>
+				</f:facet>
+				<h:outputText value="#{entity.libCatProd}" />				
+			</rich:column>
+			
+			<rich:column label="Description" sortBy="#{entity.desc}" filterBy="#{entity.libDesc}" width="300">
+				<f:facet name="header">
+					<h:outputText value="Description"  title="Description de la Categorie"/>
+				</f:facet>
+				<h:outputText value="#{entity.libDesc}" />				
+			</rich:column>
+				
+		</ui:define>	
+												
+	</ui:composition>
+ 		
+</html>

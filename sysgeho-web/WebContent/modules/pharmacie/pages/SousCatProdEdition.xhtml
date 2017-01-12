@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+ 	<ui:composition template="/shared/templates/templateFormulaireEdition.xhtml">
+   			
+		<ui:param name="managedBean" value="#{sessionScope[sousCatProdCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" d'une Sous Categorie Examen " />
+		
+	<!-- Definition du contenu de l'ecran principal  -->
+		<ui:define name="ecranPrincipalContenu">
+		
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Informations Categorie" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:panelGroup>
+								<h:outputText value="Categorie" />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
+							<h:panelGroup>
+							<h:inputText id="inpt_codCat" value="#{sousCatProdCtrl.defaultVue.entiteCourante.tabCatProd.codCatProd}" style="width: 20%" 
+								required="true" requiredMessage="Valeur obligatoire"
+								readonly="true" 
+								title="Code" disabled="false">
+								<a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>	
+							<h:inputText id="inpt_libCat" value="#{sousCatProdCtrl.defaultVue.entiteCourante.tabCatProd.libCatProd}" style="width: 40%" 
+								required="false"
+								readonly="true"  
+								title="#{locale.libelle} categorie" disabled="false"> 
+								<a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
+							<h:panelGroup>
+								<a4j:commandButton   value="..." action="#{sousCatProdCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" >   	
+		           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
+		         						<f:setPropertyActionListener value="SousCatProdEdition" target="#{catProdCtrl.defaultVue.navigationMgr.selectionSource}" />
+		         						<!-- MAJ de la destination en mode Selection   --> 
+		           						<f:setPropertyActionListener value="true" target="#{catProdCtrl.defaultVue.navigationMgr.enSelection}" />  
+		           						<!-- Nom du Controlleur de l'entite source  --> 
+		          						<f:setPropertyActionListener value="sousCatProdCtrl" target="#{catProdCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
+		          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
+		          						<f:setPropertyActionListener value="CatProdListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
+		          						<!-- Nom de la propriete a selectionner -->							         						             						
+		          						<f:setPropertyActionListener value="tabCatProd" target="#{defaultVue.navigationMgr.selectionPropertyName}" />            						             						          						             				            					      						
+				             	</a4j:commandButton>
+				             	<rich:message for="inpt_codCat" errorClass="msg_error" />
+							</h:panelGroup>
+						</h:panelGroup>
+						
+						</h:panelGrid>
+						
+						<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+						</h:panelGrid>
+					</h:panelGrid>
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Informations Sous Categorie" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         					<h:panelGroup>
+         						<h:outputText value="Code de la sous categorie"	 />
+								<ui:include src="/shared/include/required.xhtml" />
+         					</h:panelGroup>
+         					<h:panelGroup>
+	         					<h:inputText id="inpt_codSousCat" value="#{sousCatProdCtrl.defaultVue.entiteCourante.codSousCatProd}"  
+									 required="true" style="width: 60%" title="Code de la sous categorie" >
+									 <a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+								<rich:message for="inpt_codSousCat" errorClass="msg_error" />
+							</h:panelGroup>
+         				
+         					<h:panelGroup>
+         						<h:outputText value="#{locale.libelle} de la sous categorie"	 />
+								<ui:include src="/shared/include/required.xhtml" />
+         					</h:panelGroup>
+         					<h:panelGroup>
+	         					<h:inputText id="inpt_libSousCat" value="#{sousCatProdCtrl.defaultVue.entiteCourante.libSousCatProd}"  
+									 required="true" style="width: 60%" title="#{locale.libelle} sous categorie" >
+									 <a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+								<rich:message for="inpt_libSousCat" errorClass="msg_error" />
+							</h:panelGroup>
+							
+							<h:panelGroup>
+								<h:outputText value="Description " />
+							</h:panelGroup> 
+							<h:panelGroup>								
+								<h:inputTextarea id="inpt_desc" value="#{sousCatProdCtrl.defaultVue.entiteCourante.libDesc}" style="width: 60%" title="Description de la Sous Categorie">
+									<a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputTextarea>
+								<rich:message for="inpt_desc" errorClass="msg_error" />
+							</h:panelGroup>
+         				</h:panelGrid>  
+         				
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         				</h:panelGrid> 
+         				         		         		
+         			</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+
+		</ui:define>
+													
+	</ui:composition>
+	
+</html>

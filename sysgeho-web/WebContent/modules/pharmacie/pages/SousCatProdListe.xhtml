@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+     
+  	<ui:composition template="/shared/templates/templateFormulaireListe.xhtml">
+		
+		<ui:param name="managedBean" value="#{sessionScope[sousCatProdCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" des Sous Categories de produits" />
+		
+		<!-- Criteres standards de recherche -->
+		<ui:define name="standardFilter"  >
+		
+			<h:panelGrid columns="2" width="100%"   columnClasses="pngdColMiddle" rowClasses="pngdRow" >
+			
+				<h:panelGrid columns="2" width="100%"  columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				
+					<h:outputText value="Code " />          				
+         			<h:inputText  value="#{sousCatProdCtrl.defaultVue.entiteRecherche.codSousCatProd}" style="width: 30%" /> 
+         			
+					<h:outputText value="#{locale.libelle} Sous categorie" />          				
+         			<h:inputText  value="#{sousCatProdCtrl.defaultVue.entiteRecherche.libSousCatProd}" style="width: 30%" />  
+         			
+         			<h:outputText value="#{locale.libelle} categorie" />       
+         			<h:selectOneMenu value="#{sousCatProdCtrl.defaultVue.entiteRecherche.tabCatProd.codCatProd}" style="width: 40%"  
+         			    title="#{locale.libelle} categorie" >
+						<f:selectItem itemLabel="" itemValue="#{null}"/>
+						<f:selectItems  value="#{sousCatProdCtrl.defaultVue.listeCatProd}"/> 
+						<a4j:support event="onchange" ajaxSingle="true"  />						
+					</h:selectOneMenu>	   				
+
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2" width="100%" border="0" columnClasses="pngdColLeftDynamic,pngdColRightDynamic" >
+				</h:panelGrid>
+														
+																																																	
+			</h:panelGrid>	
+						
+		</ui:define>
+		
+		<!-- Colonnes specifiques e l entite -->
+		<ui:define name="specificColumns"  >
+		
+			<rich:column label="Code " sortBy="#{entity.codSousCatProd}" filterBy="#{entity.codSousCatProd}" >
+				<f:facet name="header">
+					<h:outputText value="Code "  />
+				</f:facet>
+				<h:outputText value="#{entity.codSousCatProd}" />				
+			</rich:column>
+			
+			<rich:column label="#{locale.libelle} " sortBy="#{entity.libSousCatProd}" filterBy="#{entity.libSousCatProd}" >
+				<f:facet name="header">
+					<h:outputText value="#{locale.libelle} "  />
+				</f:facet>
+				<h:outputText value="#{entity.libSousCatProd}" />				
+			</rich:column>
+			
+			<rich:column label="Categorie" sortBy="#{entity.tabCatProd.libCatProd}" filterBy="#{entity.tabCatProd.libCatProd}"  >
+				<f:facet name="header">
+					<h:outputText value="Categorie"  />
+				</f:facet>
+				<h:outputText value="#{entity.tabCatProd.libCatProd}" />				
+			</rich:column>
+			
+		</ui:define>
+													
+	</ui:composition>
+	
+</html>

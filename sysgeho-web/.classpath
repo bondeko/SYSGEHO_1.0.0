@@ -9,5 +9,6 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/sysgeho-entity"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/sysgeho-svco-contract"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/sysgeho-web-core"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/CoreDev"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

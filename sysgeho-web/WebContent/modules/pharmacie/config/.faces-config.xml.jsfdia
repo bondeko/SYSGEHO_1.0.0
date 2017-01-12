@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:*" PATH="*" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:*:0" NAME="item" PATH="*" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT
+    ID="CatProdDetails::#modules#pharmacie#pages#CatProdDetails.xhtml"
+    NAME="output" PATH="/modules/pharmacie/pages/CatProdDetails.xhtml"
+    TARGET="rules:#modules#pharmacie#pages#CatProdDetails.xhtml"
+    TITLE="CatProdDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="CatProdEdition::#modules#pharmacie#pages#CatProdEdition.xhtml"
+    NAME="output1" PATH="/modules/pharmacie/pages/CatProdEdition.xhtml"
+    TARGET="rules:#modules#pharmacie#pages#CatProdEdition.xhtml"
+    TITLE="CatProdEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="CatProdListe::#modules#pharmacie#pages#CatProdListe.xhtml"
+    NAME="output2" PATH="/modules/pharmacie/pages/CatProdListe.xhtml"
+    TARGET="rules:#modules#pharmacie#pages#CatProdListe.xhtml"
+    TITLE="CatProdListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="SousCatProdDetails::#modules#pharmacie#pages#SousCatProdDetails.xhtml"
+    NAME="output3"
+    PATH="/modules/pharmacie/pages/SousCatProdDetails.xhtml"
+    TARGET="rules:#modules#pharmacie#pages#SousCatProdDetails.xhtml"
+    TITLE="SousCatProdDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="SousCatProdEdition::#modules#pharmacie#pages#SousCatProdEdition.xhtml"
+    NAME="output4"
+    PATH="/modules/pharmacie/pages/SousCatProdEdition.xhtml"
+    TARGET="rules:#modules#pharmacie#pages#SousCatProdEdition.xhtml"
+    TITLE="SousCatProdEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="SousCatProdListe::#modules#pharmacie#pages#SousCatProdListe.xhtml"
+    NAME="output5"
+    PATH="/modules/pharmacie/pages/SousCatProdListe.xhtml"
+    TARGET="rules:#modules#pharmacie#pages#SousCatProdListe.xhtml"
+    TITLE="SousCatProdListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="ProdDetails::#modules#pharmacie#pages#ProdDetails.xhtml"
+    NAME="output6" PATH="/modules/pharmacie/pages/ProdDetails.xhtml"
+    TARGET="rules:#modules#pharmacie#pages#ProdDetails.xhtml"
+    TITLE="ProdDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="ProdEdition::#modules#pharmacie#pages#ProdEdition.xhtml"
+    NAME="output7" PATH="/modules/pharmacie/pages/ProdEdition.xhtml"
+    TARGET="rules:#modules#pharmacie#pages#ProdEdition.xhtml"
+    TITLE="ProdEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="ProdListe::#modules#pharmacie#pages#ProdListe.xhtml"
+    NAME="output8" PATH="/modules/pharmacie/pages/ProdListe.xhtml"
+    TARGET="rules:#modules#pharmacie#pages#ProdListe.xhtml"
+    TITLE="ProdListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="FourDetails::#modules#pharmacie#pages#FourDetails.xhtml"
+    NAME="output9" PATH="/modules/pharmacie/pages/FourDetails.xhtml"
+    TARGET="rules:#modules#pharmacie#pages#FourDetails.xhtml"
+    TITLE="FourDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="FourEdition::#modules#pharmacie#pages#FourEdition.xhtml"
+    NAME="output10" PATH="/modules/pharmacie/pages/FourEdition.xhtml"
+    TARGET="rules:#modules#pharmacie#pages#FourEdition.xhtml"
+    TITLE="FourEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="FourListe::#modules#pharmacie#pages#FourListe.xhtml"
+    NAME="output11" PATH="/modules/pharmacie/pages/FourListe.xhtml"
+    TARGET="rules:#modules#pharmacie#pages#FourListe.xhtml"
+    TITLE="FourListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="DepartDetails::#modules#pharmacie#pages#DepartDetails.xhtml"
+    NAME="output12" PATH="/modules/pharmacie/pages/DepartDetails.xhtml"
+    TARGET="rules:#modules#pharmacie#pages#DepartDetails.xhtml"
+    TITLE="DepartDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="DepartEdition::#modules#pharmacie#pages#DepartEdition.xhtml"
+    NAME="output13" PATH="/modules/pharmacie/pages/DepartEdition.xhtml"
+    TARGET="rules:#modules#pharmacie#pages#DepartEdition.xhtml"
+    TITLE="DepartEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="DepartListe::#modules#pharmacie#pages#DepartListe.xhtml"
+    NAME="output14" PATH="/modules/pharmacie/pages/DepartListe.xhtml"
+    TARGET="rules:#modules#pharmacie#pages#DepartListe.xhtml"
+    TITLE="DepartListe" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="MouvStockDetails::#modules#pharmacie#pages#MouvStockDetails.xhtml"
+    NAME="output15"
+    PATH="/modules/pharmacie/pages/MouvStockDetails.xhtml"
+    TARGET="rules:#modules#pharmacie#pages#MouvStockDetails.xhtml"
+    TITLE="MouvStockDetails" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="MouvStockEdition::#modules#pharmacie#pages#MouvStockEdition.xhtml"
+    NAME="output16"
+    PATH="/modules/pharmacie/pages/MouvStockEdition.xhtml"
+    TARGET="rules:#modules#pharmacie#pages#MouvStockEdition.xhtml"
+    TITLE="MouvStockEdition" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="MouvStockListe::#modules#pharmacie#pages#MouvStockListe.xhtml"
+    NAME="output17" PATH="/modules/pharmacie/pages/MouvStockListe.xhtml"
+    TARGET="rules:#modules#pharmacie#pages#MouvStockListe.xhtml"
+    TITLE="MouvStockListe" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM
+  NAME="rules:#modules#pharmacie#pages#CatProdEdition.xhtml"
+  PATH="/modules/pharmacie/pages/CatProdEdition.xhtml"
+  SHAPE="304,1089,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#pharmacie#pages#CatProdListe.xhtml"
+  PATH="/modules/pharmacie/pages/CatProdListe.xhtml"
+  SHAPE="304,1201,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#pharmacie#pages#CatProdDetails.xhtml"
+  PATH="/modules/pharmacie/pages/CatProdDetails.xhtml"
+  SHAPE="304,977,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#pharmacie#pages#SousCatProdListe.xhtml"
+  PATH="/modules/pharmacie/pages/SousCatProdListe.xhtml"
+  SHAPE="304,417,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#pharmacie#pages#SousCatProdDetails.xhtml"
+  PATH="/modules/pharmacie/pages/SousCatProdDetails.xhtml"
+  SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#pharmacie#pages#SousCatProdEdition.xhtml"
+  PATH="/modules/pharmacie/pages/SousCatProdEdition.xhtml"
+  SHAPE="304,305,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#pharmacie#pages#ProdEdition.xhtml"
+  PATH="/modules/pharmacie/pages/ProdEdition.xhtml" SHAPE="304,737,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#pharmacie#pages#ProdListe.xhtml"
+  PATH="/modules/pharmacie/pages/ProdListe.xhtml" SHAPE="304,849,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#pharmacie#pages#ProdDetails.xhtml"
+  PATH="/modules/pharmacie/pages/ProdDetails.xhtml" SHAPE="304,401,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#pharmacie#pages#FourListe.xhtml"
+  PATH="/modules/pharmacie/pages/FourListe.xhtml" SHAPE="304,945,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#pharmacie#pages#FourEdition.xhtml"
+  PATH="/modules/pharmacie/pages/FourEdition.xhtml" SHAPE="304,833,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#pharmacie#pages#FourDetails.xhtml"
+  PATH="/modules/pharmacie/pages/FourDetails.xhtml" SHAPE="304,497,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#pharmacie#pages#DepartEdition.xhtml"
+  PATH="/modules/pharmacie/pages/DepartEdition.xhtml"
+  SHAPE="304,1041,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#pharmacie#pages#DepartDetails.xhtml"
+  PATH="/modules/pharmacie/pages/DepartDetails.xhtml"
+  SHAPE="304,593,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#modules#pharmacie#pages#DepartListe.xhtml"
+  PATH="/modules/pharmacie/pages/DepartListe.xhtml" SHAPE="304,1713,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#pharmacie#pages#MouvStockDetails.xhtml"
+  PATH="/modules/pharmacie/pages/MouvStockDetails.xhtml"
+  SHAPE="304,689,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#pharmacie#pages#MouvStockEdition.xhtml"
+  PATH="/modules/pharmacie/pages/MouvStockEdition.xhtml"
+  SHAPE="304,1809,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM
+  NAME="rules:#modules#pharmacie#pages#MouvStockListe.xhtml"
+  PATH="/modules/pharmacie/pages/MouvStockListe.xhtml"
+  SHAPE="304,1921,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

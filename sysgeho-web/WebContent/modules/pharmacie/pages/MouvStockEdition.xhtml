@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jstl/core"
+      xmlns:a4j="http://richfaces.org/a4j"
+      xmlns:rich="http://richfaces.org/rich">
+      
+ 	<ui:composition template="/shared/templates/templateFormulaireEdition.xhtml">
+   			
+		<ui:param name="managedBean" value="#{sessionScope[mouvStockCtrl.nomManagedBean2]}" />
+		<ui:param name="entetePage" value=" d'un Mouvement de Stock " />
+		
+	<!-- Definition du contenu de l'ecran principal  -->
+		<ui:define name="ecranPrincipalContenu">
+		
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Informations Produit" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+
+							<h:panelGroup>
+								<h:outputText value="Produit" />
+								<ui:include src="/shared/include/required.xhtml" />
+							</h:panelGroup>
+							<h:panelGroup>
+							<h:inputText id="inpt_codProd" value="#{mouvStockCtrl.defaultVue.entiteCourante.tabProd.codProd}" style="width: 20%" 
+								required="true" requiredMessage="Valeur obligatoire"
+								readonly="true" 
+								title="Code" disabled="false">
+								<a4j:support event="onchange" ajaxSingle="true" 
+									reRender="qte,qte2,depart,depart2,four,four2,dateperem,dateperem2"/>
+							</h:inputText>	
+							<h:inputText id="inpt_libProd" value="#{mouvStockCtrl.defaultVue.entiteCourante.tabProd.libProd}" style="width: 40%" 
+								required="false"
+								readonly="true"  
+								title="#{locale.libelle}" disabled="false"> 
+								<a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							<!--  Selection d'une Entite avec envoi des parametres correspondants  -->
+							<h:panelGroup>
+								<a4j:commandButton   value="..." action="#{mouvStockCtrl.makeSelection}" ajaxSingle="true" immediate="true" disabled="false" >   	
+		           						<!-- Regle de Navigation permettant de revenir a la page source   -->           					          							
+		         						<f:setPropertyActionListener value="MouvStockEdition" target="#{prodCtrl.defaultVue.navigationMgr.selectionSource}" />
+		         						<!-- MAJ de la destination en mode Selection   --> 
+		           						<f:setPropertyActionListener value="true" target="#{prodCtrl.defaultVue.navigationMgr.enSelection}" />  
+		           						<!-- Nom du Controlleur de l'entite source  --> 
+		          						<f:setPropertyActionListener value="mouvStockCtrl" target="#{prodCtrl.defaultVue.navigationMgr.selectionBeanCtrlName}" /> 
+		          						<!-- Regle de Navigation permettant d'atteindre le formulaire de destination  -->   
+		          						<f:setPropertyActionListener value="ProdListe" target="#{defaultVue.navigationMgr.selectionDestination}" />	
+		          						<!-- Nom de la propriete a selectionner -->							         						             						
+		          						<f:setPropertyActionListener value="tabProd" target="#{defaultVue.navigationMgr.selectionPropertyName}" />            						             						          						             				            					      						
+				             	</a4j:commandButton>
+				             	<rich:message for="inpt_codProd" errorClass="msg_error" />
+							</h:panelGroup>
+						</h:panelGroup>
+							
+							<h:panelGroup id="qte">
+								<h:outputText value="Quantite actuelle" rendered="#{! empty mouvStockCtrl.defaultVue.entiteCourante.tabProd.codProd}" />
+							</h:panelGroup>
+							<h:panelGroup id="qte2">							
+								<h:inputText  value="#{mouvStockCtrl.defaultVue.entiteCourante.tabProd.qteProd}" style="width: 40%" readonly="true"  title="Quantite actuelle" rendered="#{! empty mouvStockCtrl.defaultVue.entiteCourante.tabProd.codProd}"/>
+							</h:panelGroup>
+							
+						</h:panelGrid>
+							
+						<h:panelGrid columns="2" width="100%" columnClasses="pngdColLeftDynamic,pngdLColRightDynamic" cellspacing="10" >
+						
+							<h:panelGroup id="depart">
+								<h:outputText value="Departement Sanitaire" rendered="#{! empty mouvStockCtrl.defaultVue.entiteCourante.tabProd.codProd}"/>
+							</h:panelGroup>
+							<h:panelGroup id="depart2">
+								<h:inputText value="#{mouvStockCtrl.defaultVue.entiteCourante.tabProd.tabDepart.libDepart}" readonly="true" style="width: 30%" title="Departement Sanitaire"  rendered="#{! empty mouvStockCtrl.defaultVue.entiteCourante.tabProd.codProd}"/>
+							</h:panelGroup>
+							
+							<h:panelGroup id="four">
+								<h:outputText value="Fournisseur" rendered="#{! empty mouvStockCtrl.defaultVue.entiteCourante.tabProd.codProd}"/>
+							</h:panelGroup>
+							<h:panelGroup id="four2">
+								<h:inputText value="#{mouvStockCtrl.defaultVue.entiteCourante.tabProd.tabFour.libFour}" readonly="true" style="width: 30%" title="Fournisseur"  rendered="#{! empty mouvStockCtrl.defaultVue.entiteCourante.tabProd.codProd}"/>
+							</h:panelGroup>
+							
+							<h:panelGroup id="dateperem">
+								<h:outputText value="Date de peremption" rendered="#{! empty mouvStockCtrl.defaultVue.entiteCourante.tabProd.codProd}"/>
+							</h:panelGroup>	
+							<h:panelGroup id="dateperem2">
+								<h:inputText value="#{mouvStockCtrl.defaultVue.entiteCourante.tabProd.datePerem}" readonly="true" style="width: 30%" title="Date de peremption" rendered="#{! empty mouvStockCtrl.defaultVue.entiteCourante.tabProd.codProd}" >
+									<f:convertDateTime type="date" dateStyle="full" pattern="dd/MM/yyyy" timeZone="GMT+1" />
+								</h:inputText>
+							</h:panelGroup>
+							
+						</h:panelGrid>
+					</h:panelGrid>
+         	
+				</fieldset>								
+			</h:panelGroup>
+		
+			<h:panelGroup>
+				<fieldset>
+					<legend> <h:outputText value="Informations Mouvement" styleClass="legend" />  </legend>
+
+        			<h:panelGrid columns="2" width="100%" columnClasses="pngdColMiddle" rowClasses="pngdRow"  >
+        							         		
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         					<h:panelGroup>
+         						<h:outputText value="#{locale.libelle} Mouvement"	 />
+								<ui:include src="/shared/include/required.xhtml" />
+         					</h:panelGroup>
+         					<h:panelGroup>
+	         					<h:inputText id="inpt_libMouv" value="#{mouvStockCtrl.defaultVue.entiteCourante.libMouv}"  
+									 required="true" requiredMessage="Valeur obligatoire" style="width: 60%" title="#{locale.libelle} Mouvement" >
+									 <a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+								<rich:message for="inpt_libMouv" errorClass="msg_error" />
+							</h:panelGroup>
+							
+							<h:panelGroup>
+								<h:outputText value="Type Mouvement"/>
+								<ui:include src="/shared/include/required.xhtml" />
+         					</h:panelGroup>
+							<h:panelGroup>
+								<h:selectOneMenu id="typeMouv" value="#{mouvStockCtrl.defaultVue.entiteCourante.enuTypMouv}" style="width: 30%"
+										title="Type Mouvement"  immediate="true" required="true" requiredMessage="Valeur obligatoire">
+									<f:selectItems  value="#{mouvStockCtrl.defaultVue.listeTypMouv['map']}"/>
+									<a4j:support event="onchange" ajaxSingle="true" reRender="libliv,libliv1"/>						
+								</h:selectOneMenu>
+							</h:panelGroup>
+							
+							<h:outputText value="Date Mouvement"/>
+							<rich:calendar value="#{mouvStockCtrl.defaultVue.entiteCourante.dateMouv}" inputStyle="width: 30%"  title="Date " 
+									styleClass="selectDate"  datePattern="dd/MM/yyyy" >
+								<a4j:support event="onchanged" ajaxSingle="true" />
+							</rich:calendar>
+							
+							<h:panelGroup>
+								<h:outputText value="Quantite"	 />
+								<ui:include src="/shared/include/required.xhtml" />
+         					</h:panelGroup>
+							<h:inputText  value="#{mouvStockCtrl.defaultVue.entiteCourante.qteMouv}"  converter="#{Integer}"
+								 required="true" style="width: 20%" title="Statut" requiredMessage="Valeur obligatoire" 
+								 validatorMessage="Please enter digits only">
+								 <f:convertNumber pattern="#,###,##0.00"/>
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputText>
+							
+							<h:panelGroup id="libliv">
+								<h:outputText value="Code/Libelle Livraison" rendered="#{mouvStockCtrl.defaultVue.entreeMouv}"/>
+							</h:panelGroup>
+							<h:panelGroup id="libliv1">
+								<h:inputText  value="#{mouvStockCtrl.defaultVue.entiteCourante.libLiv}"  
+									 required="#{mouvStockCtrl.defaultVue.entreeMouv}" style="width: 20%" title="Statut" requiredMessage="Valeur obligatoire"
+									 	rendered="#{mouvStockCtrl.defaultVue.entreeMouv}">
+									 <a4j:support event="onchange" ajaxSingle="true" />
+								</h:inputText>
+							</h:panelGroup>
+							
+							<h:outputText value="Commentaire"	 />
+							<h:inputTextarea  value="#{mouvStockCtrl.defaultVue.entiteCourante.libDesc}"  
+								 required="false" style="width: 60%" title="Commentaire" >
+								 <a4j:support event="onchange" ajaxSingle="true" />
+							</h:inputTextarea>
+							
+         				</h:panelGrid>  
+         				
+         				<h:panelGrid columns="2"  width="100%" columnClasses="pngdColLeftDynamic,pngdColRightDynamic"  >
+         				
+         				</h:panelGrid> 
+         				         		         		
+         			</h:panelGrid>  
+         	
+				</fieldset>								
+			</h:panelGroup>
+			
+		</ui:define>
+													
+	</ui:composition>
+	
+</html>
