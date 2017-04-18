@@ -32,7 +32,6 @@
   <managed-bean-class>com.bondeko.sysgeho.ui.phar.controleur.MouvStockCtrl</managed-bean-class>
   <managed-bean-scope>session</managed-bean-scope>
  </managed-bean>
- 
  <navigation-rule>
   <from-view-id>*</from-view-id>
   <navigation-case>
@@ -49,7 +48,6 @@
    <to-view-id>/modules/pharmacie/pages/CatProdListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-  
   <navigation-case>
    <from-outcome>SousCatProdDetails</from-outcome>
    <to-view-id>/modules/pharmacie/pages/SousCatProdDetails.xhtml</to-view-id>
@@ -64,7 +62,6 @@
    <to-view-id>/modules/pharmacie/pages/SousCatProdListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-  
   <navigation-case>
    <from-outcome>ProdDetails</from-outcome>
    <to-view-id>/modules/pharmacie/pages/ProdDetails.xhtml</to-view-id>
@@ -79,7 +76,6 @@
    <to-view-id>/modules/pharmacie/pages/ProdListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-  
   <navigation-case>
    <from-outcome>FourDetails</from-outcome>
    <to-view-id>/modules/pharmacie/pages/FourDetails.xhtml</to-view-id>
@@ -94,7 +90,6 @@
    <to-view-id>/modules/pharmacie/pages/FourListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-  
   <navigation-case>
    <from-outcome>DepartDetails</from-outcome>
    <to-view-id>/modules/pharmacie/pages/DepartDetails.xhtml</to-view-id>
@@ -109,7 +104,6 @@
    <to-view-id>/modules/pharmacie/pages/DepartListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-  
   <navigation-case>
    <from-outcome>MouvStockDetails</from-outcome>
    <to-view-id>/modules/pharmacie/pages/MouvStockDetails.xhtml</to-view-id>
@@ -124,7 +118,5 @@
    <to-view-id>/modules/pharmacie/pages/MouvStockListe.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
-   
- 
  </navigation-rule>
 </faces-config>
