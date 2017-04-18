@@ -111,5 +111,17 @@ public class SvcoPat extends BaseSvco<TabPat> implements IRemotePat, ILocalPat{
 			throw sdr;
 		}
 	}
+	
+	@Override
+	public EntFichier  genererListCpteRenduExam(TabPat pat)
+	throws SysGehoAppException {
+		try {
+			return sisvPat.genererListCpteRenduExam(pat);
+		} catch (SysGehoSystemException e) {
+			e.printStackTrace();
+			SysGehoAppException sdr = new SysGehoAppException(e);
+			throw sdr;
+		}
+	}
 
 }
