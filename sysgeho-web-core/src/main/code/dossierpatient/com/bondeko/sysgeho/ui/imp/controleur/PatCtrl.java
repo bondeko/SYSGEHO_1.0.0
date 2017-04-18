@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -111,6 +112,10 @@ public class PatCtrl extends SysGehoCtrl<TabPat, TabPat>{
 		
 		v$mapTrt.put(DossierPatientTrt.ETA_DOS_PAT.getKey(), new Traitement(DossierPatientTrt.ETA_DOS_PAT));
 
+		Traitement v$traitementcrex = new Traitement(DossierPatientTrt.GENERER_LIST_CREXAM);
+		v$traitementcrex.setModalPanel("mpnl_critere_selection_exam");	// Id du modal panel
+		v$mapTrt.put(DossierPatientTrt.GENERER_LIST_CREXAM.getKey(), new Traitement(v$traitementcrex));
+		
 		Traitement v$traitement = new Traitement(
 				DossierPatientTrt.NAVIGUER_RDV.naviguerVersFormulaireListe(),
 				DossierPatientTrt.NAVIGUER_RDV);
@@ -1090,5 +1095,86 @@ public class PatCtrl extends SysGehoCtrl<TabPat, TabPat>{
 
 	}
 	
+	/**
+	 * @return un message  sur l'état de l'opération
+	 */
+	@SuppressWarnings("finally")
+	public String genListCpteRenduExam() {
+	// Determine vers quelle page ou Formulaire l'on doit se diriger
+		String v$navigation = null;
+
+		// Message d'information
+		String v$msgDetails = "GENERATION_SUCCES";
+		Date datedeb = defaultVue.getEntiteCourante().getDateDebut();
+		Date datefin = defaultVue.getEntiteCourante().getDateFin();
+
+		try {
+			PatVue v$vue = (PatVue) defaultVue;
+
+			// Mise à jour de l'entité courante selon le contexte du Formulaire
+			defaultVue.setEntiteCouranteOfPageContext();
+
+			// Sauvegarde de l'entité avant traitement specifique
+			defaultVue.setEntiteTemporaire(defaultVue.getEntiteCourante());
+			
+			defaultVue.getEntiteCourante().setDateDebut(datedeb);
+			defaultVue.getEntiteCourante().setDateFin(datefin);
+
+			// Spécification du type de génération du fichier
+			OutputType outputType = OutputType.PDF;
+
+			// Consommation du service distant
+			TabPat patient = defaultVue.getEntiteCourante();
+			
+			
+			EntFichier v$fichier = DossierPatientSvcoDeleguate.getSvcoPat().genererListCpteRenduExam(patient);
+
+			// création de dossier et fichiers temporaires et affichage de
+			// l'état généré
+			v$navigation = preview(v$fichier, outputType.getExtension());
+			
+			// L'on remplace l'ancienne entité de la liste par la nouvelle issue
+			// du résultat du traitement spécifiques
+			 defaultVue.getTableMgr().replace(defaultVue.getEntiteTemporaire(),
+					 defaultVue.getEntiteCourante());
+
+			// Si nous sommes en Consultation ==> sur le formulaire Details
+			if (defaultVue.getNavigationMgr().isFromDetails()) {
+				// Traitements particuliers
+			}
+
+			// Par contre si nous sommes sur le formulaire Liste
+			else if (defaultVue.getNavigationMgr().isFromListe()) {
+				// Traitements particuliers
+			}
+			FacesUtil.addInfoMessage("GENERATION_SUCCES", v$msgDetails);
+
+		} catch (SysGehoAppException e) {
+			// Aucune navigation possible
+			v$navigation = null;
+
+			// Message utilisateur
+			FacesUtil
+					.addWarnMessage("TRAITEMENT_ALL_ECHEC", e.getMessage());
+			getLogger().error(e.getMessage(), e);
+		} catch (Exception e) {
+			// Aucune navigation possible
+			e.printStackTrace();
+			v$navigation = null;
+			// Message utilisateur
+			FacesUtil
+					.addWarnMessage(
+							"TRAITEMENT_ALL_ECHEC","TRAITEMENT_ALL_ECHEC_INCONNU");
+			getLogger().error(e.getMessage(), e);
+		} finally {
+			// Retour à la page adéquate
+			return v$navigation;
+		}
+
+	}
+	
+	public String selectionCriterePreModal(){
+		return null;
+	}
 	
 }

@@ -493,4 +493,16 @@ public class DossierPatientTrt extends SysGehoTrt{
 				/* Raccourci clavier */ "Shift+F3", /* index */ "13", /* reRender */ Traitement.RERENDER_MAIN_PANEL, /* image */ "" );
 	}
 	
+	/***
+	 * GENERER_LIST_CREXAM
+	 */
+	public static Traitement GENERER_LIST_CREXAM;	
+	static{
+		
+		GENERER_LIST_CREXAM = new Traitement(/* Type */Traitement.SPECIFIQUE , /* Code */ "Gen_List_Med" , /* Libellé */ "Générer la liste des comptes rendus examen" , /* Commentaire */ "" , /* Méthode */ "selectionCriterePreModal",
+				/* Config IHM */ new boolean[]{true,true,true,false} , /* Config Visibilité */ "112",
+				/* Type de modal panel */ Traitement.MODAL_SPECIAL, /* Message du modal panel */ "Confirmer la génération ?", /* Type de progress bar */ Traitement.PROGRESS_SIMPLE, 
+				/* Raccourci clavier */ "", /* index */ "18", /* reRender */ "mpnl_critere_selection_exam", /* image */ "" );
+	}
+	
 }
