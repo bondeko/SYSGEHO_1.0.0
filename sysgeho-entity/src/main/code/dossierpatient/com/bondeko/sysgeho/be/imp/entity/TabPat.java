@@ -114,6 +114,13 @@ public class TabPat extends SysGehoBaseEntity implements Serializable{
 	
 	@Column(name = "LIB_MED")
 	private String libMed;
+	
+	//utilisé pour les états
+	@Column(name = "DAT_DEB")
+	private String datDebut;
+	//utilisé pour les états
+	@Column(name = "DAT_FIN")
+	private String datFin;
 
 	public String getCodPat() {
 		return codPat;
@@ -404,6 +411,72 @@ public class TabPat extends SysGehoBaseEntity implements Serializable{
 	
 	public boolean getBEstAffi() {
 		return (booEstAff != null && booEstAff.compareTo(BigDecimal.ONE) == 0);
+	}
+
+	/**
+	 * @param datDebut the datDebut to set
+	 */
+	public void setDatDebut(String datDebut) {
+		this.datDebut = datDebut;
+	}
+
+	/**
+	 * @return the datDebut
+	 */
+	public String getDatDebut() {
+		return datDebut;
+	}
+
+	/**
+	 * @param datFin the datFin to set
+	 */
+	public void setDatFin(String datFin) {
+		this.datFin = datFin;
+	}
+
+	/**
+	 * @return the datFin
+	 */
+	public String getDatFin() {
+		return datFin;
+	}
+	
+	public void setDateDebut(Date date) {
+		if (date == null)
+			this.datDebut = null;
+		else
+			this.datDebut = DateTools.formatDate(date);
+	}
+	
+	public Date getDateDebut() {
+		if (this.datDebut == null || this.datDebut.trim().isEmpty())
+			return null;
+
+		try {
+			return DateTools.getDateValue(this.datDebut);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public void setDateFin(Date date) {
+		if (date == null)
+			this.datFin = null;
+		else
+			this.datFin = DateTools.formatDate(date);
+	}
+	
+	public Date getDateFin() {
+		if (this.datFin == null || this.datFin.trim().isEmpty())
+			return null;
+
+		try {
+			return DateTools.getDateValue(this.datFin);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
