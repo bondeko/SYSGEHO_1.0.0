@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.ejb.Local;
 
-import com.bondeko.sysgeho.be.core.base.BaseEntity;
 import com.bondeko.sysgeho.be.core.dao.base.IBaseDao;
 import com.bondeko.sysgeho.be.core.exception.SysGehoPersistenceException;
 import com.bondeko.sysgeho.be.imp.entity.TabConsul;
