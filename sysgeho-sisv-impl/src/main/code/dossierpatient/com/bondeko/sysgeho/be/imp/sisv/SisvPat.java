@@ -32,6 +32,8 @@ import com.bondeko.sysgeho.be.imp.entity.TabExam;
 import com.bondeko.sysgeho.be.imp.entity.TabHospi;
 import com.bondeko.sysgeho.be.imp.entity.TabPat;
 import com.bondeko.sysgeho.be.imp.entity.TabSoin;
+import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatCpteRenduExam;
+import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatCpteRenduExamElt;
 import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPat;
 import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatDosPatElt;
 import com.bondeko.sysgeho.be.imp.serialiaze.SrlEtatFichePat;
@@ -295,6 +297,60 @@ public class SisvPat extends BaseSisv<TabPat, String> implements ISisvPat{
 			
 			// Construction du nom par défaut du fichier
 			String str = (ReportNames.ETAT_DOSSIER_PAT).getDefaulFileName() + "."
+					+ result.getFileExtention();
+			
+			// Création de l'entité fichier
+			getLogger().debug("SisvCon.genererEtatMouvCon Creation de l'entite fichier ..."+result.getUri());
+			EntFichier v$fichier = new EntFichier(result.getUri(), str,
+					result.getFileStream());
+			
+			logger.debug("Fichier généré " + str + " >> avec "
+					+ v$fichier.getLength() + "Ko.");
+			return v$fichier;
+			
+		}catch(Exception e){
+			throw new SysGehoSystemException(e.getMessage());
+		}
+		
+	}
+	
+	private SrlEtatCpteRenduExam getListCpteRenduExam(TabPat patient) throws SysGehoSystemException {
+		SrlEtatCpteRenduExam srlEtatCpteRenduExam = new SrlEtatCpteRenduExam();
+		try {
+			TabExam exam = new TabExam();
+			exam.setTabPat(patient);
+			TabCpteRenduExam cpterenduexam = new TabCpteRenduExam();
+			cpterenduexam.setTabExam(exam);
+			//Recherche tous les mouvements de ce conteneurs
+			List<TabCpteRenduExam> listcpterendu = daoCpteRenduExam.findByExampleAndDate(cpterenduexam, patient.getDatDebut(),patient.getDatFin());
+			if(listcpterendu != null && listcpterendu.size() > 0){
+				//On parcour la liste des mouvement obtenus et on construit la sérialization  
+				for(TabCpteRenduExam pat : listcpterendu){
+					srlEtatCpteRenduExam.addElement(new SrlEtatCpteRenduExamElt(pat));
+				}
+			}
+//			else{
+//				srlMouvCon.addElement(new SrlMouvConElt(conCour, null));
+//			}
+		} catch (SysGehoPersistenceException e) {
+			e.printStackTrace();
+			throw new SysGehoSystemException(e.getMessage());
+		}
+		return srlEtatCpteRenduExam;
+	}
+	
+	@Override
+	public EntFichier genererListCpteRenduExam(TabPat patient) throws SysGehoSystemException{
+		
+		try{
+			SrlEtatCpteRenduExam etatCpteRenCon = getListCpteRenduExam(patient);
+			getLogger().debug("SisvPat.genererEtatListPatient Serialisation ...");
+			SysGehoOutput result = fillAndExport(etatCpteRenCon,
+					ResourceLocator.getReportModel(ReportNames.ETAT_CPTE_RENDU_EXAM_LIST),
+					SysGehoPrinterExportEnum.PDF, null, null, null);
+			
+			// Construction du nom par défaut du fichier
+			String str = (ReportNames.ETAT_CPTE_RENDU_EXAM_LIST).getDefaulFileName() + "."
 					+ result.getFileExtention();
 			
 			// Création de l'entité fichier
